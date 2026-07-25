@@ -386,7 +386,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
         <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
         <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
-        <span class="sc-cell warn" title="CDK: cdk8s emits stateless manifests; AWS CDK keeps no store you host, but CloudFormation holds the stack record server-side">&#9680;</span>
+        <span class="sc-cell good" title="CDK: No state store you host — cdk8s is stateless, AWS CDK leaves the stack record to CloudFormation, server-side on AWS">&#9679;</span>
         <span class="sc-cell bad" title="Pulumi: Keeps its own authoritative state, any backend">&#10007;</span>
         <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
       </summary>
@@ -396,7 +396,7 @@ a:hover{text-decoration:underline;}
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
         <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
         <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
-        <p><b>CDK</b> cdk8s emits stateless manifests you can GitOps; AWS CDK keeps no store you host, but CloudFormation holds the stack record server-side</p>
+        <p><b>CDK</b> No state store you host: cdk8s emits stateless manifests you can GitOps, and AWS CDK leaves the stack record to CloudFormation, server-side on AWS</p>
         <p><b>Pulumi</b> Keeps its own authoritative state, whatever the backend</p>
         <p><b>Terraform / OpenTofu</b> The state file is the authority<sup>5</sup></p>
       </div>
