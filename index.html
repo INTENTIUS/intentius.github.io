@@ -152,7 +152,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="KCL/CUE/Pkl: Folds via its own DSL">&#9679;</span>
         <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span>
         <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span>
-        <span class="sc-cell warn" title="CDK: Synthesizes a reviewable native template (CFN, cdk8s, cdktf), and a lookup can shift the output when it runs">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: Synthesizes a reviewable native template (CFN, or K8s via cdk8s), and a lookup can shift the output when it runs">&#9680;</span>
         <span class="sc-cell bad" title="Pulumi: Runs and applies via its engine; no native artifact">&#10007;</span>
         <span class="sc-cell warn" title="Terraform: Declarative, but the real plan needs cloud + state">&#9680;</span>
       </summary>
@@ -162,7 +162,7 @@ a:hover{text-decoration:underline;}
         <p><b>KCL / CUE / Pkl</b> Folds via its own DSL</p>
         <p><b>Formae</b> Folds via Pkl; source is the truth</p>
         <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p>
-        <p><b>CDK</b> Synthesizes a reviewable native template (CloudFormation, or K8s via cdk8s, or HCL via cdktf), and a context lookup can shift the output when the program runs</p>
+        <p><b>CDK</b> Synthesizes a reviewable native template (CloudFormation, or K8s via cdk8s), and a context lookup can shift the output when the program runs</p>
         <p><b>Pulumi</b> Runs the program and applies through its own engine, with no native artifact to keep</p>
         <p><b>Terraform / OpenTofu</b> Declarative, but the real plan needs cloud and state</p>
       </div>
@@ -386,7 +386,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
         <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
         <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
-        <span class="sc-cell warn" title="CDK: cdk8s emits stateless manifests, but AWS CDK and cdktf keep state (CFN, Terraform)">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: cdk8s emits stateless manifests; AWS CDK keeps no store you host, but CloudFormation holds the stack record server-side">&#9680;</span>
         <span class="sc-cell bad" title="Pulumi: Keeps its own authoritative state, any backend">&#10007;</span>
         <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
       </summary>
@@ -396,7 +396,7 @@ a:hover{text-decoration:underline;}
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
         <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
         <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
-        <p><b>CDK</b> cdk8s emits stateless manifests you can GitOps, but AWS CDK and cdktf keep state (CloudFormation, Terraform)</p>
+        <p><b>CDK</b> cdk8s emits stateless manifests you can GitOps; AWS CDK keeps no store you host, but CloudFormation holds the stack record server-side</p>
         <p><b>Pulumi</b> Keeps its own authoritative state, whatever the backend</p>
         <p><b>Terraform / OpenTofu</b> The state file is the authority<sup>5</sup></p>
       </div>
