@@ -128,7 +128,7 @@ a:hover{text-decoration:underline;}
     <span><b class="sc-dot warn">&#9680;</b> partial, via add-ons or by hand</span>
     <span><b class="sc-dot bad">&#10007;</b> misses</span>
     <span><b class="sc-dot na">&ndash;</b> out of scope</span>
-    <span class="sc-hint">Open a row for the detail, or follow &#8599; to the full factor</span>
+    <span class="sc-hint">Open a row for the detail, or follow &#8599; to the full property</span>
   </div>
 
   <div class="sc-grid">
@@ -157,7 +157,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Declarative, but the real plan needs cloud + state">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/honor-the-lower-layer/">Build in the platform's own terms, and keep its spec readable and predictable before anything runs. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/honor-the-lower-layer/">Build in the platform's own terms, and keep its spec readable and predictable before anything runs. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Fold to native spec, no run</p>
         <p><b>KCL / CUE / Pkl</b> Folds via its own DSL</p>
         <p><b>Formae</b> Folds via Pkl; source is the truth</p>
@@ -180,7 +180,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: validate is shallow; the real check is plan">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/correctness-left-of-the-commit/">A change proves itself at the keystroke, the same check for a human and an agent. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/correctness-left-of-the-commit/">A change proves itself at the keystroke, the same check for a human and an agent. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Type and fold diagnostics at the keystroke, human and agent alike</p>
         <p><b>KCL / CUE / Pkl</b> Schema check plus an LSP</p>
         <p><b>Formae</b> Pkl types plus an LSP</p>
@@ -203,7 +203,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Thin types; policy via OPA or Sentinel">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/documentation-is-law/">The parts a machine can't infer belong in writing. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/documentation-is-law/">The parts a machine can't infer belong in writing. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Typed lexicons, semantic lint, and policy checks</p>
         <p><b>KCL / CUE / Pkl</b> Schemas and constraints encode validity</p>
         <p><b>Formae</b> Pkl schemas and value constraints</p>
@@ -228,7 +228,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="Terraform: plan / apply">&#9679;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/one-path-to-prod/">Every change arrives as a diff, in one place. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/one-path-to-prod/">Every change arrives as a diff, in one place. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Every change is one typed change set against live</p>
         <p><b>KCL / CUE / Pkl</b> Language only; bring your own pipeline</p>
         <p><b>Formae</b> Reconciles Pkl source to the cloud</p>
@@ -251,7 +251,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Refs, but the state file can capture secrets">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/named-secrets-least-privilege/">Access stays scoped and revocable, and secrets are referenced by name rather than held. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/named-secrets-least-privilege/">Access stays scoped and revocable, and secrets are referenced by name rather than held. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> By reference, never held, with keyless signing</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> By reference, but an agent datastore sits in the loop</p>
@@ -274,7 +274,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Module boundaries; shared state couples them">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/bounded-blast-radius/">One mistake can't take down everything. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/bounded-blast-radius/">One mistake can't take down everything. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Owned-only by marker, a per-environment dial, and a blast lens</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p>
@@ -297,7 +297,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: No rollback; re-apply a prior state by hand">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/reversible-before-risky/">Actions that can be undone run on their own, and the ones that cannot wait for a human. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/reversible-before-risky/">Actions that can be undone run on their own, and the ones that cannot wait for a human. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Reversible runs ungated; a destructive one is gated with saga rollback</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Reconciles drift, with no reversible or irreversible split</p>
@@ -320,7 +320,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Approval via HCP run tasks (add-on)">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/escalate-the-judgment/">The newcomer executes, and a human owns the call that matters. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/escalate-the-judgment/">The newcomer executes, and a human owns the call that matters. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> A durable approval gate that survives a crash; orphans escalate</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Approval rides the pipeline, not the tool</p>
@@ -343,7 +343,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: State history / CI logs, outside the tool">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/attributable/">Every change traces to who made it and who approved it. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/attributable/">Every change traces to who made it and who approved it. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> An append-only release ledger, with approval in the workflow history</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p>
@@ -366,7 +366,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: A state-captured secret needs state surgery">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/secret-rotation-is-cheap/">Any credential can be rotated as a routine change, from what's written down. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/secret-rotation-is-cheap/">Any credential can be rotated as a routine change, from what's written down. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> By-reference makes rotation an out-of-band routine change</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> By reference, but the datastore can hold the value</p>
@@ -391,7 +391,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/truth-lives-live/">Truth lives in the running system, never a separate store you host. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/truth-lives-live/">Truth lives in the running system, never a separate store you host. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Truth left in the live system, with no state store</p>
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
         <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
@@ -414,7 +414,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Import into state, then rewrite as HCL">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/adopt-in-place/">Existing infrastructure comes under management in place, without conversion to a private format. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/adopt-in-place/">Existing infrastructure comes under management in place, without conversion to a private format. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Imports a template or live estate; the spec stays native</p>
         <p><b>KCL / CUE / Pkl</b> Importers bootstrap from OpenAPI, CRDs, or Terraform, but authoring moves to the DSL</p>
         <p><b>Formae</b> Reconciles an existing estate into Pkl</p>
@@ -437,7 +437,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Omission deletes by default; removed / prevent_destroy are opt-in guards">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/manage-only-what-you-declare/">The tool touches only what you declare and deletes only what it owns. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/manage-only-what-you-declare/">The tool touches only what you declare and deletes only what it owns. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Selective by omission; deletes gated on an ownership marker</p>
         <p><b>KCL / CUE / Pkl</b> No apply, so nothing to over-reach</p>
         <p><b>Formae</b> Reconciles the declared, with ownership less explicit</p>
@@ -460,7 +460,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Terraform: Provenance via CI add-ons">&#9680;</span>
       </summary>
       <div class="sc-detail">
-        <p class="sc-statement"><a href="https://accessibleops.net/verify-the-artifact/">A deployable proves itself before it ships, verified where it is built. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p class="sc-statement"><a href="https://accessibleops.net/verify-the-artifact/">A deployable proves itself before it ships, verified where it is built. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> SBOM, provenance, and a signature, checked at synthesis before values fill in</p>
         <p><b>KCL / CUE / Pkl</b> No build artifact or gate</p>
         <p><b>Formae</b> Provenance via external tooling</p>
@@ -483,8 +483,8 @@ a:hover{text-decoration:underline;}
       <li><b>Scoping and revocation are provider-native</b> (OIDC expiry, IAM). A tool's part is to reference a secret by name and never hold it, and to flag over-broad permissions at author time.</li>
       <li><b>Rotation is cheap as a consequence, not a command.</b> When a secret enters only by reference and never lands in source or state, rotating the underlying credential is an out-of-band change the source never sees.</li>
       <li><b>&#8220;Folds by construction&#8221;</b> means synthesis reduces the source to spec with no module execution, so a call-as-value is structurally unrepresentable and the semantic lint is a pre-flight diagnostic rather than the guarantee.</li>
-      <li>The config languages are rated as languages. A platform built on one, like Kusion over KCL, adds an apply path but keeps an authoritative state store, landing where the runtime tools do on factor XI.</li>
-      <li>Factor XI is about a separate authoritative record of live state, a state file, checkpoint, store, or datastore. The declared source in git is an input every tool has, so it does not count against a tool.</li>
+      <li>The config languages are rated as languages. A platform built on one, like Kusion over KCL, adds an apply path but keeps an authoritative state store, landing where the runtime tools do on property XI.</li>
+      <li>Property XI is about a separate authoritative record of live state, a state file, checkpoint, store, or datastore. The declared source in git is an input every tool has, so it does not count against a tool.</li>
     </ol>
   </div>
 </section>
