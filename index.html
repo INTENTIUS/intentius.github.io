@@ -87,7 +87,8 @@ a:hover{text-decoration:underline;}
 .sc-cell.na   { color: var(--na); }
 .sc-detail { margin: 0.4rem 0 0.7rem 0.9rem; padding: 0.55rem 0.85rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; display: grid; gap: 0.3rem; }
 .sc-detail p { margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
-.sc-detail b { color: var(--ink); font-weight: 600; display: inline-block; min-width: 9.5rem; }
+.sc-detail p:not(.sc-statement) { display: grid; grid-template-columns: 9.5rem 1fr; column-gap: 0.5rem; }
+.sc-detail b { color: var(--ink); font-weight: 600; }
 .sc-detail .sc-statement { margin: 0 0 0.6rem; padding: 0 0 0.55rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem; line-height: 1.4; }
 .sc-detail .sc-statement a { color: var(--ink); font-weight: 600; }
 .sc-detail .sc-statement a:hover { color: var(--link); }
