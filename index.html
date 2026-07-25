@@ -153,7 +153,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span>
         <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span>
         <span class="sc-cell warn" title="CDK: Synthesizes a reviewable native template (CFN, or K8s via cdk8s), and a lookup can shift the output when it runs">&#9680;</span>
-        <span class="sc-cell bad" title="Pulumi: Runs and applies via its engine; no native artifact">&#10007;</span>
+        <span class="sc-cell bad" title="Pulumi: runs the program; no static declarative spec, only an engine preview/plan">&#10007;</span>
         <span class="sc-cell warn" title="Terraform: Declarative, but the real plan needs cloud + state">&#9680;</span>
       </summary>
       <div class="sc-detail">
@@ -163,7 +163,7 @@ a:hover{text-decoration:underline;}
         <p><b>Formae</b> Folds via Pkl; source is the truth</p>
         <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p>
         <p><b>CDK</b> Synthesizes a reviewable native template (CloudFormation, or K8s via cdk8s), and a context lookup can shift the output when the program runs</p>
-        <p><b>Pulumi</b> Runs the program and applies through its own engine, with no native artifact to keep</p>
+        <p><b>Pulumi</b> Runs the program through its own engine; no static declarative spec, only an engine preview or plan</p>
         <p><b>Terraform / OpenTofu</b> Declarative, but the real plan needs cloud and state</p>
       </div>
     </details>
@@ -248,7 +248,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="ConfigHub: Never holds secrets, but scoping rides the worker creds you supply">&#9680;</span>
         <span class="sc-cell warn" title="CDK: Refs + IAM, but the program can read secrets at runtime">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: ESC refs with OIDC, but core stores secrets in state">&#9680;</span>
-        <span class="sc-cell warn" title="Terraform: Refs, but the state file can capture secrets">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: refs, but state can capture secrets; OpenTofu encrypts state at rest">&#9680;</span>
       </summary>
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/named-secrets-least-privilege/">Access stays scoped and revocable, and secrets are referenced by name rather than held. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
@@ -258,14 +258,14 @@ a:hover{text-decoration:underline;}
         <p><b>ConfigHub</b> Never holds secrets, but least privilege rides the worker credentials you supply</p>
         <p><b>CDK</b> Refs and IAM, but the program can read secrets at runtime</p>
         <p><b>Pulumi</b> ESC gives references with short-lived OIDC, but core stores secrets encrypted in state</p>
-        <p><b>Terraform / OpenTofu</b> Refs, but the state file can capture secrets</p>
+        <p><b>Terraform / OpenTofu</b> Refs, but the state file can capture secrets; OpenTofu encrypts state at rest</p>
       </div>
     </details>
 
     <details class="sc-row">
       <summary>
         <span class="sc-factor"><b>VI</b><span class="sc-fname">Bounded blast radius <a class="sc-open" href="https://accessibleops.net/bounded-blast-radius/" aria-label="Full text for Bounded blast radius">&#8599;</a></span></span>
-        <span class="sc-cell good" title="chant: Owned-only by marker; per-env dial; blast lens">&#9679;</span>
+        <span class="sc-cell good" title="chant: Owned-only by marker; per-env removal cap; blast-radius graph view">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Reconcile scope; an agent datastore in the loop">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Actuator-scoped; ownership from live markers">&#9680;</span>
@@ -275,7 +275,7 @@ a:hover{text-decoration:underline;}
       </summary>
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/bounded-blast-radius/">One mistake can't take down everything. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
-        <p><b>chant</b> Owned-only by marker, a per-environment dial, and a blast lens</p>
+        <p><b>chant</b> Owned-only by marker, a per-environment removal cap, and a blast-radius graph view</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p>
         <p><b>ConfigHub</b> Actuator-scoped, ownership from live markers</p>
@@ -311,23 +311,23 @@ a:hover{text-decoration:underline;}
     <details class="sc-row">
       <summary>
         <span class="sc-factor"><b>VIII</b><span class="sc-fname">Escalate the judgment <a class="sc-open" href="https://accessibleops.net/escalate-the-judgment/" aria-label="Full text for Escalate the judgment">&#8599;</a></span></span>
-        <span class="sc-cell good" title="chant: Durable approval gate that survives a crash; orphans escalate">&#9679;</span>
+        <span class="sc-cell good" title="chant: Durable approval gate that survives a crash">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Approval rides the pipeline, not the tool">&#9680;</span>
+        <span class="sc-cell warn" title="Formae: native drift approve/reject; broader approval rides the pipeline">&#9680;</span>
         <span class="sc-cell good" title="ConfigHub: Apply Gates and approvals before a change touches a cluster">&#9679;</span>
         <span class="sc-cell warn" title="CDK: Approval in the CI pipeline, not the tool">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Approval via Pulumi Deployments (add-on)">&#9680;</span>
-        <span class="sc-cell warn" title="Terraform: Approval via HCP run tasks (add-on)">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: apply confirmation is built-in; role-separated approval needs HCP (paid)">&#9680;</span>
       </summary>
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/escalate-the-judgment/">The newcomer executes, and a human owns the call that matters. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
-        <p><b>chant</b> A durable approval gate that survives a crash; orphans escalate</p>
+        <p><b>chant</b> A durable approval gate that survives a crash</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> Approval rides the pipeline, not the tool</p>
+        <p><b>Formae</b> Native drift approve or reject; broader approval rides the pipeline</p>
         <p><b>ConfigHub</b> Apply Gates and named approvals before a change touches a cluster, in the tool</p>
         <p><b>CDK</b> Approval in the CI pipeline, not the tool</p>
         <p><b>Pulumi</b> Approval via Pulumi Deployments, a Cloud add-on</p>
-        <p><b>Terraform / OpenTofu</b> Approval via HCP run tasks, an add-on</p>
+        <p><b>Terraform / OpenTofu</b> Apply confirmation is built-in; role-separated approval needs HCP, a paid add-on</p>
       </div>
     </details>
 
@@ -339,7 +339,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="Formae: Pkl in git, plus the reconcile datastore">&#9680;</span>
         <span class="sc-cell good" title="ConfigHub: Each revision records who changed what and who approved">&#9679;</span>
         <span class="sc-cell warn" title="CDK: CloudTrail / pipeline logs, outside the tool">&#9680;</span>
-        <span class="sc-cell warn" title="Pulumi: Pulumi Cloud update history (add-on)">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Pulumi Cloud records who applied by default; the approver needs Deployments">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: State history / CI logs, outside the tool">&#9680;</span>
       </summary>
       <div class="sc-detail">
@@ -349,7 +349,7 @@ a:hover{text-decoration:underline;}
         <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p>
         <p><b>ConfigHub</b> Each revision records who changed what and who approved, in the tool</p>
         <p><b>CDK</b> CloudTrail or pipeline logs, outside the tool</p>
-        <p><b>Pulumi</b> Pulumi Cloud update history, a Cloud add-on</p>
+        <p><b>Pulumi</b> Pulumi Cloud records who applied by default; the approver needs Deployments, an add-on</p>
         <p><b>Terraform / OpenTofu</b> State history or CI logs, outside the tool</p>
       </div>
     </details>
@@ -386,7 +386,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
         <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
         <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
-        <span class="sc-cell good" title="CDK: No state store you host — cdk8s is stateless, AWS CDK leaves the stack record to CloudFormation, server-side on AWS">&#9679;</span>
+        <span class="sc-cell good" title="CDK: no tool-side state copy. cdk8s is stateless, and AWS CDK's stack state is CloudFormation's own record, not a copy the tool keeps">&#9679;</span>
         <span class="sc-cell bad" title="Pulumi: Keeps its own authoritative state, any backend">&#10007;</span>
         <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
       </summary>
@@ -396,7 +396,7 @@ a:hover{text-decoration:underline;}
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
         <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
         <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
-        <p><b>CDK</b> No state store you host: cdk8s emits stateless manifests you can GitOps, and AWS CDK leaves the stack record to CloudFormation, server-side on AWS</p>
+        <p><b>CDK</b> No tool-side state copy: cdk8s emits stateless manifests you can GitOps, and AWS CDK's stack state is CloudFormation's own record of what AWS runs, not a copy the tool keeps</p>
         <p><b>Pulumi</b> Keeps its own authoritative state, whatever the backend</p>
         <p><b>Terraform / OpenTofu</b> The state file is the authority<sup>5</sup></p>
       </div>
@@ -411,7 +411,7 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell warn" title="ConfigHub: Imports into the store; leaving means exporting">&#9680;</span>
         <span class="sc-cell warn" title="CDK: cdk import, then rewrite as code">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: pulumi import, then rewrite as code">&#9680;</span>
-        <span class="sc-cell warn" title="Terraform: Import into state, then rewrite as HCL">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: config-driven import blocks preview it; you still author the HCL">&#9680;</span>
       </summary>
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/adopt-in-place/">Existing infrastructure comes under management in place, without conversion to a private format. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
@@ -421,7 +421,7 @@ a:hover{text-decoration:underline;}
         <p><b>ConfigHub</b> Imports into the store; leaving means exporting</p>
         <p><b>CDK</b> <span class="mono">cdk import</span>, then rewrite as code</p>
         <p><b>Pulumi</b> <span class="mono">pulumi import</span>, then rewrite as code</p>
-        <p><b>Terraform / OpenTofu</b> Import into state, then rewrite as HCL</p>
+        <p><b>Terraform / OpenTofu</b> Config-driven import blocks preview the import; you still author the HCL</p>
       </div>
     </details>
 
@@ -451,7 +451,7 @@ a:hover{text-decoration:underline;}
     <details class="sc-row">
       <summary>
         <span class="sc-factor"><b>XIV</b><span class="sc-fname">Verify the artifact <a class="sc-open" href="https://accessibleops.net/verify-the-artifact/" aria-label="Full text for Verify the artifact">&#8599;</a></span></span>
-        <span class="sc-cell good" title="chant: SBOM, provenance, and a signature, checked at synthesis before values fill in">&#9679;</span>
+        <span class="sc-cell good" title="chant: SBOM, provenance, and a signature built at synthesis, verified at the deploy gate">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: No build artifact or gate">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Provenance via external tooling">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Provenance via external tooling">&#9680;</span>
@@ -461,7 +461,7 @@ a:hover{text-decoration:underline;}
       </summary>
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/verify-the-artifact/">A deployable proves itself before it ships, verified where it is built. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
-        <p><b>chant</b> SBOM, provenance, and a signature, checked at synthesis before values fill in</p>
+        <p><b>chant</b> SBOM, provenance, and a signature built at synthesis, verified at the deploy gate</p>
         <p><b>KCL / CUE / Pkl</b> No build artifact or gate</p>
         <p><b>Formae</b> Provenance via external tooling</p>
         <p><b>ConfigHub</b> Provenance via external tooling</p>
