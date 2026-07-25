@@ -1,139 +1,509 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Intentius</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intentius</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--ink:#e6e8ee;--muted:#8b8fa3;--faint:#6a6f80;
+  --rule:#2a2d3a;--rule-strong:#3a3e4d;--link:#8aa4ff;--accent:#6c8cff;
+  --panel:#161923;--panel-2:#1a1d27;
+  --good:#57d6a0;--warn:#e2b558;--bad:#f27676;--na:#6a6f80;
+}
+html{-webkit-text-size-adjust:100%;}
+body{background:radial-gradient(1100px 500px at 80% -10%,rgba(108,140,255,0.10),transparent 60%),var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
+main{max-width:60rem;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) 1.5rem 4rem;}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.hero{text-align:center;margin-bottom:2.8rem;}
+.hero h1{font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;letter-spacing:-0.03em;}
+.hero .tagline{color:var(--muted);font-size:1.12rem;margin:0.8rem auto 0;max-width:36rem;}
+.hero-links{display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap;margin-top:1.7rem;}
+.btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.58rem 1.15rem;border-radius:8px;border:1px solid var(--rule-strong);color:var(--ink);font-weight:600;font-size:0.95rem;background:var(--surface);transition:border-color .15s,background .15s;}
+.btn:hover{text-decoration:none;border-color:var(--accent);background:#1e2130;}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#0f1117;}
+.btn-primary:hover{background:#8aa4ff;border-color:#8aa4ff;}
+.intro{max-width:46rem;margin:0 auto 1.2rem;}
+.intro h2{font-size:1.35rem;letter-spacing:-0.01em;}
+.intro p{color:var(--muted);margin-top:0.6rem;}
+.pagefooter{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--rule);text-align:center;color:var(--faint);font-size:0.9rem;}
+.pagefooter a{color:var(--muted);}
+/* ---- scorecard ---- */
+.scorecard { margin: 1rem 0 0; }
+.scorecard h2 { font-size: 0.92rem; letter-spacing: 0; margin: 0 0 0.6rem; }
+.sc-bands {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 0 0 0.9rem;
+}
+.sc-bands > div { background: var(--bg); padding: 0.45rem 0.6rem; }
+.sc-bands h3 { margin: 0 0 0.15rem; font-size: 0.62rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--link); font-weight: 700; }
+.sc-bands p { margin: 0; font-size: 0.69rem; color: var(--muted); line-height: 1.3; }
+.sc-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; align-items: baseline; margin: 0 0 1rem; font-size: 0.83rem; color: var(--muted); }
+.sc-legend span { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+.sc-legend .sc-dot { font-weight: 700; width: 1em; text-align: center; }
+.sc-legend .sc-hint { color: var(--faint); font-style: italic; }
+.sc-dot.good { color: var(--good); } .sc-dot.warn { color: var(--warn); } .sc-dot.bad { color: var(--bad); } .sc-dot.na { color: var(--na); }
 
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3a;
-      --text: #e2e4ea;
-      --text-muted: #8b8fa3;
-      --accent: #6c8cff;
-      --accent-hover: #8aa4ff;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    main {
-      max-width: 540px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-
-    .projects {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .project {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.15s, background 0.15s;
-    }
-
-    .project:hover {
-      border-color: var(--accent);
-      background: #1e2130;
-    }
-
-    .project-info { text-align: left; }
-
-    .project-name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .project-desc {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-    }
-
-    .arrow {
-      margin-left: auto;
-      color: var(--text-muted);
-      font-size: 1.25rem;
-      transition: color 0.15s, transform 0.15s;
-    }
-
-    .project:hover .arrow {
-      color: var(--accent);
-      transform: translateX(3px);
-    }
-
-    footer {
-      position: fixed;
-      bottom: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    footer a:hover { color: var(--accent); }
-  </style>
+/* heatmap grid */
+.sc-grid { margin: 0.2rem 0 0; overflow-x: auto; }
+.sc-head, .sc-row > summary {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 1.6fr) repeat(7, minmax(0, 1fr));
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 40rem;
+}
+.sc-bandhead { min-width: 40rem; }
+.sc-fname { min-width: 0; }
+.sc-open { color: var(--faint); font-size: 0.82em; margin-left: 0.25rem; text-decoration: none; font-weight: 700; white-space: nowrap; }
+.sc-open:hover { color: var(--link); }
+.sc-head { align-items: end; padding: 0 0 0.5rem; border-bottom: 2px solid var(--rule-strong); }
+.sc-head .sc-tool { font-size: 0.66rem; font-weight: 700; color: var(--ink); text-align: center; line-height: 1.2; padding: 0 0.1rem; }
+.sc-bandhead {
+  margin: 1rem 0 0; padding: 0.45rem 0 0.3rem;
+  font-size: 0.68rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--link); font-weight: 700;
+}
+.sc-row { border-top: 1px solid var(--rule); }
+.sc-row > summary { list-style: none; cursor: pointer; padding: 0.5rem 0; }
+.sc-row > summary::-webkit-details-marker { display: none; }
+.sc-row > summary::marker { content: ""; }
+.sc-row > summary:hover { background: var(--panel); }
+.sc-row[open] { box-shadow: inset 3px 0 0 var(--link); }
+.sc-row[open] > summary { background: var(--panel-2); }
+.sc-factor { display: grid; grid-template-columns: auto 1fr; column-gap: 0.4rem; align-items: baseline; font-size: 0.85rem; font-weight: 600; color: var(--ink); line-height: 1.25; padding-right: 0.5rem; }
+.sc-factor b { color: var(--link); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sc-factor b::before {
+  content: ""; display: inline-block; width: 0; height: 0;
+  border-left: 5px solid var(--faint);
+  border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  margin-right: 0.4rem; vertical-align: middle; transition: transform 0.15s ease;
+}
+.sc-row[open] .sc-factor b::before { transform: rotate(90deg); border-left-color: var(--link); }
+@media (prefers-reduced-motion: reduce) { .sc-factor b::before { transition: none; } }
+.sc-cell { text-align: center; font-weight: 700; font-family: ui-monospace, Menlo, monospace; font-size: 1rem; }
+.sc-cell.good { color: var(--good); }
+.sc-cell.warn { color: var(--warn); }
+.sc-cell.bad  { color: var(--bad); }
+.sc-cell.na   { color: var(--na); }
+.sc-detail { margin: 0.4rem 0 0.7rem 0.9rem; padding: 0.55rem 0.85rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; display: grid; gap: 0.3rem; }
+.sc-detail p { margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+.sc-detail b { color: var(--ink); font-weight: 600; display: inline-block; min-width: 9.5rem; }
+.sc-detail .sc-statement { margin: 0 0 0.6rem; padding: 0 0 0.55rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem; line-height: 1.4; }
+.sc-detail .sc-statement a { color: var(--ink); font-weight: 600; }
+.sc-detail .sc-statement a:hover { color: var(--link); }
+.sc-detail .sc-statement .sc-readmore { color: var(--link); font-weight: 700; font-size: 0.82em; white-space: nowrap; }
+.scorecard .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.92em; }
+.sc-closing { margin: 1.8rem 0 0; padding: 1.1rem 1.25rem; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; }
+.sc-closing p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+.sc-closing p + p { margin-top: 0.65rem; }
+.sc-closing .term { color: var(--ink); font-weight: 600; }
+.sc-notes { margin: 1.8rem 0 0; }
+.sc-notes h4 { font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--faint); margin: 0 0 0.6rem; font-weight: 700; }
+.sc-notes ol { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.45rem; }
+.sc-notes li { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+.sc-notes b { color: var(--ink); font-weight: 600; }
+</style>
 </head>
 <body>
-  <main>
-    <h1>Intentius</h1>
-    <div class="projects">
-      <a class="project" href="/chant/">
-        <div class="project-info">
-          <div class="project-name">chant</div>
-          <div class="project-desc">A type system for operations. TypeScript in, deployment-ready artifacts out.</div>
-        </div>
-        <span class="arrow">&rarr;</span>
-      </a>
-      <a class="project" href="https://blacklight.intentius.io">
-        <div class="project-info">
-          <div class="project-name">blacklight</div>
-          <div class="project-desc">Hosted security audit for any repo. Paste a URL, see the misconfigurations hiding in your CI &amp; infra.</div>
-        </div>
-        <span class="arrow">&rarr;</span>
-      </a>
-      <a class="project" href="https://spicypath.intentius.workers.dev">
-        <div class="project-info">
-          <div class="project-name">spicypath</div>
-          <div class="project-desc">A fast, zero-build profile inspector. Drop in a profile and explore it as a flame graph, timeline, sandwich, or radial view — nothing leaves your browser.</div>
-        </div>
-        <span class="arrow">&rarr;</span>
-      </a>
+<main>
+<header class="hero">
+  <h1>Intentius</h1>
+  <p class="tagline">A type system for operations. Author in TypeScript, ship the platform's own spec.</p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="/chant/">chant &rarr;</a>
+    <a class="btn" href="https://github.com/intentius">GitHub org &rarr;</a>
+  </div>
+</header>
+<section class="intro">
+  <h2>Which tools clear the Accessible Ops factors</h2>
+  <p>The factors are a neutral spec at <a href="https://accessibleops.net/">accessibleops.net</a>. Here is how the common tools measure up. chant clears every one, because it folds source to the native spec and carries the change through ops and lifecycle. The others clear some, and are moving on the rest.</p>
+</section>
+<section class="scorecard" aria-label="Scorecard">
+
+  <div class="sc-bands">
+    <div><h3>Synthesis</h3><p>Source becomes the platform's own spec, settled before anything runs.</p></div>
+    <div><h3>Ops &amp; Lifecycle</h3><p>A change reaches production as one reviewable diff and stays accountable.</p></div>
+    <div><h3>Truth &amp; trust</h3><p>Truth stays live, adoption stays in place, and the artifact is verified.</p></div>
+  </div>
+
+  <div class="sc-legend" role="note" aria-label="Legend">
+    <span><b class="sc-dot good">&#9679;</b> meets by design</span>
+    <span><b class="sc-dot warn">&#9680;</b> partial, via add-ons or by hand</span>
+    <span><b class="sc-dot bad">&#10007;</b> misses</span>
+    <span><b class="sc-dot na">&ndash;</b> out of scope</span>
+    <span class="sc-hint">Open a row for the detail, or follow &#8599; to the full factor</span>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc-head">
+      <span></span>
+      <span class="sc-tool">chant</span>
+      <span class="sc-tool">KCL / CUE / Pkl</span>
+      <span class="sc-tool">Formae</span>
+      <span class="sc-tool">ConfigHub</span>
+      <span class="sc-tool">CDK</span>
+      <span class="sc-tool">Pulumi</span>
+      <span class="sc-tool">Terraform / OpenTofu</span>
     </div>
-  </main>
-  <footer>
-    <a href="https://github.com/intentius">github.com/intentius</a>
-  </footer>
+
+    <p class="sc-bandhead">Synthesis</p>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>I</b><span class="sc-fname">Honor the lower layer <a class="sc-open" href="https://accessibleops.net/honor-the-lower-layer/" aria-label="Full text for Honor the lower layer">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Fold to native spec, no run">&#9679;</span>
+        <span class="sc-cell good" title="KCL/CUE/Pkl: Folds via its own DSL">&#9679;</span>
+        <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span>
+        <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span>
+        <span class="sc-cell warn" title="CDK: Synthesizes a reviewable native template (CFN, cdk8s, cdktf), and a lookup can shift the output when it runs">&#9680;</span>
+        <span class="sc-cell bad" title="Pulumi: Runs and applies via its engine; no native artifact">&#10007;</span>
+        <span class="sc-cell warn" title="Terraform: Declarative, but the real plan needs cloud + state">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/honor-the-lower-layer/">Build in the platform's own terms, and keep its spec readable and predictable before anything runs. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Fold to native spec, no run</p>
+        <p><b>KCL / CUE / Pkl</b> Folds via its own DSL</p>
+        <p><b>Formae</b> Folds via Pkl; source is the truth</p>
+        <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p>
+        <p><b>CDK</b> Synthesizes a reviewable native template (CloudFormation, or K8s via cdk8s, or HCL via cdktf), and a context lookup can shift the output when the program runs</p>
+        <p><b>Pulumi</b> Runs the program and applies through its own engine, with no native artifact to keep</p>
+        <p><b>Terraform / OpenTofu</b> Declarative, but the real plan needs cloud and state</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>II</b><span class="sc-fname">The same check, left of the commit <a class="sc-open" href="https://accessibleops.net/correctness-left-of-the-commit/" aria-label="Full text for The same check, left of the commit">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Type + fold diagnostics at the keystroke">&#9679;</span>
+        <span class="sc-cell good" title="KCL/CUE/Pkl: Schema check plus an LSP">&#9679;</span>
+        <span class="sc-cell good" title="Formae: Pkl types + LSP">&#9679;</span>
+        <span class="sc-cell warn" title="ConfigHub: Validated in the store, not at an editor keystroke">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: TS types check; infra correctness needs synth and a plan">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: TS types check; infra correctness needs a preview">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: validate is shallow; the real check is plan">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/correctness-left-of-the-commit/">A change proves itself at the keystroke, the same check for a human and an agent. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Type and fold diagnostics at the keystroke, human and agent alike</p>
+        <p><b>KCL / CUE / Pkl</b> Schema check plus an LSP</p>
+        <p><b>Formae</b> Pkl types plus an LSP</p>
+        <p><b>ConfigHub</b> Validated in the store, not at an editor keystroke</p>
+        <p><b>CDK</b> TS types check, but infra correctness needs a synth and a plan</p>
+        <p><b>Pulumi</b> TS types check, but infra correctness needs a preview</p>
+        <p><b>Terraform / OpenTofu</b> <span class="mono">validate</span> is shallow; the real check is <span class="mono">plan</span></p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>III</b><span class="sc-fname">Documentation is Law <a class="sc-open" href="https://accessibleops.net/documentation-is-law/" aria-label="Full text for Documentation is Law">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Typed lexicons + semantic lint + policy checks">&#9679;</span>
+        <span class="sc-cell good" title="KCL/CUE/Pkl: Schemas and constraints encode validity">&#9679;</span>
+        <span class="sc-cell good" title="Formae: Pkl schemas and value constraints">&#9679;</span>
+        <span class="sc-cell good" title="ConfigHub: KRM schemas encode validity">&#9679;</span>
+        <span class="sc-cell warn" title="CDK: L2 constructs and cdk-nag encode a lot of validity, deeper policy is an add-on">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Types encode shape; policy via CrossGuard">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Thin types; policy via OPA or Sentinel">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/documentation-is-law/">The parts a machine can't infer belong in writing. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Typed lexicons, semantic lint, and policy checks</p>
+        <p><b>KCL / CUE / Pkl</b> Schemas and constraints encode validity</p>
+        <p><b>Formae</b> Pkl schemas and value constraints</p>
+        <p><b>ConfigHub</b> KRM schemas encode validity</p>
+        <p><b>CDK</b> L2 constructs and cdk-nag encode a lot of validity, and deeper policy is an add-on</p>
+        <p><b>Pulumi</b> Types encode shape; policy via CrossGuard</p>
+        <p><b>Terraform / OpenTofu</b> Thin types; policy via OPA or Sentinel</p>
+      </div>
+    </details>
+
+    <p class="sc-bandhead">Ops &amp; Lifecycle</p>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>IV</b><span class="sc-fname">One path to prod <a class="sc-open" href="https://accessibleops.net/one-path-to-prod/" aria-label="Full text for One path to prod">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Every change is one typed change set against live">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; bring your own pipeline">&ndash;</span>
+        <span class="sc-cell good" title="Formae: Reconciles Pkl source to the cloud">&#9679;</span>
+        <span class="sc-cell good" title="ConfigHub: Actuates from the store via ArgoCD / Crossplane">&#9679;</span>
+        <span class="sc-cell good" title="CDK: Deploy through cdk deploy">&#9679;</span>
+        <span class="sc-cell good" title="Pulumi: Deploy through pulumi up">&#9679;</span>
+        <span class="sc-cell good" title="Terraform: plan / apply">&#9679;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/one-path-to-prod/">Every change arrives as a diff, in one place. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Every change is one typed change set against live</p>
+        <p><b>KCL / CUE / Pkl</b> Language only; bring your own pipeline</p>
+        <p><b>Formae</b> Reconciles Pkl source to the cloud</p>
+        <p><b>ConfigHub</b> Actuates from the store via ArgoCD or Crossplane</p>
+        <p><b>CDK</b> Deploy through <span class="mono">cdk deploy</span></p>
+        <p><b>Pulumi</b> Deploy through <span class="mono">pulumi up</span></p>
+        <p><b>Terraform / OpenTofu</b> <span class="mono">plan</span> and <span class="mono">apply</span></p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>V</b><span class="sc-fname">Named secrets, least privilege <a class="sc-open" href="https://accessibleops.net/named-secrets-least-privilege/" aria-label="Full text for Named secrets, least privilege">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: By reference, never held; keyless signing">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: By reference, but an agent datastore sits in the loop">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: Never holds secrets, but scoping rides the worker creds you supply">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: Refs + IAM, but the program can read secrets at runtime">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: ESC refs with OIDC, but core stores secrets in state">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Refs, but the state file can capture secrets">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/named-secrets-least-privilege/">Access stays scoped and revocable, and secrets are referenced by name rather than held. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> By reference, never held, with keyless signing</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> By reference, but an agent datastore sits in the loop</p>
+        <p><b>ConfigHub</b> Never holds secrets, but least privilege rides the worker credentials you supply</p>
+        <p><b>CDK</b> Refs and IAM, but the program can read secrets at runtime</p>
+        <p><b>Pulumi</b> ESC gives references with short-lived OIDC, but core stores secrets encrypted in state</p>
+        <p><b>Terraform / OpenTofu</b> Refs, but the state file can capture secrets</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>VI</b><span class="sc-fname">Bounded blast radius <a class="sc-open" href="https://accessibleops.net/bounded-blast-radius/" aria-label="Full text for Bounded blast radius">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Owned-only by marker; per-env dial; blast lens">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Reconcile scope; an agent datastore in the loop">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: Actuator-scoped; ownership from live markers">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: Stack + IAM boundaries; refs can widen reach">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Stack + IAM boundaries; refs can widen reach">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Module boundaries; shared state couples them">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/bounded-blast-radius/">One mistake can't take down everything. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Owned-only by marker, a per-environment dial, and a blast lens</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p>
+        <p><b>ConfigHub</b> Actuator-scoped, ownership from live markers</p>
+        <p><b>CDK</b> Stack and IAM boundaries, but refs can widen reach</p>
+        <p><b>Pulumi</b> Stack and IAM boundaries, but refs can widen reach</p>
+        <p><b>Terraform / OpenTofu</b> Module boundaries, but shared state couples them</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>VII</b><span class="sc-fname">Reversible before risky <a class="sc-open" href="https://accessibleops.net/reversible-before-risky/" aria-label="Full text for Reversible before risky">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Reversible runs ungated; destructive gated + saga rollback">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Reconciles drift; no reversible / irreversible split">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: Revert the store record; no reversible / irreversible split">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: CloudFormation auto-rollback and cdk rollback recover a failed deploy, no gate on an irreversible one">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: No auto-rollback; re-apply a prior state">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: No rollback; re-apply a prior state by hand">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/reversible-before-risky/">Actions that can be undone run on their own, and the ones that cannot wait for a human. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Reversible runs ungated; a destructive one is gated with saga rollback</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> Reconciles drift, with no reversible or irreversible split</p>
+        <p><b>ConfigHub</b> Revert the store record, with no reversible or irreversible split</p>
+        <p><b>CDK</b> CloudFormation auto-rollback and <span class="mono">cdk rollback</span> recover a failed deploy, though an irreversible change is not gated</p>
+        <p><b>Pulumi</b> No auto-rollback; you re-apply a prior state</p>
+        <p><b>Terraform / OpenTofu</b> No rollback; you re-apply a prior state by hand</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>VIII</b><span class="sc-fname">Escalate the judgment <a class="sc-open" href="https://accessibleops.net/escalate-the-judgment/" aria-label="Full text for Escalate the judgment">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Durable approval gate that survives a crash; orphans escalate">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Approval rides the pipeline, not the tool">&#9680;</span>
+        <span class="sc-cell good" title="ConfigHub: Apply Gates and approvals before a change touches a cluster">&#9679;</span>
+        <span class="sc-cell warn" title="CDK: Approval in the CI pipeline, not the tool">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Approval via Pulumi Deployments (add-on)">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Approval via HCP run tasks (add-on)">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/escalate-the-judgment/">The newcomer executes, and a human owns the call that matters. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> A durable approval gate that survives a crash; orphans escalate</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> Approval rides the pipeline, not the tool</p>
+        <p><b>ConfigHub</b> Apply Gates and named approvals before a change touches a cluster, in the tool</p>
+        <p><b>CDK</b> Approval in the CI pipeline, not the tool</p>
+        <p><b>Pulumi</b> Approval via Pulumi Deployments, a Cloud add-on</p>
+        <p><b>Terraform / OpenTofu</b> Approval via HCP run tasks, an add-on</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>IX</b><span class="sc-fname">Attributable <a class="sc-open" href="https://accessibleops.net/attributable/" aria-label="Full text for Attributable">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Append-only release ledger + approval in workflow history">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Pkl in git, plus the reconcile datastore">&#9680;</span>
+        <span class="sc-cell good" title="ConfigHub: Each revision records who changed what and who approved">&#9679;</span>
+        <span class="sc-cell warn" title="CDK: CloudTrail / pipeline logs, outside the tool">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Pulumi Cloud update history (add-on)">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: State history / CI logs, outside the tool">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/attributable/">Every change traces to who made it and who approved it. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> An append-only release ledger, with approval in the workflow history</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p>
+        <p><b>ConfigHub</b> Each revision records who changed what and who approved, in the tool</p>
+        <p><b>CDK</b> CloudTrail or pipeline logs, outside the tool</p>
+        <p><b>Pulumi</b> Pulumi Cloud update history, a Cloud add-on</p>
+        <p><b>Terraform / OpenTofu</b> State history or CI logs, outside the tool</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>X</b><span class="sc-fname">Secret rotation is cheap <a class="sc-open" href="https://accessibleops.net/secret-rotation-is-cheap/" aria-label="Full text for Secret rotation is cheap">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: By-reference makes rotation an out-of-band routine change">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: By reference; the datastore can hold the value">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: By reference; secrets stay external to the store">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: Runtime reads or state can pin the value">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: ESC helps, but core state can pin the value">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: A state-captured secret needs state surgery">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/secret-rotation-is-cheap/">Any credential can be rotated as a routine change, from what's written down. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> By-reference makes rotation an out-of-band routine change</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>Formae</b> By reference, but the datastore can hold the value</p>
+        <p><b>ConfigHub</b> By reference; secrets stay external to the store</p>
+        <p><b>CDK</b> Runtime reads or state can pin the value</p>
+        <p><b>Pulumi</b> ESC helps, but core state can pin the value</p>
+        <p><b>Terraform / OpenTofu</b> A state-captured secret needs state surgery</p>
+      </div>
+    </details>
+
+    <p class="sc-bandhead">Truth &amp; trust</p>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XI</b><span class="sc-fname">The live system is the truth <a class="sc-open" href="https://accessibleops.net/truth-lives-live/" aria-label="Full text for The live system is the truth">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Truth left in the live system; no state store">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
+        <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
+        <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
+        <span class="sc-cell warn" title="CDK: cdk8s emits stateless manifests, but AWS CDK and cdktf keep state (CFN, Terraform)">&#9680;</span>
+        <span class="sc-cell bad" title="Pulumi: Keeps its own authoritative state, any backend">&#10007;</span>
+        <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/truth-lives-live/">Truth lives in the running system, never a separate store you host. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Truth left in the live system, with no state store</p>
+        <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
+        <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
+        <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
+        <p><b>CDK</b> cdk8s emits stateless manifests you can GitOps, but AWS CDK and cdktf keep state (CloudFormation, Terraform)</p>
+        <p><b>Pulumi</b> Keeps its own authoritative state, whatever the backend</p>
+        <p><b>Terraform / OpenTofu</b> The state file is the authority<sup>5</sup></p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XII</b><span class="sc-fname">Adopt in place <a class="sc-open" href="https://accessibleops.net/adopt-in-place/" aria-label="Full text for Adopt in place">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Imports a template or live estate; the spec stays native">&#9679;</span>
+        <span class="sc-cell warn" title="KCL/CUE/Pkl: Importers bootstrap from OpenAPI / CRD / Terraform, but authoring moves to the DSL">&#9680;</span>
+        <span class="sc-cell warn" title="Formae: Reconciles an existing estate into Pkl">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: Imports into the store; leaving means exporting">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: cdk import, then rewrite as code">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: pulumi import, then rewrite as code">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Import into state, then rewrite as HCL">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/adopt-in-place/">Existing infrastructure comes under management in place, without conversion to a private format. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Imports a template or live estate; the spec stays native</p>
+        <p><b>KCL / CUE / Pkl</b> Importers bootstrap from OpenAPI, CRDs, or Terraform, but authoring moves to the DSL</p>
+        <p><b>Formae</b> Reconciles an existing estate into Pkl</p>
+        <p><b>ConfigHub</b> Imports into the store; leaving means exporting</p>
+        <p><b>CDK</b> <span class="mono">cdk import</span>, then rewrite as code</p>
+        <p><b>Pulumi</b> <span class="mono">pulumi import</span>, then rewrite as code</p>
+        <p><b>Terraform / OpenTofu</b> Import into state, then rewrite as HCL</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XIII</b><span class="sc-fname">Manage only what you declare <a class="sc-open" href="https://accessibleops.net/manage-only-what-you-declare/" aria-label="Full text for Manage only what you declare">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Selective by omission; deletes gated on an ownership marker">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: No apply; nothing to over-reach">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Reconciles the declared; ownership less explicit">&#9680;</span>
+        <span class="sc-cell good" title="ConfigHub: Ownership from live markers, not the store">&#9679;</span>
+        <span class="sc-cell warn" title="CDK: Stack-scoped; absence in the template deletes">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Stack-scoped; absence in the program deletes">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Omission deletes by default; removed / prevent_destroy are opt-in guards">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/manage-only-what-you-declare/">The tool touches only what you declare and deletes only what it owns. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> Selective by omission; deletes gated on an ownership marker</p>
+        <p><b>KCL / CUE / Pkl</b> No apply, so nothing to over-reach</p>
+        <p><b>Formae</b> Reconciles the declared, with ownership less explicit</p>
+        <p><b>ConfigHub</b> Ownership from live markers, not the store</p>
+        <p><b>CDK</b> Stack-scoped, but absence in the template deletes</p>
+        <p><b>Pulumi</b> Stack-scoped, but absence in the program deletes</p>
+        <p><b>Terraform / OpenTofu</b> Omission deletes by default; <span class="mono">removed</span> and <span class="mono">prevent_destroy</span> are opt-in guards, not the design</p>
+      </div>
+    </details>
+
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XIV</b><span class="sc-fname">Verify the artifact <a class="sc-open" href="https://accessibleops.net/verify-the-artifact/" aria-label="Full text for Verify the artifact">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: SBOM, provenance, and a signature, checked at synthesis before values fill in">&#9679;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: No build artifact or gate">&ndash;</span>
+        <span class="sc-cell warn" title="Formae: Provenance via external tooling">&#9680;</span>
+        <span class="sc-cell warn" title="ConfigHub: Provenance via external tooling">&#9680;</span>
+        <span class="sc-cell warn" title="CDK: Provenance via CI add-ons (cosign, SLSA)">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Provenance via CI add-ons (cosign, SLSA)">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Provenance via CI add-ons">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/verify-the-artifact/">A deployable proves itself before it ships, verified where it is built. <span class="sc-readmore">Read the full factor &rarr;</span></a></p>
+        <p><b>chant</b> SBOM, provenance, and a signature, checked at synthesis before values fill in</p>
+        <p><b>KCL / CUE / Pkl</b> No build artifact or gate</p>
+        <p><b>Formae</b> Provenance via external tooling</p>
+        <p><b>ConfigHub</b> Provenance via external tooling</p>
+        <p><b>CDK</b> Provenance via CI add-ons like cosign or SLSA</p>
+        <p><b>Pulumi</b> Provenance via CI add-ons like cosign or SLSA</p>
+        <p><b>Terraform / OpenTofu</b> Provenance via CI add-ons</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="sc-closing">
+    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself. <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit.</p>
+    <p>chant reaches every row because it folds source to the native spec <span class="term">by construction</span>, then carries that same change set through approval, rollback, and a record, with no authoritative state store to keep. It got there first, and nothing here is chant's to keep.</p>
+  </div>
+
+  <div class="sc-notes">
+    <h4>Notes</h4>
+    <ol>
+      <li><b>Scoping and revocation are provider-native</b> (OIDC expiry, IAM). A tool's part is to reference a secret by name and never hold it, and to flag over-broad permissions at author time.</li>
+      <li><b>Rotation is cheap as a consequence, not a command.</b> When a secret enters only by reference and never lands in source or state, rotating the underlying credential is an out-of-band change the source never sees.</li>
+      <li><b>&#8220;Folds by construction&#8221;</b> means synthesis reduces the source to spec with no module execution, so a call-as-value is structurally unrepresentable and the semantic lint is a pre-flight diagnostic rather than the guarantee.</li>
+      <li>The config languages are rated as languages. A platform built on one, like Kusion over KCL, adds an apply path but keeps an authoritative state store, landing where the runtime tools do on factor XI.</li>
+      <li>Factor XI is about a separate authoritative record of live state, a state file, checkpoint, store, or datastore. The declared source in git is an input every tool has, so it does not count against a tool.</li>
+    </ol>
+  </div>
+</section>
+<script>
+  document.querySelectorAll('.sc-open').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.stopPropagation(); });
+  });
+</script>
+<footer class="pagefooter">
+  More from Intentius &nbsp;&middot;&nbsp; <a href="https://blacklight.intentius.io">blacklight</a> &nbsp;&middot;&nbsp; <a href="https://spicypath.intentius.workers.dev">spicypath</a> &nbsp;&middot;&nbsp; <a href="https://github.com/intentius">github.com/intentius</a>
+</footer>
+</main>
+<script>
+document.querySelectorAll('.sc-open').forEach(function(a){a.addEventListener('click',function(e){e.stopPropagation();});});
+</script>
 </body>
 </html>
