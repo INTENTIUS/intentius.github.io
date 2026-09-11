@@ -58,12 +58,12 @@ a:hover{text-decoration:underline;}
 .sc-grid { margin: 0.2rem 0 0; overflow-x: auto; }
 .sc-head, .sc-row > summary {
   display: grid;
-  grid-template-columns: minmax(7.5rem, 1.6fr) repeat(7, minmax(0, 1fr));
+  grid-template-columns: minmax(7.5rem, 1.6fr) repeat(8, minmax(0, 1fr));
   align-items: center;
   gap: 0.15rem;
-  min-width: 40rem;
+  min-width: 44rem;
 }
-.sc-bandhead { min-width: 40rem; }
+.sc-bandhead { min-width: 44rem; }
 .sc-fname { min-width: 0; }
 .sc-open { color: var(--faint); font-size: 0.82em; margin-left: 0.25rem; text-decoration: none; font-weight: 700; white-space: nowrap; }
 .sc-open:hover { color: var(--link); }
@@ -151,6 +151,7 @@ a:hover{text-decoration:underline;}
     <div class="sc-head">
       <span></span>
       <span class="sc-tool">chant</span>
+      <span class="sc-tool">choudoufu</span>
       <span class="sc-tool">KCL / CUE / Pkl</span>
       <span class="sc-tool">Formae</span>
       <span class="sc-tool">ConfigHub</span>
@@ -165,6 +166,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>I</b><span class="sc-fname">Honor the lower layer <a class="sc-open" href="https://accessibleops.net/honor-the-lower-layer/" aria-label="Full text for Honor the lower layer">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Fold to native spec, no run">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Declarative HCL, as upstream; the real plan reads the cloud, with no state file">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Folds via its own DSL">&#9679;</span>
         <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span>
         <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span>
@@ -175,6 +177,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/honor-the-lower-layer/">Build in the platform's own terms, and keep its spec readable and predictable before anything runs. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Fold to native spec, no run</p>
+        <p><b>choudoufu</b> Declarative HCL, as upstream; the real plan reads the cloud, and needs no state file to do it</p>
         <p><b>KCL / CUE / Pkl</b> Folds via its own DSL</p>
         <p><b>Formae</b> Folds via Pkl; source is the truth</p>
         <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p>
@@ -188,6 +191,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>II</b><span class="sc-fname">The same check, left of the commit <a class="sc-open" href="https://accessibleops.net/correctness-left-of-the-commit/" aria-label="Full text for The same check, left of the commit">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Type + fold diagnostics at the keystroke">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: live-check refuses the documented limits with no cloud call; the real check is still plan">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Schema check plus an LSP">&#9679;</span>
         <span class="sc-cell good" title="Formae: Pkl types + LSP">&#9679;</span>
         <span class="sc-cell warn" title="ConfigHub: Validated in the store, not at an editor keystroke">&#9680;</span>
@@ -198,6 +202,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/correctness-left-of-the-commit/">A change proves itself at the keystroke, the same check for a human and an agent. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Type and fold diagnostics at the keystroke, human and agent alike</p>
+        <p><b>choudoufu</b> <span class="mono">live-check</span> refuses every documented limit with no cloud call or credential; the real check is still <span class="mono">plan</span></p>
         <p><b>KCL / CUE / Pkl</b> Schema check plus an LSP</p>
         <p><b>Formae</b> Pkl types plus an LSP</p>
         <p><b>ConfigHub</b> Validated in the store, not at an editor keystroke</p>
@@ -211,6 +216,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>III</b><span class="sc-fname">Documentation is Law <a class="sc-open" href="https://accessibleops.net/documentation-is-law/" aria-label="Full text for Documentation is Law">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Typed lexicons + semantic lint + policy checks">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Thin types, as upstream; each limit the fork adds is a lint rule with a fixture; policy via OPA or Sentinel">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Schemas and constraints encode validity">&#9679;</span>
         <span class="sc-cell good" title="Formae: Pkl schemas and value constraints">&#9679;</span>
         <span class="sc-cell good" title="ConfigHub: KRM schemas encode validity">&#9679;</span>
@@ -221,6 +227,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/documentation-is-law/">The parts a machine can't infer belong in writing. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Typed lexicons, semantic lint, and policy checks</p>
+        <p><b>choudoufu</b> Thin types, as upstream; each limit the fork adds is a named lint rule with a fixture, and policy is still OPA or Sentinel</p>
         <p><b>KCL / CUE / Pkl</b> Schemas and constraints encode validity</p>
         <p><b>Formae</b> Pkl schemas and value constraints</p>
         <p><b>ConfigHub</b> KRM schemas encode validity</p>
@@ -236,6 +243,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>IV</b><span class="sc-fname">One path to prod <a class="sc-open" href="https://accessibleops.net/one-path-to-prod/" aria-label="Full text for One path to prod">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Every change is one typed change set against live">&#9679;</span>
+        <span class="sc-cell good" title="choudoufu: plan / apply; an approved plan file is re-planned against live and refused by name if it no longer matches">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; bring your own pipeline">&ndash;</span>
         <span class="sc-cell good" title="Formae: Reconciles Pkl source to the cloud">&#9679;</span>
         <span class="sc-cell good" title="ConfigHub: Actuates from the store via ArgoCD / Crossplane">&#9679;</span>
@@ -246,6 +254,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/one-path-to-prod/">Every change arrives as a diff, in one place. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Every change is one typed change set against live</p>
+        <p><b>choudoufu</b> <span class="mono">plan</span> and <span class="mono">apply</span>; an approved plan file is re-planned against live and refused by name if it no longer matches</p>
         <p><b>KCL / CUE / Pkl</b> Language only; bring your own pipeline</p>
         <p><b>Formae</b> Reconciles Pkl source to the cloud</p>
         <p><b>ConfigHub</b> Actuates from the store via ArgoCD or Crossplane</p>
@@ -259,6 +268,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>V</b><span class="sc-fname">Named secrets, least privilege <a class="sc-open" href="https://accessibleops.net/named-secrets-least-privilege/" aria-label="Full text for Named secrets, least privilege">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: By reference, never held; keyless signing">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Least privilege is your IAM, per resource by tag; the record store keeps generated secrets unless strict secrets = refuse">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: By reference, but an agent datastore sits in the loop">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Never holds secrets, but scoping rides the worker creds you supply">&#9680;</span>
@@ -269,6 +279,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/named-secrets-least-privilege/">Access stays scoped and revocable, and secrets are referenced by name rather than held. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> By reference, never held, with keyless signing</p>
+        <p><b>choudoufu</b> Least privilege is your own IAM, per resource, on the marker tags; the record store keeps generated secrets the way state does unless <span class="mono">strict secrets = refuse</span> is set</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> By reference, but an agent datastore sits in the loop</p>
         <p><b>ConfigHub</b> Never holds secrets, but least privilege rides the worker credentials you supply</p>
@@ -282,6 +293,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>VI</b><span class="sc-fname">Bounded blast radius <a class="sc-open" href="https://accessibleops.net/bounded-blast-radius/" aria-label="Full text for Bounded blast radius">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Owned-only by marker; per-env removal cap; blast-radius graph view">&#9679;</span>
+        <span class="sc-cell good" title="choudoufu: Every resource carries its estate as a tag, so an IAM Deny on other estates holds below the tool">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Reconcile scope; an agent datastore in the loop">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Actuator-scoped; ownership from live markers">&#9680;</span>
@@ -292,6 +304,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/bounded-blast-radius/">One mistake can't take down everything. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Owned-only by marker, a per-environment removal cap, and a blast-radius graph view</p>
+        <p><b>choudoufu</b> Every resource carries its estate as a tag, so an IAM Deny on anything outside the estate holds below the tool, wherever AWS honours the condition</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p>
         <p><b>ConfigHub</b> Actuator-scoped, ownership from live markers</p>
@@ -305,6 +318,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>VII</b><span class="sc-fname">Reversible before risky <a class="sc-open" href="https://accessibleops.net/reversible-before-risky/" aria-label="Full text for Reversible before risky">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Reversible runs ungated; destructive gated + saga rollback">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: No rollback; re-apply a prior configuration by hand">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Reconciles drift; no reversible / irreversible split">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Revert the store record; no reversible / irreversible split">&#9680;</span>
@@ -315,6 +329,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/reversible-before-risky/">Actions that can be undone run on their own, and the ones that cannot wait for a human. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Reversible runs ungated; a destructive one is gated with saga rollback</p>
+        <p><b>choudoufu</b> No rollback; you re-apply a prior configuration by hand</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Reconciles drift, with no reversible or irreversible split</p>
         <p><b>ConfigHub</b> Revert the store record, with no reversible or irreversible split</p>
@@ -328,6 +343,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>VIII</b><span class="sc-fname">Escalate the judgment <a class="sc-open" href="https://accessibleops.net/escalate-the-judgment/" aria-label="Full text for Escalate the judgment">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Durable approval gate that survives a crash">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Apply confirmation is built-in; a role-separated gate rides the pipeline">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: native drift approve/reject; broader approval rides the pipeline">&#9680;</span>
         <span class="sc-cell good" title="ConfigHub: Apply Gates and approvals before a change touches a cluster">&#9679;</span>
@@ -338,6 +354,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/escalate-the-judgment/">The newcomer executes, and a human owns the call that matters. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> A durable approval gate that survives a crash</p>
+        <p><b>choudoufu</b> Apply confirmation is built-in, and an approved plan file is checked against live before it applies; a role-separated gate rides the pipeline, chant's or your own</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Native drift approve or reject; broader approval rides the pipeline</p>
         <p><b>ConfigHub</b> Apply Gates and named approvals before a change touches a cluster, in the tool</p>
@@ -351,6 +368,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>IX</b><span class="sc-fname">Attributable <a class="sc-open" href="https://accessibleops.net/attributable/" aria-label="Full text for Attributable">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Append-only release ledger + approval in workflow history">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: CloudTrail / CI logs, outside the tool; the tags say which estate owns a resource, not who changed it">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Pkl in git, plus the reconcile datastore">&#9680;</span>
         <span class="sc-cell good" title="ConfigHub: Each revision records who changed what and who approved">&#9679;</span>
@@ -361,6 +379,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/attributable/">Every change traces to who made it and who approved it. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> An append-only release ledger, with approval in the workflow history</p>
+        <p><b>choudoufu</b> CloudTrail or CI logs, outside the tool; the marker says which estate owns a resource, not who changed it</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p>
         <p><b>ConfigHub</b> Each revision records who changed what and who approved, in the tool</p>
@@ -374,6 +393,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>X</b><span class="sc-fname">Secret rotation is cheap <a class="sc-open" href="https://accessibleops.net/secret-rotation-is-cheap/" aria-label="Full text for Secret rotation is cheap">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: By-reference makes rotation an out-of-band routine change">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: A record-captured secret needs the same surgery as state, unless strict secrets = refuse">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
         <span class="sc-cell warn" title="Formae: By reference; the datastore can hold the value">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: By reference; secrets stay external to the store">&#9680;</span>
@@ -384,6 +404,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/secret-rotation-is-cheap/">Any credential can be rotated as a routine change, from what's written down. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> By-reference makes rotation an out-of-band routine change</p>
+        <p><b>choudoufu</b> A secret captured in the record store needs the same surgery as state, unless <span class="mono">strict secrets = refuse</span> keeps it out</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
         <p><b>Formae</b> By reference, but the datastore can hold the value</p>
         <p><b>ConfigHub</b> By reference; secrets stay external to the store</p>
@@ -399,6 +420,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>XI</b><span class="sc-fname">The live system is the truth <a class="sc-open" href="https://accessibleops.net/truth-lives-live/" aria-label="Full text for The live system is the truth">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Truth left in the live system; no state store">&#9679;</span>
+        <span class="sc-cell good" title="choudoufu: Ownership is two tags on the resource; the state file is a cache you may lose">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
         <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
         <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
@@ -409,6 +431,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/truth-lives-live/">Truth lives in the running system, never a separate store you host. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Truth left in the live system, with no state store</p>
+        <p><b>choudoufu</b> Ownership is two tags on the resource itself, and the state file is a cache you are allowed to lose; values with no cloud twin go in a small record store</p>
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
         <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
         <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
@@ -422,6 +445,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>XII</b><span class="sc-fname">Adopt in place <a class="sc-open" href="https://accessibleops.net/adopt-in-place/" aria-label="Full text for Adopt in place">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Imports a template or live estate; the spec stays native">&#9679;</span>
+        <span class="sc-cell good" title="choudoufu: A stock OpenTofu estate migrates by stamping its markers; a live resource is adopted by a tag write">&#9679;</span>
         <span class="sc-cell warn" title="KCL/CUE/Pkl: Importers bootstrap from OpenAPI / CRD / Terraform, but authoring moves to the DSL">&#9680;</span>
         <span class="sc-cell warn" title="Formae: Reconciles an existing estate into Pkl">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Imports into the store; leaving means exporting">&#9680;</span>
@@ -432,6 +456,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/adopt-in-place/">Existing infrastructure comes under management in place, without conversion to a private format. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Imports a template or live estate; the spec stays native</p>
+        <p><b>choudoufu</b> A stock OpenTofu estate migrates by stamping markers from the state it already has, and a live resource matching a block is adopted by writing two tags; the HCL stays as it was</p>
         <p><b>KCL / CUE / Pkl</b> Importers bootstrap from OpenAPI, CRDs, or Terraform, but authoring moves to the DSL</p>
         <p><b>Formae</b> Reconciles an existing estate into Pkl</p>
         <p><b>ConfigHub</b> Imports into the store; leaving means exporting</p>
@@ -445,6 +470,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>XIII</b><span class="sc-fname">Manage only what you declare <a class="sc-open" href="https://accessibleops.net/manage-only-what-you-declare/" aria-label="Full text for Manage only what you declare">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: Selective by omission; deletes gated on an ownership marker">&#9679;</span>
+        <span class="sc-cell good" title="choudoufu: Unmarked resources are kept; a delete is gated on the estate's own marker">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: No apply; nothing to over-reach">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Reconciles the declared; ownership less explicit">&#9680;</span>
         <span class="sc-cell good" title="ConfigHub: Ownership from live markers, not the store">&#9679;</span>
@@ -455,6 +481,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/manage-only-what-you-declare/">The tool touches only what you declare and deletes only what it owns. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> Selective by omission; deletes gated on an ownership marker</p>
+        <p><b>choudoufu</b> A resource carrying no marker is kept, and a delete is gated on the estate's own marker; the ownership policy sets what happens in each case</p>
         <p><b>KCL / CUE / Pkl</b> No apply, so nothing to over-reach</p>
         <p><b>Formae</b> Reconciles the declared, with ownership less explicit</p>
         <p><b>ConfigHub</b> Ownership from live markers, not the store</p>
@@ -468,6 +495,7 @@ a:hover{text-decoration:underline;}
       <summary>
         <span class="sc-factor"><b>XIV</b><span class="sc-fname">Verify the artifact <a class="sc-open" href="https://accessibleops.net/verify-the-artifact/" aria-label="Full text for Verify the artifact">&#8599;</a></span></span>
         <span class="sc-cell good" title="chant: SBOM, provenance, and a signature built at synthesis, verified at the deploy gate">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Provenance via CI add-ons, as upstream">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: No build artifact or gate">&ndash;</span>
         <span class="sc-cell warn" title="Formae: Provenance via external tooling">&#9680;</span>
         <span class="sc-cell warn" title="ConfigHub: Provenance via external tooling">&#9680;</span>
@@ -478,6 +506,7 @@ a:hover{text-decoration:underline;}
       <div class="sc-detail">
         <p class="sc-statement"><a href="https://accessibleops.net/verify-the-artifact/">A deployable proves itself before it ships, verified where it is built. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
         <p><b>chant</b> SBOM, provenance, and a signature built at synthesis, verified at the deploy gate</p>
+        <p><b>choudoufu</b> Provenance via CI add-ons, as upstream</p>
         <p><b>KCL / CUE / Pkl</b> No build artifact or gate</p>
         <p><b>Formae</b> Provenance via external tooling</p>
         <p><b>ConfigHub</b> Provenance via external tooling</p>
@@ -489,7 +518,7 @@ a:hover{text-decoration:underline;}
   </div>
 
   <div class="sc-closing">
-    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself. <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit.</p>
+    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself. <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags, so the truth band clears and your own IAM bounds the blast radius, while the rest of its column stays where upstream is.</p>
     <p>chant reaches every row because it folds source to the native spec <span class="term">by construction</span>, then carries that same change set through approval, rollback, and a record, with no authoritative state store to keep. It got there first, and nothing here is chant's to keep.</p>
   </div>
 
