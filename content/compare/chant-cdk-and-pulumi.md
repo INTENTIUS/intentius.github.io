@@ -21,10 +21,6 @@ CDK and Pulumi execute your program, and the output depends on what ran. [chant]
 
 The [scorecard](/accessible-ops/) has the reasoning behind each mark.
 
-## What they have that chant does not
-
-Reach and years. A resource a lexicon does not model cannot be declared yet.
-
 ## Where it stands
 
 An approval names the plan it approved. An agent driving chant over MCP can still answer its own gate, and there is no scale figure beyond a synthetic bench. Both are tracked in the open.
