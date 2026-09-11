@@ -58,12 +58,12 @@ a:hover{text-decoration:underline;}
 .sc-grid { margin: 0.2rem 0 0; overflow-x: auto; }
 .sc-head, .sc-row > summary {
   display: grid;
-  grid-template-columns: minmax(7.5rem, 1.6fr) repeat(8, minmax(0, 1fr));
+  grid-template-columns: minmax(7.5rem, 1.6fr) repeat(6, minmax(0, 1fr));
   align-items: center;
   gap: 0.15rem;
-  min-width: 44rem;
+  min-width: 38rem;
 }
-.sc-bandhead { min-width: 44rem; }
+.sc-bandhead { min-width: 38rem; }
 .sc-fname { min-width: 0; }
 .sc-open { color: var(--faint); font-size: 0.82em; margin-left: 0.25rem; text-decoration: none; font-weight: 700; white-space: nowrap; }
 .sc-open:hover { color: var(--link); }
@@ -153,8 +153,8 @@ a:hover{text-decoration:underline;}
       <span class="sc-tool">chant</span>
       <span class="sc-tool">choudoufu</span>
       <span class="sc-tool">KCL / CUE / Pkl</span>
-      <span class="sc-tool">Formae</span>
-      <span class="sc-tool">ConfigHub</span>
+      <!-- <span class="sc-tool">Formae</span> -->
+      <!-- <span class="sc-tool">ConfigHub</span> -->
       <span class="sc-tool">CDK</span>
       <span class="sc-tool">Pulumi</span>
       <span class="sc-tool">Terraform / OpenTofu</span>
@@ -168,8 +168,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Fold to native spec, no run">&#9679;</span>
         <span class="sc-cell warn" title="choudoufu: Declarative HCL, as upstream; the real plan reads the cloud, with no state file">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Folds via its own DSL">&#9679;</span>
-        <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span>
-        <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span>
+        <!-- <span class="sc-cell good" title="Formae: Folds via Pkl; source is the truth">&#9679;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: Holds the real spec (KRM) as data">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: Synthesizes a reviewable native template (CFN, or K8s via cdk8s), and a lookup can shift the output when it runs">&#9680;</span>
         <span class="sc-cell bad" title="Pulumi: runs the program; no static declarative spec, only an engine preview/plan">&#10007;</span>
         <span class="sc-cell warn" title="Terraform: Declarative, but the real plan needs cloud + state">&#9680;</span>
@@ -179,8 +179,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Fold to native spec, no run</p>
         <p><b>choudoufu</b> Declarative HCL, as upstream; the real plan reads the cloud, and needs no state file to do it</p>
         <p><b>KCL / CUE / Pkl</b> Folds via its own DSL</p>
-        <p><b>Formae</b> Folds via Pkl; source is the truth</p>
-        <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p>
+        <!-- <p><b>Formae</b> Folds via Pkl; source is the truth</p> -->
+        <!-- <p><b>ConfigHub</b> Holds the real spec (KRM) as data</p> -->
         <p><b>CDK</b> Synthesizes a reviewable native template (CloudFormation, or K8s via cdk8s), and a context lookup can shift the output when the program runs</p>
         <p><b>Pulumi</b> Runs the program through its own engine; no static declarative spec, only an engine preview or plan</p>
         <p><b>Terraform / OpenTofu</b> Declarative, but the real plan needs cloud and state</p>
@@ -193,8 +193,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Type + fold diagnostics at the keystroke">&#9679;</span>
         <span class="sc-cell warn" title="choudoufu: live-check lints and resolves every identity with no cloud call or credential; the real check is still plan">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Schema check plus an LSP">&#9679;</span>
-        <span class="sc-cell good" title="Formae: Pkl types + LSP">&#9679;</span>
-        <span class="sc-cell warn" title="ConfigHub: Validated in the store, not at an editor keystroke">&#9680;</span>
+        <!-- <span class="sc-cell good" title="Formae: Pkl types + LSP">&#9679;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Validated in the store, not at an editor keystroke">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: TS types check; infra correctness needs synth and a plan">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: TS types check; infra correctness needs a preview">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: validate is shallow; the real check is plan">&#9680;</span>
@@ -204,8 +204,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Type and fold diagnostics at the keystroke, human and agent alike</p>
         <p><b>choudoufu</b> <span class="mono">live-check</span> lints and resolves every identity with no cloud call, credential or state, on any OpenTofu configuration; the real check is still <span class="mono">plan</span></p>
         <p><b>KCL / CUE / Pkl</b> Schema check plus an LSP</p>
-        <p><b>Formae</b> Pkl types plus an LSP</p>
-        <p><b>ConfigHub</b> Validated in the store, not at an editor keystroke</p>
+        <!-- <p><b>Formae</b> Pkl types plus an LSP</p> -->
+        <!-- <p><b>ConfigHub</b> Validated in the store, not at an editor keystroke</p> -->
         <p><b>CDK</b> TS types check, but infra correctness needs a synth and a plan</p>
         <p><b>Pulumi</b> TS types check, but infra correctness needs a preview</p>
         <p><b>Terraform / OpenTofu</b> <span class="mono">validate</span> is shallow; the real check is <span class="mono">plan</span></p>
@@ -218,8 +218,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Typed lexicons + semantic lint + policy checks">&#9679;</span>
         <span class="sc-cell warn" title="choudoufu: Thin types, as upstream; every limit is a named lint rule with its reasoning and a fixture; broader policy via OPA or Sentinel">&#9680;</span>
         <span class="sc-cell good" title="KCL/CUE/Pkl: Schemas and constraints encode validity">&#9679;</span>
-        <span class="sc-cell good" title="Formae: Pkl schemas and value constraints">&#9679;</span>
-        <span class="sc-cell good" title="ConfigHub: KRM schemas encode validity">&#9679;</span>
+        <!-- <span class="sc-cell good" title="Formae: Pkl schemas and value constraints">&#9679;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: KRM schemas encode validity">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: L2 constructs and cdk-nag encode a lot of validity, deeper policy is an add-on">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Types encode shape; policy via CrossGuard">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: Thin types; policy via OPA or Sentinel">&#9680;</span>
@@ -229,8 +229,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Typed lexicons, semantic lint, and policy checks</p>
         <p><b>choudoufu</b> Thin types, as upstream; every limit is a named lint rule with its reasoning and a fixture, and ownership policy is declared in the estate file; broader policy is still OPA or Sentinel</p>
         <p><b>KCL / CUE / Pkl</b> Schemas and constraints encode validity</p>
-        <p><b>Formae</b> Pkl schemas and value constraints</p>
-        <p><b>ConfigHub</b> KRM schemas encode validity</p>
+        <!-- <p><b>Formae</b> Pkl schemas and value constraints</p> -->
+        <!-- <p><b>ConfigHub</b> KRM schemas encode validity</p> -->
         <p><b>CDK</b> L2 constructs and cdk-nag encode a lot of validity, and deeper policy is an add-on</p>
         <p><b>Pulumi</b> Types encode shape; policy via CrossGuard</p>
         <p><b>Terraform / OpenTofu</b> Thin types; policy via OPA or Sentinel</p>
@@ -245,8 +245,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Every change is one typed change set against live">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: plan / apply; an approved plan file is re-planned against live and refused by name if it no longer matches">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; bring your own pipeline">&ndash;</span>
-        <span class="sc-cell good" title="Formae: Reconciles Pkl source to the cloud">&#9679;</span>
-        <span class="sc-cell good" title="ConfigHub: Actuates from the store via ArgoCD / Crossplane">&#9679;</span>
+        <!-- <span class="sc-cell good" title="Formae: Reconciles Pkl source to the cloud">&#9679;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: Actuates from the store via ArgoCD / Crossplane">&#9679;</span> -->
         <span class="sc-cell good" title="CDK: Deploy through cdk deploy">&#9679;</span>
         <span class="sc-cell good" title="Pulumi: Deploy through pulumi up">&#9679;</span>
         <span class="sc-cell good" title="Terraform: plan / apply">&#9679;</span>
@@ -256,8 +256,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Every change is one typed change set against live</p>
         <p><b>choudoufu</b> <span class="mono">plan</span> and <span class="mono">apply</span>; an approved plan file is re-planned against live and refused by name if it no longer matches</p>
         <p><b>KCL / CUE / Pkl</b> Language only; bring your own pipeline</p>
-        <p><b>Formae</b> Reconciles Pkl source to the cloud</p>
-        <p><b>ConfigHub</b> Actuates from the store via ArgoCD or Crossplane</p>
+        <!-- <p><b>Formae</b> Reconciles Pkl source to the cloud</p> -->
+        <!-- <p><b>ConfigHub</b> Actuates from the store via ArgoCD or Crossplane</p> -->
         <p><b>CDK</b> Deploy through <span class="mono">cdk deploy</span></p>
         <p><b>Pulumi</b> Deploy through <span class="mono">pulumi up</span></p>
         <p><b>Terraform / OpenTofu</b> <span class="mono">plan</span> and <span class="mono">apply</span></p>
@@ -270,8 +270,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: By reference, never held; keyless signing">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Credentials are your IAM, scoped per resource on tags every create carries, revoked by detaching a policy; strict secrets = refuse holds no secret at all">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: By reference, but an agent datastore sits in the loop">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: Never holds secrets, but scoping rides the worker creds you supply">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: By reference, but an agent datastore sits in the loop">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Never holds secrets, but scoping rides the worker creds you supply">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: Refs + IAM, but the program can read secrets at runtime">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: ESC refs with OIDC, but core stores secrets in state">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: refs, but state can capture secrets; OpenTofu encrypts state at rest">&#9680;</span>
@@ -281,8 +281,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> By reference, never held, with keyless signing</p>
         <p><b>choudoufu</b> Credentials are your own IAM, scoped per estate or per address on tags every create carries, and revoked by detaching a policy; <span class="mono">strict secrets = refuse</span> holds no generated secret at all and can be pinned from outside the configuration. The default keeps what a state file keeps</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> By reference, but an agent datastore sits in the loop</p>
-        <p><b>ConfigHub</b> Never holds secrets, but least privilege rides the worker credentials you supply</p>
+        <!-- <p><b>Formae</b> By reference, but an agent datastore sits in the loop</p> -->
+        <!-- <p><b>ConfigHub</b> Never holds secrets, but least privilege rides the worker credentials you supply</p> -->
         <p><b>CDK</b> Refs and IAM, but the program can read secrets at runtime</p>
         <p><b>Pulumi</b> ESC gives references with short-lived OIDC, but core stores secrets encrypted in state</p>
         <p><b>Terraform / OpenTofu</b> Refs, but the state file can capture secrets; OpenTofu encrypts state at rest</p>
@@ -295,8 +295,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Owned-only by marker; per-env removal cap; blast-radius graph view">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Every resource carries its estate as a tag, so an IAM Deny on other estates holds below the tool">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Reconcile scope; an agent datastore in the loop">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: Actuator-scoped; ownership from live markers">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Reconcile scope; an agent datastore in the loop">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Actuator-scoped; ownership from live markers">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: Stack + IAM boundaries; refs can widen reach">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Stack + IAM boundaries; refs can widen reach">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: Module boundaries; shared state couples them">&#9680;</span>
@@ -306,8 +306,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Owned-only by marker, a per-environment removal cap, and a blast-radius graph view</p>
         <p><b>choudoufu</b> Every resource carries its estate as a tag, so an IAM Deny on anything outside the estate holds below the tool, wherever AWS honours the condition</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p>
-        <p><b>ConfigHub</b> Actuator-scoped, ownership from live markers</p>
+        <!-- <p><b>Formae</b> Reconcile scope, with an agent datastore in the loop</p> -->
+        <!-- <p><b>ConfigHub</b> Actuator-scoped, ownership from live markers</p> -->
         <p><b>CDK</b> Stack and IAM boundaries, but refs can widen reach</p>
         <p><b>Pulumi</b> Stack and IAM boundaries, but refs can widen reach</p>
         <p><b>Terraform / OpenTofu</b> Module boundaries, but shared state couples them</p>
@@ -320,8 +320,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Reversible runs ungated; destructive gated + saga rollback">&#9679;</span>
         <span class="sc-cell warn" title="choudoufu: No rollback; a change that would abandon or duplicate an object refuses by default, but a plain destroy is not held apart">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Reconciles drift; no reversible / irreversible split">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: Revert the store record; no reversible / irreversible split">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Reconciles drift; no reversible / irreversible split">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Revert the store record; no reversible / irreversible split">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: CloudFormation auto-rollback and cdk rollback recover a failed deploy, no gate on an irreversible one">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: No auto-rollback; re-apply a prior state">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: No rollback; re-apply a prior state by hand">&#9680;</span>
@@ -331,8 +331,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Reversible runs ungated; a destructive one is gated with saga rollback</p>
         <p><b>choudoufu</b> No rollback; a change that would abandon or duplicate an object refuses by default and proceeds only by name, but a plain destroy is not held apart from a reversible change, as upstream</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> Reconciles drift, with no reversible or irreversible split</p>
-        <p><b>ConfigHub</b> Revert the store record, with no reversible or irreversible split</p>
+        <!-- <p><b>Formae</b> Reconciles drift, with no reversible or irreversible split</p> -->
+        <!-- <p><b>ConfigHub</b> Revert the store record, with no reversible or irreversible split</p> -->
         <p><b>CDK</b> CloudFormation auto-rollback and <span class="mono">cdk rollback</span> recover a failed deploy, though an irreversible change is not gated</p>
         <p><b>Pulumi</b> No auto-rollback; you re-apply a prior state</p>
         <p><b>Terraform / OpenTofu</b> No rollback; you re-apply a prior state by hand</p>
@@ -345,8 +345,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Durable approval gate that survives a crash">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: The plan file is the approval: the apply re-plans against live and refuses if the world moved; the generated pipelines gate both writing Ops in git">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: native drift approve/reject; broader approval rides the pipeline">&#9680;</span>
-        <span class="sc-cell good" title="ConfigHub: Apply Gates and approvals before a change touches a cluster">&#9679;</span>
+        <!-- <span class="sc-cell warn" title="Formae: native drift approve/reject; broader approval rides the pipeline">&#9680;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: Apply Gates and approvals before a change touches a cluster">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: Approval in the CI pipeline, not the tool">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Approval via Pulumi Deployments (add-on)">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: apply confirmation is built-in; role-separated approval needs HCP (paid)">&#9680;</span>
@@ -356,8 +356,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> A durable approval gate that survives a crash</p>
         <p><b>choudoufu</b> The approved plan file is the approval: the apply re-plans against live and refuses, with its own exit status, if anything moved since review. The pipelines generated for GitHub, GitLab and Forgejo stop both writing Ops at a gate that is a fact in git</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> Native drift approve or reject; broader approval rides the pipeline</p>
-        <p><b>ConfigHub</b> Apply Gates and named approvals before a change touches a cluster, in the tool</p>
+        <!-- <p><b>Formae</b> Native drift approve or reject; broader approval rides the pipeline</p> -->
+        <!-- <p><b>ConfigHub</b> Apply Gates and named approvals before a change touches a cluster, in the tool</p> -->
         <p><b>CDK</b> Approval in the CI pipeline, not the tool</p>
         <p><b>Pulumi</b> Approval via Pulumi Deployments, a Cloud add-on</p>
         <p><b>Terraform / OpenTofu</b> Apply confirmation is built-in; role-separated approval needs HCP, a paid add-on</p>
@@ -370,8 +370,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Append-only release ledger + approval in workflow history">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Every change, ownership moves included, is an API call the cloud audit log names by session; the plan and its approval are in git">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Pkl in git, plus the reconcile datastore">&#9680;</span>
-        <span class="sc-cell good" title="ConfigHub: Each revision records who changed what and who approved">&#9679;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Pkl in git, plus the reconcile datastore">&#9680;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: Each revision records who changed what and who approved">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: CloudTrail / pipeline logs, outside the tool">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Pulumi Cloud records who applied by default; the approver needs Deployments">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: State history / CI logs, outside the tool">&#9680;</span>
@@ -381,8 +381,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> An append-only release ledger, with approval in the workflow history</p>
         <p><b>choudoufu</b> Every change is an API call under a scoped role, ownership moves included, so the cloud's own audit log names who did what with no ledger edit beside it; the plan file and the approval it landed under are in git</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p>
-        <p><b>ConfigHub</b> Each revision records who changed what and who approved, in the tool</p>
+        <!-- <p><b>Formae</b> Pkl in git, plus the reconcile datastore</p> -->
+        <!-- <p><b>ConfigHub</b> Each revision records who changed what and who approved, in the tool</p> -->
         <p><b>CDK</b> CloudTrail or pipeline logs, outside the tool</p>
         <p><b>Pulumi</b> Pulumi Cloud records who applied by default; the approver needs Deployments, an add-on</p>
         <p><b>Terraform / OpenTofu</b> State history or CI logs, outside the tool</p>
@@ -395,8 +395,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: By-reference makes rotation an out-of-band routine change">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Under strict secrets = refuse no secret is held, so rotation is out of band; a stored generated secret is one record, deleted to regenerate">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: By reference; the datastore can hold the value">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: By reference; secrets stay external to the store">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: By reference; the datastore can hold the value">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: By reference; secrets stay external to the store">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: Runtime reads or state can pin the value">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: ESC helps, but core state can pin the value">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: A state-captured secret needs state surgery">&#9680;</span>
@@ -406,8 +406,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> By-reference makes rotation an out-of-band routine change</p>
         <p><b>choudoufu</b> Under <span class="mono">strict secrets = refuse</span> no secret is ever held, so rotating a credential is an out-of-band change the source never sees; a generated secret kept under the default is one record, deleted to regenerate, never state surgery</p>
         <p><b>KCL / CUE / Pkl</b> Out of scope</p>
-        <p><b>Formae</b> By reference, but the datastore can hold the value</p>
-        <p><b>ConfigHub</b> By reference; secrets stay external to the store</p>
+        <!-- <p><b>Formae</b> By reference, but the datastore can hold the value</p> -->
+        <!-- <p><b>ConfigHub</b> By reference; secrets stay external to the store</p> -->
         <p><b>CDK</b> Runtime reads or state can pin the value</p>
         <p><b>Pulumi</b> ESC helps, but core state can pin the value</p>
         <p><b>Terraform / OpenTofu</b> A state-captured secret needs state surgery</p>
@@ -422,8 +422,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Truth left in the live system; no state store">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Ownership is two tags on the resource; the state file is a cache you may lose">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: Language only; no state model">&ndash;</span>
-        <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span>
-        <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span>
+        <!-- <span class="sc-cell bad" title="Formae: Requires an authoritative agent datastore (SQLite/Postgres/Aurora)">&#10007;</span> -->
+        <!-- <span class="sc-cell bad" title="ConfigHub: Authoring surface, source of truth, and control plane in one store">&#10007;</span> -->
         <span class="sc-cell good" title="CDK: no tool-side state copy. cdk8s is stateless, and AWS CDK's stack state is CloudFormation's own record, not a copy the tool keeps">&#9679;</span>
         <span class="sc-cell bad" title="Pulumi: Keeps its own authoritative state, any backend">&#10007;</span>
         <span class="sc-cell bad" title="Terraform: The state file is the authority">&#10007;</span>
@@ -433,8 +433,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Truth left in the live system, with no state store</p>
         <p><b>choudoufu</b> Ownership is two tags on the resource itself, and the state file is a cache you are allowed to lose; values with no cloud twin go in a small record store</p>
         <p><b>KCL / CUE / Pkl</b> Language only, no state model<sup>4</sup></p>
-        <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p>
-        <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p>
+        <!-- <p><b>Formae</b> Requires an authoritative agent datastore (SQLite, Postgres, or Aurora)</p> -->
+        <!-- <p><b>ConfigHub</b> Authoring surface, source of truth, and control plane collapsed into one store</p> -->
         <p><b>CDK</b> No tool-side state copy: cdk8s emits stateless manifests you can GitOps, and AWS CDK's stack state is CloudFormation's own record of what AWS runs, not a copy the tool keeps</p>
         <p><b>Pulumi</b> Keeps its own authoritative state, whatever the backend</p>
         <p><b>Terraform / OpenTofu</b> The state file is the authority<sup>5</sup></p>
@@ -447,8 +447,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Imports a template or live estate; the spec stays native">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: A stock OpenTofu estate migrates by stamping its markers; a live resource is adopted by a tag write">&#9679;</span>
         <span class="sc-cell warn" title="KCL/CUE/Pkl: Importers bootstrap from OpenAPI / CRD / Terraform, but authoring moves to the DSL">&#9680;</span>
-        <span class="sc-cell warn" title="Formae: Reconciles an existing estate into Pkl">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: Imports into the store; leaving means exporting">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Reconciles an existing estate into Pkl">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Imports into the store; leaving means exporting">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: cdk import, then rewrite as code">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: pulumi import, then rewrite as code">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: config-driven import blocks preview it; you still author the HCL">&#9680;</span>
@@ -458,8 +458,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Imports a template or live estate; the spec stays native</p>
         <p><b>choudoufu</b> A stock OpenTofu estate migrates by stamping markers from the state it already has, and a live resource matching a block is adopted by writing two tags; the HCL stays as it was</p>
         <p><b>KCL / CUE / Pkl</b> Importers bootstrap from OpenAPI, CRDs, or Terraform, but authoring moves to the DSL</p>
-        <p><b>Formae</b> Reconciles an existing estate into Pkl</p>
-        <p><b>ConfigHub</b> Imports into the store; leaving means exporting</p>
+        <!-- <p><b>Formae</b> Reconciles an existing estate into Pkl</p> -->
+        <!-- <p><b>ConfigHub</b> Imports into the store; leaving means exporting</p> -->
         <p><b>CDK</b> <span class="mono">cdk import</span>, then rewrite as code</p>
         <p><b>Pulumi</b> <span class="mono">pulumi import</span>, then rewrite as code</p>
         <p><b>Terraform / OpenTofu</b> Config-driven import blocks preview the import; you still author the HCL</p>
@@ -472,8 +472,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: Selective by omission; deletes gated on an ownership marker">&#9679;</span>
         <span class="sc-cell good" title="choudoufu: Unmarked resources are kept; a delete is gated on the estate's own marker">&#9679;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: No apply; nothing to over-reach">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Reconciles the declared; ownership less explicit">&#9680;</span>
-        <span class="sc-cell good" title="ConfigHub: Ownership from live markers, not the store">&#9679;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Reconciles the declared; ownership less explicit">&#9680;</span> -->
+        <!-- <span class="sc-cell good" title="ConfigHub: Ownership from live markers, not the store">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: Stack-scoped; absence in the template deletes">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Stack-scoped; absence in the program deletes">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: Omission deletes by default; removed / prevent_destroy are opt-in guards">&#9680;</span>
@@ -483,8 +483,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> Selective by omission; deletes gated on an ownership marker</p>
         <p><b>choudoufu</b> A resource carrying no marker is kept, and a delete is gated on the estate's own marker; the ownership policy sets what happens in each case</p>
         <p><b>KCL / CUE / Pkl</b> No apply, so nothing to over-reach</p>
-        <p><b>Formae</b> Reconciles the declared, with ownership less explicit</p>
-        <p><b>ConfigHub</b> Ownership from live markers, not the store</p>
+        <!-- <p><b>Formae</b> Reconciles the declared, with ownership less explicit</p> -->
+        <!-- <p><b>ConfigHub</b> Ownership from live markers, not the store</p> -->
         <p><b>CDK</b> Stack-scoped, but absence in the template deletes</p>
         <p><b>Pulumi</b> Stack-scoped, but absence in the program deletes</p>
         <p><b>Terraform / OpenTofu</b> Omission deletes by default; <span class="mono">removed</span> and <span class="mono">prevent_destroy</span> are opt-in guards, not the design</p>
@@ -497,8 +497,8 @@ a:hover{text-decoration:underline;}
         <span class="sc-cell good" title="chant: SBOM, provenance, and a signature built at synthesis, verified at the deploy gate">&#9679;</span>
         <span class="sc-cell warn" title="choudoufu: The plan file is admitted only if it still matches live, failing closed; no provenance or signature, as upstream">&#9680;</span>
         <span class="sc-cell na" title="KCL/CUE/Pkl: No build artifact or gate">&ndash;</span>
-        <span class="sc-cell warn" title="Formae: Provenance via external tooling">&#9680;</span>
-        <span class="sc-cell warn" title="ConfigHub: Provenance via external tooling">&#9680;</span>
+        <!-- <span class="sc-cell warn" title="Formae: Provenance via external tooling">&#9680;</span> -->
+        <!-- <span class="sc-cell warn" title="ConfigHub: Provenance via external tooling">&#9680;</span> -->
         <span class="sc-cell warn" title="CDK: Provenance via CI add-ons (cosign, SLSA)">&#9680;</span>
         <span class="sc-cell warn" title="Pulumi: Provenance via CI add-ons (cosign, SLSA)">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: Provenance via CI add-ons">&#9680;</span>
@@ -508,8 +508,8 @@ a:hover{text-decoration:underline;}
         <p><b>chant</b> SBOM, provenance, and a signature built at synthesis, verified at the deploy gate</p>
         <p><b>choudoufu</b> The plan file is admitted before apply only if it still matches the live system, failing closed with its own exit status; it carries no provenance or signature, as upstream</p>
         <p><b>KCL / CUE / Pkl</b> No build artifact or gate</p>
-        <p><b>Formae</b> Provenance via external tooling</p>
-        <p><b>ConfigHub</b> Provenance via external tooling</p>
+        <!-- <p><b>Formae</b> Provenance via external tooling</p> -->
+        <!-- <p><b>ConfigHub</b> Provenance via external tooling</p> -->
         <p><b>CDK</b> Provenance via CI add-ons like cosign or SLSA</p>
         <p><b>Pulumi</b> Provenance via CI add-ons like cosign or SLSA</p>
         <p><b>Terraform / OpenTofu</b> Provenance via CI add-ons</p>
@@ -518,7 +518,7 @@ a:hover{text-decoration:underline;}
   </div>
 
   <div class="sc-closing">
-    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself. <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. The truth band clears, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
+    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself.<!-- Formae and ConfigHub columns hidden for now: <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. --> <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. The truth band clears, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
     <p>chant reaches every row because it folds source to the native spec <span class="term">by construction</span>, then carries that same change set through approval, rollback, and a record, with no authoritative state store to keep. It got there first, and nothing here is chant's to keep.</p>
   </div>
 
