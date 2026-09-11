@@ -20,7 +20,3 @@ CDK and Pulumi execute your program, and the output depends on what ran. [chant]
 | Verify the artifact | SBOM, provenance, signature | CI add-ons | CI add-ons |
 
 The [scorecard](/accessible-ops/) has the reasoning behind each mark.
-
-## Where it stands
-
-An approval names the plan it approved. An agent driving chant over MCP can still answer its own gate, and there is no scale figure beyond a synthetic bench. Both are tracked in the open.
