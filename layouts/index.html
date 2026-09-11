@@ -3,11 +3,11 @@
   <h1>{{ .Params.lede | markdownify }}</h1>
   <p class="sub">{{ .Params.sub | markdownify }}</p>
   {{ with .Params.intro }}<p class="intro">{{ . | markdownify }}</p>{{ end }}
-  <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Talk to us</a> <a class="btn" href="{{ "/work/" | relURL }}">What we do</a></p>
+  <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Get in touch</a> <a class="btn" href="{{ "/work/" | relURL }}">The work</a></p>
 </section>
 
 <section class="problems">
-  <h2>Bring us one of these</h2>
+  <h2>Common starting points</h2>
   <div class="cards">
   {{ range .Params.problems }}
     <article class="card">

@@ -3,4 +3,4 @@ title: "Compare"
 summary: "One page per matchup."
 ---
 
-We are not neutral. Read these as arguments, and follow the links to the docs.
+These are arguments, not a neutral survey. Follow the links to the docs.

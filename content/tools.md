@@ -37,7 +37,7 @@ An org and its repositories kept in a declared state, with drift correction. One
 
 ## Emulators
 
-Stateful local targets so the tools run without an account. [mudflaps](https://github.com/INTENTIUS/mudflaps) for Fly Machines, [spritzer](https://github.com/INTENTIUS/spritzer) for Fly Sprites, [m80](https://github.com/INTENTIUS/m80) for KubeMicroVM. The gauntlet runs on [floci](https://github.com/lex00/floci), an AWS emulator we contribute to.
+Stateful local targets so the tools run without an account. [mudflaps](https://github.com/INTENTIUS/mudflaps) for Fly Machines, [spritzer](https://github.com/INTENTIUS/spritzer) for Fly Sprites, [m80](https://github.com/INTENTIUS/m80) for KubeMicroVM. The gauntlet runs on [floci](https://github.com/lex00/floci), an AWS emulator Intentius contributes to.
 
 ## Also
 

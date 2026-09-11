@@ -1,6 +1,6 @@
 ---
 title: "Writing"
-summary: "The arguments behind the tools, on our blog. Start with these."
+summary: "The arguments behind the tools. Start with these."
 ---
 
 - [A release is a compile target](https://lex00.github.io/posts/a-release-is-a-compile-target/)
