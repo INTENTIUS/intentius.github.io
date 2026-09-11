@@ -15,6 +15,10 @@ A type system for operations. Infrastructure in a statically evaluable subset of
 
 [Docs](https://intentius.io/chant/) · [Source](https://github.com/INTENTIUS/chant) · [The subset as a spec](https://github.com/INTENTIUS/typescript-as-data) · [Compare](/compare/chant-cdk-and-pulumi/)
 
+### Agents
+
+`chant init` writes the MCP server into your editor's config and installs a skill per platform. Over MCP an agent can build and lint the project or search it. It can take a lifecycle snapshot and diff it against live. It can run an Op and approve or report on one. The forge lexicons add read-only tools that answer questions about a pipeline before it runs: what it does, what it pulls in and whether that is pinned, what re-runs if a job changes. An agent meets a gate the same way a person does.
+
 ### Fountain lexicon
 
 The Fountain lexicon declares an agent's sandbox, vault and schedule as typed resources and diffs them against what is running. Thirteen lint rules catch the ways agents fail before anything is sent.
