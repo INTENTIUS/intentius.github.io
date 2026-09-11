@@ -17,7 +17,7 @@ A type system for operations. Infrastructure in a statically evaluable subset of
 
 ### Audit
 
-`chant audit` reads an existing repository, with no chant project required, and runs a few hundred security and correctness checks over its pipelines and infrastructure config. It reads the CI workflows for all three platforms and the Kubernetes and Helm config beside them. Dockerfiles and Terraform roots are covered, as are the cloud templates for AWS, Azure and GCP. Every file is scanned for secrets. Findings that are safe to fix mechanically come back as ready-to-apply diffs. Point it at a local path or a public URL, or use [blacklight](https://blacklight.intentius.io), which is the same audit hosted.
+`chant audit` reads an existing repository, with no chant project required, and runs a few hundred security and correctness checks over its pipelines and infrastructure config. It reads the CI workflows for all three platforms and the Kubernetes and Helm config beside them. Dockerfiles and Terraform roots are covered. So are the cloud templates for each of the three big clouds. Every file is scanned for secrets. Findings that are safe to fix mechanically come back as ready-to-apply diffs. Point it at a local path or a public URL, or use [blacklight](https://blacklight.intentius.io), which is the same audit hosted.
 
 ### Agents
 
