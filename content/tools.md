@@ -11,9 +11,13 @@ OpenTofu plus identity hooks. Each AWS resource carries its identity as two tags
 
 ## chant
 
-A type system for operations. Infrastructure in a statically evaluable subset of TypeScript, folded to the platform's own spec with no execution. It deploys to the three big clouds and Kubernetes from one project. Seventeen lexicons in all, generated pipelines, and gates that are commits, under Apache 2.0.
+A type system for operations. Infrastructure in a statically evaluable subset of TypeScript, folded to the platform's own spec with no execution. It deploys to the three big clouds and Kubernetes from one project. A release is a compile target: components described as data, the deploy order from the dependency graph, and the CI generated from the same declarations. Seventeen lexicons in all, under Apache 2.0.
 
 [Docs](https://intentius.io/chant/) · [Source](https://github.com/INTENTIUS/chant) · [The subset as a spec](https://github.com/INTENTIUS/typescript-as-data) · [Compare](/compare/chant-cdk-and-pulumi/)
+
+### Audit
+
+`chant audit` reads an existing repository, with no chant project required, and runs a few hundred security and correctness checks over its pipelines and infrastructure config. It reads the CI workflows for all three platforms and the Kubernetes and Helm config beside them. It reads Dockerfiles and Terraform roots. It reads the cloud templates for AWS, Azure and GCP, and it scans every file for secrets. Findings that are safe to fix mechanically come back as ready-to-apply diffs. Point it at a local path or a public URL, or use [blacklight](https://blacklight.intentius.io), which is the same audit hosted.
 
 ### Agents
 

@@ -3,6 +3,7 @@ title: "Writing"
 summary: "The arguments behind the tools, on our blog. Start with these."
 ---
 
+- [A release is a compile target](https://lex00.github.io/posts/a-release-is-a-compile-target/)
 - [Terraform state has three pieces](https://lex00.github.io/posts/terraform-state-has-three-pieces/)
 - [Invisible ownership is ridiculous](https://lex00.github.io/posts/invisible-ownership-is-ridiculous/)
 - [Infra tooling expectations in 2026](https://lex00.github.io/posts/infra-tooling-expectations-in-2026/)

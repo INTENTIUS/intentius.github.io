@@ -23,9 +23,11 @@ We take one operation you run by hand and write it as a chant Op. It runs in a [
 
 You keep the Ops, the lint rules and the audit trail. We will not promise the agent never surprises you. The gates are there because it will.
 
-## Generated CI with gates
+## Releases as compile targets
 
-Five Ops over one root, with the pipeline YAML generated from them for whichever of the three platforms you run. Two read on a pull request, two write on a push behind an approval, one sweeps the account on a cron. The gate is a commit, so an outage cannot lose it.
+Off Kubernetes there is no shared apply verb, so every component grows its own pipeline and they drift apart. We describe each component as data instead, and the release compiles from it: typed and linted before anything runs, with cross-stack references resolved by name rather than scraped out with `jq`. One generic runner deploys every component in dependency order, and adding the hundredth costs one declaration and no new pipeline. [The argument in full.](https://lex00.github.io/posts/a-release-is-a-compile-target/)
+
+The CI is generated from the same declarations, one thin job per component, for whichever of the three platforms you run. A write stops at an approval, and the approval is a commit, so an outage cannot lose it.
 
 You keep one `chant.config.ts` and the workflows. A warden declares the org and its repositories too, if you want that. {{< wardens >}}
 

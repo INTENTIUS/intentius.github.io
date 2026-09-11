@@ -11,10 +11,10 @@ problems:
     body: "The program makes the call and never holds the credential."
     link: "Agents against real infrastructure"
     href: "/work/#agents-against-real-infrastructure"
-  - title: "A pipeline per platform, by hand"
-    body: "One typed project generates the pipeline for GitHub, GitLab or Forgejo, with the approval gate as a commit."
-    link: "Generated CI"
-    href: "/work/#generated-ci-with-gates"
+  - title: "A pipeline per component, drifting"
+    body: "Describe each component as data and the release compiles from it. Adding one is a declaration, and the CI is generated from the same declarations."
+    link: "Releases as compile targets"
+    href: "/work/#releases-as-compile-targets"
 ---
 
 <div class="tool">
