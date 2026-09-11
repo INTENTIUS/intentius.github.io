@@ -1,7 +1,7 @@
 ---
 title: "Intentius"
-lede: "We do infrastructure work, and we built the tools it needed."
-sub: "Intentius is a small infrastructure consultancy. Two of the tools it uses every day are its own: [chant](https://intentius.io/chant/), a type system for operations, and [choudoufu](https://intentius.io/choudoufu/), an OpenTofu fork that keeps ownership on the resource. Both are open source. Neither is for sale. The help is."
+lede: "The creators of choudoufu and chant"
+sub: "Our tools are free. Need help?"
 problems:
   - title: "A Terraform estate nobody wants to inherit"
     body: "One state file, many teams, and a migration project every time the org chart moves. We move ownership onto the resources as tags, so handover is an IAM grant and a split is a tag rewrite."
