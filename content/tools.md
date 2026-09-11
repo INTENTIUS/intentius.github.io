@@ -11,7 +11,7 @@ OpenTofu plus identity hooks. Each AWS resource carries its identity as two tags
 
 ## chant
 
-A type system for operations. Infrastructure in a statically evaluable subset of TypeScript, folded to the platform's own spec with no execution. It deploys to AWS, Azure, GCP and Kubernetes, with Helm, Docker, the forges and Fly covered by the same seventeen lexicons. Generated pipelines and gates that are commits, under Apache 2.0.
+A type system for operations. Infrastructure in a statically evaluable subset of TypeScript, folded to the platform's own spec with no execution. It deploys to AWS, Azure, GCP and Kubernetes from one project. Seventeen lexicons in all, generated pipelines, and gates that are commits, under Apache 2.0.
 
 [Docs](https://intentius.io/chant/) · [Source](https://github.com/INTENTIUS/chant) · [The subset as a spec](https://github.com/INTENTIUS/typescript-as-data) · [Compare](/compare/chant-cdk-and-pulumi/)
 
