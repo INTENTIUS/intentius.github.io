@@ -69,3 +69,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:2rem 0;}
 .pagefooter{max-width:var(--wide);margin:2rem auto 0;padding:1.4rem 1.5rem 2.5rem;border-top:1px solid var(--rule);color:var(--muted);font-size:0.9rem;}
 .pagefooter p{margin:0 0 0.4rem;}
 @media (max-width:600px){.topbar{gap:0.8rem;} .topbar nav{gap:0.8rem;font-size:0.88rem;}}
+
+/* warden icon links */
+.wardens{display:inline-flex;gap:0.6rem;flex-wrap:wrap;vertical-align:baseline;}
+.warden{display:inline-flex;align-items:center;gap:0.3rem;padding:0.1rem 0.5rem;border:1px solid var(--rule-strong);border-radius:6px;color:var(--ink);font-size:0.9em;font-weight:600;white-space:nowrap;}
+.warden svg{opacity:0.8;}
+.warden:hover{text-decoration:none;border-color:var(--accent);color:var(--link);}

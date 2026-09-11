@@ -17,7 +17,7 @@ A type system for operations. Infrastructure in a statically evaluable subset of
 
 ### Agents
 
-`chant init` writes the MCP server into your editor's config and installs a skill per platform. Over MCP an agent can build and lint the project or search it. It can take a lifecycle snapshot and diff it against live. It can run an Op and approve or report on one. The forge lexicons add read-only tools that answer questions about a pipeline before it runs: what it does, what it pulls in and whether that is pinned, what re-runs if a job changes. An agent meets a gate the same way a person does.
+`chant init` writes the MCP server into your editor's config and installs a skill per platform. Over MCP an agent can build and lint the project or search it. It can take a lifecycle snapshot and diff it against live. It can run an Op and approve or report on one. The GitHub, GitLab and Forgejo lexicons add read-only tools that answer questions about a pipeline before it runs: what it does, what it pulls in and whether that is pinned, what re-runs if a job changes. An agent meets a gate the same way a person does.
 
 ### Fountain lexicon
 
@@ -29,7 +29,7 @@ The whole estate as one graph. Read-only core, every write through a gated chant
 
 ## Wardens
 
-A GitHub org, a GitLab group or a Forgejo org kept in a declared state, with drift correction. [github](https://github.com/INTENTIUS/github-warden) · [gitlab](https://github.com/INTENTIUS/gitlab-warden) · [forgejo](https://github.com/INTENTIUS/forgejo-warden)
+An org and its repositories kept in a declared state, with drift correction. One warden per platform. {{< wardens >}}
 
 ## Emulators
 

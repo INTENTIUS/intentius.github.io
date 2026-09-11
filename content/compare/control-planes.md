@@ -18,7 +18,7 @@ Our answer is a tag on the resource, so your IAM is the boundary whether or not 
 | Honest compatibility | The gauntlet: 26 real configurations against stock OpenTofu as the oracle. | Refusal by name, and a compatibility page still to come. |
 | A control plane you can look at | | [behold](https://github.com/INTENTIUS/behold), read-only core, writes through gated Ops. |
 | Any scale | 79, 301 and 745 resources measured, 745 against real AWS, 3,705 on the emulator. The category publishes an adjective. | A synthetic bench to 200. |
-| Agent-native | | An MCP server with tools for build, lint and search, lifecycle snapshot and diff, and running and approving Ops, plus read-only pipeline tools from the forge lexicons. `chant acp` for an editor or sandbox that drives chant directly. |
+| Agent-native | | An MCP server with tools for build, lint and search, lifecycle snapshot and diff, and running and approving Ops, plus read-only pipeline tools from the GitHub, GitLab and Forgejo lexicons. `chant acp` for an editor or sandbox that drives chant directly. |
 | Model choice | No model calls. | The model is a field on a Fountain `Agent` resource. |
 
 No answer on our side, by design: Terraform Actions, deferred changes in the language, and a one-effect-at-a-time apply.

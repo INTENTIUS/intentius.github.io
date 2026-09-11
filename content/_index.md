@@ -11,8 +11,8 @@ problems:
     body: "The program makes the call and never holds the credential."
     link: "Agents against real infrastructure"
     href: "/work/#agents-against-real-infrastructure"
-  - title: "A pipeline per forge, by hand"
-    body: "One typed project generates all three, with the approval gate as a commit."
+  - title: "A pipeline per platform, by hand"
+    body: "One typed project generates the pipeline for GitHub, GitLab or Forgejo, with the approval gate as a commit."
     link: "Generated CI"
     href: "/work/#generated-ci-with-gates"
 ---

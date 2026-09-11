@@ -25,9 +25,9 @@ You keep the Ops, the lint rules and the audit trail. We will not promise the ag
 
 ## Generated CI with gates
 
-Five Ops over one root, and each forge's YAML generated from them. Two read on a pull request, two write on a push behind an approval, one sweeps the account on a cron. The gate is a commit, so an outage cannot lose it.
+Five Ops over one root, with the pipeline YAML generated from them for whichever of the three platforms you run. Two read on a pull request, two write on a push behind an approval, one sweeps the account on a cron. The gate is a commit, so an outage cannot lose it.
 
-You keep one `chant.config.ts` and the workflows. A [warden](https://github.com/INTENTIUS/github-warden) declares the forge itself if you want that too.
+You keep one `chant.config.ts` and the workflows. A warden declares the org and its repositories too, if you want that. {{< wardens >}}
 
 ## Upstream
 
