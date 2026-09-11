@@ -8,8 +8,8 @@ enableRobotsTXT = true
   description = "Intentius is an infrastructure consulting company. It built chant and choudoufu so that ownership of cloud resources lives on the resources, where IAM can read it."
   githubOrg = "https://github.com/intentius"
   blog = "https://lex00.github.io/"
-  # Leave empty to hide the email line on /contact/.
-  contactEmail = ""
+  # Rendered as a mailto link only; the address is never printed. Leave empty to hide the line.
+  contactEmail = "albert.a.artigues@gmail.com"
 
 [menus]
   [[menus.main]]
