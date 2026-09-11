@@ -1,8 +1,8 @@
 ---
 title: "Compare"
-summary: "Opinionated matchups, one page each. Every claim about our own tools links to the test, the smoke scenario, or the issue that says it is not done yet."
+summary: "One page per matchup. Every claim about our tools links to the proof or the issue."
 ---
 
-We are not neutral. We built two of the tools on these pages because the alternatives kept the record of what you own somewhere your IAM cannot see. Read the marks as arguments, follow the links, and decide for yourself.
+We are not neutral. Read the marks as arguments and follow the links.
 
-Every claim on these pages carries a status: measured means a test or smoke scenario proves it and you can run it; shipped means it exists with a date; documented means the docs describe it and nothing measures it yet; open means an issue is filed and the site is waiting on it.
+Measured means a test you can run. Shipped means it exists, with a date. Documented means nothing measures it yet. Open means an issue is filed.
