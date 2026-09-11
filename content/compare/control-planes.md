@@ -19,11 +19,12 @@ Read the left column for the claim and the other two for the answer from each to
 | Many tools in one governed run | Out of scope. | Seventeen lexicons, one gate. No Ansible, and no combined example yet. |
 | Honest compatibility | The gauntlet: 26 real configurations against stock OpenTofu as the oracle. | Refusal by name, and a compatibility page still to come. |
 | A control plane you can look at | | [behold](https://github.com/INTENTIUS/behold), read-only core, writes through gated Ops. |
+| Agent-native | | An MCP server with tools for build, lint and search, lifecycle snapshot and diff, and running and approving Ops, plus read-only pipeline tools from the GitHub, GitLab and Forgejo lexicons. `chant acp` for an editor or sandbox that drives chant directly. |
+| Model choice | No model calls. | The model is a field on a Fountain `Agent` resource. |
+
 <!-- scale row held until the 10,000+ runs land (choudoufu#1051, chant#2399)
 | Any scale | 79, 301 and 745 resources measured, 745 against real AWS, 3,705 on the emulator. The category publishes an adjective. | A synthetic bench to 200. |
 -->
-| Agent-native | | An MCP server with tools for build, lint and search, lifecycle snapshot and diff, and running and approving Ops, plus read-only pipeline tools from the GitHub, GitLab and Forgejo lexicons. `chant acp` for an editor or sandbox that drives chant directly. |
-| Model choice | No model calls. | The model is a field on a Fountain `Agent` resource. |
 
 No answer on our side, by design: Terraform Actions, deferred changes in the language, and a one-effect-at-a-time apply.
 
