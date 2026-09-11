@@ -37,7 +37,9 @@ Each is a smoke scenario, a few minutes on Docker plus an emulator, and each als
 - About half the provider's types carry no tags. They are identifiable, not governable by a tag condition. [Per type.](https://intentius.io/choudoufu/docs/use/resource-tiers/)
 - Identity must be knowable before create. `live-check` tells you what refuses, with no cloud call.
 - The record store keeps generated secrets like state does, unless `strict { secrets = "refuse" }`.
+<!-- scale claims held until the 10,000+ run lands (choudoufu#1051)
 - 745 resources measured against real AWS. 3,705 on the emulator only.
+-->
 - Discovery cost grows with unfiltered IAM list resources.
 
 On the [scorecard](/accessible-ops/), choudoufu clears nine of fourteen. Terraform clears one.
