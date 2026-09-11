@@ -1,0 +1,8 @@
+<header class="topbar">
+  <a class="wordmark" href="{{ "/" | relURL }}">Intentius</a>
+  <nav aria-label="Site">
+    {{ range .Site.Menus.main }}
+    <a href="{{ .URL }}"{{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+  </nav>
+</header>

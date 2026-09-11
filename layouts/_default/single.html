@@ -1,0 +1,9 @@
+{{ define "main" }}
+<article class="prose">
+  <header class="pagehead">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.summary }}<p class="sub">{{ . | markdownify }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+</article>
+{{ end }}

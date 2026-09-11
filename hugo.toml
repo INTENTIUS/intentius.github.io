@@ -1,0 +1,49 @@
+baseURL = "https://intentius.io/"
+title = "Intentius"
+languageCode = "en-us"
+disableKinds = ["taxonomy", "term", "rss"]
+enableRobotsTXT = true
+
+[params]
+  description = "Intentius is an infrastructure consulting company. It built chant and choudoufu so that ownership of cloud resources lives on the resources, where IAM can read it."
+  githubOrg = "https://github.com/intentius"
+  blog = "https://lex00.github.io/"
+  # Leave empty to hide the email line on /contact/.
+  contactEmail = ""
+
+[menus]
+  [[menus.main]]
+    name = "Work"
+    pageRef = "/work"
+    weight = 10
+  [[menus.main]]
+    name = "Tools"
+    pageRef = "/tools"
+    weight = 20
+  [[menus.main]]
+    name = "Compare"
+    pageRef = "/compare"
+    weight = 30
+  [[menus.main]]
+    name = "Accessible Ops"
+    pageRef = "/accessible-ops"
+    weight = 40
+  [[menus.main]]
+    name = "Writing"
+    pageRef = "/writing"
+    weight = 50
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 60
+  [[menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 70
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2

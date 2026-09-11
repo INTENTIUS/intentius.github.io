@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="prose">
+  <header class="pagehead">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.summary }}<p class="sub">{{ . | markdownify }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+  {{ $pages := .Pages.ByWeight }}
+  {{ if $pages }}
+  <div class="cards">
+  {{ range $pages }}
+    <article class="card">
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Params.summary | markdownify }}</p>
+    </article>
+  {{ end }}
+  </div>
+  {{ end }}
+</article>
+{{ end }}

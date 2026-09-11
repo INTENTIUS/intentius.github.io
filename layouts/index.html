@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="lede">
+  <h1>{{ .Params.lede | markdownify }}</h1>
+  <p class="sub">{{ .Params.sub | markdownify }}</p>
+  <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Talk to us</a> <a class="btn" href="{{ "/work/" | relURL }}">What we do</a></p>
+</section>
+
+<section class="problems">
+  <h2>Bring us one of these</h2>
+  <div class="cards">
+  {{ range .Params.problems }}
+    <article class="card">
+      <h3>{{ .title }}</h3>
+      <p>{{ .body | markdownify }}</p>
+      <p class="more"><a href="{{ .href | relURL }}">{{ .link }}</a></p>
+    </article>
+  {{ end }}
+  </div>
+</section>
+
+<section class="evidence">
+  <h2>The tools are the evidence</h2>
+  {{ .Content }}
+</section>
+{{ end }}
