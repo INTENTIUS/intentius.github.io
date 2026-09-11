@@ -23,7 +23,7 @@ problems:
 </div>
 <div class="tool">
   <div class="name">chant</div>
-  <p>A type system for operations. Typed source folded to the platform's own spec before anything runs, then deployed to AWS, Azure, GCP and Kubernetes from one project. <a href="https://intentius.io/chant/">Docs</a> · <a href="/compare/chant-cdk-and-pulumi/">Compare</a></p>
+  <p>A type system for operations. Typed source folded to the platform's own spec before anything runs, then deployed to the three big clouds and Kubernetes from one project. <a href="https://intentius.io/chant/">Docs</a> · <a href="/compare/chant-cdk-and-pulumi/">Compare</a></p>
 </div>
 <div class="tool">
   <div class="name">the standard</div>

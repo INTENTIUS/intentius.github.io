@@ -4,7 +4,7 @@ summary: "All three take TypeScript. Only one refuses to run it."
 weight: 20
 ---
 
-CDK and Pulumi execute your program, and the output depends on what ran. [chant](https://intentius.io/chant/) accepts only the subset of TypeScript whose value is fixed by literals and references, and folds it to the platform's own spec with no execution. It deploys to AWS, Azure, GCP and Kubernetes from one project. The [subset is a spec](https://github.com/INTENTIUS/typescript-as-data) with a conformance suite.
+CDK and Pulumi execute your program, and the output depends on what ran. [chant](https://intentius.io/chant/) accepts only the subset of TypeScript whose value is fixed by literals and references, and folds it to the platform's own spec with no execution. It deploys to the three big clouds and Kubernetes from one project. The [subset is a spec](https://github.com/INTENTIUS/typescript-as-data) with a conformance suite.
 
 | Property | chant | CDK | Pulumi |
 |---|---|---|---|
