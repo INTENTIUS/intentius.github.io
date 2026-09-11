@@ -1,31 +1,33 @@
 ---
 title: "The control planes and orchestration wrappers"
-summary: "If you are on Spacelift, Terraform Cloud or something like them, this is the page. Their pitch, claim by claim, and how each of our tools answers it."
+summary: "If you are on Spacelift, Terraform Cloud or something like them, this is the page."
 weight: 30
 ---
 
-The pitch is a loop. Plan and apply one effect, then replan and go round again with a person or a policy between rounds. It works only for actors that go through the loop. Anyone holding IAM credentials goes around it.
+They all sell the same shape. Your changes go through their loop, a person or a policy approves each one, and nothing runs unreviewed. It works, and it is worth paying for if the loop is the only way anyone touches your infrastructure.
 
-Our answer is a tag on the resource, so your IAM is the boundary whether or not the actor used any tool.
+It never is. Someone has a key. The on-call engineer fixing an outage at 2am has a key, the script that has run every night since 2019 has a key, and the contractor you onboarded last month has a key. None of them go through the loop, and the loop cannot see them.
 
-Read the left column for the claim and the other two for the answer from each tool.
+That is the gap we build for.
 
-| The claim | choudoufu | chant |
-|---|---|---|
-| Every change approved, nothing off-plan | The plan file is the approval. The apply re-plans against live and refuses if anything moved. | A gate whose resolution is a commit, bound to the plan digest since 0.63. |
-| One effect at a time | Blast radius by partition, not sequencing. An estate is what shares a marker, and `live-mv` moves the boundary. | Owned-only by marker, with a per-environment removal cap. |
-| Replan and converge | Every plan reads live, so every run is the loop. | `ConvergeOp` on a schedule, ticked by `chant operator`. Not yet shown on a choudoufu root. |
-| Import as a reviewed diff | `live-adopt`: ledger, gate, then two tags per resource. | `carve`, one resource at a time. |
-| Many tools in one governed run | Out of scope. | Seventeen lexicons, one gate. No Ansible, and no combined example yet. |
-| Honest compatibility | The gauntlet: 26 real configurations against stock OpenTofu as the oracle. | Refusal by name, and a compatibility page still to come. |
-| A control plane you can look at | | [behold](https://github.com/INTENTIUS/behold), read-only core, writes through gated Ops. |
-| Agent-native | | An MCP server with tools for build, lint and search, lifecycle snapshot and diff, and running and approving Ops, plus read-only pipeline tools from the GitHub, GitLab and Forgejo lexicons. `chant acp` for an editor or sandbox that drives chant directly. |
-| Model choice | No model calls. | The model is a field on a Fountain `Agent` resource. |
+## Put the record where the cloud can read it
 
-<!-- scale row held until the 10,000+ runs land (choudoufu#1051, chant#2399)
-| Any scale | 79, 301 and 745 resources measured, 745 against real AWS, 3,705 on the emulator. The category publishes an adjective. | A synthetic bench to 200. |
--->
+Every resource we create is stamped with who owns it, in the cloud, on the resource itself. Your own permissions read that stamp. A staging role that may not touch production gets denied by AWS rather than by a policy engine sitting in front of AWS. The rule holds for the console and the CLI, and for the nightly script and the contractor too.
 
-No answer on our side, by design: Terraform Actions, deferred changes in the language, and a one-effect-at-a-time apply.
+Nobody has to route through anything for it to work. That is the difference, and it is the whole argument.
 
-Ask any of them what stops someone using the CLI. Then ask where ownership is written, and whether IAM can read it there.
+## What you get on top
+
+Your Terraform keeps working. Same HCL, same providers, same plan, because [choudoufu](/compare/choudoufu-and-terraform-state/) is a build of OpenTofu rather than a wrapper around it.
+
+Handing a team its own slice becomes a permissions change. No state surgery, no repository reshuffle, no maintenance window.
+
+An approved plan cannot drift into a different one. The apply re-reads the live system, compares it against what was approved, and stops if anything moved.
+
+Your pipeline is yours. It runs on your GitHub, GitLab or Forgejo, and the approvals are commits in your repository. Nothing is hosted by us, so there is no seat to buy and no account to lose access to.
+
+## The honest part
+
+We are a consultancy that gives its tools away, so we will tell you when the answer is no. choudoufu is AWS only and experimental. If you are on Azure or GCP, or you want one hosted thing your whole company logs into, buy the product.
+
+If your problem is that the guardrail stops at the edge of the tool, [talk to us](/contact/).
