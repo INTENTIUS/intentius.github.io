@@ -4,7 +4,7 @@ summary: "Fourteen properties an infrastructure toolchain either has or does not
 wide: true
 ---
 
-[Accessible Ops](https://accessibleops.net/) is a spec, not a product. Its fourteen properties describe what it takes for a newcomer, human or agent, to operate infrastructure safely: the source predicts the platform spec, the same check runs at the keystroke, every change arrives as a diff in one place, credentials are scoped and revocable, the live system is the truth, and so on.
+[Accessible Ops](https://accessibleops.net/) is a spec, not a product. Its fourteen properties describe what it takes for a newcomer, human or agent, to operate infrastructure safely. The source predicts the platform spec. Every change arrives as a diff in one place where someone can say no. The live system is the truth.
 
 We use it as the bar for every engagement. When we recommend a tool, or build one, this is why.
 

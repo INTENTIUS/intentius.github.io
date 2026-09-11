@@ -4,9 +4,9 @@ summary: "A category of products puts an approval loop around Terraform and call
 weight: 30
 ---
 
-The pitch is consistent across the category. Every change is planned, visible and approved. Nothing runs off-plan. The plan is the agent's work list, applied one effect at a time. Import brings existing infrastructure in as a reviewed diff. It scales to thousands of resources. It is native to whatever transport agents use this year.
+The pitch is consistent across the category. Every change is planned, visible and approved. Nothing runs off-plan. The plan is the agent's work list, applied one effect at a time. Import brings existing infrastructure in as a reviewed diff. It scales to thousands of resources and speaks whatever transport agents use this year.
 
-Strip the framing and the mechanism is a loop: plan, pick one effect, apply it, replan, repeat, with a person or a policy between rounds. The safety property is a small blast radius achieved by sequencing. It depends on the approval step catching the bad effect before it runs, and it depends on every actor going through the loop. Anything holding IAM credentials goes around it.
+Strip the framing and the mechanism is a loop. Plan and apply one effect from that plan, then replan and go round again with a person or a policy between rounds. The safety property is a small reach for any one mistake, achieved by sequencing. It depends on the approval step catching the bad effect before it runs, and it depends on every actor going through the loop. Anything holding IAM credentials goes around it.
 
 We answer the same claims from a different layer. Ownership is a tag on the resource, so your IAM is the boundary, and it holds whether or not the actor went through any tool.
 

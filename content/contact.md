@@ -9,7 +9,7 @@ summary: "There is no form and nothing to sign up for. Write to us, and say what
 
 The conversation goes faster with three things:
 
-- A diagram, or a list, of what exists today. Accounts, estates, state files, pipelines, and who owns which.
+- A diagram, or a list, of what exists today. Which accounts and estates there are, where state lives, and who owns each.
 - The one operation you would like to stop doing by hand.
 - Who has to approve it when it runs.
 
@@ -17,4 +17,4 @@ That is usually enough to say in one reply whether we can help, and what it woul
 
 ## What we are not
 
-Not a vendor. There is no product to license, no seat, no tenancy, and no lever for anyone to pull later. If the right answer for you is a tool we did not build, we will say so.
+Not a vendor. There is no product to license and no seat to buy, so nobody has a lever to pull later. If the right answer for you is a tool we did not build, we will say so.

@@ -1,0 +1,11 @@
+{
+  "name": "intentius-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint:prose": "node scripts/lint-prose.mjs $(find content -name '*.md')"
+  },
+  "devDependencies": {
+    "sentences": "^0.1.1"
+  }
+}

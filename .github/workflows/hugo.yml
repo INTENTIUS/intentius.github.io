@@ -32,6 +32,13 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Prose lint (sentences ruleset)
+        run: npm run lint:prose
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6

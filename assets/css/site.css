@@ -72,7 +72,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:2rem 0;}
 .status-measured{color:var(--good);border-color:var(--good);}
 .status-documented{color:var(--warn);border-color:var(--warn);}
 .status-proposed{color:var(--faint);}
-.status-open{color:var(--bad);border-color:var(--bad);}
+.status-open{color:var(--muted);border-color:var(--rule-strong);}
 
 /* footer */
 .pagefooter{max-width:var(--wide);margin:2rem auto 0;padding:1.4rem 1.5rem 2.5rem;border-top:1px solid var(--rule);color:var(--muted);font-size:0.9rem;}

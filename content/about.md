@@ -3,13 +3,13 @@ title: "About"
 summary: "Intentius is a one-person infrastructure consultancy. The tools came out of the work."
 ---
 
-Intentius does infrastructure work for teams that inherited more than they built: shared production accounts, state files nobody wants to touch, pipelines maintained by hand on whichever forge the company used last, and now agents that need production access without production keys.
+Intentius does infrastructure work for teams that inherited more than they built: shared production accounts, state files nobody wants to touch, and now agents that need production access without production keys.
 
 The tools exist because the work kept hitting the same wall. Every infrastructure tool outside Kubernetes keeps a private ledger of what it owns, and the ledger is where the permission boundary, the secrets and the lock end up. An entire industry sells workarounds for that ledger from a layer above it. We wanted the record where IAM could read it.
 
 [choudoufu](https://intentius.io/choudoufu/) is the smallest possible change to OpenTofu that does this for AWS: two tags per resource, and the state file becomes a cache. [chant](https://intentius.io/chant/) goes the other way, out of Terraform and into the platform's own spec, across many platforms, with the same property. Both are open source, both are documented to the point of naming their own gaps, and neither has a pricing page.
 
-The person behind it has run infrastructure for a long time and writes about it at [lex00.github.io](https://lex00.github.io/). The [Accessible Ops](https://accessibleops.net/) spec, which this site rates every tool against, was seeded in part by that writing.
+The person behind it has run infrastructure for a long time and writes about it on [a personal blog](https://lex00.github.io/). The [Accessible Ops](https://accessibleops.net/) spec, which this site rates every tool against, was seeded in part by that writing.
 
 ## How we work
 

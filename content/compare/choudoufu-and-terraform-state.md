@@ -25,13 +25,13 @@ Everything else is stock OpenTofu, and the [gauntlet](https://intentius.io/choud
 
 ## The claims, and how to check them
 
-Each of these is a smoke scenario in the repository, two to six minutes on Docker plus a local AWS emulator. Each also runs inverted: under `BREAK=1` it manufactures the exact corruption the claim guards against and passes only by catching it. [The full list is twenty.](https://intentius.io/choudoufu/docs/claims/)
+Each of these is a smoke scenario in the repository, two to six minutes on Docker plus a local AWS emulator. Each also runs inverted, where under `BREAK=1` it manufactures the exact corruption the claim guards against and passes only by catching it. [The full list is twenty.](https://intentius.io/choudoufu/docs/claims/)
 
 - Owned resources cannot fall out of plans unnoticed. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-1-owned-resources-cannot-fall-out-of-plans-unnoticed" >}}
 - Contention settles at the platform API, never in a lock. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-2-contention-settles-at-the-platform-api-never-in-a-lock" >}}
 - Staleness costs reads, never results. A fresh, an ancient and a missing cache plan byte-identically. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-3-staleness-costs-reads-never-results" >}}
 - Recovery is a re-run, never surgery. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-5-recovery-is-a-re-run-never-surgery" >}}
-- The roundtrip: one command in, one file out. Stock stands an estate up, `live-import` adopts it, the cache hands a stock state file back. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-6-the-roundtrip---one-command-in-one-file-out" >}}
+- The roundtrip is one command in and one file out. Stock stands an estate up, `live-import` adopts it, the cache hands a stock state file back. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-6-the-roundtrip---one-command-in-one-file-out" >}}
 - Carve by retag. A 79-resource terralith is split into team estates with tag writes and no state surgery. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-12-carve-by-retag" >}}
 - The tag is the boundary. Two roles fenced to two halves of one estate by an IAM condition; refused by AWS, not by the tool, and the same refusal lands on a plain CLI call. Reproduced on a real account with CloudTrail evidence. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-13-the-tag-is-the-boundary" >}}
 - A plan costs its estate, not its account. Measured with 3,705 foreign resources in the account: the read pass did not move by one call. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-20-scale---the-estate-boundary-holds-when-the-account-is-a-terralith" >}}

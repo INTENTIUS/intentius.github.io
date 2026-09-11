@@ -5,19 +5,19 @@ summary: "Everything Intentius builds is open source. Two of these are the reaso
 
 ## choudoufu
 
-OpenTofu plus identity hooks. Each AWS resource carries its identity as two tags, `tofu-estate` and `tofu-address`, written as part of the create call and read back live on the next plan. The state file is a cache you are allowed to lose, and the IAM you already run decides who may read or change what. Handover is granting a role, a split is a tag rewrite, adoption is a tag you write. Twenty claims, each a smoke scenario with its failure demonstrated. Experimental, AWS only, MPL-2.0 like upstream.
+OpenTofu plus identity hooks. Each AWS resource carries its identity as two tags, written as part of the create call and read back live on the next plan. The tags are `tofu-estate` and `tofu-address`. The state file is a cache you are allowed to lose, and the IAM you already run decides who may read or change what. Handover is granting a role, a split is a tag rewrite, adoption is a tag you write. Twenty claims, each a smoke scenario with its failure demonstrated. Experimental, AWS only, MPL-2.0 like upstream.
 
 [Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [The claims](https://intentius.io/choudoufu/docs/claims/) · [How it compares](/compare/choudoufu-and-terraform-state/)
 
 ## chant
 
-A type system for operations. Infrastructure is declared in a statically evaluable subset of TypeScript and folded to the platform's own spec with no module execution. Seventeen lexicons: AWS, Azure, GCP, Kubernetes, Helm, Docker, GitHub, GitLab, Forgejo, Fly, Fountain, Terraform and more. One project generates the pipeline for each forge, and gates are durable facts in git. `chant serve mcp` and `chant acp` let an agent drive it over stdio. Apache 2.0.
+A type system for operations. Infrastructure is declared in a statically evaluable subset of TypeScript and folded to the platform's own spec with no module execution. Seventeen lexicons cover the three big clouds and Kubernetes. Others reach the three forges. Fly, Fountain and Terraform have lexicons too. One project generates the pipeline for each forge, and gates are durable facts in git. `chant serve mcp` and `chant acp` let an agent drive it over stdio. It is licensed Apache 2.0.
 
 [Docs](https://intentius.io/chant/) · [Source](https://github.com/INTENTIUS/chant) · [The TypeScript subset, as a spec](https://github.com/INTENTIUS/typescript-as-data) · [How it compares](/compare/chant-cdk-and-pulumi/)
 
 ### The Fountain lexicon
 
-chant can declare a [Fountain](https://github.com/BinaryBourbon/fountain) estate the way it declares cloud infrastructure: agents, environments, vaults, teammates, schedules and webhook receivers, in TypeScript, applied through one call and diffed against what is live. Thirteen lint rules run before anything is sent, and they exist because of how agents fail: an environment that never said what network it wanted, a cloud key sitting in plain environment variables, an MCP server handed a literal token, a vault key silently shadowing an environment key. An agent, a teammate and a schedule are declared resources with per-tool permission verdicts, allowed vaults, allowed environments and a sandbox mode. Most products let you talk to an agent. This lets you declare one and diff it against what is actually running.
+chant can declare a [Fountain](https://github.com/BinaryBourbon/fountain) estate the way it declares cloud infrastructure, in TypeScript, applied through one call and diffed against what is live. The kinds it models are agents and their environments, vaults and teammates, and schedules and webhook receivers. Thirteen lint rules run before anything is sent, and they exist because of how agents fail: an environment that never said what network it wanted, a cloud key sitting in plain environment variables, an MCP server handed a literal token, a vault key silently shadowing an environment key. An agent is a declared resource with per-tool permission verdicts and a sandbox mode, and so are a teammate and a schedule. Most products let you talk to an agent. This lets you declare one and diff it against what is actually running.
 
 The six Fountain kinds chant models are modeled completely. The remaining API surface is excluded with recorded reasons.
 
@@ -39,4 +39,4 @@ Stateful local emulators so the tools above can be tested without an account. [m
 
 ## Also
 
-[pinhole](https://github.com/INTENTIUS/pinhole) draws chant's resolved graph as diagrams. [blacklight](https://blacklight.intentius.io) is a hosted chant audit: paste a public repo URL, get the misconfigurations in its CI, manifests and templates as ready-made diffs. [spicypath](https://spicypath.intentius.workers.dev) inspects any profile in the browser.
+[pinhole](https://github.com/INTENTIUS/pinhole) draws chant's resolved graph as diagrams. [blacklight](https://blacklight.intentius.io) is a hosted chant audit: paste a public repo URL and get its misconfigurations back as ready-made diffs. [spicypath](https://spicypath.intentius.workers.dev) inspects any profile in the browser.

@@ -2,6 +2,10 @@
 serve:
     hugo server -D
 
+# Lint every content page on the sentences trope ruleset (medium and high fail)
+lint:
+    npm run -s lint:prose
+
 # Build the site into public/
 build:
     hugo --gc --minify
