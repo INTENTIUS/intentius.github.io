@@ -1,12 +1,14 @@
 ---
 title: "The control planes and orchestration wrappers"
-summary: "An approval loop around Terraform, sold as governance. Here is each claim when ownership lives on the resource."
+summary: "If you are on Spacelift, Terraform Cloud or something like them, this is the page. Their pitch, claim by claim, and how each of our tools answers it."
 weight: 30
 ---
 
 The pitch is a loop. Plan and apply one effect, then replan and go round again with a person or a policy between rounds. It works only for actors that go through the loop. Anyone holding IAM credentials goes around it.
 
 Our answer is a tag on the resource, so your IAM is the boundary whether or not the actor used any tool.
+
+Read the left column for the claim and the other two for the answer from each tool.
 
 | The claim | choudoufu | chant |
 |---|---|---|

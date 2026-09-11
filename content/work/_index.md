@@ -3,9 +3,11 @@ title: "Work"
 summary: "Four kinds of engagement. Everything we build is open source, so nothing you keep depends on us."
 ---
 
+One word first. An estate is everything one team owns in a cloud account: the resources, and the right to change them.
+
 ## Estate migration and carving
 
-A Terraform estate shared by more teams than it was built for. We move ownership onto the resources as two tags, and the state file becomes a cache. Carving a team out is one `live-mv` per resource and an IAM policy. Handover is a role grant.
+One Terraform state file shared by more teams than it was built for, so every handover is a migration project. We move ownership onto the resources as two tags, and the state file becomes a cache nobody has to guard. Carving a team out is one `live-mv` per resource and an IAM policy. Handover is a role grant.
 
 You keep your HCL, the tags and the policies. One command hands a stock state file back if you want out. AWS only, and the [limits are enumerated](https://intentius.io/choudoufu/docs/use/compatibility/).
 
@@ -25,7 +27,7 @@ You keep the Ops, the lint rules and the audit trail. We will not promise the ag
 
 ## Releases as compile targets
 
-Off Kubernetes there is no shared apply verb, so every component grows its own pipeline and they drift apart. We describe each component as data instead, and the release compiles from it: typed and linted before anything runs, with cross-stack references resolved by name rather than scraped out with `jq`. One generic runner deploys every component in dependency order, and adding the hundredth costs one declaration and no new pipeline. [The argument in full.](https://lex00.github.io/posts/a-release-is-a-compile-target/)
+Outside Kubernetes every service ends up with its own deploy pipeline, each a near copy of the last, drifting apart. We describe each component as data instead, and the release compiles from it: typed and linted before anything runs, with cross-stack references resolved by name rather than scraped out with `jq`. One generic runner deploys every component in dependency order, and adding the hundredth costs one declaration and no new pipeline. [The argument in full.](https://lex00.github.io/posts/a-release-is-a-compile-target/)
 
 The CI is generated from the same declarations, one thin job per component, for whichever of the three platforms you run. A write stops at an approval, and the approval is a commit, so an outage cannot lose it.
 

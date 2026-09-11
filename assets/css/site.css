@@ -47,6 +47,8 @@ hr{border:0;border-top:1px solid var(--rule);margin:2rem 0;}
 .lede{max-width:var(--measure);}
 .lede h1{font-size:clamp(2.2rem,6vw,3.4rem);}
 .lede .sub{font-size:1.25rem;max-width:40rem;}
+.lede .intro{max-width:40rem;margin-top:1rem;font-size:1.05rem;}
+.bridge{margin-top:1.4rem;padding:1rem 1.2rem;background:var(--panel);border:1px solid var(--rule);border-radius:10px;color:var(--muted);font-size:0.95rem;}
 .cta{margin-top:1.6rem;display:flex;gap:0.7rem;flex-wrap:wrap;}
 .problems,.evidence{margin-top:3.5rem;}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0 0;}

@@ -2,6 +2,7 @@
 <section class="lede">
   <h1>{{ .Params.lede | markdownify }}</h1>
   <p class="sub">{{ .Params.sub | markdownify }}</p>
+  {{ with .Params.intro }}<p class="intro">{{ . | markdownify }}</p>{{ end }}
   <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Talk to us</a> <a class="btn" href="{{ "/work/" | relURL }}">What we do</a></p>
 </section>
 
@@ -19,7 +20,8 @@
 </section>
 
 <section class="evidence">
-  <h2>The tools are the evidence</h2>
+  <h2>Two tools, both free</h2>
   {{ .Content }}
+  {{ with .Params.bridge }}<p class="bridge">{{ . | markdownify }}</p>{{ end }}
 </section>
 {{ end }}
