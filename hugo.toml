@@ -1,6 +1,6 @@
 baseURL = "https://intentius.io/"
 title = "Intentius"
-languageCode = "en-us"
+locale = "en-us"
 disableKinds = ["taxonomy", "term", "rss"]
 enableRobotsTXT = true
 
