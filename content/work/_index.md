@@ -23,15 +23,11 @@ We take one operation you run by hand and write it as a chant Op. It runs in a [
 
 You keep the Ops, the lint rules and the audit trail. We will not promise the agent never surprises you. The gates are there because it will.
 
-Bound-secret substitution on hosted accounts. {{< status kind="shipped" date="2026-09-04" >}} Approvals bound to the plan digest. {{< status kind="shipped" date="2026-09-09" href="https://github.com/INTENTIUS/chant/pull/2338" >}} Declaring the secret binding from chant source. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2388" >}} An agent answering its own gate over MCP. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2384" >}}
-
 ## Generated CI with gates
 
 Five Ops over one root, and each forge's YAML generated from them. Two read on a pull request, two write on a push behind an approval, one sweeps the account on a cron. The gate is a commit, so an outage cannot lose it.
 
 You keep one `chant.config.ts` and the workflows. A [warden](https://github.com/INTENTIUS/github-warden) declares the forge itself if you want that too.
-
-Runs on all three forges against the emulator. {{< status kind="measured" date="2026-09-09" href="https://github.com/INTENTIUS/choudoufu/issues/1018" >}} Not yet against real AWS with OIDC. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/807" >}}
 
 ## Upstream
 

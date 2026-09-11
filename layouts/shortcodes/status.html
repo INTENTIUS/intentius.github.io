@@ -1,4 +1,0 @@
-{{- $kind := .Get "kind" -}}
-{{- $date := .Get "date" -}}
-{{- $href := .Get "href" -}}
-<span class="status status-{{ $kind }}">{{ if $href }}<a href="{{ $href }}">{{ end }}{{ $kind }}{{ with $date }} {{ . }}{{ end }}{{ if $href }}</a>{{ end }}</span>

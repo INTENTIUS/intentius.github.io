@@ -65,15 +65,6 @@ hr{border:0;border-top:1px solid var(--rule);margin:2rem 0;}
 .btn-primary{background:var(--accent);border-color:var(--accent);color:#0f1117;}
 .btn-primary:hover{background:#8aa4ff;border-color:#8aa4ff;}
 
-/* status pills */
-.status{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.1rem 0.5rem;border-radius:999px;border:1px solid var(--rule-strong);color:var(--muted);vertical-align:middle;margin-left:0.3rem;white-space:nowrap;}
-.status a{color:inherit;}
-.status-shipped{color:var(--good);border-color:var(--good);}
-.status-measured{color:var(--good);border-color:var(--good);}
-.status-documented{color:var(--warn);border-color:var(--warn);}
-.status-proposed{color:var(--faint);}
-.status-open{color:var(--muted);border-color:var(--rule-strong);}
-
 /* footer */
 .pagefooter{max-width:var(--wide);margin:2rem auto 0;padding:1.4rem 1.5rem 2.5rem;border-top:1px solid var(--rule);color:var(--muted);font-size:0.9rem;}
 .pagefooter p{margin:0 0 0.4rem;}

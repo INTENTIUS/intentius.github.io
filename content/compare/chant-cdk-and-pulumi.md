@@ -23,8 +23,8 @@ The [scorecard](/accessible-ops/) has the reasoning behind each mark.
 
 ## What they have that chant does not
 
-Reach and years. A resource a lexicon does not model cannot be declared yet. A compatibility page is filed and not written. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2318" >}}
+Reach and years. A resource a lexicon does not model cannot be declared yet.
 
-## Fixed, and still open
+## Where it stands
 
-Until 0.63 an approval did not name the plan it approved. It does now. {{< status kind="shipped" date="2026-09-09" href="https://github.com/INTENTIUS/chant/pull/2338" >}} An agent on MCP can still answer its own gate. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2384" >}} No scale figure beyond a 200-entity bench. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2317" >}}
+An approval names the plan it approved. An agent driving chant over MCP can still answer its own gate, and there is no scale figure beyond a synthetic bench. Both are tracked in the open.

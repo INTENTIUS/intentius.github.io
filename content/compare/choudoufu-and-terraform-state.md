@@ -21,15 +21,15 @@ Everything else is stock OpenTofu, measured on 26 real configurations by the [ga
 
 Each is a smoke scenario, a few minutes on Docker plus an emulator, and each also runs inverted under `BREAK=1` to prove it can fail. [All twenty.](https://intentius.io/choudoufu/docs/claims/)
 
-- Owned resources cannot fall out of plans unnoticed. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-1-owned-resources-cannot-fall-out-of-plans-unnoticed" >}}
-- Contention settles at the API, never in a lock. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-2-contention-settles-at-the-platform-api-never-in-a-lock" >}}
-- Staleness costs reads, never results. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-3-staleness-costs-reads-never-results" >}}
-- Recovery is a re-run, never surgery. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-5-recovery-is-a-re-run-never-surgery" >}}
-- One command in, one file out. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-6-the-roundtrip---one-command-in-one-file-out" >}}
-- Carve by retag. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-12-carve-by-retag" >}}
-- The tag is the boundary, refused by AWS and not by the tool. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-13-the-tag-is-the-boundary" >}}
-- A plan costs its estate, not its account. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-20-scale---the-estate-boundary-holds-when-the-account-is-a-terralith" >}}
-- Apply exactly what was approved. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/claims/#claim-15-apply-exactly-what-was-approved" >}}
+- Owned resources cannot fall out of plans unnoticed.
+- Contention settles at the API, never in a lock.
+- Staleness costs reads, never results.
+- Recovery is a re-run, never surgery.
+- One command in, one file out.
+- Carve by retag.
+- The tag is the boundary, refused by AWS and not by the tool.
+- A plan costs its estate, not its account.
+- Apply exactly what was approved.
 
 ## Where it stops
 
@@ -37,7 +37,7 @@ Each is a smoke scenario, a few minutes on Docker plus an emulator, and each als
 - About half the provider's types carry no tags. They are identifiable, not governable by a tag condition. [Per type.](https://intentius.io/choudoufu/docs/use/resource-tiers/)
 - Identity must be knowable before create. `live-check` tells you what refuses, with no cloud call.
 - The record store keeps generated secrets like state does, unless `strict { secrets = "refuse" }`.
-- 745 resources measured against real AWS. 3,705 on the emulator only. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/1032" >}}
-- Discovery cost grows with unfiltered IAM list resources. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/1037" >}}
+- 745 resources measured against real AWS. 3,705 on the emulator only.
+- Discovery cost grows with unfiltered IAM list resources.
 
 On the [scorecard](/accessible-ops/), choudoufu clears nine of fourteen. Terraform clears one.
