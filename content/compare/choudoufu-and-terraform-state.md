@@ -43,7 +43,8 @@ Each of these is a smoke scenario in the repository, two to six minutes on Docke
 - About half the provider's resource types carry no tags. Their identity is composed from configuration or a tagged parent instead, which makes them identifiable but not governable by a tag condition. The [resource tier lookup](https://intentius.io/choudoufu/docs/use/resource-tiers/) says which is which, per type.
 - Identity must be knowable before anything is created. A `for_each` keyed by a live ID, or a module output read in a `count`, stops a run. `choudoufu live-check` tells you in advance, with no cloud call. [What is refused](https://intentius.io/choudoufu/docs/use/compatibility/) is enumerated.
 - The record store keeps generated secrets the way a state file does, unless you set `strict { secrets = "refuse" }`. Read [where things are stored](https://intentius.io/choudoufu/docs/use/storage/) before picking a backend.
-- The largest estate measured is 745 resources against real AWS. A 4,005-resource point is designed and has never been run. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/961" >}}
+- The largest estate measured against real AWS is 745 resources. A 3,705-resource estate has cleared every active stage on the emulator only; the real-account run has not happened. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/1032" >}}
+- Discovery cost is not flat per resource on large estates: the native sweep grows with unfiltered IAM list resources. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/1037" >}}
 
 ## On the scorecard
 

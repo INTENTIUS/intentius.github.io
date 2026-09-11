@@ -35,13 +35,13 @@ What it looks like. We start with one operation you already run by hand and woul
 
 Three things we say up front, because you would ask in the first ten minutes. Only bound secrets are protected this way; an unbound secret enters the sandbox in the clear, so we bind the ones that matter. Brokered egress is on for hosted Fountain accounts; a self-hosted instance needs it configured. And where the runner cannot isolate, Fountain refuses the launch rather than pretending, which is the behaviour you want.
 
-What done looks like. The Op runs on its own cadence. When it reaches a gate it stops, a person answers, and the run continues. A denied gate is recorded and the run ends cleanly. Nobody on your team can name a place where a live cloud key sits inside an agent's environment, and chant's lint rules would fail the build if someone added one.
+What done looks like. The Op runs on its own cadence. When it reaches a gate its turn ends there. The approval is a commit on a ledger branch, written by a person or a merged pull request, never a live process the agent can talk past, and it names the digest of the plan it approves. A denied gate is recorded and the run ends cleanly. Nobody on your team can name a place where a live cloud key sits inside an agent's environment, and chant's lint rules would fail the build if someone added one.
 
 What you keep. The Ops, as TypeScript in your repository. The lint rules, in your CI. The agent, environment and vault declarations, applied by chant and diffable against what is running. A Fountain instance you host, or the hosted one. An audit trail you can hand to whoever asks. chant is Apache 2.0 and Fountain's server is AGPL; none of it is licensed from us.
 
 What we will not promise. That the agent will never do something surprising. The gates and the credential boundary are there because it will. The work is putting the surprises where they can be caught.
 
-Status. Bound-secret substitution at the egress broker, on hosted accounts since 2026-09-04. {{< status kind="shipped" date="2026-09-04" >}} `chant acp`, chant as a deterministic agent over the Agent Client Protocol. {{< status kind="shipped" >}} Declaring which secret binds to which host from chant source. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2388" >}} An approval that outlives the session and names the plan it covers. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2384" >}}
+Status. Bound-secret substitution at the egress broker, on hosted accounts since 2026-09-04. {{< status kind="shipped" date="2026-09-04" >}} `chant acp`, chant as a deterministic agent over the Agent Client Protocol. {{< status kind="shipped" >}} An approval bound to the digest of the plan it approved, since chant 0.63. {{< status kind="shipped" date="2026-09-09" href="https://github.com/INTENTIUS/chant/pull/2338" >}} Declaring which secret binds to which host from chant source. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2388" >}} Closing the hole where an agent on the MCP or ACP channel answers its own gate. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2384" >}}
 
 ## Generated CI with gates
 
@@ -53,7 +53,7 @@ What done looks like. Branch protection requires the Op names. Leaving one forge
 
 What you keep. One `chant.config.ts`, the generated workflows, and the wardens if you want the forge itself declared: [github-warden](https://github.com/INTENTIUS/github-warden), [gitlab-warden](https://github.com/INTENTIUS/gitlab-warden), [forgejo-warden](https://github.com/INTENTIUS/forgejo-warden) keep an org and its repos in a declared state with drift correction.
 
-Status. A local smoke proves all five Ops, gate included. {{< status kind="measured" href="https://intentius.io/choudoufu/docs/use/cicd/" >}} End-to-end runs exist for GitLab only, and no forge has yet run the generated pipeline against a real cloud account. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/1018" >}}
+Status. The generated pipelines run on all three forges against the emulator, with a hermetic end-to-end stack per forge. {{< status kind="measured" date="2026-09-09" href="https://github.com/INTENTIUS/choudoufu/issues/1018" >}} OIDC is wired in the GitHub pipeline and documented, but no forge has yet run the pipeline against a real AWS account with OIDC-minted credentials. {{< status kind="open" href="https://github.com/INTENTIUS/choudoufu/issues/807" >}}
 
 ## How we work upstream
 

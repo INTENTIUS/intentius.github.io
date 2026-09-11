@@ -34,5 +34,6 @@ Reach and years. CDK covers every CloudFormation resource and Pulumi covers ever
 
 ## Where we are waiting
 
-- The human approval gate records who approved and when, but does not yet bind the identity of the plan being approved. Approve, edit the root, re-run, and the edited change applies. The exit-3 check in choudoufu closes the plan-to-apply window; the approval-to-re-run window is open. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2300" >}}
-- The largest synthetic benchmark is 200 resources. There is no measured scale figure for chant comparable to choudoufu's 745. {{< status kind="documented" >}}
+- Until chant 0.63 the approval gate recorded who approved and when but not which plan. Approve, edit the root, re-run, and the edited change applied. Since 0.63 a resolution names the plan digest and the re-run is refused by name. That was our own biggest hole, and it is closed rather than never having existed. {{< status kind="shipped" date="2026-09-09" href="https://github.com/INTENTIUS/chant/pull/2338" >}}
+- An agent driving chant over MCP or ACP can still answer a gate it raised itself. Until that closes, no claim about approval integrity across both products. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2384" >}}
+- The largest synthetic benchmark is 200 resources. There is no measured scale figure for chant comparable to choudoufu's 745, and none is claimed. {{< status kind="open" href="https://github.com/INTENTIUS/chant/issues/2317" >}}
