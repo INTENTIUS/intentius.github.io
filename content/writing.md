@@ -1,15 +1,12 @@
 ---
 title: "Writing"
-summary: "The arguments behind the tools. Start with these."
+summary: "Five to start with."
 ---
 
-- [A release is a compile target](https://lex00.github.io/posts/a-release-is-a-compile-target/)
-- [Terraform state has three pieces](https://lex00.github.io/posts/terraform-state-has-three-pieces/)
-- [Invisible ownership is ridiculous](https://lex00.github.io/posts/invisible-ownership-is-ridiculous/)
+- [Terraform state at scale the easy way](https://lex00.github.io/posts/terraform-state-at-scale-the-easy-way/)
+- [choudoufu cuts terralith optimization time in half](https://lex00.github.io/posts/choudoufu-cuts-terralith-optimization-time-in-half/)
 - [Infra tooling expectations in 2026](https://lex00.github.io/posts/infra-tooling-expectations-in-2026/)
 - [Adopt infrastructure without re-homing it](https://lex00.github.io/posts/adopt-without-rehoming/)
-- [The intoxicating mix of synthesis and execution](https://lex00.github.io/posts/the-intoxicating-mix-of-synthesis-and-execution/)
-- [Terraform state at scale the easy way](https://lex00.github.io/posts/terraform-state-at-scale-the-easy-way/)
-- [Take a whiff of choudoufu](https://lex00.github.io/posts/take-a-whiff-of-choudoufu/)
+- [Down to earth infra dependencies](https://lex00.github.io/posts/down-to-earth-infra-dependencies/)
 
-[All posts](https://lex00.github.io/posts/)
+[Everything else](https://lex00.github.io/posts/)

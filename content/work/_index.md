@@ -3,15 +3,15 @@ title: "Work"
 summary: "Four kinds of engagement. Every tool involved is open source, so nothing you keep depends on Intentius."
 ---
 
-The consulting is the product. The tools are free, your estate stays ordinary Terraform throughout, and one command takes the tooling back out.
+The consulting is the product. Your estate stays ordinary Terraform throughout, and one command takes the tooling back out.
 
-An estate is everything one team owns in a cloud account: the resources, and the right to change them.
+Every engagement starts with a read-only check against your configuration, no credentials and no cloud calls, reporting what would refuse. The rest is sized from what it finds.
 
 ## Estate migration and carving
 
-One state file shared by more teams than it was built for, so every handover is a migration project. Ownership moves onto the resources as two tags, and carving a team out becomes one `live-mv` per resource and an IAM policy.
+An estate is everything one team owns in a cloud account. One state file shared by more teams than it was built for makes every handover a migration project. Ownership moves onto the resources as two tags, and carving a team out becomes one `live-mv` per resource and an IAM policy.
 
-A published Terraform migration spent 38% of its engineering weeks on state work, and that chain set the calendar because the rest ran in parallel. Taking it out is where [the estimate of roughly half the time](https://lex00.github.io/posts/choudoufu-cuts-terralith-optimization-time-in-half/) comes from. It is an estimate from someone else's public case study, not a measurement of your estate.
+How long depends on the estate. A published Terraform migration spent 38% of its engineering weeks on state work, and that chain set the calendar because everything else ran in parallel. Removing it is where [the estimate of roughly half the time](https://lex00.github.io/posts/choudoufu-cuts-terralith-optimization-time-in-half/) comes from, off someone else's case study rather than a measurement of your estate.
 
 You keep your HCL, the tags and the policies. AWS only, and the [limits are enumerated](https://intentius.io/choudoufu/docs/use/compatibility/).
 
@@ -23,11 +23,9 @@ The engagement designs the boundaries and the policies over them, and says up fr
 
 ## Agents against real infrastructure
 
-The agent is a program, the program has gates, and the credential never enters the machine it runs on. Confused or compromised, it cannot leak a key it was never given.
+The agent is a program with gates, and the credential never enters the machine it runs on. Confused or compromised, it cannot leak a key it was never given.
 
-One operation you run by hand becomes a chant Op, running in a [Fountain](https://github.com/BinaryBourbon/fountain) sandbox whose only route out swaps a placeholder for the real credential. Reaching a gate ends its turn, and the approval is a commit naming the plan.
-
-Nothing here promises the agent will never surprise you. The gates exist because it will.
+One operation you run by hand becomes a chant Op in a [Fountain](https://github.com/BinaryBourbon/fountain) sandbox, whose only route out swaps a placeholder for the real credential. Reaching a gate ends its turn, and the approval is a commit naming the plan.
 
 ## Releases as compile targets
 

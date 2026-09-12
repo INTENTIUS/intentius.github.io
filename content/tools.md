@@ -1,6 +1,6 @@
 ---
 title: "Tools"
-summary: "All open source. Two are the reason the company exists."
+summary: "All open source."
 ---
 
 ## choudoufu
@@ -17,7 +17,7 @@ A type system for operations. Typed source folded to the platform's own spec wit
 
 ### Audit
 
-`chant audit` reads a repository that has never heard of chant and runs a few hundred checks over its pipelines and infrastructure config. Mechanical fixes come back as ready-to-apply diffs. [blacklight](https://blacklight.intentius.io) is the same audit, hosted.
+`chant audit` reads a repository that has never heard of chant and runs a few hundred checks over its pipelines and config. Mechanical fixes come back as ready-to-apply diffs. [blacklight](https://blacklight.intentius.io) is the same audit, hosted.
 
 ### Agents
 
@@ -25,7 +25,7 @@ A type system for operations. Typed source folded to the platform's own spec wit
 
 ### Fountain lexicon
 
-Declares an agent's sandbox, vault and schedule as typed resources and diffs them against what is running.
+Declares an agent's sandbox, vault and schedule as typed resources, diffed against what is running.
 
 ## behold
 
