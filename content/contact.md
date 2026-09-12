@@ -3,7 +3,7 @@ title: "Contact"
 summary: "No form, nothing to sign up for."
 ---
 
-{{< email >}} Or open an issue on [github.com/intentius](https://github.com/intentius).
+Intentius is in Colorado. {{< email >}} Or open an issue on [github.com/intentius](https://github.com/intentius).
 
 Bring three things: what exists today and who owns it, the one operation you would like to stop doing by hand, and who has to approve it.
 
