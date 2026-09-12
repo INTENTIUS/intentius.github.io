@@ -4,7 +4,13 @@ summary: "If you are on Spacelift, Terraform Cloud or something like them, this 
 weight: 30
 ---
 
-Changes go through their loop, someone approves each one, and nothing runs unreviewed. That governs everyone who uses the loop. The on-call engineer at 2am has a key, and so do the nightly script and the contractor from last month.
+Ownership means two different things, and the category sells the one it cannot deliver.
+
+One is accountability. Who gets paged, who takes the blame, which team owns the outcome. No vendor settles that for you, and none of them can.
+
+The other is identity. A record on the resource of which team created it and under what name. That one is buyable. Terraform has nowhere to keep it, so inheriting an estate means inheriting a state file and a hope.
+
+The loop they sell governs everyone who goes through the loop. The on-call engineer at 2am has a key, and so do the nightly script and the contractor from last month.
 
 ## The record goes where the cloud can read it
 
@@ -12,7 +18,7 @@ Every resource choudoufu creates is stamped with its owner, on the resource. You
 
 ## No copy between stacks
 
-A stack needing another's VPC reads the live resource, filtered by tags every resource already carries. Reading state across stacks is refused, so a dependency cannot go stale.
+A stack needing another's network reads the live resource, filtered by tags every resource already carries. Nothing is copied, so nothing goes stale. The alternative keeps the link inside the vendor's platform, where nobody reading your repository can see that it exists.
 
 ## The pipeline is derived
 

@@ -11,7 +11,11 @@ What lands at the end varies. Where it runs does not. It runs in your CI, on you
 
 ## Estate migration and carving
 
-An estate is everything one team owns in a cloud account. One state file shared by more teams than it was built for makes every handover a migration project. Ownership moves onto the resources as two tags, and splitting a team off becomes a tag rewrite and a permissions policy.
+An estate is everything one team owns in a cloud account. One state file shared by more teams than it was built for makes every handover a migration project, and inheriting one means the file is the only thing telling you which resources are yours.
+
+Ownership moves onto the resources as two tags, so splitting a team off becomes a tag rewrite and a permissions policy. Importing into a hosted product copies your resources into a record that product holds. This writes the record onto the resources themselves, in your account, and it stays there whether you keep the tooling or not.
+
+By the end of it, who owns this is a tag query. A tag carries one owner, so the answer is one name. Your permissions gate on that tag, including console changes that never went near your pipeline.
 
 How long depends on the estate. A published Terraform migration spent 38% of its engineering weeks on state work, and that chain set the calendar because everything else ran in parallel. Removing it is where [the estimate of roughly half the time](https://lex00.github.io/posts/choudoufu-cuts-terralith-optimization-time-in-half/) comes from, off someone else's case study rather than a measurement of your estate.
 
