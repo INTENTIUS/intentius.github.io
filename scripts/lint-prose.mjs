@@ -38,7 +38,10 @@ for (const file of files) {
   const blanked = withFm
     .replace(/^---\n[\s\S]*?\n---\n/, (s) => s.replace(/^---$/gm, "   "))
     .replace(/\{\{<[\s\S]*?>\}\}/g, (m) => " ".repeat(m.length))
-    .replace(/^(\s*)[-*+] /gm, (m) => " ".repeat(m.length));
+    .replace(/^(\s*)[-*+] /gm, (m) => " ".repeat(m.length))
+    // Heading markers are punctuation, not words: blank the hashes and keep
+    // the heading text, so a run of short sections is not read as anaphora.
+    .replace(/^#{1,6} /gm, (m) => " ".repeat(m.length));
   const text = extractProse(blanked);
   const doc = buildDocAnalysis(text);
   const { findings, errors } = runRules(RULES, doc);
