@@ -88,7 +88,7 @@
         <!-- <span class="sc-cell good" title="Formae: Pkl schemas and value constraints">&#9679;</span> -->
         <!-- <span class="sc-cell good" title="ConfigHub: KRM schemas encode validity">&#9679;</span> -->
         <span class="sc-cell warn" title="CDK: L2 constructs and cdk-nag encode a lot of validity, deeper policy is an add-on">&#9680;</span>
-        <span class="sc-cell warn" title="Pulumi: Types encode shape; policy via CrossGuard">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Types encode structure, and policy comes from CrossGuard">&#9680;</span>
         <span class="sc-cell warn" title="Terraform: Thin types; policy via OPA or Sentinel">&#9680;</span>
       </summary>
       <div class="sc-detail">
@@ -99,7 +99,7 @@
         <!-- <p><b>Formae</b> Pkl schemas and value constraints</p> -->
         <!-- <p><b>ConfigHub</b> KRM schemas encode validity</p> -->
         <p><b>CDK</b> L2 constructs and cdk-nag encode a lot of validity, and deeper policy is an add-on</p>
-        <p><b>Pulumi</b> Types encode shape; policy via CrossGuard</p>
+        <p><b>Pulumi</b> Types encode structure, and policy comes from CrossGuard</p>
         <p><b>Terraform / OpenTofu</b> Thin types; policy via OPA or Sentinel</p>
       </div>
     </details>
@@ -385,7 +385,7 @@
   </div>
 
   <div class="sc-closing">
-    <p>Read down a column and the shape is a division of labor, not a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself.<!-- Formae and ConfigHub columns hidden for now: <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. --> <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. The truth band clears, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
+    <p>Read down a column and what emerges is a division of labor rather than a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself.<!-- Formae and ConfigHub columns hidden for now: <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. --> <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. The truth band clears, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
     <p>chant reaches every row because it folds source to the native spec <span class="term">by construction</span>, then carries that same change set through approval, rollback, and a record, with no authoritative state store to keep. It got there first, and nothing here is chant's to keep.</p>
   </div>
 

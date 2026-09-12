@@ -19,11 +19,11 @@ Everything else is stock OpenTofu, measured on 26 real configurations by the [ga
 
 ## The claims
 
-Twenty of them, each a smoke scenario of a few minutes. Each runs inverted under `BREAK=1`, so a check that cannot fail gets caught. Staleness costs reads and never results. Recovery is a re-run rather than surgery. The tag is the boundary, enforced by AWS rather than by the tool. [Run them yourself.](https://intentius.io/choudoufu/docs/claims/)
+Twenty of them, each a scenario that runs in a few minutes. Every one also runs inverted, so a check that cannot fail gets caught. Staleness costs reads and never results. Recovery is a re-run rather than surgery. The tag is the boundary, enforced by AWS rather than by the tool. [Run them yourself.](https://intentius.io/choudoufu/docs/claims/)
 
 ## Where it stops
 
-AWS only, and experimental. About half the provider's types carry no tags, so they are identifiable but not governable by a tag condition. Identity must be knowable before create, and `live-check` reports what refuses with no cloud call.
+AWS only, and experimental. About half the provider's types carry no tags, so they are identifiable but not governable by a tag condition. The identity of a resource has to be knowable before it is created, and a read-only check reports what refuses before you commit to anything.
 
 <!-- scale claims held until the 10,000+ run lands (choudoufu#1051)
 745 resources measured against real AWS. 3,705 on the emulator only.
