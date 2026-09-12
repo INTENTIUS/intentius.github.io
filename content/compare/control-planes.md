@@ -24,7 +24,19 @@ Handing a team its own slice becomes a permissions change. No state surgery, no 
 
 An approved plan cannot drift into a different one. The apply re-reads the live system, compares it against what was approved, and stops if anything moved.
 
-Your pipeline is yours. It runs on your GitHub, GitLab or Forgejo, and the approvals are commits in your repository. Nothing is hosted here, so there is no seat to buy and no account to lose access to.
+## One stack reading another, with no copy in between
+
+Cross-stack wiring is what the category sells hardest. One stack's outputs feed the next, held in their store and ordered by their runner, with the product keeping the two in step.
+
+There is nothing to keep in step. A stack that needs another stack's VPC or role reads the live resource directly, filtered by the ownership tags every managed resource already carries. No stored copy of an ID, no output block to maintain, and no scraping one stack's state file for another stack's input. Reading state across stacks is refused outright, because a value copied out of a state file can be wrong and a value read off the resource cannot.
+
+So a dependency cannot go stale. Change the producer and the consumer's next plan reads what is actually there, which is the same thing anyone with the console would see.
+
+## The pipeline is derived, not maintained
+
+The workflow files are generated from the same declarations that describe the deploy, and a guard compares every committed file against what the generator emits, byte for byte. Regenerating a clean tree changes nothing, and a stale one fails the build. The job names your branch protection requires come out of those declarations rather than out of a YAML file somebody has to remember to update.
+
+It runs on your GitHub, GitLab or Forgejo, and the approvals are commits in your repository. Nothing is hosted here, so there is no seat to buy and no account to lose access to.
 
 ## The honest part
 
