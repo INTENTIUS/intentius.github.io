@@ -7,6 +7,8 @@ The consulting is the product. Your estate stays ordinary Terraform throughout, 
 
 Every engagement starts with a read-only check against your configuration, no credentials and no cloud calls, reporting what would refuse. The rest is sized from what it finds.
 
+What lands at the end varies, but the shape does not: it runs in your CI, on your infrastructure, under your accounts, with nothing of Intentius left in the path.
+
 ## Estate migration and carving
 
 An estate is everything one team owns in a cloud account. One state file shared by more teams than it was built for makes every handover a migration project. Ownership moves onto the resources as two tags, and carving a team out becomes one `live-mv` per resource and an IAM policy.
