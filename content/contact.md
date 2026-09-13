@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-summary: "No form, nothing to sign up for."
+summary: "Write to us."
 ---
 
 Intentius is in Colorado. {{< email >}} Or open an issue on [github.com/intentius](https://github.com/intentius).

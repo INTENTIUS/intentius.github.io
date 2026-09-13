@@ -1,11 +1,11 @@
 ---
 title: "Work"
-summary: "Four kinds of engagement. Every tool involved is open source, so nothing you keep depends on Intentius."
+summary: "Four kinds of engagement. Everything you keep is open source and yours."
 ---
 
-You are hiring the work, not a tool. Your estate stays ordinary Terraform throughout, and one command takes the tooling back out.
+You are hiring the work. Your estate stays ordinary Terraform throughout, and one command takes the tooling back out.
 
-Everything starts with a read-only check against your configuration. No credentials, no cloud calls, and a report of what would refuse. Whatever gets built runs in your CI, under your accounts, with nothing of Intentius left in the path.
+Everything starts with a read-only check against your configuration. It reads the code and reports what would refuse. Whatever gets built runs in your CI, under your accounts, yours to keep.
 
 ## Estate migration and carving
 
@@ -19,11 +19,11 @@ How long depends on the estate. A published Terraform migration spent 38% of its
 
 Tag-based access control has been in AWS for years. What stopped teams using it was tags they could not trust.
 
-The boundaries and the policies over them get designed together, and [where AWS enforces them](https://intentius.io/choudoufu/docs/use/governance/reach/) is said up front. A mistake pointed at the wrong estate then fails at the cloud rather than at review, including console changes that never went near your pipeline.
+The boundaries and the policies over them get designed together, with [where AWS enforces them](https://intentius.io/choudoufu/docs/use/governance/reach/) said up front. A mistake pointed at the wrong estate fails at the cloud, console changes included.
 
 ## Agents against real infrastructure
 
-The agent is a program with approval gates, and the credential never enters the machine it runs on. Confused or compromised, it cannot leak a key it was never given.
+The agent is a program with approval gates. The credential stays outside the machine it runs on, so a confused or compromised agent leaks a placeholder.
 
 One operation you run by hand becomes a program in a [Fountain](https://github.com/BinaryBourbon/fountain) sandbox, whose only way out swaps a placeholder for the real credential. Reaching an approval stops it, and the approval is a commit naming what was approved.
 
@@ -33,4 +33,4 @@ Outside Kubernetes every service grows its own deploy pipeline, each a near copy
 
 ## Upstream
 
-Bugs found in other people's projects get fixed there rather than worked around here.
+Bugs found in other people's projects get fixed there.

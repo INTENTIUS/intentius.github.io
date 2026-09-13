@@ -2,14 +2,14 @@
 title: "Intentius"
 lede: "Infrastructure consulting"
 sub: "The tools are free. Need help?"
-intro: "Handing a team its own infrastructure should take an afternoon, not a quarter. Letting an agent run routine operations should not mean giving it a production key."
+intro: "Handing a team its own infrastructure should take an afternoon. An agent should run your routine operations while your production key stays where it is."
 problems:
   - title: "Splitting a team off takes a quarter"
     body: "One file records who owns what, so every reorganisation is a migration project. In a published migration that work alone took 38% of the engineering weeks."
     link: "How that works"
     href: "/work/#estate-migration-and-carving"
-  - title: "An agent doing ops, without the keys"
-    body: "It runs routine operations behind approval gates. Confused or compromised, it cannot leak a key it was never given."
+  - title: "An agent doing ops, while you keep the keys"
+    body: "It runs routine operations behind approval gates. A confused or compromised agent leaks a placeholder."
     link: "How that works"
     href: "/work/#agents-against-real-infrastructure"
   - title: "The hundredth service costs as much as the first"
@@ -28,6 +28,6 @@ bridge: "Already on Spacelift or Terraform Cloud? Those put an approval loop aro
   <p>Infrastructure as typed code, checked before anything runs. Deploys to the three big clouds and Kubernetes, and generates the pipelines. <a href="https://intentius.io/chant/">Docs</a> · <a href="/compare/chant-cdk-and-pulumi/">Compare</a></p>
 </div>
 <div class="tool">
-  <div class="name">no lock-in</div>
-  <p>One command hands the estate back as an ordinary Terraform state file, and your HCL never changed. Both tools are open source and neither has a pricing page.</p>
+  <div class="name">yours to keep</div>
+  <p>One command hands the estate back as an ordinary Terraform state file, with your own code unchanged. Both tools are open source and free.</p>
 </div>
