@@ -3,7 +3,7 @@
   <div class="sc-bands">
     <div><h3>Synthesis</h3><p>Source becomes the platform's own spec, settled before anything runs.</p></div>
     <div><h3>Ops &amp; Lifecycle</h3><p>A change reaches production as one reviewable diff and stays accountable.</p></div>
-    <div><h3>Truth &amp; trust</h3><p>Truth stays live, adoption stays in place, and the artifact is verified.</p></div>
+    <div><h3>Truth &amp; trust</h3><p>Truth stays live, adoption stays in place, the artifact is verified, and provenance travels with the code.</p></div>
   </div>
 
   <div class="sc-legend" role="note" aria-label="Legend">
@@ -382,10 +382,73 @@
         <p><b>Terraform / OpenTofu</b> Provenance via CI add-ons</p>
       </div>
     </details>
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XV</b><span class="sc-fname">The reason travels with the change <a class="sc-open" href="https://accessibleops.net/the-reason-travels-with-the-change/" aria-label="Full text for The reason travels with the change">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Decisions are records with permanent ids; each commit names its record in a trailer">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: As a chant workspace member it gets the same records; alone, commit messages as upstream">&#9680;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <!-- Formae and ConfigHub columns hidden -->
+        <span class="sc-cell warn" title="CDK: By hand, with ADRs and commit conventions outside the tool">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: By hand, with ADRs and commit conventions outside the tool">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: By hand, with ADRs and commit conventions outside the tool">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/the-reason-travels-with-the-change/">Each change names the decision behind it, and the name survives every rewrite. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
+        <p><b>chant</b> Decisions and work items are records in the repo with permanent ids. Each commit names its record in a trailer, and the intent walk reads the joins from today's history. A squash keeps them when its message keeps the trailers</p>
+        <p><b>choudoufu</b> As a member of a chant workspace it gets the same decision records; on its own, commit messages as upstream</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>CDK</b> By hand, with ADRs and commit conventions outside the tool</p>
+        <p><b>Pulumi</b> By hand, with ADRs and commit conventions outside the tool</p>
+        <p><b>Terraform / OpenTofu</b> By hand, with ADRs and commit conventions outside the tool</p>
+      </div>
+    </details>
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XVI</b><span class="sc-fname">Provenance verifies anywhere <a class="sc-open" href="https://accessibleops.net/provenance-verifies-anywhere/" aria-label="Full text for Provenance verifies anywhere">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Decisions and review verdicts carry ssh seals over their exact text, checked offline against the signers in the repo">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: Signed commits, as git provides; a rewrite re-signs them as whoever rewrote">&#9680;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <!-- Formae and ConfigHub columns hidden -->
+        <span class="sc-cell warn" title="CDK: Signed commits by hand; a rewrite re-signs them as whoever rewrote">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Signed commits by hand; who applied and approved verifies only in Pulumi Cloud">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Signed commits by hand; a rewrite re-signs them as whoever rewrote">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/provenance-verifies-anywhere/">The record carries its own signatures, and anyone holding the code can check them. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
+        <p><b>chant</b> Decisions and review verdicts carry ssh seals over their exact text, checked offline against the allowed signers committed in the repo. Sealing is opt-in</p>
+        <p><b>choudoufu</b> Signed commits, as git provides; a rebase or a squash re-signs them as whoever rewrote</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>CDK</b> Signed commits by hand; a rebase or a squash re-signs them as whoever rewrote</p>
+        <p><b>Pulumi</b> Signed commits by hand; who applied and approved verifies only in Pulumi Cloud</p>
+        <p><b>Terraform / OpenTofu</b> Signed commits by hand; a rebase or a squash re-signs them as whoever rewrote</p>
+      </div>
+    </details>
+    <details class="sc-row">
+      <summary>
+        <span class="sc-factor"><b>XVII</b><span class="sc-fname">Provenance stays with the code <a class="sc-open" href="https://accessibleops.net/provenance-stays-with-the-code/" aria-label="Full text for Provenance stays with the code">&#8599;</a></span></span>
+        <span class="sc-cell good" title="chant: Records live in the repo, and the lifecycle ledger is a branch pushed with it">&#9679;</span>
+        <span class="sc-cell warn" title="choudoufu: The plan and its approval travel in git, ownership travels on the resources; the reason behind a change stays out">&#9680;</span>
+        <span class="sc-cell na" title="KCL/CUE/Pkl: Out of scope">&ndash;</span>
+        <!-- Formae and ConfigHub columns hidden -->
+        <span class="sc-cell warn" title="CDK: Git history travels; CloudTrail and pipeline logs stay with the account">&#9680;</span>
+        <span class="sc-cell warn" title="Pulumi: Git history travels; who applied and approved stays in Pulumi Cloud">&#9680;</span>
+        <span class="sc-cell warn" title="Terraform: Git history travels; state history and CI logs stay behind">&#9680;</span>
+      </summary>
+      <div class="sc-detail">
+        <p class="sc-statement"><a href="https://accessibleops.net/provenance-stays-with-the-code/">A trusted record of why travels with the code to whoever holds it next. <span class="sc-readmore">Read the full property &rarr;</span></a></p>
+        <p><b>chant</b> Decision, work and review records live in the repo, and the lifecycle ledger is a branch pushed with it, so a clone, fork or mirror carries both</p>
+        <p><b>choudoufu</b> The plan file and its approval travel in git, and ownership travels on the resources as tags; the reason behind a change is not recorded</p>
+        <p><b>KCL / CUE / Pkl</b> Out of scope</p>
+        <p><b>CDK</b> Git history travels; CloudTrail and pipeline logs stay with the account</p>
+        <p><b>Pulumi</b> Git history travels; who applied and approved stays in Pulumi Cloud</p>
+        <p><b>Terraform / OpenTofu</b> Git history travels; state history and CI logs stay behind</p>
+      </div>
+    </details>
   </div>
 
   <div class="sc-closing">
-    <p>Read down a column and what emerges is a division of labor rather than a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself.<!-- Formae and ConfigHub columns hidden for now: <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. --> <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. The truth band clears, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
+    <p>Read down a column and what emerges is a division of labor rather than a ranking. The <span class="term">config languages</span> clear synthesis and stop there, so the ops and lifecycle band is out of scope and you assemble it yourself.<!-- Formae and ConfigHub columns hidden for now: <span class="term">Formae</span> reconciles Pkl source to the cloud, and <span class="term">ConfigHub</span> holds the spec as data and actuates from a store, with real approval and audit built in. Both read ownership from live markers, and both keep an authoritative datastore. --> <span class="term">CDK</span> synthesizes a native template, reviewable but produced by running; <span class="term">Pulumi</span> applies through its own engine with no native artifact to keep. <span class="term">Terraform and OpenTofu</span> operate through a state file, and their real check is a cloud plan that lands after the commit. <span class="term">choudoufu</span> is OpenTofu with the state file's one authoritative job, ownership, moved onto the resources as tags. Live truth, adoption and ownership clear, your own IAM scopes and bounds every run, the plan file is an approval the apply enforces against live, and the cloud's audit log is complete because there is no ledger to edit beside it. Synthesis stays where upstream is.</p>
     <p>chant reaches every row because it folds source to the native spec <span class="term">by construction</span>, then carries that same change set through approval, rollback, and a record, with no authoritative state store to keep. It got there first, and nothing here is chant's to keep.</p>
   </div>
 

@@ -29,4 +29,4 @@ AWS only, and experimental. About half the provider's types carry no tags, so th
 745 resources measured against real AWS. 3,705 on the emulator only.
 -->
 
-On the [scorecard](/accessible-ops/), choudoufu clears nine of fourteen. Terraform clears one.
+On the [scorecard](/accessible-ops/), choudoufu clears nine of seventeen. Terraform clears one.
