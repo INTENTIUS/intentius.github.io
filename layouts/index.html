@@ -3,11 +3,11 @@
   <h1>{{ .Params.lede | markdownify }}</h1>
   <p class="sub">{{ .Params.sub | markdownify }}</p>
   {{ with .Params.intro }}<p class="intro">{{ . | markdownify }}</p>{{ end }}
-  <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Get in touch</a> <a class="btn" href="{{ "/work/" | relURL }}">The work</a></p>
+  <p class="cta"><a class="btn btn-primary" href="{{ "/contact/" | relURL }}">Get in touch</a> <a class="btn" href="https://intentius.io/terragucci/">terragucci docs</a></p>
 </section>
 
 <section class="problems">
-  <h2>Common problems</h2>
+  <h2>What I do</h2>
   <div class="cards">
   {{ range .Params.problems }}
     <article class="card">
@@ -20,8 +20,13 @@
 </section>
 
 <section class="evidence">
-  <h2>Two tools, both free</h2>
-  {{ .Content }}
+  <h2>Open source</h2>
+  {{ range .Params.tools }}
+  <div class="tool">
+    <div class="name"><a href="{{ .href }}">{{ .name }}</a></div>
+    <p>{{ .body | markdownify }}</p>
+  </div>
+  {{ end }}
   {{ with .Params.bridge }}<p class="bridge">{{ . | markdownify }}</p>{{ end }}
 </section>
 {{ end }}

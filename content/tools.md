@@ -3,6 +3,12 @@ title: "Tools"
 summary: "All open source."
 ---
 
+## terragucci
+
+Plan, approve and apply Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
+
+[Docs](https://intentius.io/terragucci/) · [Source](https://github.com/INTENTIUS/terragucci)
+
 ## choudoufu
 
 A build of OpenTofu where every AWS resource records who owns it, written into the cloud as two tags. The state file becomes a copy you are allowed to lose. Twenty claims about it, each one you can run yourself. Experimental, and AWS only.
