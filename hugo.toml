@@ -5,13 +5,17 @@ disableKinds = ["taxonomy", "term", "rss"]
 enableRobotsTXT = true
 
 [params]
-  description = "Intentius is an infrastructure consulting company. It built chant and choudoufu so that ownership of cloud resources lives on the resources, where IAM can read it."
+  description = "Intentius helps teams adopt terragucci, the open-source way to plan, approve and apply Terraform from pull requests in your own CI."
   githubOrg = "https://github.com/intentius"
   blog = "https://lex00.github.io/"
   # Rendered as a mailto link only; the address is never printed. Leave empty to hide the line.
   contactEmail = "albert.a.artigues@gmail.com"
 
 [menus]
+  [[menus.main]]
+    name = "terragucci"
+    pageRef = "/terragucci"
+    weight = 5
   [[menus.main]]
     name = "Work"
     pageRef = "/work"

@@ -1,10 +1,8 @@
 ---
 title: "Contact"
-summary: "Write to us."
+summary: "Write to me."
 ---
 
 Intentius is in Colorado. {{< email >}} Or open an issue on [github.com/intentius](https://github.com/intentius).
 
-Bring three things. What exists today and who owns it. The one operation you would like to stop doing by hand. Who has to approve it.
-
-You get one reply saying whether this is a fit. If the right answer is a tool built by someone else, the reply will say so.
+Tell me your forge, roughly how many roots you have, and what runs them today. I will reply saying whether this is a fit.
