@@ -6,7 +6,8 @@
 // The first tile is rendered picked, so the cards read the same without
 // script. Each tile is a link to its page: with script, a click on a tile
 // that is not picked picks it instead, and a click on the picked one opens
-// the page. The pick is kept in localStorage.
+// the page. Picking a tile scrolls its bullets into view if they are off
+// screen. The pick is kept in localStorage.
 import { ROOMS, firstStep } from '../data/rooms.mjs';
 
 const tiles = ROOMS.map((r) => ({ id: r.id, label: r.label, blurb: r.blurb, href: `/for/${r.id}/`, title: r.title, does: r.does }));
@@ -70,6 +71,8 @@ const [tile] = tiles;
 				e.preventDefault();
 				pick = t.dataset.tile;
 				show();
+				const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+				section.querySelector('.card').scrollIntoView({ block: 'nearest', behavior: smooth ? 'smooth' : 'auto' });
 			});
 			show();
 		}
@@ -133,6 +136,7 @@ const [tile] = tiles;
 		gap: 0.75rem;
 	}
 	.card {
+		scroll-margin: calc(var(--sl-nav-height) + 1rem) 0 1rem;
 		display: grid;
 		align-content: start;
 		gap: 0.7rem;
