@@ -1,5 +1,5 @@
 ---
-// The home page's first choice: "I need help with..." as tiles, one per
+// The home page's first choice: the situations as tiles, one per
 // situation in data/rooms.mjs. Two cards then say what I do for the picked
 // one and what to send first, and link its page under /for/<id>/.
 //
@@ -12,8 +12,7 @@ import { ROOMS, firstStep } from '../data/rooms.mjs';
 const tiles = ROOMS.map((r) => ({ id: r.id, label: r.label, blurb: r.blurb, href: `/for/${r.id}/`, title: r.title, does: r.does }));
 const [tile] = tiles;
 ---
-<section class="in-picker not-content" aria-labelledby="in-picker-h">
-	<p class="ask" id="in-picker-h">I need help with</p>
+<section class="in-picker not-content" aria-label="I need help with">
 	<nav class="tiles" aria-label="Situations">
 		{tiles.map((t, i) => (
 			<a class="tile" href={t.href} data-tile={t.id} aria-current={i === 0 ? 'true' : undefined}>
@@ -87,15 +86,6 @@ const [tile] = tiles;
 		max-width: 64rem;
 		margin: 1rem auto 2.5rem;
 		font-size: var(--sl-text-sm);
-	}
-	.ask {
-		margin: 0;
-		text-align: center;
-		font-size: 0.72rem;
-		font-weight: 600;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--sl-color-gray-3);
 	}
 	.tiles {
 		display: grid;
