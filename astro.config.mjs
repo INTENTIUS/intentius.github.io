@@ -51,22 +51,18 @@ export default defineConfig({
 					label: 'I need help with',
 					collapsed: true,
 					items: [
-						{ label: 'Rolling out terragucci', link: '/for/rollout/' },
-						{ label: 'Moving off another runner', link: '/for/moving/' },
 						{ label: 'A large estate', link: '/for/estate/' },
+						{ label: 'Moving off another runner', link: '/for/moving/' },
+						{ label: 'Rolling out terragucci', link: '/for/rollout/' },
 						{ label: 'Agents on real infrastructure', link: '/for/agents/' },
 						{ label: 'Deploys and pipelines', link: '/for/releases/' },
 					],
 				},
-				{
-					label: 'Work',
-					collapsed: true,
-					items: ['work', 'terragucci'],
-				},
+				'work',
 				{
 					label: 'Open source',
 					collapsed: true,
-					items: ['tools', 'accessible-ops'],
+					items: ['tools', 'terragucci', 'accessible-ops'],
 				},
 				{
 					label: 'Compare',

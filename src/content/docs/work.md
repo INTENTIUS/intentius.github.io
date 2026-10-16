@@ -1,21 +1,21 @@
 ---
 title: "Work"
-description: "What I do, starting with terragucci."
+description: "What I do for teams, one section per kind of job."
 ---
 
 Everything I build runs in your CI, under your accounts, and stays yours.
 
-## Rollout
+## Estate migration and carving
 
-I add terragucci to your repos, with the cloud roles and approvals your team needs. It arrives as a pull request you review and merge.
+A large estate gets [choudoufu](https://intentius.io/choudoufu/) as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy. AWS only.
 
 ## Moving from another runner
 
 Repos move over from Atlantis, Terraform Cloud or Spacelift one at a time. Each one plans under terragucci before the old runner lets go of it.
 
-## Estate migration and carving
+## Rollout
 
-A large estate gets [choudoufu](https://intentius.io/choudoufu/) as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy. AWS only.
+I add terragucci to your repos, with the cloud roles and approvals your team needs. It arrives as a pull request you review and merge.
 
 ## Agents against real infrastructure
 
