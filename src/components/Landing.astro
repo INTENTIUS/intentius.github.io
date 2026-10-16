@@ -1,7 +1,7 @@
 ---
-// The home page's parts. `part="top"` (the default) is the pixel eye, with
-// the page's heading kept for screen readers only, then the picker
-// (Picker.astro). `part="tools"` is the three open-source tools as
+// The home page's parts. `part="top"` (the default) is the pixel eye, the
+// wordmark, the mark between two gold hairlines and the tagline, then the
+// picker (Picker.astro). `part="tools"` is the three open-source tools as
 // tiles, under the "Open source" heading in index.mdx.
 // One import keeps index.mdx's prose free of import lines.
 import Picker from './Picker.astro';
@@ -21,7 +21,9 @@ const tools = [
 	<>
 		<section class="in-landing not-content">
 			<span class="in-logo hero-logo" aria-hidden="true"></span>
-			<h1 class="sr-only">Intentius</h1>
+			<h1 class="wordmark">INTENTIUS</h1>
+			<span class="rule" aria-hidden="true"><span class="in-mark"></span></span>
+			<p class="claim">Infrastructure consulting</p>
 		</section>
 		<Picker />
 	</>
@@ -44,13 +46,45 @@ const tools = [
 	.in-landing {
 		display: grid;
 		justify-items: center;
-		padding-block: clamp(1.25rem, 3vw, 2rem) 0;
+		gap: 0.9rem;
+		padding-block: clamp(1.5rem, 4vw, 2.5rem) 1.25rem;
 		text-align: center;
 	}
 	/* Three screen pixels per art pixel, so every square stays sharp. */
 	.hero-logo {
 		width: 171px;
 		height: 96px;
+	}
+	.wordmark {
+		margin: 0.4rem 0 0;
+		font-family: var(--in-display);
+		font-weight: 500;
+		font-size: clamp(1.4rem, 3.8vw, 1.8rem);
+		letter-spacing: 0.4em;
+		line-height: 1;
+		color: var(--sl-color-white);
+	}
+	/* The mark between two gold hairlines, under the wordmark. */
+	.rule {
+		display: flex;
+		align-items: center;
+		gap: 0.9rem;
+	}
+	.rule::before,
+	.rule::after {
+		content: '';
+		width: 2.6rem;
+		height: 1px;
+		background: var(--in-gold);
+	}
+	.claim {
+		margin: 0;
+		font-family: var(--in-display);
+		font-size: 0.78rem;
+		line-height: 1.3;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--sl-color-gray-3);
 	}
 	.in-tools {
 		list-style: none;
