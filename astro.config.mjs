@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Intentius',
-			description: 'Intentius helps teams adopt terragucci, the open-source way to plan, approve and apply Terraform from pull requests in your own CI.',
+			description: 'Intentius is an infrastructure consultancy. I build terragucci, choudoufu and chant, and help teams put them to work.',
 			// The pixel eye and the brain (scripts/brand/), Geist, and the palette
 			// as tokens for both themes.
 			customCss: ['./src/styles/intentius.css'],

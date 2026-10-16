@@ -16,7 +16,7 @@
 
 /** @typedef {{ label: string, href: string }} Link */
 
-const FIRST_STEP = 'Tell me your forge, roughly how many roots you have, and what runs them today. I will reply saying whether this is a fit.';
+const FIRST_STEP = 'Tell me what you run today and what you want to change. I will reply saying whether this is a fit.';
 
 export const ROOMS = [
 	{
