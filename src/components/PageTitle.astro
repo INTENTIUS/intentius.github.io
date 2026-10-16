@@ -1,0 +1,22 @@
+---
+// Starlight's page title with the page's description under it, the one-line
+// summary each page has carried since the Hugo site. A page with `wide: true`
+// also marks itself so styles/intentius.css can widen the main column.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const { description, wide } = entry.data;
+---
+<Default />
+{description && <p class="in-sub">{description}</p>}
+{wide && <span class="in-wide" hidden />}
+
+<style>
+	.in-sub {
+		margin: 0.6rem 0 0;
+		font-size: var(--sl-text-lg);
+		line-height: 1.45;
+		color: var(--sl-color-gray-3);
+		text-wrap: pretty;
+	}
+</style>

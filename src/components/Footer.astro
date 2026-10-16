@@ -1,0 +1,57 @@
+---
+// Starlight's footer, then what the Hugo site's footer said (the tools, the
+// wardens, and that help is a message away), then the pixel eye and the name
+// on every page, linking home.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import Wardens from './Wardens.astro';
+---
+<Default />
+<div class="in-foot not-content">
+	<p>
+		Intentius builds <a href="https://intentius.io/terragucci/">terragucci</a>, <a href="https://intentius.io/choudoufu/">choudoufu</a> and <a href="https://intentius.io/chant/">chant</a>. Everything is open source at <a href="https://github.com/intentius">github.com/intentius</a>. Also from Intentius are <a href="https://blacklight.intentius.io">blacklight</a>, <a href="https://spicypath.intentius.workers.dev">spicypath</a> and the wardens <Wardens />.
+	</p>
+	<p>The tools are free. For help with them, <a href="/contact/">get in touch</a>.</p>
+	<a class="home" href="/"><span class="in-logo" aria-hidden="true"></span><span>Intentius</span></a>
+</div>
+
+<style>
+	.in-foot {
+		display: grid;
+		justify-items: center;
+		gap: 0.6rem;
+		margin: 2.5rem 0 1rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--in-rule);
+		font-size: var(--sl-text-xs);
+		line-height: 1.6;
+		text-align: center;
+		color: var(--sl-color-gray-3);
+	}
+	.in-foot p {
+		margin: 0;
+		max-width: 40rem;
+	}
+	.in-foot p :global(a) {
+		color: var(--sl-color-gray-2);
+	}
+	.in-foot p :global(a:hover) {
+		color: var(--in-accent);
+	}
+	.home {
+		--in-ink: var(--sl-color-gray-3);
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.45rem;
+		margin-top: 1rem;
+		font-family: var(--in-display);
+		font-weight: 600;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--in-ink);
+		text-decoration: none;
+	}
+	.home:hover {
+		--in-ink: var(--sl-color-white);
+	}
+</style>

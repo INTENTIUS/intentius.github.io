@@ -1,0 +1,16 @@
+---
+// One page per situation on the home page's picker, at /for/<id>/, from
+// data/rooms.mjs (the picker reads the same file).
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import Room from '../../components/Room.astro';
+import { ROOMS } from '../../data/rooms.mjs';
+
+export function getStaticPaths() {
+	return ROOMS.map((r) => ({ params: { id: r.id } }));
+}
+
+const r = ROOMS.find((x) => x.id === Astro.params.id)!;
+---
+<StarlightPage frontmatter={{ title: r.title, description: r.blurb, tableOfContents: false }}>
+	<Room id={r.id} />
+</StarlightPage>

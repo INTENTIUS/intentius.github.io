@@ -1,17 +1,19 @@
-# Serve the site locally with live reload at http://localhost:1313/
+# Serve the site locally with live reload at http://localhost:4321/
 serve:
-    hugo server -D
+    npm run dev
 
 # Lint every content page on the sentences trope ruleset (medium and high fail)
 lint:
     npm run -s lint:prose
 
-# Build the site into public/
+# Build the site into dist/ and check every room and home page link
 build:
-    hugo --gc --minify
+    npm run build
 
-# Screenshot the built homepage (macOS Chrome) into /tmp/intentius-home.png
-shot: build
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
-      --hide-scrollbars --window-size=1200,1600 --screenshot=/tmp/intentius-home.png \
-      "file://$(pwd)/public/index.html"
+# Serve the built site at http://localhost:4321/
+preview: build
+    npm run preview
+
+# Redraw the logo, the mark and the favicons from scripts/brand/*.py
+brand:
+    scripts/brand/generate.sh

@@ -3,7 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint:prose": "node scripts/lint-prose.mjs $(find content -name '*.md')"
+    "dev": "astro dev",
+    "build": "astro build && node scripts/check-rooms.mjs",
+    "preview": "astro preview",
+    "lint:prose": "node scripts/lint-prose.mjs $(find src/content/docs -name '*.md' -o -name '*.mdx')"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.5",
+    "astro": "7.3.5"
   },
   "devDependencies": {
     "sentences": "^0.1.1"
