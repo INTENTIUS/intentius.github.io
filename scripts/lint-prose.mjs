@@ -52,11 +52,13 @@ let total = 0;
 for (const file of files) {
   const raw = readFileSync(file, "utf8");
   const withFm = frontMatterAsProse(raw);
-  // Blank Hugo shortcodes and list markers to spaces so they neither read as
-  // sentence openers nor shift offsets; extractProse keeps offsets too.
+  // Blank MDX imports, component tags and list markers to spaces so they
+  // neither read as sentence openers nor shift offsets; extractProse keeps
+  // offsets too.
   const blanked = withFm
     .replace(/^---\n[\s\S]*?\n---\n/, (s) => s.replace(/^---$/gm, "   "))
-    .replace(/\{\{<[\s\S]*?>\}\}/g, (m) => " ".repeat(m.length))
+    .replace(/^import .*$/gm, (m) => " ".repeat(m.length))
+    .replace(/<[A-Z][\s\S]*?\/>/g, (m) => " ".repeat(m.length))
     .replace(/^(\s*)[-*+] /gm, (m) => " ".repeat(m.length))
     // Heading markers are punctuation, not words: blank the hashes and keep
     // the heading text, so a run of short sections is not read as anaphora.

@@ -1,0 +1,147 @@
+---
+// One situation's page, from data/rooms.mjs: the lede, then two cards (what
+// I do, and the first step), what a reader can check today, and the pages
+// to read next. pages/for/[id].astro renders it.
+import { firstStep, room } from '../data/rooms.mjs';
+
+interface Props {
+	id: string;
+}
+const r = room(Astro.props.id);
+---
+<div class="in-room not-content">
+	<p class="lede">{r.lede}</p>
+	<div class="cols">
+		<section>
+			<h2 id="what-i-do">What I do</h2>
+			<ul>{r.does.map((d: string) => <li>{d}</li>)}</ul>
+		</section>
+		<section>
+			<h2 id="first-step">First step</h2>
+			<p>{firstStep()}</p>
+			<p><a class="go" href="/contact/">Get in touch</a></p>
+		</section>
+	</div>
+	<section>
+		<h2 id="check">What you can check now</h2>
+		<p class="note">All of it is open source, so you can read or run it before writing to me.</p>
+		<ul>{r.check.map((l: { label: string; href: string }) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+	</section>
+	<section class="read">
+		<h2 id="then-read">Then read</h2>
+		<p class="chips">{r.read.map((l: { label: string; href: string }) => <a href={l.href}>{l.label}</a>)}</p>
+	</section>
+</div>
+
+<style>
+	.in-room {
+		display: grid;
+		gap: 2.25rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.6;
+		color: var(--sl-color-gray-2);
+	}
+	.lede {
+		margin: 0;
+		font-size: var(--sl-text-base);
+	}
+	.cols {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 0.75rem;
+	}
+	.cols section {
+		min-width: 0;
+		padding: 1rem 1.15rem;
+		border: 1px solid var(--in-rule);
+		border-top: 1px solid var(--in-gold);
+		border-radius: 0.6rem;
+		background: var(--in-panel);
+	}
+	h2 {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 0 0.7rem;
+		font-size: 0.68rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--sl-color-gray-3);
+	}
+	section:not(.cols section) > h2::before {
+		content: '';
+		width: 15px;
+		height: 15px;
+		background-color: var(--in-gold);
+		-webkit-mask: var(--in-mark) center / contain no-repeat;
+		mask: var(--in-mark) center / contain no-repeat;
+	}
+	ul {
+		display: grid;
+		gap: 0.45rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		position: relative;
+		margin: 0;
+		padding-left: 1.6rem;
+		color: var(--sl-color-white);
+	}
+	li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.2em;
+		width: 15px;
+		height: 15px;
+		background-color: var(--in-ink);
+		-webkit-mask: var(--in-mark) center / contain no-repeat;
+		mask: var(--in-mark) center / contain no-repeat;
+	}
+	p {
+		margin: 0 0 0.7rem;
+	}
+	.note {
+		color: var(--sl-color-gray-3);
+	}
+	a {
+		color: var(--in-accent);
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+		text-decoration-color: var(--in-gold);
+		text-underline-offset: 0.2em;
+	}
+	.go {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.5rem 0.95rem;
+		font-weight: 600;
+		color: var(--sl-color-black);
+		background: var(--in-accent);
+		border-radius: 0.5rem;
+	}
+	.go:hover {
+		text-decoration: none;
+		filter: brightness(1.1);
+	}
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+	.chips a {
+		padding: 0.2rem 0.65rem;
+		color: var(--sl-color-white);
+		border: 1px solid var(--in-rule);
+		border-radius: 999px;
+	}
+	.chips a:hover {
+		text-decoration: none;
+		border-color: var(--in-gold);
+	}
+</style>

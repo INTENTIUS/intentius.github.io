@@ -1,0 +1,215 @@
+---
+// The home page's first choice: the situations as tiles, one per
+// situation in data/rooms.mjs. Two cards then say what I do for the picked
+// one and what to send first, and link its page under /for/<id>/.
+//
+// The first tile is rendered picked, so the cards read the same without
+// script. Each tile is a link to its page: with script, a click on a tile
+// that is not picked picks it instead, and a click on the picked one opens
+// the page. The pick is kept in localStorage.
+import { ROOMS, firstStep } from '../data/rooms.mjs';
+
+const tiles = ROOMS.map((r) => ({ id: r.id, label: r.label, blurb: r.blurb, href: `/for/${r.id}/`, title: r.title, does: r.does }));
+const [tile] = tiles;
+---
+<section class="in-picker not-content" aria-label="Help me">
+	<nav class="tiles" aria-label="Situations">
+		{tiles.map((t, i) => (
+			<a class="tile" href={t.href} data-tile={t.id} aria-current={i === 0 ? 'true' : undefined}>
+				<span class="in-mark" aria-hidden="true"></span>
+				<b>{t.label}</b>
+				<small>{t.blurb}</small>
+			</a>
+		))}
+	</nav>
+	<div class="cards" aria-live="polite">
+		<div class="card">
+			<p class="h">What I do</p>
+			<ul class="mark-list" data-does>
+				{tile.does.map((d) => <li>{d}</li>)}
+			</ul>
+		</div>
+		<div class="card">
+			<p class="h">First step</p>
+			<p>{firstStep()}</p>
+			<a class="go" href="/contact/">Get in touch</a>
+			<p class="more"><a data-room href={tile.href}>Read more</a>, with what you can check before you write.</p>
+		</div>
+	</div>
+	<script type="application/json" data-picker-data set:html={JSON.stringify(tiles).replace(/</g, '\\u003c')} />
+</section>
+
+<script is:inline>
+	(() => {
+		const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		const key = 'in-picker';
+		for (const section of document.querySelectorAll('.in-picker')) {
+			const tiles = JSON.parse(section.querySelector('[data-picker-data]').textContent);
+			let pick = tiles[0].id;
+			try {
+				const saved = localStorage.getItem(key);
+				if (tiles.some((t) => t.id === saved)) pick = saved;
+			} catch {}
+			const show = () => {
+				const tile = tiles.find((t) => t.id === pick) || tiles[0];
+				for (const t of section.querySelectorAll('[data-tile]')) {
+					if (t.dataset.tile === tile.id) t.setAttribute('aria-current', 'true');
+					else t.removeAttribute('aria-current');
+				}
+				section.querySelector('[data-does]').innerHTML = tile.does.map((d) => `<li>${esc(d)}</li>`).join('');
+				section.querySelector('[data-room]').href = tile.href;
+				try {
+					localStorage.setItem(key, pick);
+				} catch {}
+			};
+			section.addEventListener('click', (e) => {
+				const t = e.target.closest('[data-tile]');
+				if (!t || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+				// The picked tile opens its page; another one is picked first.
+				if (t.dataset.tile === pick) return;
+				e.preventDefault();
+				pick = t.dataset.tile;
+				show();
+			});
+			show();
+		}
+	})();
+</script>
+
+<style>
+	.in-picker {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1.1rem;
+		max-width: 64rem;
+		margin: 1rem auto 2.5rem;
+		font-size: var(--sl-text-sm);
+	}
+	.tiles {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.5rem;
+	}
+	.tile {
+		--in-gold-tile: var(--sl-color-gray-4);
+		position: relative;
+		display: grid;
+		gap: 0.45rem;
+		align-content: start;
+		padding: 0.85rem 0.9rem;
+		color: var(--sl-color-white);
+		text-decoration: none;
+		background: var(--in-panel);
+		border: 1px solid var(--in-rule);
+		border-top: 2px solid var(--in-rule);
+		border-radius: 0.6rem;
+		transition: border-color 0.15s;
+	}
+	.tile .in-mark {
+		background-color: var(--in-gold-tile);
+	}
+	.tile b {
+		line-height: 1.3;
+	}
+	.tile small {
+		font-size: var(--sl-text-xs);
+		line-height: 1.35;
+		color: var(--sl-color-gray-3);
+	}
+	.tile:hover {
+		--in-gold-tile: var(--sl-color-gray-2);
+		border-color: var(--in-gold);
+	}
+	/* The picked tile: a gold edge and the mark in gold. */
+	.tile[aria-current='true'] {
+		--in-gold-tile: var(--in-gold);
+		border-color: var(--in-rule);
+		border-top-color: var(--in-gold);
+		box-shadow: inset 0 0 0 1px var(--in-gold);
+	}
+	.cards {
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+		gap: 0.75rem;
+	}
+	.card {
+		display: grid;
+		align-content: start;
+		gap: 0.7rem;
+		padding: 1rem 1.15rem;
+		background: var(--in-panel);
+		border: 1px solid var(--in-rule);
+		border-top: 1px solid var(--in-gold);
+		border-radius: 0.6rem;
+		color: var(--sl-color-gray-2);
+		line-height: 1.55;
+	}
+	.card p {
+		margin: 0;
+	}
+	.h {
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--sl-color-gray-3);
+	}
+	.mark-list {
+		display: grid;
+		gap: 0.45rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.mark-list :global(li) {
+		position: relative;
+		margin: 0;
+		padding-left: 1.6rem;
+		color: var(--sl-color-white);
+	}
+	.mark-list :global(li)::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.2em;
+		width: 15px;
+		height: 15px;
+		background-color: var(--in-gold);
+		-webkit-mask: var(--in-mark) center / contain no-repeat;
+		mask: var(--in-mark) center / contain no-repeat;
+	}
+	.go {
+		justify-self: start;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.55rem 1rem;
+		font-weight: 600;
+		color: var(--sl-color-black);
+		text-decoration: none;
+		background: var(--in-accent);
+		border-radius: 0.5rem;
+	}
+	.go:hover {
+		filter: brightness(1.1);
+	}
+	.more {
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+	.more a {
+		color: var(--in-accent);
+	}
+	@media (max-width: 56rem) {
+		.tiles {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+		.cards {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+	@media (max-width: 36rem) {
+		.tiles {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>
