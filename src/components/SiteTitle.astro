@@ -1,14 +1,15 @@
 ---
 // The site title: the pixel eye beside the name, drawn as a mask over the
-// text colour so it follows the theme (styles/intentius.css). On a phone a
-// Contact link sits beside it, since Starlight hides the header's right side
-// (where SocialIcons.astro puts Contact) below its md width.
+// text colour so it follows the theme (styles/intentius.css). On a phone the
+// Demo and Contact links sit beside it, since Starlight hides the header's
+// right side (where SocialIcons.astro puts them) below its md width.
 const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 ---
 <a href={siteTitleHref} class="site-title sl-flex">
 	<span class="in-logo" aria-hidden="true"></span>
 	<span translate="no">{siteTitle}</span>
 </a>
+<a class="in-contact-phone" href="https://demo.intentius.io/">Demo</a>
 <a class="in-contact-phone" href="/contact/">Contact</a>
 
 <style>
@@ -21,7 +22,7 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 	}
 	.in-contact-phone {
 		align-self: center;
-		margin-left: 0.75rem;
+		margin-left: 0.5rem;
 		padding: 0.2rem 0.65rem;
 		font-size: var(--sl-text-xs);
 		font-weight: 600;
