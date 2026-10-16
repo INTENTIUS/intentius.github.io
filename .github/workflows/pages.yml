@@ -1,8 +1,11 @@
 name: Deploy site to Pages
 
+# A pull request runs the prose lint, the build and the room link check; a
+# push to main does the same and then deploys.
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,8 +14,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -28,16 +31,19 @@ jobs:
       - name: Prose lint (sentences ruleset)
         run: npm run lint:prose
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
       # astro build, then scripts/check-rooms.mjs on the output
       - name: Build
         run: npm run build
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
