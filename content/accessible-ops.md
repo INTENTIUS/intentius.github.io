@@ -1,6 +1,6 @@
 ---
 title: "Accessible Ops"
-summary: "Fourteen properties a toolchain has or does not. The bar every engagement is held to."
+summary: "Seventeen properties a toolchain has or does not. The bar every engagement is held to."
 wide: true
 ---
 
