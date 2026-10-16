@@ -42,20 +42,20 @@ export default defineConfig({
 				},
 			],
 			// Every group starts collapsed; Starlight opens the one holding the
-			// current page. "I need help with" lists the pages under /for/
+			// current page. "Help me" lists the pages under /for/
 			// (src/pages/for/[id].astro) in the order of src/data/rooms.mjs;
 			// scripts/check-rooms.mjs fails the build when the two disagree, and it
 			// reads this list as plain text, so keep it literal.
 			sidebar: [
 				{
-					label: 'I need help with',
+					label: 'Help me',
 					collapsed: true,
 					items: [
-						{ label: 'A large estate', link: '/for/estate/' },
-						{ label: 'Moving off another runner', link: '/for/moving/' },
-						{ label: 'Rolling out terragucci', link: '/for/rollout/' },
-						{ label: 'Agents on real infrastructure', link: '/for/agents/' },
-						{ label: 'Deploys and pipelines', link: '/for/releases/' },
+						{ label: 'Carve up a large estate', link: '/for/estate/' },
+						{ label: 'Move off another runner', link: '/for/moving/' },
+						{ label: 'Roll out terragucci', link: '/for/rollout/' },
+						{ label: 'Run agents on real infrastructure', link: '/for/agents/' },
+						{ label: 'Generate deploys and pipelines', link: '/for/releases/' },
 					],
 				},
 				'work',

@@ -1,4 +1,4 @@
-// The home page's picker ("I need help with...") and the pages under
+// The home page's picker (one "Help me ..." tile per situation) and the pages under
 // /for/<id>/, from one file. Each situation is a tile on the home page and a
 // page of its own; pages/for/[id].astro renders every one with the same
 // sections in the same order: the lede, What I do, First step, What you can
@@ -21,9 +21,9 @@ const FIRST_STEP = 'Tell me what you run today and what you want to change. I wi
 export const ROOMS = [
 	{
 		id: 'estate',
-		label: 'A large estate',
+		label: 'Help me carve up a large estate',
 		blurb: 'Hundreds of roots, or one state file shared by too many teams',
-		title: 'A large estate',
+		title: 'Carve up a large estate',
 		lede: 'A large estate gets choudoufu as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy.',
 		does: [
 			'Same HCL, same providers, same plan. choudoufu is a build of OpenTofu.',
@@ -42,9 +42,9 @@ export const ROOMS = [
 	},
 	{
 		id: 'moving',
-		label: 'Moving off another runner',
+		label: 'Help me move off another runner',
 		blurb: 'Atlantis, Terraform Cloud or Spacelift',
-		title: 'Moving off another runner',
+		title: 'Move off another runner',
 		lede: 'Repos move over from Atlantis, Terraform Cloud or Spacelift one at a time. Each one plans under terragucci before the old runner lets go of it.',
 		does: [
 			'One repo moves at a time, and the rest keep running where they are.',
@@ -63,9 +63,9 @@ export const ROOMS = [
 	},
 	{
 		id: 'rollout',
-		label: 'Rolling out terragucci',
+		label: 'Help me roll out terragucci',
 		blurb: 'Approvals, policy and traces, across your repos',
-		title: 'Rolling out terragucci',
+		title: 'Roll out terragucci',
 		lede: 'terragucci across your repos, with approvals, policy and traces set up. It arrives as a pull request you review and merge.',
 		does: [
 			'I add terragucci to your repos, with the cloud roles and approvals your team needs.',
@@ -84,9 +84,9 @@ export const ROOMS = [
 	},
 	{
 		id: 'agents',
-		label: 'Agents on real infrastructure',
+		label: 'Help me run agents on real infrastructure',
 		blurb: 'Approval gates, and the credential kept off the box',
-		title: 'Agents on real infrastructure',
+		title: 'Run agents on real infrastructure',
 		lede: 'An operation you run by hand becomes a program behind approval gates. Its credential stays outside the machine it runs on.',
 		does: [
 			'The operation becomes a program an agent or a person can start.',
@@ -104,9 +104,9 @@ export const ROOMS = [
 	},
 	{
 		id: 'releases',
-		label: 'Deploys and pipelines',
+		label: 'Help me generate deploys and pipelines',
 		blurb: 'Compiled from one description of the service',
-		title: 'Deploys and pipelines from one description',
+		title: 'Generate deploys and pipelines',
 		lede: 'Describe a service as data and chant compiles its deploy and its pipeline from it.',
 		does: [
 			'The service is written as typed code and checked before anything runs.',

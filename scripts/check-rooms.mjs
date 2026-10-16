@@ -1,7 +1,7 @@
 // Runs after `astro build` (npm run build) and fails it when a page under
 // /for/, the home page or src/data/rooms.mjs links a page or an anchor of
 // this site that does not exist. Links to other sites are left alone. It
-// also fails when the sidebar's "I need help with" group and the rooms
+// also fails when the sidebar's "Help me" group and the rooms
 // disagree.
 
 import { existsSync, readFileSync, statSync } from 'node:fs';
@@ -66,12 +66,12 @@ for (const f of pages) {
 	}
 }
 
-// The sidebar's "I need help with" group, against the rooms.
+// The sidebar's "Help me" group, against the rooms.
 const config = readFileSync(join(root, 'astro.config.mjs'), 'utf8');
 const listed = [...config.matchAll(/link: '\/for\/([^/']+)\/'/g)].map((m) => m[1]);
 const rooms = ROOMS.map((r) => r.id);
 if (listed.join(' ') !== rooms.join(' ')) {
-	problems.push(`astro.config.mjs: "I need help with" lists ${listed.join(', ')}, but rooms.mjs has ${rooms.join(', ')}`);
+	problems.push(`astro.config.mjs: "Help me" lists ${listed.join(', ')}, but rooms.mjs has ${rooms.join(', ')}`);
 }
 
 for (const p of problems) console.error(p);

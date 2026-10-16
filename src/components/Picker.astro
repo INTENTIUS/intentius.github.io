@@ -12,7 +12,7 @@ import { ROOMS, firstStep } from '../data/rooms.mjs';
 const tiles = ROOMS.map((r) => ({ id: r.id, label: r.label, blurb: r.blurb, href: `/for/${r.id}/`, title: r.title, does: r.does }));
 const [tile] = tiles;
 ---
-<section class="in-picker not-content" aria-label="I need help with">
+<section class="in-picker not-content" aria-label="Help me">
 	<nav class="tiles" aria-label="Situations">
 		{tiles.map((t, i) => (
 			<a class="tile" href={t.href} data-tile={t.id} aria-current={i === 0 ? 'true' : undefined}>
@@ -33,7 +33,7 @@ const [tile] = tiles;
 			<p class="h">First step</p>
 			<p>{firstStep()}</p>
 			<a class="go" href="/contact/">Get in touch</a>
-			<p class="more">More in <a data-room href={tile.href}>{tile.title}</a>, with what you can check before you write.</p>
+			<p class="more"><a data-room href={tile.href}>Read more</a>, with what you can check before you write.</p>
 		</div>
 	</div>
 	<script type="application/json" data-picker-data set:html={JSON.stringify(tiles).replace(/</g, '\\u003c')} />
@@ -57,9 +57,7 @@ const [tile] = tiles;
 					else t.removeAttribute('aria-current');
 				}
 				section.querySelector('[data-does]').innerHTML = tile.does.map((d) => `<li>${esc(d)}</li>`).join('');
-				const room = section.querySelector('[data-room]');
-				room.href = tile.href;
-				room.textContent = tile.title;
+				section.querySelector('[data-room]').href = tile.href;
 				try {
 					localStorage.setItem(key, pick);
 				} catch {}
