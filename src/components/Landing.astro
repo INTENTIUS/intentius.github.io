@@ -1,7 +1,7 @@
 ---
 // The home page's parts. `part="top"` (the default) is the pixel eye, the
 // wordmark, the mark between two gold hairlines and the tagline, then the
-// picker (Picker.astro). `part="tools"` is the three open-source tools as
+// picker (Picker.astro). `part="tools"` is the four open-source tools as
 // tiles, under the "Open source" heading in index.mdx.
 // One import keeps index.mdx's prose free of import lines.
 import Picker from './Picker.astro';
@@ -12,9 +12,10 @@ interface Props {
 const { part = 'top' } = Astro.props;
 
 const tools = [
-	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform repo, run in your own CI.' },
-	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with a lock and an owner on every resource.' },
+	{ name: 'behold', href: 'https://intentius.io/behold/', body: 'The whole estate as one picture, coloured by what has drifted.' },
 	{ name: 'chant', href: 'https://intentius.io/chant/', body: 'Infrastructure as typed code, checked before anything runs.' },
+	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with a lock and an owner on every resource.' },
+	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform repo, run in your own CI.' },
 ];
 ---
 {part === 'top' && (
@@ -92,7 +93,7 @@ const tools = [
 		margin: 1rem auto 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 0.75rem;
 	}
 	.in-tools li {
@@ -101,6 +102,7 @@ const tools = [
 	}
 	.in-tools a {
 		display: grid;
+		align-content: start;
 		gap: 0.6rem;
 		justify-items: start;
 		height: 100%;
@@ -124,6 +126,11 @@ const tools = [
 	.in-tools a:hover,
 	.in-tools a:focus-visible {
 		border-color: var(--in-gold);
+	}
+	@media (max-width: 64rem) {
+		.in-tools {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 	@media (max-width: 50rem) {
 		.in-tools {
