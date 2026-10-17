@@ -25,6 +25,6 @@ Workflow files are generated from the declarations that describe the deploy, and
 
 ## Where it fits
 
-choudoufu suits an AWS estate whose owners are willing to run something experimental. On Azure or GCP, or for one hosted thing your whole company logs into, buy the product.
+choudoufu suits an estate on AWS or Kubernetes. On a platform it does not cover yet, or for one hosted thing your whole company logs into, buy the product.
 
 If the guardrail stopping at the edge of the tool is your problem, [get in touch](/contact/).
