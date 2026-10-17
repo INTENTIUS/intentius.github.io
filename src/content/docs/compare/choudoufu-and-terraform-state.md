@@ -22,7 +22,7 @@ Twenty of them, each a scenario that runs in a few minutes. Every one also runs 
 
 ## Where it stops
 
-AWS only, and experimental. About half the provider's types carry no tags, so they are identifiable but not governable by a tag condition. The identity of a resource has to be knowable before it is created, and a read-only check reports what refuses before you commit to anything.
+choudoufu runs on AWS and Kubernetes, with more platforms on the way. A missing resource type is rarely what stops a configuration. A `backend "s3"` block, a non-default workspace or a `count.index` in a resource name usually stops it first. `choudoufu live-check` reads your configuration and reports anything it would refuse before you commit to anything.
 
 <!-- scale claims held until the 10,000+ run lands (choudoufu#1051)
 745 resources measured against real AWS. 3,705 on the emulator only.

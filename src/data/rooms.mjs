@@ -28,7 +28,7 @@ export const ROOMS = [
 		does: [
 			'Same HCL, same providers, same plan. choudoufu is a build of OpenTofu.',
 			'Ownership moves out of the state file and onto each resource, where your IAM policies can read it.',
-			'AWS only, and experimental. A read-only check reports what refuses before you commit to anything.',
+			'Runs on AWS and Kubernetes, with more on the way. A read-only check reports anything it would refuse before you commit.',
 		],
 		check: [
 			{ label: 'The twenty claims, each one you can run', href: 'https://intentius.io/choudoufu/docs/claims/' },

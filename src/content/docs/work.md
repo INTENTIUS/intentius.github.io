@@ -7,7 +7,7 @@ Everything I build runs in your CI, under your accounts, and stays yours.
 
 ## Estate migration and carving
 
-A large estate gets [choudoufu](https://intentius.io/choudoufu/) as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy. AWS only.
+A large estate gets [choudoufu](https://intentius.io/choudoufu/) as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy. It runs on AWS and Kubernetes, with more on the way.
 
 ## Moving from another runner
 
