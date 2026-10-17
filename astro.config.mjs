@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Intentius',
-			description: 'Intentius is an infrastructure consultancy. I build terragucci, choudoufu and chant, and help teams put them to work.',
+			description: 'Intentius is an infrastructure consultancy. I build behold, chant, choudoufu and terragucci, and help teams put them to work.',
 			// The pixel eye and the brain (scripts/brand/), Geist, and the palette
 			// as tokens for both themes.
 			customCss: ['./src/styles/intentius.css'],
@@ -62,7 +62,14 @@ export default defineConfig({
 				{
 					label: 'Open source',
 					collapsed: true,
-					items: ['tools', 'terragucci', 'accessible-ops'],
+					items: [
+						'tools',
+						{ label: 'behold', link: 'https://intentius.io/behold/' },
+						{ label: 'chant', link: 'https://intentius.io/chant/' },
+						{ label: 'choudoufu', link: 'https://intentius.io/choudoufu/' },
+						'terragucci',
+						'accessible-ops',
+					],
 				},
 				{
 					label: 'Compare',
