@@ -312,7 +312,7 @@ code, pre, kbd, samp {
 	flex: none;
 }
 
-/* A page with `wide: true` (the scorecard) uses the full main column. */
+/* A page with `wide: true` (a comparison) uses the full main column. */
 :root:has(.in-wide) {
 	--sl-content-width: 64rem;
 }

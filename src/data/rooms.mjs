@@ -120,7 +120,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Releases as compile targets', href: '/work/#releases-as-compile-targets' },
-			{ label: 'chant, CDK and Pulumi on the scorecard', href: '/accessible-ops/' },
+			{ label: 'The intoxicating mix of synthesis and execution', href: 'https://lex00.github.io/posts/the-intoxicating-mix-of-synthesis-and-execution/' },
 		],
 	},
 ];

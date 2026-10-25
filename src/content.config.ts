@@ -7,7 +7,7 @@ export const collections = {
 		loader: docsLoader(),
 		schema: docsSchema({
 			extend: z.object({
-				// The scorecard page uses the full main column (PageTitle.astro).
+				// A comparison page uses the full main column (PageTitle.astro).
 				wide: z.boolean().optional(),
 			}),
 		}),
