@@ -7,6 +7,12 @@ import starlight from '@astrojs/starlight';
 // their own repositories.
 export default defineConfig({
 	site: 'https://intentius.io',
+	// The control planes page became the terragucci, HCP Terraform and Spacelift arenas.
+	redirects: {
+		'/compare/control-planes/': '/compare/terraform-platforms/',
+		// chant, CDK and Pulumi is argued on the blog; the scorecard compares them property by property.
+		'/compare/chant-cdk-and-pulumi/': '/accessible-ops/',
+	},
 	integrations: [
 		starlight({
 			title: 'Intentius',
@@ -74,7 +80,7 @@ export default defineConfig({
 				{
 					label: 'Compare',
 					collapsed: true,
-					items: ['compare', 'compare/choudoufu-and-terraform-state', 'compare/chant-cdk-and-pulumi', 'compare/control-planes'],
+					items: ['compare', 'compare/terraform-platforms', 'compare/choudoufu-and-terraform-state'],
 				},
 				{
 					label: 'About',
