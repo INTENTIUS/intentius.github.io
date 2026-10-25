@@ -37,6 +37,8 @@ const need = (v, ids) => {
 };
 const all = GATED.map((f) => f.id);
 
+// The best-answer key shows only where some cell is marked best.
+const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id][0] === 'good')));
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
@@ -46,7 +48,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	{TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
 
 	<p class="ar-legend">
-		<span><b class="ar-best-key"></b> the best answer in the row</span>
+		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
 	</p>
@@ -66,13 +68,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}</span>
+						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => {
 							const [m, text, src] = r[v.id];
 							return (
 								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
 									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									<a class="ar-src" href={src}>{host(src)}</a>
+									{src && <a class="ar-src" href={src}>{host(src)}</a>}
 								</span>
 							);
 						})}
@@ -138,13 +140,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}</span>
+						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => {
 							const [m, text, src] = r[v.id];
 							return (
 								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
 									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									<a class="ar-src" href={src}>{host(src)}</a>
+									{src && <a class="ar-src" href={src}>{host(src)}</a>}
 								</span>
 							);
 						})}
@@ -244,6 +246,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-head { border-top: none; align-items: center; background: var(--panel); position: sticky; top: 0; z-index: 1; }
 .ar-head .ar-vendor { box-shadow: inset 0 -3px 0 var(--vc, transparent); }
 .ar-q { font-weight: 600; color: var(--ink); }
+.ar-note { display: block; margin-top: 0.2rem; font-weight: 400; font-size: 0.78rem; line-height: 1.35; color: var(--muted) !important; }
 .ar-cell { color: var(--ink); transition: background-color .2s ease; }
 .ar-cell small { display: block; color: var(--muted); font-size: 0.78rem; }
 .ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

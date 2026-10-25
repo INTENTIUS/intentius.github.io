@@ -12,8 +12,6 @@ export default defineConfig({
 		'/compare/control-planes/': '/compare/terraform-platforms/',
 		// chant, CDK and Pulumi is argued on the blog and in chant's docs.
 		'/compare/chant-cdk-and-pulumi/': 'https://intentius.io/chant/',
-		// The Accessible Ops scorecard is retired; the spec lives on its own site.
-		'/accessible-ops/': 'https://accessibleops.net/',
 	},
 	integrations: [
 		starlight({
@@ -79,6 +77,7 @@ export default defineConfig({
 						{ label: 'chant', link: 'https://intentius.io/chant/' },
 						{ label: 'choudoufu', link: 'https://intentius.io/choudoufu/' },
 						{ label: 'terragucci', link: 'https://intentius.io/terragucci/' },
+						'accessible-ops',
 					],
 				},
 				{
