@@ -46,6 +46,7 @@ export const ROOMS = [
 		blurb: 'Atlantis, Terraform Cloud or Spacelift',
 		title: 'Move off another runner',
 		lede: 'Repos move over from Atlantis, Terraform Cloud or Spacelift one at a time. Each one plans under terragucci before the old runner lets go of it.',
+		compare: true,
 		does: [
 			'One repo moves at a time, and the rest keep running where they are.',
 			'Each repo plans under terragucci before the old runner lets go of it.',
@@ -58,7 +59,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Moving from another runner', href: '/work/#moving-from-another-runner' },
-			{ label: 'The control planes', href: '/compare/control-planes/' },
+			{ label: 'terragucci, HCP Terraform and Spacelift', href: '/compare/terraform-platforms/' },
 		],
 	},
 	{
@@ -119,7 +120,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Releases as compile targets', href: '/work/#releases-as-compile-targets' },
-			{ label: 'chant, CDK and Pulumi', href: '/compare/chant-cdk-and-pulumi/' },
+			{ label: 'chant, CDK and Pulumi on the scorecard', href: '/accessible-ops/' },
 		],
 	},
 ];
