@@ -260,7 +260,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 /* ---- an arena ---- */
 .ar-arena { margin: 0 0 2.4rem; scroll-margin-top: 5rem; }
-.ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1; }
+.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1 !important; }
 .ar-arena header p { margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
 .ar-grid { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
 .ar-row { display: grid; grid-template-columns: var(--cols); align-items: stretch; border-top: 1px solid var(--rule); }

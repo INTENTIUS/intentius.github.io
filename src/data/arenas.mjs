@@ -157,7 +157,7 @@ export const GATED = [
 // The arenas after the gating one. Each row: a question, then a cell per vendor.
 export const ARENAS = [
 	{
-		id: 'basics', title: 'The basics', first: true,
+		id: 'basics', title: 'The basics',
 		rows: [
 			{ q: 'How you pay',
 				tg: ['good', 'nothing; Apache-2.0', `${T}/concepts/how-it-works/`],
