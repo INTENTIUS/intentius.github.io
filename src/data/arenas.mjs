@@ -12,7 +12,7 @@
 export const READ_ON = '2026-10-24';
 
 export const VENDORS = [
-	{ id: 'tg', name: 'terragucci', logo: { dark: '/brand/vendors/terragucci.svg', light: '/brand/vendors/terragucci.svg' }, named: true, link: true, color: '#0fb5b8', what: 'runs in your CI', href: 'https://intentius.io/terragucci/' },
+	{ id: 'tg', name: 'terragucci', logo: { dark: '/brand/vendors/terragucci.svg', light: '/brand/vendors/terragucci.svg' }, named: true, link: true, color: '#0fb5b8', what: 'just pipelines', href: 'https://intentius.io/terragucci/' },
 	{ id: 'hcp', name: 'HCP Terraform', logo: { dark: '/brand/vendors/hcp-terraform-on-dark.svg', light: '/brand/vendors/hcp-terraform-on-light.svg' }, color: '#8a5cd6', what: 'hosted', href: 'https://developer.hashicorp.com/terraform/cloud-docs' },
 	{ id: 'sl', name: 'Spacelift', logo: { dark: '/brand/vendors/spacelift-on-dark.svg', light: '/brand/vendors/spacelift-on-light.svg' }, color: '#4f7cff', what: 'hosted', href: 'https://spacelift.io/' },
 ];
