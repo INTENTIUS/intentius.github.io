@@ -5,6 +5,10 @@
 
 export const LABEL = 'choudoufu and the Terraform state file compared';
 
+export const READ_ON = '2026-10-25';
+
+export const TRADEMARKS = 'Terraform is a trademark of HashiCorp, an IBM Company. OpenTofu is a trademark of The Linux Foundation.';
+
 export const VENDORS = [
 	{ id: 'cdf', name: 'choudoufu', logo: { dark: '/brand/vendors/choudoufu.svg', light: '/brand/vendors/choudoufu.svg' }, named: true, link: true, color: '#c9a96e', href: 'https://intentius.io/choudoufu/' },
 	{ id: 'tf', name: 'Terraform or OpenTofu', logo: null, color: '#8a5cd6', href: 'https://opentofu.org/docs/language/state/' },
@@ -23,12 +27,6 @@ export const ARENAS = [
 			{ q: 'Narrowing access',
 				cdf: ['good', 'write an IAM policy on the tag', `${C}/docs/claims/the-tag-is-the-boundary/`],
 				tf: ['warn', 'split the state', `${H}/language/state`] },
-			{ q: 'Handing an estate to another team',
-				cdf: ['good', 'grant a role', `${C}/docs/claims/the-tag-is-the-boundary/`],
-				tf: ['warn', 'export, migrate, re-import', `${H}/language/import`] },
-			{ q: 'Renaming a resource',
-				cdf: ['good', 'rewrite a tag', `${C}/`],
-				tf: ['warn', 'state mv', `${H}/cli/commands/state/mv`] },
 		],
 	},
 	{

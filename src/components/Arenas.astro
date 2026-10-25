@@ -38,15 +38,7 @@ const need = (v, ids) => {
 };
 const all = GATED.map((f) => f.id);
 
-// The scoreboard counts marks that meet, per vendor and arena. The gating
-// arena counts features on the vendor's cheapest plan.
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
-const tally = (a) => Object.fromEntries(VENDORS.map((v) => [v.id, a.rows.filter((r) => r[v.id][0] === 'good').length]));
-const board = [
-	...(GATED.length ? [{ id: 'gating', title: "What's included", of: GATED.length,
-		score: Object.fromEntries(VENDORS.map((v) => [v.id, GATED.filter((f) => f[v.id].plan === 0).length])) }] : []),
-	...ARENAS.map((a) => ({ id: a.id, title: a.title, of: a.rows.length, score: tally(a), lead: a.lead?.name })),
-];
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
 <section class="arenas not-content" aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`)].join(';')}>
@@ -92,7 +84,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	))}
 
 	{GATED.length > 0 && <div class="ar-arena" id="ar-gating" data-arena>
-		<header><h2>What's included</h2><p>Tick what you need.</p></header>
+		<header><h2>What's included</h2><p>Tick what you need. These are terragucci's features; what it lacks is under The basics.</p></header>
 		<div class="ar-grid">
 			<div class="ar-row ar-head">
 				<span></span>
