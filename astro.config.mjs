@@ -36,6 +36,9 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/intentius' }],
 			head: [
 				{ tag: 'link', attrs: { rel: 'icon', href: '/favicon-48.png', sizes: '48x48', type: 'image/png' } },
+				// The preview card for links to any page; the comparison sets its own.
+				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://intentius.io/og.png' } },
+				{ tag: 'meta', attrs: { name: 'twitter:image', content: 'https://intentius.io/og.png' } },
 				{
 					tag: 'script',
 					content: `
@@ -73,7 +76,7 @@ export default defineConfig({
 						{ label: 'behold', link: 'https://intentius.io/behold/' },
 						{ label: 'chant', link: 'https://intentius.io/chant/' },
 						{ label: 'choudoufu', link: 'https://intentius.io/choudoufu/' },
-						'terragucci',
+						{ label: 'terragucci', link: 'https://intentius.io/terragucci/' },
 						'accessible-ops',
 					],
 				},

@@ -80,7 +80,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Rollout', href: '/work/#rollout' },
-			{ label: 'terragucci', href: '/terragucci/' },
+			{ label: 'terragucci', href: 'https://intentius.io/terragucci/' },
 		],
 	},
 	{

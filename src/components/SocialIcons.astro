@@ -22,4 +22,8 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 	.in-contact:hover {
 		border-color: var(--in-gold);
 	}
+	@media (max-width: 30rem) {
+		.in-contact { margin-right: 0.25rem; padding: 0.2rem 0.55rem; font-size: 0.78rem; }
+		.in-contact[href^='https://demo'] { display: none; }
+	}
 </style>

@@ -2,9 +2,8 @@
 // A comparison as arenas, one per thing a reader decides on. `data` is a
 // module like src/data/arenas.mjs (the default: terragucci against HCP
 // Terraform and Spacelift): VENDORS, ARENAS, and optionally PLANS and GATED
-// for a "what's included" arena, READ_ON and TRADEMARKS. The first vendor is
-// ours. A scoreboard links the arenas. In each
-// one, hovering or focusing a vendor grows its logo, shrinks the others and
+// for a "what's included" arena, READ_ON, TRADEMARKS and TRY. The first
+// vendor is ours. In each arena, hovering or focusing a vendor grows its logo, shrinks the others and
 // lights its column; the logos themselves are never tinted or recoloured, as
 // HashiCorp's and Spacelift's logo rules ask. Each cell links its source.
 // The gating arena takes the features you tick and names the plan each
@@ -215,21 +214,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 :root[data-theme='light'] .arenas { --good: #11805a; --warn: #8f6200; --bad: #c23434; }
 .arenas a { text-decoration: none; color: var(--in-accent); }
 
-/* ---- scoreboard ---- */
-.ar-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 0.7rem; margin: 0 0 1.2rem; }
-.ar-card {
-	display: grid; gap: 0.3rem; padding: 0.75rem 0.85rem; border: 1px solid var(--rule); border-radius: 10px;
-	background: var(--panel); color: var(--ink) !important; transition: transform .2s ease, border-color .2s ease;
-}
-.ar-card:hover, .ar-card:focus-visible { transform: translateY(-2px); border-color: var(--in-accent); }
-.ar-card > b { font-size: 0.9rem; margin-bottom: 0.2rem; }
-.ar-bar { display: grid; grid-template-columns: 6.5rem 1fr 2.2rem; align-items: center; gap: 0.45rem; font-size: 0.72rem; color: var(--muted); }
-.ar-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ar-bar-track { height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
-.ar-bar-fill { display: block; height: 100%; width: var(--w); background: var(--muted); border-radius: 3px; }
-.ar-bar.ar-ours .ar-bar-fill { background: var(--in-accent); }
-.ar-bar-n { text-align: right; font-variant-numeric: tabular-nums; }
-
 .ar-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.82rem; color: var(--muted); margin: 0 0 1.4rem; }
 .ar-hint { color: var(--faint); font-style: italic; }
 .ar-mark { font-weight: 700; }
@@ -262,7 +246,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-q { font-weight: 600; color: var(--ink); }
 .ar-cell { color: var(--ink); transition: background-color .2s ease; }
 .ar-cell small { display: block; color: var(--muted); font-size: 0.78rem; }
-.ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; }
+.ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ar-cell { min-width: 0; overflow-wrap: anywhere; }
 
 /* The logo for each vendor: it grows when followed, the others shrink. */
 .ar-vendor {
@@ -309,5 +294,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	.ar-wordmark { font-size: 0.8rem; }
 	.ar-vendor img { height: 1.4rem; }
 	.ar-vendor img.ar-wide { height: 1.05rem; }
+	.ar-total .ar-cell b { font-size: 0.85rem; }
+	.ar-src { font-size: 0.62rem; }
 }
 </style>
