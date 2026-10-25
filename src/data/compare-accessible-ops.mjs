@@ -1,7 +1,8 @@
 // The Accessible Ops properties (accessibleops.net) where the tools differ,
 // as arenas for Arenas.astro. A cross means the tool doesn't do it itself:
 // only through another product, the CI or by hand. Opt-in counts as doing it,
-// and the rule is the same for every column. Rows where no tool gets a cross
+// and the rule is the same for every column. AWS CDK is a wordmark: AWS's
+// trademark guidelines license only the Powered by AWS logo. Rows where no tool gets a cross
 // (III to VI, X, XII and XIII) are left out.
 
 export const LABEL = 'chant, choudoufu, AWS CDK, Pulumi and Terraform on Accessible Ops';
@@ -12,8 +13,8 @@ export const VENDORS = [
 	{ id: 'chant', name: 'chant', logo: { dark: '/brand/vendors/chant-on-dark.svg', light: '/brand/vendors/chant-on-light.svg' }, named: true, link: true, color: '#c9a96e', href: 'https://intentius.io/chant/' },
 	{ id: 'cdf', name: 'choudoufu', logo: { dark: '/brand/vendors/choudoufu.svg', light: '/brand/vendors/choudoufu.svg' }, named: true, link: true, color: '#b3a797', href: 'https://intentius.io/choudoufu/' },
 	{ id: 'cdk', name: 'AWS CDK', logo: null, color: '#ff9900', href: 'https://docs.aws.amazon.com/cdk/' },
-	{ id: 'pul', name: 'Pulumi', logo: null, color: '#8a3391', href: 'https://www.pulumi.com/docs/' },
-	{ id: 'tf', name: 'Terraform or OpenTofu', logo: null, color: '#8a5cd6', href: 'https://opentofu.org/' },
+	{ id: 'pul', name: 'Pulumi', logo: { dark: '/brand/vendors/pulumi-on-dark.svg', light: '/brand/vendors/pulumi-on-light.svg' }, color: '#8a3391', href: 'https://www.pulumi.com/docs/' },
+	{ id: 'tf', name: 'Terraform or OpenTofu', logo: { dark: '/brand/vendors/terraform-on-dark.svg', light: '/brand/vendors/terraform-on-light.svg' }, logo2: { dark: '/brand/vendors/opentofu-on-dark.svg', light: '/brand/vendors/opentofu-on-light.svg' }, color: '#8a5cd6', href: 'https://opentofu.org/' },
 ];
 
 export const TRADEMARKS = 'AWS CDK is a trademark of Amazon.com, Inc. Pulumi is a trademark of Pulumi Corporation. Terraform is a trademark of HashiCorp, an IBM Company. OpenTofu is a trademark of The Linux Foundation.';

@@ -2,14 +2,18 @@
 // A vendor's logo in a column head: one file for the dark theme and one for
 // the light, shown by theme. A pixel logo stays crisp; a wordmark logo that
 // already carries the name is drawn wider and without the name under it. A
-// vendor with no logo is its name, set as a wordmark.
+// column for two products (Terraform or OpenTofu) stacks a second logo,
+// `logo2`. A vendor with no logo is its name, set as a wordmark.
 const { v } = Astro.props;
 const cls = v.named ? 'ar-pixel' : 'ar-wide';
+const both = v.logo && v.logo2;
 ---
 {v.logo ? (
 	<>
-		<img class={`${cls} ar-on-dark`} src={v.logo.dark} alt={v.named ? '' : v.name} />
-		<img class={`${cls} ar-on-light`} src={v.logo.light} alt={v.named ? '' : v.name} />
+		<img class={`${cls}${both ? ' ar-half' : ''} ar-on-dark`} src={v.logo.dark} alt={v.named ? '' : v.name} />
+		<img class={`${cls}${both ? ' ar-half' : ''} ar-on-light`} src={v.logo.light} alt={v.named ? '' : v.name} />
+		{v.logo2 && <img class={`${cls} ar-half ar-on-dark`} src={v.logo2.dark} alt="" />}
+		{v.logo2 && <img class={`${cls} ar-half ar-on-light`} src={v.logo2.light} alt="" />}
 		{v.named && <span class="ar-logo-name">{v.name}</span>}
 	</>
 ) : <span class="ar-wordmark">{v.name}</span>}

@@ -11,7 +11,7 @@ export const TRADEMARKS = 'Terraform is a trademark of HashiCorp, an IBM Company
 
 export const VENDORS = [
 	{ id: 'cdf', name: 'choudoufu', logo: { dark: '/brand/vendors/choudoufu.svg', light: '/brand/vendors/choudoufu.svg' }, named: true, link: true, color: '#c9a96e', href: 'https://intentius.io/choudoufu/' },
-	{ id: 'tf', name: 'Terraform or OpenTofu', logo: null, color: '#8a5cd6', href: 'https://opentofu.org/docs/language/state/' },
+	{ id: 'tf', name: 'Terraform or OpenTofu', logo: { dark: '/brand/vendors/terraform-on-dark.svg', light: '/brand/vendors/terraform-on-light.svg' }, logo2: { dark: '/brand/vendors/opentofu-on-dark.svg', light: '/brand/vendors/opentofu-on-light.svg' }, color: '#8a5cd6', href: 'https://opentofu.org/docs/language/state/' },
 ];
 
 const C = 'https://intentius.io/choudoufu';
