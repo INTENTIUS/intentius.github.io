@@ -1,20 +1,29 @@
 ---
 // The home page's parts. `part="top"` (the default) is the pixel eye, the
-// wordmark, the mark between two gold hairlines and the tagline, then the
-// picker (Picker.astro). `part="tools"` is the four open-source tools as
-// tiles, under the "Open source" heading in index.mdx.
+// wordmark, the mark between two gold hairlines and one line on what this is.
+// `part="picker"` is the situations picker (Picker.astro). `part="tools"` is
+// the four open-source tools as tiles, under the "Open source" heading in
+// index.mdx.
 // One import keeps index.mdx's prose free of import lines.
 import Picker from './Picker.astro';
 
 interface Props {
-	part?: 'top' | 'tools';
+	part?: 'top' | 'picker' | 'tools' | 'cards';
 }
 const { part = 'top' } = Astro.props;
+
+// One row of cards under the header, each straight into a page of the site.
+const cards = [
+	{ title: 'terragucci, HCP Terraform and Spacelift', body: 'Everything included, against Enterprise plans.', href: '/compare/terraform-platforms/' },
+	{ title: 'choudoufu and the state file', body: 'The owner on the resource, no state lock.', href: '/compare/choudoufu-and-terraform-state/' },
+	{ title: 'Move off another runner', body: 'Atlantis, Terraform Cloud or Spacelift, one repo at a time.', href: '/for/moving/' },
+	{ title: 'Carve up a large estate', body: 'Hundreds of roots, or one state file shared by too many teams.', href: '/for/estate/' },
+];
 
 const tools = [
 	{ name: 'behold', href: 'https://intentius.io/behold/', body: 'The whole estate as one picture, coloured by what has drifted.' },
 	{ name: 'chant', href: 'https://intentius.io/chant/', body: 'Infrastructure as typed code, checked before anything runs.' },
-	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with a lock and an owner on every resource.' },
+	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with the owner on every resource, and no state lock.' },
 	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform repo, run in your own CI.' },
 ];
 ---
@@ -24,10 +33,16 @@ const tools = [
 			<span class="in-logo hero-logo" aria-hidden="true"></span>
 			<h1 class="wordmark">INTENTIUS</h1>
 			<span class="rule" aria-hidden="true"><span class="in-mark"></span></span>
-			<p class="claim">Infrastructure consulting</p>
 		</section>
-		<Picker />
 	</>
+)}
+{part === 'picker' && <Picker />}
+{part === 'cards' && (
+	<ul class="in-cards not-content">
+		{cards.map((c) => (
+			<li><a href={c.href}><b>{c.title}</b><span>{c.body}</span><span class="go" aria-hidden="true">→</span></a></li>
+		))}
+	</ul>
 )}
 {part === 'tools' && (
 	<ul class="in-tools not-content">
@@ -48,13 +63,19 @@ const tools = [
 		display: grid;
 		justify-items: center;
 		gap: 0.9rem;
-		padding-block: clamp(1.5rem, 4vw, 2.5rem) 1.25rem;
+		padding-block: clamp(0.75rem, 2.5vw, 1.5rem) 0.5rem;
 		text-align: center;
 	}
 	/* Three screen pixels per art pixel, so every square stays sharp. */
 	.hero-logo {
-		width: 171px;
-		height: 96px;
+		width: 114px;
+		height: 64px;
+	}
+	.what {
+		margin: 0.2rem 0 0;
+		max-width: 36rem;
+		font-size: var(--sl-text-base);
+		color: var(--sl-color-gray-2);
 	}
 	.wordmark {
 		margin: 0.4rem 0 0;
@@ -87,6 +108,38 @@ const tools = [
 		text-transform: uppercase;
 		color: var(--sl-color-gray-3);
 	}
+	.in-cards {
+		list-style: none;
+		max-width: 64rem;
+		margin: 0.5rem auto 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+	.in-cards li { margin: 0; min-width: 0; }
+	.in-cards a {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		gap: 0.35rem;
+		height: 100%;
+		padding: 0.9rem 1rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.4;
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+		border: 1px solid var(--in-rule);
+		border-top: 2px solid var(--in-accent);
+		border-radius: 0.5rem;
+		background: var(--in-panel);
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	.in-cards b { font-family: var(--in-display); font-size: var(--sl-text-base); color: var(--sl-color-white); }
+	.in-cards .go { color: var(--in-accent); font-weight: 600; }
+	.in-cards a:hover, .in-cards a:focus-visible { border-color: var(--in-accent); transform: translateY(-2px); }
+	@media (max-width: 64rem) { .in-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 40rem) { .in-cards { grid-template-columns: minmax(0, 1fr); } }
+	@media (prefers-reduced-motion: reduce) { .in-cards a { transition: none; } }
 	.in-tools {
 		list-style: none;
 		max-width: 64rem;

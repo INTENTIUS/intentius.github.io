@@ -1,12 +1,12 @@
 ---
 title: "Accessible Ops"
-description: "Fourteen properties a toolchain has or does not. The bar every engagement is held to."
 wide: true
 tableOfContents: false
 ---
 
-import Scorecard from '../../components/Scorecard.astro';
+import Arenas from '../../components/Arenas.astro';
+import * as data from '../../data/compare-accessible-ops.mjs';
 
-[Accessible Ops](https://accessibleops.net/) is a spec, not a product. Open a row for the reasoning behind each mark, or follow the arrow to the property. Three columns are hidden while their notes are rechecked.
+[Accessible Ops](https://accessibleops.net/) is a spec. These are its properties where the tools differ.
 
-<Scorecard />
+<Arenas data={data} />

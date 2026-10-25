@@ -2,9 +2,8 @@
 // A comparison as arenas, one per thing a reader decides on. `data` is a
 // module like src/data/arenas.mjs (the default: terragucci against HCP
 // Terraform and Spacelift): VENDORS, ARENAS, and optionally PLANS and GATED
-// for a "what's included" arena, READ_ON and TRADEMARKS. The first vendor is
-// ours. A scoreboard links the arenas. In each
-// one, hovering or focusing a vendor grows its logo, shrinks the others and
+// for a "what's included" arena, READ_ON, TRADEMARKS and TRY. The first
+// vendor is ours. In each arena, hovering or focusing a vendor grows its logo, shrinks the others and
 // lights its column; the logos themselves are never tinted or recoloured, as
 // HashiCorp's and Spacelift's logo rules ask. Each cell links its source.
 // The gating arena takes the features you tick and names the plan each
@@ -38,15 +37,9 @@ const need = (v, ids) => {
 };
 const all = GATED.map((f) => f.id);
 
-// The scoreboard counts marks that meet, per vendor and arena. The gating
-// arena counts features on the vendor's cheapest plan.
+// The best-answer key shows only where some cell is marked best.
+const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id][0] === 'good')));
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
-const tally = (a) => Object.fromEntries(VENDORS.map((v) => [v.id, a.rows.filter((r) => r[v.id][0] === 'good').length]));
-const board = [
-	...(GATED.length ? [{ id: 'gating', title: "What's included", of: GATED.length,
-		score: Object.fromEntries(VENDORS.map((v) => [v.id, GATED.filter((f) => f[v.id].plan === 0).length])) }] : []),
-	...ARENAS.map((a) => ({ id: a.id, title: a.title, of: a.rows.length, score: tally(a), lead: a.lead?.name })),
-];
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
 <section class="arenas not-content" aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`)].join(';')}>
@@ -55,7 +48,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	{TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
 
 	<p class="ar-legend">
-		<span><b class="ar-best-key"></b> the best answer in the row</span>
+		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
 	</p>
@@ -75,13 +68,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}</span>
+						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => {
 							const [m, text, src] = r[v.id];
 							return (
 								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
 									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									<a class="ar-src" href={src}>{host(src)}</a>
+									{src && <a class="ar-src" href={src}>{host(src)}</a>}
 								</span>
 							);
 						})}
@@ -92,7 +85,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	))}
 
 	{GATED.length > 0 && <div class="ar-arena" id="ar-gating" data-arena>
-		<header><h2>What's included</h2><p>Tick what you need.</p></header>
+		<header><h2>What's included</h2><p>Tick what you need. These are terragucci's features; what it lacks is under The basics.</p></header>
 		<div class="ar-grid">
 			<div class="ar-row ar-head">
 				<span></span>
@@ -147,13 +140,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}</span>
+						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => {
 							const [m, text, src] = r[v.id];
 							return (
 								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
 									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									<a class="ar-src" href={src}>{host(src)}</a>
+									{src && <a class="ar-src" href={src}>{host(src)}</a>}
 								</span>
 							);
 						})}
@@ -223,21 +216,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 :root[data-theme='light'] .arenas { --good: #11805a; --warn: #8f6200; --bad: #c23434; }
 .arenas a { text-decoration: none; color: var(--in-accent); }
 
-/* ---- scoreboard ---- */
-.ar-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 0.7rem; margin: 0 0 1.2rem; }
-.ar-card {
-	display: grid; gap: 0.3rem; padding: 0.75rem 0.85rem; border: 1px solid var(--rule); border-radius: 10px;
-	background: var(--panel); color: var(--ink) !important; transition: transform .2s ease, border-color .2s ease;
-}
-.ar-card:hover, .ar-card:focus-visible { transform: translateY(-2px); border-color: var(--in-accent); }
-.ar-card > b { font-size: 0.9rem; margin-bottom: 0.2rem; }
-.ar-bar { display: grid; grid-template-columns: 6.5rem 1fr 2.2rem; align-items: center; gap: 0.45rem; font-size: 0.72rem; color: var(--muted); }
-.ar-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ar-bar-track { height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
-.ar-bar-fill { display: block; height: 100%; width: var(--w); background: var(--muted); border-radius: 3px; }
-.ar-bar.ar-ours .ar-bar-fill { background: var(--in-accent); }
-.ar-bar-n { text-align: right; font-variant-numeric: tabular-nums; }
-
 .ar-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.82rem; color: var(--muted); margin: 0 0 1.4rem; }
 .ar-hint { color: var(--faint); font-style: italic; }
 .ar-mark { font-weight: 700; }
@@ -260,7 +238,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 /* ---- an arena ---- */
 .ar-arena { margin: 0 0 2.4rem; scroll-margin-top: 5rem; }
-.ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1; }
+.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1 !important; }
 .ar-arena header p { margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
 .ar-grid { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
 .ar-row { display: grid; grid-template-columns: var(--cols); align-items: stretch; border-top: 1px solid var(--rule); }
@@ -268,9 +246,11 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-head { border-top: none; align-items: center; background: var(--panel); position: sticky; top: 0; z-index: 1; }
 .ar-head .ar-vendor { box-shadow: inset 0 -3px 0 var(--vc, transparent); }
 .ar-q { font-weight: 600; color: var(--ink); }
+.ar-note { display: block; margin-top: 0.2rem; font-weight: 400; font-size: 0.78rem; line-height: 1.35; color: var(--muted) !important; }
 .ar-cell { color: var(--ink); transition: background-color .2s ease; }
 .ar-cell small { display: block; color: var(--muted); font-size: 0.78rem; }
-.ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; }
+.ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ar-cell { min-width: 0; overflow-wrap: anywhere; }
 
 /* The logo for each vendor: it grows when followed, the others shrink. */
 .ar-vendor {
@@ -282,6 +262,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-vendor img { height: 2rem; width: auto; max-width: 100%; object-fit: contain; }
 .ar-vendor img.ar-pixel { image-rendering: pixelated; }
 .ar-vendor img.ar-wide { height: 1.7rem; }
+.ar-vendor img.ar-wide.ar-half { height: 1.45rem; }
 .ar-logo-name { font: 700 0.8rem/1 var(--in-display); }
 /* One logo file per theme: the dark one by default, the light one under data-theme='light'. */
 .ar-vendor .ar-on-light { display: none; }
@@ -317,5 +298,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	.ar-wordmark { font-size: 0.8rem; }
 	.ar-vendor img { height: 1.4rem; }
 	.ar-vendor img.ar-wide { height: 1.05rem; }
+	.ar-total .ar-cell b { font-size: 0.85rem; }
+	.ar-src { font-size: 0.62rem; }
 }
 </style>
