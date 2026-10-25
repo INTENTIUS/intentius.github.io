@@ -337,5 +337,5 @@ export const ARENAS = [
 export const FEATURED = ['pr', 'waves', 'grouped', 'policy', 'drift', 'audit', 'sso', 'private'];
 
 export const TRY = [
-	['Watch the multi-root demo', 'https://demo.intentius.io/'],
+	['Watch a guided demo', 'https://demo.intentius.io/'],
 ];
