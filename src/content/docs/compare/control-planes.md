@@ -17,7 +17,7 @@ Every resource choudoufu creates is stamped with its owner, on the resource. You
 
 ## One stack reads another live
 
-A stack needing another's network reads the live resource, filtered by tags every resource already carries. It reads the current value every time. The alternative keeps the link inside the vendor's platform, visible only to someone logged into it.
+A stack needing another's network reads the live resource, filtered by tags every resource already carries. It reads the current value every time. The alternative keeps the link behind the vendor's UI or API.
 
 ## The pipeline is derived
 
