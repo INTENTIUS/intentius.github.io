@@ -1,10 +1,8 @@
 ---
-// One situation's page, from data/rooms.mjs: the lede, a comparison preview
-// for a room with `compare`, then two cards (what
+// One situation's page, from data/rooms.mjs: the lede, then two cards (what
 // I do, and the first step), what a reader can check today, and the pages
 // to read next. pages/for/[id].astro renders it.
 import { firstStep, room } from '../data/rooms.mjs';
-import CompareTeaser from './CompareTeaser.astro';
 
 interface Props {
 	id: string;
@@ -13,7 +11,6 @@ const r = room(Astro.props.id);
 ---
 <div class="in-room not-content">
 	<p class="lede">{r.lede}</p>
-	{r.compare && <CompareTeaser />}
 	<div class="cols">
 		<section>
 			<h2 id="what-i-do">What I do</h2>

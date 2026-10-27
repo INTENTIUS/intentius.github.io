@@ -1,26 +1,28 @@
 ---
-title: "terragucci, HCP Terraform and Spacelift"
-wide: true
-head:
-  - tag: meta
-    attrs:
-      name: description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
-  - tag: meta
-    attrs:
-      property: og:description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
-  - tag: meta
-    attrs:
-      property: og:image
-      content: https://intentius.io/og-compare.png
-  - tag: meta
-    attrs:
-      name: twitter:image
-      content: https://intentius.io/og-compare.png
-tableOfContents: false
+title: "terragucci with HCP Terraform and Spacelift"
+description: "Plan notes and waves in your CI, with your workspaces and stacks kept where they are."
 ---
 
-import Arenas from '../../../components/Arenas.astro';
+HCP Terraform and Spacelift run Terraform and OpenTofu for a great many teams. [terragucci](https://intentius.io/terragucci/) works next to them. It plans a change across every root it reaches in your forge's CI and writes one plan note on the pull request, then approves and applies in waves. Nothing is hosted, and its records land in your git and your bucket.
 
-<Arenas />
+## With HCP Terraform
+
+Set a workspace to local execution, and terragucci plans and applies its root in your CI with the `cloud` block as it is. The state stays in HCP Terraform. A workspace on remote execution adds HCP Terraform's own approvals and locks, so local execution is the simpler setup.
+
+The [HCP Terraform guide](https://intentius.io/terragucci/guides/coming-from-hcp-terraform-scalr-or-otf/) maps each workspace setting to a terragucci key. Moving a workspace's state into your own bucket is optional, and the guide covers it.
+
+## With Spacelift
+
+terragucci plans each stack's root in your CI and writes one plan note for every root a change reaches. A stack on your own backend keeps that backend. Spacelift keeps its policies and drift detection for the stacks it runs. The [Spacelift guide](https://intentius.io/terragucci/guides/coming-from-spacelift-or-env-zero/) lists the terragucci key for each stack setting.
+
+## With other runners
+
+Atlantis and OpenTaco have [a guide of their own](https://intentius.io/terragucci/guides/coming-from-atlantis-or-opentaco/). Scalr and OTF share the HCP Terraform guide, and env zero shares the Spacelift one.
+
+## In behold
+
+[behold](https://intentius.io/behold/using/terraform/) draws a repo's roots from its `.tf` files, so a root looks the same whichever platform runs it. It needs no cloud account and no `terraform` binary. On a repo terragucci runs, behold also reads [terragucci's reports bucket](https://intentius.io/behold/using/terragucci/). Each root then carries the verdict of its newest run.
+
+[All the tools a team might run](/compare/), Pulumi included.
+
+<small>HashiCorp, Terraform and HCP Terraform are trademarks of HashiCorp, an IBM Company. Spacelift is a trademark of Spacelift, Inc.</small>

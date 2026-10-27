@@ -1,0 +1,63 @@
+---
+// One card per tool a team already runs (src/data/alongside.mjs): its logo,
+// the parts that stay as they are, the Intentius tools that work beside it,
+// and the way behold draws it. Used on the home page and on /compare/. The logos are never
+// tinted or recoloured.
+import { PLATFORMS, TRADEMARKS } from '../data/alongside.mjs';
+---
+<section class="in-along not-content" aria-label="The Intentius tools beside Terraform, OpenTofu, HCP Terraform, Spacelift and Pulumi">
+	<ul>
+		{PLATFORMS.map((p) => (
+			<li>
+				<span class="logo">
+					<img class="on-dark" src={p.logo.dark} alt={p.name} />
+					<img class="on-light" src={p.logo.light} alt={p.name} />
+				</span>
+				<p class="keeps">{p.keeps}</p>
+				{p.adds.map(([name, href, text]) => (
+					<p><a href={href}>{name}</a> {text}</p>
+				))}
+				<p class="behold"><a href={p.behold[1]}>{p.behold[0]}</a> {p.behold[2]}</p>
+			</li>
+		))}
+	</ul>
+	<p class="tm">{TRADEMARKS}</p>
+</section>
+
+<style>
+	.in-along ul {
+		list-style: none;
+		max-width: 64rem;
+		margin: 1rem auto 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 0.75rem;
+	}
+	.in-along li {
+		display: grid;
+		align-content: start;
+		gap: 0.55rem;
+		margin: 0;
+		min-width: 0;
+		padding: 1rem 1.1rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.45;
+		color: var(--sl-color-gray-2);
+		border: 1px solid var(--in-rule);
+		border-top: 1px solid var(--in-gold);
+		border-radius: 0.5rem;
+		background: var(--in-panel);
+	}
+	.in-along p { margin: 0; }
+	.in-along a { color: var(--sl-color-white); font-weight: 600; }
+	.in-along a:hover { color: var(--in-accent); }
+	.in-along .keeps { color: var(--sl-color-white); }
+	.in-along .behold { padding-top: 0.5rem; border-top: 1px solid var(--in-rule); }
+	.in-along .logo { display: flex; align-items: center; height: 2.4rem; }
+	.in-along .logo img { height: 1.9rem; width: auto; max-width: 100%; object-fit: contain; }
+	.in-along .on-light { display: none; }
+	:root[data-theme='light'] .in-along .on-light { display: block; }
+	:root[data-theme='light'] .in-along .on-dark { display: none; }
+	.in-along .tm { max-width: 64rem; margin: 0.75rem auto 0; font-size: 0.7rem; color: var(--sl-color-gray-3); }
+</style>

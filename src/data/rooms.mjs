@@ -5,7 +5,7 @@
 // check now, and Then read. components/Picker.astro reads the same list, so
 // the picker and the pages cannot disagree.
 //
-// The text comes from the Work, Tools and Compare pages. Nothing here is a
+// The text comes from the Work, Tools and Works with pages. Nothing here is a
 // claim the site does not already make; "What you can check now" links only
 // to things a reader can open or run today. There is no case study yet, so
 // none is named.
@@ -22,12 +22,12 @@ export const ROOMS = [
 	{
 		id: 'estate',
 		label: 'Help me carve up a large estate',
-		blurb: 'Hundreds of roots, or one state file shared by too many teams',
+		blurb: 'Hundreds of roots, or one root that many teams share',
 		title: 'Carve up a large estate',
-		lede: 'A large estate gets choudoufu as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy.',
+		lede: 'A large estate keeps its OpenTofu code and runs it with choudoufu. Each resource gets its own record and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy.',
 		does: [
 			'Same HCL, same providers, same plan. choudoufu is a build of OpenTofu.',
-			'Ownership moves out of the state file and onto each resource, where your IAM policies can read it.',
+			'Each resource records its owner on itself, where your IAM policies can read it.',
 			'Runs on AWS and Kubernetes, with more on the way. A read-only check reports anything it would refuse before you commit.',
 		],
 		check: [
@@ -37,29 +37,28 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Estate migration and carving', href: '/work/#estate-migration-and-carving' },
-			{ label: 'choudoufu and the state file', href: '/compare/choudoufu-and-terraform-state/' },
+			{ label: 'choudoufu with Terraform and OpenTofu', href: '/compare/choudoufu-and-terraform-state/' },
 		],
 	},
 	{
 		id: 'moving',
-		label: 'Help me move off another runner',
-		blurb: 'Atlantis, Terraform Cloud or Spacelift',
-		title: 'Move off another runner',
-		lede: 'Repos move over from Atlantis, Terraform Cloud or Spacelift one at a time. Each one plans under terragucci before the old runner lets go of it.',
-		compare: true,
+		label: 'Help me bring terragucci to more repos',
+		blurb: 'One repo at a time, beside the runner you have',
+		title: 'Bring terragucci to more repos',
+		lede: 'terragucci starts on one repo. It plans there while your current runner keeps applying, and you choose when to switch each repo.',
 		does: [
-			'One repo moves at a time, and the rest keep running where they are.',
-			'Each repo plans under terragucci before the old runner lets go of it.',
-			'Your runner settings map onto terragucci keys, and I tell you which ones have no equivalent.',
+			'Each repo moves on its own schedule, and the rest keep running where they are.',
+			'Each repo plans under terragucci while your current runner keeps applying.',
+			'Your runner settings map onto terragucci keys, and I list any that need a different approach.',
 		],
 		check: [
-			{ label: 'Coming from Atlantis or OpenTaco', href: 'https://intentius.io/terragucci/guides/coming-from-atlantis-or-opentaco/' },
-			{ label: 'Coming from HCP Terraform, Scalr or OTF', href: 'https://intentius.io/terragucci/guides/coming-from-hcp-terraform-scalr-or-otf/' },
-			{ label: 'Coming from Spacelift or env0', href: 'https://intentius.io/terragucci/guides/coming-from-spacelift-or-env-zero/' },
+			{ label: 'terragucci with Atlantis or OpenTaco', href: 'https://intentius.io/terragucci/guides/coming-from-atlantis-or-opentaco/' },
+			{ label: 'terragucci with HCP Terraform, Scalr or OTF', href: 'https://intentius.io/terragucci/guides/coming-from-hcp-terraform-scalr-or-otf/' },
+			{ label: 'terragucci with Spacelift or env zero', href: 'https://intentius.io/terragucci/guides/coming-from-spacelift-or-env-zero/' },
 		],
 		read: [
-			{ label: 'Moving from another runner', href: '/work/#moving-from-another-runner' },
-			{ label: 'terragucci, HCP Terraform and Spacelift', href: '/compare/terraform-platforms/' },
+			{ label: 'Adding terragucci to more repos', href: '/work/#adding-terragucci-to-more-repos' },
+			{ label: 'terragucci with HCP Terraform and Spacelift', href: '/compare/terraform-platforms/' },
 		],
 	},
 	{
@@ -120,7 +119,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Releases as compile targets', href: '/work/#releases-as-compile-targets' },
-			{ label: 'The intoxicating mix of synthesis and execution', href: 'https://lex00.github.io/posts/the-intoxicating-mix-of-synthesis-and-execution/' },
+			{ label: 'TypeScript is the right choice for infra', href: 'https://lex00.github.io/posts/typescript-is-the-right-choice-for-infra/' },
 		],
 	},
 ];

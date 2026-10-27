@@ -1,44 +1,23 @@
 ---
-// A comparison as arenas, one per thing a reader decides on. `data` is a
-// module like src/data/arenas.mjs (the default: terragucci against HCP
-// Terraform and Spacelift): VENDORS, ARENAS, and optionally PLANS and GATED
-// for a "what's included" arena, READ_ON, TRADEMARKS and TRY. The first
-// vendor is ours. In each arena, hovering or focusing a vendor grows its logo, shrinks the others and
-// lights its column; the logos themselves are never tinted or recoloured, as
-// HashiCorp's and Spacelift's logo rules ask. Each cell links its source.
-// The gating arena takes the features you tick and names the plan each
-// vendor needs for all of them. Without script every arena still reads, with
-// every feature ticked.
-import * as terraformPlatforms from '../data/arenas.mjs';
+// Properties as arenas, one per group (accessible-ops.mdx with
+// src/data/compare-accessible-ops.mjs). `data` holds VENDORS, ARENAS and
+// optionally READ_ON, TRADEMARKS, LABEL and TRY. In each arena, hovering or
+// focusing a column grows its logo, shrinks the others and lights its
+// column. Each cell links its source.
 import VendorLogo from './VendorLogo.astro';
 
-const { data = terraformPlatforms } = Astro.props;
-const { VENDORS, PLANS = {}, GATED = [], ARENAS, READ_ON, TRADEMARKS, LABEL, FEATURED = [], TRY } = data;
+const { data } = Astro.props;
+const { VENDORS, ARENAS, READ_ON, TRADEMARKS, LABEL, TRY } = data;
 const OURS = VENDORS[0].id;
 
-// A row is a question, so its best answer is highlighted (ties allowed) and
-// a vendor that doesn't do the thing at all gets a cross. Everything else is
-// its words alone.
+// A row is a property, so its best answer is highlighted (ties allowed) and
+// a tool that doesn't do it itself gets a cross. Everything else is its
+// words alone.
 const GLYPH = { good: '', warn: '', bad: '✗' };
 const WORD = { good: 'meets', warn: 'partly', bad: 'misses' };
 
-// For the features ticked: the highest plan a vendor needs, and how many of
-// them it has no equivalent for. A feature whose tier isn't published counts
-// toward neither.
-const need = (v, ids) => {
-	let max = -1, none = 0;
-	for (const f of GATED) {
-		if (!ids.includes(f.id)) continue;
-		const c = f[v];
-		if (c.plan !== null) max = Math.max(max, c.plan);
-		else if (c.tier !== 'unpublished') none++;
-	}
-	return { plan: max < 0 ? '-' : PLANS[v][max], none };
-};
-const all = GATED.map((f) => f.id);
-
 // The best-answer key shows only where some cell is marked best.
-const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id][0] === 'good')));
+const hasBest = ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id][0] === 'good')));
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
@@ -84,47 +63,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 		</div>
 	))}
 
-	{GATED.length > 0 && <div class="ar-arena" id="ar-gating" data-arena>
-		<header><h2>What's included</h2><p>Tick what you need. These are terragucci's features; what it lacks is under The basics.</p></header>
-		<div class="ar-grid">
-			<div class="ar-row ar-head">
-				<span></span>
-				{VENDORS.map((v) => (
-					v.link
-						? <a class="ar-vendor" data-v={v.id} href={v.href} style={`--vc:var(--c-${v.id})`}><VendorLogo v={v} /></a>
-						: <button type="button" class="ar-vendor" data-v={v.id} aria-label={`Follow ${v.name}`} style={`--vc:var(--c-${v.id})`}><VendorLogo v={v} /></button>
-				))}
-			</div>
-			{GATED.map((f) => (
-				<label class={`ar-row ar-gate${FEATURED.length && !FEATURED.includes(f.id) ? ' ar-more' : ''}`}>
-					<span class="ar-q"><input type="checkbox" value={f.id} checked /> {f.label}</span>
-					{VENDORS.map((v) => {
-						const c = f[v.id];
-						return (
-							<span class="ar-cell" data-v={v.id} style={`--vc:var(--c-${v.id})`}>
-								{c.plan !== null
-									? <b>{PLANS[v.id][c.plan]}</b>
-									: c.tier === 'unpublished' ? <b class="ar-unpub">Tier not published</b> : <b class="ar-none"><span class="ar-mark bad">✗</span> None</b>}
-								{c.note && <small>{c.note.replace(/^(tier not published|none documented)(; )?/, '')}</small>}
-								<a class="ar-src" href={c.src}>{host(c.src)}</a>
-							</span>
-						);
-					})}
-				</label>
-			))}
-			{FEATURED.length > 0 && (
-				<button type="button" class="ar-showall" data-showall>Show all {GATED.length} features</button>
-			)}
-			<div class="ar-row ar-total">
-				<span class="ar-q">The plan you'd need</span>
-				{VENDORS.map((v) => {
-					const n = need(v.id, all);
-					return <span class={`ar-cell${v.id === OURS ? ' ar-ours' : ''}`} data-v={v.id} data-need={v.id}><b>{n.plan}</b><small class="ar-lacks">{n.none ? `and still lacks ${n.none}` : ''}</small></span>;
-				})}
-			</div>
-		</div>
-	</div>}
-
 	{ARENAS.filter((a) => !a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${a.id}`} data-arena>
 			<header><h2>{a.title}</h2>{a.blurb && <p>{a.blurb}</p>}</header>
@@ -159,8 +97,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	{TRADEMARKS && <p class="ar-tm">{TRADEMARKS}</p>}
 </section>
 
-<script is:inline define:vars={{ PLANS, GATED, VENDORS }}>
-	// Follow a vendor: hover, focus or tap its logo. A tap on the followed one lets go.
+<script is:inline>
+	// Follow a column: hover, focus or tap its logo. A tap on the followed one lets go.
 	document.querySelectorAll('[data-arena]').forEach(function (arena) {
 		var set = function (v) {
 			if (v) arena.dataset.focus = v; else delete arena.dataset.focus;
@@ -169,40 +107,12 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 		arena.querySelectorAll('.ar-vendor').forEach(function (b) {
 			b.addEventListener('mouseenter', function () { set(b.dataset.v); });
 			b.addEventListener('focus', function () { set(b.dataset.v); });
-			// Our own products' logos are links to their sites; a click on one goes there.
+			// A logo that links to its product's site goes there on a click.
 			if (b.tagName === 'A') return;
 			b.addEventListener('click', function () { set(arena.dataset.focus === b.dataset.v && arena.dataset.pinned ? '' : b.dataset.v); arena.dataset.pinned = arena.dataset.focus ? '1' : ''; });
 		});
 		arena.addEventListener('mouseleave', function () { if (!arena.dataset.pinned) set(''); });
 	});
-	// The gating arena: the plan each vendor needs for every ticked feature.
-	var gate = document.getElementById('ar-gating');
-	var more = gate && gate.querySelector('[data-showall]');
-	if (more) more.addEventListener('click', function () {
-		var open = gate.classList.toggle('ar-all');
-		more.textContent = open ? 'Show the main features' : 'Show all ' + gate.querySelectorAll('.ar-gate').length + ' features';
-	});
-	if (gate) {
-		var boxes = gate.querySelectorAll('input[type=checkbox]');
-		var update = function () {
-			var ids = Array.prototype.filter.call(boxes, function (b) { return b.checked; }).map(function (b) { return b.value; });
-			VENDORS.forEach(function (v) {
-				var max = -1, none = 0;
-				GATED.forEach(function (f) {
-					if (ids.indexOf(f.id) < 0) return;
-					var c = f[v.id];
-					if (c.plan !== null) max = Math.max(max, c.plan);
-					else if (c.tier !== 'unpublished') none++;
-				});
-				var cell = gate.querySelector('[data-need="' + v.id + '"]');
-				cell.querySelector('b').textContent = max < 0 ? '-' : PLANS[v.id][max];
-				cell.querySelector('.ar-lacks').textContent = none ? 'and still lacks ' + none : '';
-			});
-			boxes.forEach(function (b) { b.closest('.ar-gate').classList.toggle('ar-off', !b.checked); });
-		};
-		boxes.forEach(function (b) { b.addEventListener('change', update); });
-		update();
-	}
 </script>
 
 <style is:global>
@@ -229,16 +139,10 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-key b { color: var(--ink); font-weight: 600; }
 .ar-key em { font-style: normal; color: var(--muted); }
 .ar-try { display: flex; flex-wrap: wrap; gap: 0.3rem 1.3rem; margin: 0 0 1.2rem; font-size: 0.88rem; font-weight: 600; }
-.ar-gate.ar-more { display: none; }
-.ar-all .ar-gate.ar-more { display: grid; }
-.ar-showall {
-	display: block; width: 100%; padding: 0.55rem; border: 0; border-top: 1px solid var(--rule);
-	background: none; color: var(--in-accent); font: inherit; font-size: 0.85rem; cursor: pointer;
-}
 
 /* ---- an arena ---- */
 .ar-arena { margin: 0 0 2.4rem; scroll-margin-top: 5rem; }
-.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1 !important; }
+.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--c-chant, var(--in-accent)), var(--c-cdf, var(--in-accent))) 1 !important; }
 .ar-arena header p { margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
 .ar-grid { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
 .ar-row { display: grid; grid-template-columns: var(--cols); align-items: stretch; border-top: 1px solid var(--rule); }
@@ -276,17 +180,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-cell.ar-lit { background: color-mix(in srgb, var(--vc, var(--in-accent)) 16%, transparent); }
 .ar-cell.ar-best.ar-lit { background: color-mix(in srgb, var(--vc, var(--in-accent)) 16%, transparent); }
 
-/* The gating arena. */
-.ar-gate { cursor: pointer; }
-.ar-gate input { accent-color: var(--in-accent); margin-right: 0.35rem; }
-.ar-gate.ar-off .ar-cell { opacity: 0.35; }
-.ar-total { background: var(--panel); }
-.ar-total .ar-cell b { font-size: 1.05rem; }
-.ar-total .ar-ours b { color: var(--good); }
-.ar-lacks { color: var(--bad) !important; }
-.ar-unpub { color: var(--muted); font-weight: 600; }
-.ar-none { color: var(--muted); }
-
 @media (prefers-reduced-motion: reduce) {
 	.ar-vendor, .ar-card, .ar-cell { transition: none; }
 	[data-focus] .ar-vendor { transform: none; }
@@ -298,7 +191,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	.ar-wordmark { font-size: 0.8rem; }
 	.ar-vendor img { height: 1.4rem; }
 	.ar-vendor img.ar-wide { height: 1.05rem; }
-	.ar-total .ar-cell b { font-size: 0.85rem; }
 	.ar-src { font-size: 0.62rem; }
 }
 </style>

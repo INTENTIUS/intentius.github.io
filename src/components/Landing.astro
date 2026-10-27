@@ -2,7 +2,7 @@
 // The home page's parts. `part="top"` (the default) is the pixel eye, the
 // wordmark, the mark between two gold hairlines and one line on what this is.
 // `part="picker"` is the situations picker (Picker.astro). `part="tools"` is
-// the four open-source tools as tiles, under the "Open source" heading in
+// the open-source tools as tiles, under the "Open source" heading in
 // index.mdx.
 // One import keeps index.mdx's prose free of import lines.
 import Picker from './Picker.astro';
@@ -14,17 +14,19 @@ const { part = 'top' } = Astro.props;
 
 // One row of cards under the header, each straight into a page of the site.
 const cards = [
-	{ title: 'terragucci, HCP Terraform and Spacelift', body: 'Everything included, against Enterprise plans.', href: '/compare/terraform-platforms/' },
-	{ title: 'choudoufu and the state file', body: 'The owner on the resource, no state lock.', href: '/compare/choudoufu-and-terraform-state/' },
-	{ title: 'Move off another runner', body: 'Atlantis, Terraform Cloud or Spacelift, one repo at a time.', href: '/for/moving/' },
-	{ title: 'Carve up a large estate', body: 'Hundreds of roots, or one state file shared by too many teams.', href: '/for/estate/' },
+	{ title: 'terragucci with HCP Terraform and Spacelift', body: 'Plan notes and waves in your CI, with your workspaces and stacks kept.', href: '/compare/terraform-platforms/' },
+	{ title: 'choudoufu with Terraform and OpenTofu', body: 'Your HCL as it is, with the owner recorded on each resource.', href: '/compare/choudoufu-and-terraform-state/' },
+	{ title: 'Bring terragucci to more repos', body: 'Start with one repo. The others keep running where they are.', href: '/for/moving/' },
+	{ title: 'Carve up a large estate', body: 'Hundreds of roots, or one root that many teams share.', href: '/for/estate/' },
 ];
 
 const tools = [
 	{ name: 'behold', href: 'https://intentius.io/behold/', body: 'The whole estate as one picture, coloured by what has drifted.' },
 	{ name: 'chant', href: 'https://intentius.io/chant/', body: 'Infrastructure as typed code, checked before anything runs.' },
-	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with the owner on every resource, and no state lock.' },
-	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform repo, run in your own CI.' },
+	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu, with the owner recorded on every resource.' },
+	{ name: 'plunge', href: 'https://intentius.io/plunge/', body: 'Pulumi, with the owner recorded on every resource. First release, v0.1.0.' },
+	{ name: 'plywood', href: 'https://github.com/INTENTIUS/plywood', body: 'The Pulumi CI on chant\'s runtime. The name is reserved and nothing is built yet.' },
+	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform and OpenTofu repo, run in your own CI.' },
 ];
 ---
 {part === 'top' && (
@@ -146,7 +148,7 @@ const tools = [
 		margin: 1rem auto 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 0.75rem;
 	}
 	.in-tools li {
