@@ -31,15 +31,27 @@ Declares an agent's sandbox, its secrets and its schedule as ordinary infrastruc
 
 ## choudoufu
 
-A build of OpenTofu where every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. The state file becomes a copy you are allowed to lose. Twenty claims about it, each one you can run yourself. It runs on AWS and Kubernetes, with more on the way.
+A build of OpenTofu where every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. If the state file is lost, the next plan rebuilds it from the tags. Twenty claims about it, each one you can run yourself. It runs on AWS and Kubernetes, with more on the way.
 
-[Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Claims](https://intentius.io/choudoufu/docs/claims/) · [Compare](/compare/choudoufu-and-terraform-state/)
+[Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Claims](https://intentius.io/choudoufu/docs/claims/) · [With Terraform and OpenTofu](/compare/choudoufu-and-terraform-state/)
+
+## plunge
+
+A build of Pulumi where every resource records who owns it on the resource itself. Your Pulumi programs run as they are, and the first release is out.
+
+[Docs](https://intentius.io/plunge/) · [Source](https://github.com/INTENTIUS/plunge)
+
+## plywood
+
+Plans, gates and drift for Pulumi and plunge stacks, run in your own CI on chant's runtime. The name is reserved and nothing is built yet.
+
+[Source](https://github.com/INTENTIUS/plywood)
 
 ## terragucci
 
 Plan, approve and apply Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
 
-[Docs](https://intentius.io/terragucci/) · [Source](https://github.com/INTENTIUS/terragucci)
+[Docs](https://intentius.io/terragucci/) · [Source](https://github.com/INTENTIUS/terragucci) · [With HCP Terraform and Spacelift](/compare/terraform-platforms/)
 
 ## Wardens
 

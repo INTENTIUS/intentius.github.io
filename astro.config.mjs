@@ -7,16 +7,16 @@ import starlight from '@astrojs/starlight';
 // their own repositories.
 export default defineConfig({
 	site: 'https://intentius.io',
-	// The control planes page became the terragucci, HCP Terraform and Spacelift arenas.
+	// The control planes page became terragucci with HCP Terraform and Spacelift.
 	redirects: {
 		'/compare/control-planes/': '/compare/terraform-platforms/',
-		// chant, CDK and Pulumi is argued on the blog and in chant's docs.
+		// chant with CDK and Pulumi is in chant's own docs.
 		'/compare/chant-cdk-and-pulumi/': 'https://intentius.io/chant/',
 	},
 	integrations: [
 		starlight({
 			title: 'Intentius',
-			description: 'Intentius is an infrastructure consultancy. I build behold, chant, choudoufu and terragucci, and help teams put them to work.',
+			description: 'Intentius is an infrastructure consultancy. I build behold, chant, choudoufu, plunge and terragucci for the Terraform, OpenTofu and Pulumi code teams already have, and help teams put them to work.',
 			// The pixel eye and the brain (scripts/brand/), Geist, and the palette
 			// as tokens for both themes.
 			customCss: ['./src/styles/intentius.css'],
@@ -36,7 +36,7 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/intentius' }],
 			head: [
 				{ tag: 'link', attrs: { rel: 'icon', href: '/favicon-48.png', sizes: '48x48', type: 'image/png' } },
-				// The preview card for links to any page; the comparison sets its own.
+				// The preview card for links to any page.
 				{ tag: 'meta', attrs: { property: 'og:image', content: 'https://intentius.io/og.png' } },
 				{ tag: 'meta', attrs: { name: 'twitter:image', content: 'https://intentius.io/og.png' } },
 				{
@@ -61,7 +61,7 @@ export default defineConfig({
 					collapsed: true,
 					items: [
 						{ label: 'Carve up a large estate', link: '/for/estate/' },
-						{ label: 'Move off another runner', link: '/for/moving/' },
+						{ label: 'Bring terragucci to more repos', link: '/for/moving/' },
 						{ label: 'Roll out terragucci', link: '/for/rollout/' },
 						{ label: 'Run agents on real infrastructure', link: '/for/agents/' },
 						{ label: 'Generate deploys and pipelines', link: '/for/releases/' },
@@ -76,12 +76,14 @@ export default defineConfig({
 						{ label: 'behold', link: 'https://intentius.io/behold/' },
 						{ label: 'chant', link: 'https://intentius.io/chant/' },
 						{ label: 'choudoufu', link: 'https://intentius.io/choudoufu/' },
+						{ label: 'plunge', link: 'https://intentius.io/plunge/' },
+						{ label: 'plywood', link: 'https://github.com/INTENTIUS/plywood' },
 						{ label: 'terragucci', link: 'https://intentius.io/terragucci/' },
 						'accessible-ops',
 					],
 				},
 				{
-					label: 'Compare',
+					label: 'Works with',
 					collapsed: true,
 					items: ['compare', 'compare/terraform-platforms', 'compare/choudoufu-and-terraform-state'],
 				},
