@@ -20,6 +20,7 @@ import * as pu from './compare-pulumi-platforms.mjs';
 const T = 'https://intentius.io/terragucci';
 const PW = 'https://intentius.io/plywood';
 const B = 'https://intentius.io/behold';
+const PL = 'https://intentius.io/plunge';
 
 const cell = (data, arena, q, v) => {
 	const row = data.ARENAS.find((a) => a.id === arena).rows.find((r) => r.q === q);
@@ -65,6 +66,22 @@ export const LEAD = {
 		{
 			id: 'story', title: "What's free here, against each vendor's top tier",
 			rows: [
+				{ q: 'Resource-level concurrency', def: 'Two changes to one stack or root, on different resources, apply at the same time.',
+					in: { parts: [
+						['Terraform', 'good', 'with choudoufu, both apply at once', 'https://intentius.io/choudoufu/'],
+						['Pulumi', 'good', 'with plunge, both apply at once', `${PL}/claims/`],
+					] },
+					hcp: cell(tf, 'concurrency', 'Two applies in one root, on different resources, run side by side', 'hcp'),
+					pc: cell(pu, 'plunge', 'Two updates to one stack, on different resources, run side by side', 'pc'),
+					sl: cell(tf, 'concurrency', 'Two applies in one root, on different resources, run side by side', 'sl') },
+				{ q: 'No stack lock', def: 'A change locks only the resources it touches, never the whole stack or root.',
+					in: { parts: [
+						['Terraform', 'good', 'with choudoufu, each resource locks alone', 'https://intentius.io/choudoufu/'],
+						['Pulumi', 'good', 'with plunge, each resource locks alone', `${PL}/claims/`],
+					] },
+					hcp: ['bad', 'locks the whole workspace', cell(tf, 'concurrency', 'One apply locks less than a whole root', 'hcp')[2]],
+					pc: ['bad', 'locks the whole stack', cell(pu, 'concurrency', 'One update locks less than a whole stack', 'pc')[2]],
+					sl: ['bad', 'locks the whole stack', cell(tf, 'concurrency', 'One apply locks less than a whole root', 'sl')[2]] },
 				{ q: "Every terragucci and plywood feature on one tier",
 					in: ['good', `all ${tf.GATED.length} of terragucci's and all ${pu.GATED.length} of plywood's, free`, [`${T}/`, `${PW}/`]],
 					hcp: ['bad', need(tf, 'hcp', "terragucci's"), 'https://www.hashicorp.com/en/pricing?product_intent=terraform'],
@@ -103,9 +120,14 @@ export const LEAD = {
 	],
 };
 
-export const TERRAFORM = { ...tf, LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: tf.ARENAS.filter((a) => a.id !== 'behold') };
+// Each engine's section opens on concurrency, ahead of the tier picker:
+// resource-level concurrency and no stack lock lead the comparison.
+const FIRST = new Set(['concurrency', 'plunge']);
+const lead = (arenas) => arenas.filter((a) => a.id !== 'behold').map((a) => (FIRST.has(a.id) ? { ...a, first: true } : a));
 
-export const PULUMI = { ...pu, PREFIX: 'pulumi-', LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: pu.ARENAS.filter((a) => a.id !== 'behold') };
+export const TERRAFORM = { ...tf, LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: lead(tf.ARENAS) };
+
+export const PULUMI = { ...pu, PREFIX: 'pulumi-', LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: lead(pu.ARENAS) };
 
 // behold's arena once, over both engines. Three questions are asked by both
 // files and are merged into one row each, judged in every column: the graph
