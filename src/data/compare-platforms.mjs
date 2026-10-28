@@ -43,7 +43,7 @@ const need = (data, v, whose) => {
 	return none ? `${data.PLANS[v][max]} still lacks ${none} of ${whose} ${data.GATED.length}` : data.PLANS[v][max];
 };
 
-const INTENTIUS = { id: 'in', name: 'Intentius', named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold, chant', href: '/tools/' };
+const INTENTIUS = { id: 'in', name: 'Intentius', logo: { dark: '/brand/vendors/intentius-on-dark.svg', light: '/brand/vendors/intentius-on-light.svg' }, named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold, chant', href: '/tools/' };
 const HCP = tf.VENDORS.find((v) => v.id === 'hcp');
 const PC = pu.VENDORS.find((v) => v.id === 'pc');
 const SL = { ...tf.VENDORS.find((v) => v.id === 'sl'), what: 'hosted, both engines' };
