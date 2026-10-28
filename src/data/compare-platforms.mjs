@@ -58,7 +58,7 @@ const STATE = 'State stays in your own backend';
 export const LEAD = {
 	PREFIX: 'lead-',
 	GRADIENT: true,
-	LABEL: 'Intentius, HCP Terraform and Pulumi Cloud compared',
+	LABEL: 'Intentius compared with HCP Terraform, Pulumi Cloud and Spacelift',
 	READ_ON: `${tf.READ_ON} for Terraform, ${pu.READ_ON} for Pulumi`,
 	TRY: tf.TRY,
 	VENDORS,
