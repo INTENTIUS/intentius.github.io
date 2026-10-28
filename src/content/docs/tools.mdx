@@ -35,6 +35,18 @@ A build of OpenTofu where every resource records who owns it on the resource its
 
 [Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Claims](https://intentius.io/choudoufu/docs/claims/) · [Compare](/compare/choudoufu-and-terraform-state/)
 
+## plunge
+
+Pulumi with resource level concurrency and no stack lock. This fork of Pulumi has a drop-in CLI that runs your programs as they are. plunge keeps one record per resource in place of one state file per stack and writes two ownership tags on each cloud object, so two runs that change different resources of one stack do not wait for each other.
+
+[Docs](https://intentius.io/plunge/) · [Source](https://github.com/INTENTIUS/plunge) · [Claims](https://intentius.io/plunge/claims/) · [Compare](/compare/terraform-platforms/)
+
+## plywood
+
+CI Automation for Pulumi. Previews and updates run from pull requests on GitHub, GitLab or Forgejo, as jobs in your own CI. A change gets one preview note for every stack it reaches, and each approval binds the preview digest it was shown.
+
+[Docs](https://intentius.io/plywood/) · [Source](https://github.com/INTENTIUS/plywood) · [Compare](/compare/terraform-platforms/)
+
 ## terragucci
 
 Plan, approve and apply Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.

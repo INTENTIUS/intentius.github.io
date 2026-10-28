@@ -1,0 +1,34 @@
+---
+// One cell of an arena row, for Arenas.astro. A cell is [mark, words,
+// source], where source is one address or a list of them. A cell for a
+// column that speaks for several products is { parts: [[name, mark, words,
+// source], ...] }, each part under its product's name. A row with no cell
+// for a vendor was not compared there, and draws a faint dash.
+//
+// Our own cells say what our tools do; their best answers are lit and a
+// miss gets the red cross. Another vendor's cell is a verdict: a tick with
+// the plan tier or limit it needs, or the red cross with a few words where
+// the row would mislead without them.
+const { cell, v, title, ours = false } = Astro.props;
+const GLYPH = ours ? { good: '', warn: '', bad: '✗' } : { good: '✓', bad: '✗' };
+const WORD = { good: 'meets', bad: 'misses' };
+const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
+const srcs = (s) => (s ? (Array.isArray(s) ? s : [s]) : []);
+// Several sources on one host are told apart by their first path segment.
+const seg = (u) => new URL(u).pathname.split('/').filter((x) => x && !/^[a-z]{2}$/.test(x))[0] ?? '';
+const label = (u, many) => (many && !u.startsWith('/') ? `${host(u)}/${seg(u)}`.replace(/\/$/, '') : host(u));
+const parts = !cell ? [] : cell.parts ?? [[null, ...cell]];
+const best = parts.length > 0 && parts.every((p) => p[1] === 'good');
+---
+{!cell ? (
+	<span class="ar-cell ar-na" data-v={v} style={`--vc:var(--c-${v})`} title="not compared on this row">–</span>
+) : (
+	<span class={`ar-cell${best ? ' ar-best' : ''}`} data-v={v} style={`--vc:var(--c-${v})`} title={best ? title : undefined}>
+		{parts.map(([name, m, text, src]) => (
+			<span class={name ? 'ar-part' : undefined}>
+				<span>{name && <b class="ar-part-name">{name} </b>}{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
+				{srcs(src).map((u, _, all) => <a class="ar-src" href={u}>{label(u, all.length > 1)}</a>)}
+			</span>
+		))}
+	</span>
+)}

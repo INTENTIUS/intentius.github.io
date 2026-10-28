@@ -1,15 +1,15 @@
 ---
-title: "terragucci, HCP Terraform and Spacelift"
+title: "Comparing Intentius to the rest"
 wide: true
 head:
   - tag: meta
     attrs:
       name: description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
+      content: "Intentius against HCP Terraform and Pulumi Cloud, with Spacelift, compared on plans, cost, data, leaving, AI, concurrency and one graph across engines. Every cell links its source."
   - tag: meta
     attrs:
       property: og:description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
+      content: "Intentius against HCP Terraform and Pulumi Cloud, with Spacelift, compared on plans, cost, data, leaving, AI, concurrency and one graph across engines. Every cell links its source."
   - tag: meta
     attrs:
       property: og:image
@@ -22,5 +22,31 @@ tableOfContents: false
 ---
 
 import Arenas from '../../../components/Arenas.astro';
+import { LEAD, TERRAFORM, PULUMI, BEHOLD } from '../../../data/compare-platforms.mjs';
 
-<Arenas />
+<Arenas data={LEAD} />
+
+## Terraform in detail
+
+terragucci and choudoufu against HCP Terraform and Spacelift.
+
+<Arenas data={TERRAFORM} />
+
+## Pulumi in detail
+
+plywood and plunge against Pulumi Cloud, and against Spacelift where it runs Pulumi. Pulumi calls a plan a preview, and an apply an update.
+
+<Arenas data={PULUMI} />
+
+## behold across both engines
+
+<Arenas data={BEHOLD} />
+
+## The tools in these tables
+
+- terragucci plans and applies Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
+- choudoufu is a build of OpenTofu that records each resource's owner on the resource itself.
+- plywood runs Pulumi previews and updates from pull requests, as jobs in your own CI.
+- plunge is a fork of Pulumi that keeps one record per resource, so two updates to one stack need not wait for each other.
+- behold draws the whole estate as one picture coloured by drift. It only reads.
+- chant writes infrastructure as typed code and checks it before anything runs.
