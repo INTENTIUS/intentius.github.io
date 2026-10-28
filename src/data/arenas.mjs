@@ -23,6 +23,8 @@ const H = 'https://developer.hashicorp.com/terraform/cloud-docs';
 const S = 'https://docs.spacelift.io';
 const T = 'https://intentius.io/terragucci';
 const B = 'https://intentius.io/behold';
+const C = 'https://intentius.io/choudoufu';
+const PL = 'https://intentius.io/plunge';
 
 // The plans each vendor sells, cheapest first. terragucci has one.
 export const PLANS = {
@@ -40,6 +42,10 @@ export const GATED = [
 		tg: { plan: 0, src: `${T}/getting-started/` },
 		hcp: { plan: 0, src: `${H}/overview` },
 		sl: { plan: 0, src: 'https://spacelift.io/pricing' } },
+	{ id: 'approval', label: 'An approval before an apply',
+		tg: { plan: 0, note: 'bound to the saved plan', src: `${T}/concepts/waves-and-approvals/` },
+		hcp: { plan: 0, note: 'manual apply', src: `${H}/workspaces/settings` },
+		sl: { plan: 1, src: `${S}/concepts/policy/approval-policy` } },
 	{ id: 'policy', label: 'Policy as code',
 		tg: { plan: 0, note: 'OPA, conftest', src: `${T}/reference/policy/` },
 		hcp: { plan: 2, src: `${H}/policy-enforcement` },
@@ -193,10 +199,6 @@ export const ARENAS = [
 	{
 		id: 'ownership', title: 'Who owns what',
 		rows: [
-			{ q: 'Ownership recorded on the resource itself',
-				tg: ['good', 'with choudoufu, a tag on the resource itself', 'https://intentius.io/choudoufu/'],
-				hcp: ['bad', '', `${H}/workspaces/state`],
-				sl: ['bad', '', `${S}/vendors/terraform/state-management`] },
 			{ q: 'Your cloud IAM decides who may change each resource',
 				tg: ['good', 'your cloud IAM, reading that tag', 'https://intentius.io/choudoufu/docs/claims/'],
 				hcp: ['bad', '', `${H}/users-teams-organizations/permissions`],
@@ -262,14 +264,29 @@ export const ARENAS = [
 				tg: ['warn', 'one resource only with choudoufu; terragucci alone locks the root', `${T}/concepts/locking-and-staleness/`],
 				hcp: ['bad', 'whole workspace', `${H}/workspaces/run/states`],
 				sl: ['bad', 'whole stack', `${S}/concepts/run`] },
-			{ q: 'Two applies in one root, on different resources, run side by side',
-				tg: ['warn', 'only with choudoufu; terragucci alone queues them', `${T}/concepts/locking-and-staleness/`],
-				hcp: ['bad', 'second queues', `${H}/workspaces/run/states`],
-				sl: ['bad', 'second waits', `${S}/concepts/run`] },
 			{ q: 'Two applies in different roots run side by side',
 				tg: ['good', "side by side, up to your CI's capacity", `${T}/reference/pipeline/`],
 				hcp: ['good', 'limit by tier', `${H}/overview`],
 				sl: ['good', 'one per worker', `${S}/concepts/worker-pools`] },
+		],
+	},
+	{
+		id: 'choudoufu', title: 'The engine underneath',
+		blurb: 'choudoufu is free. terragucci runs it with binary: choudoufu.',
+		lead: { name: 'choudoufu', logo: { dark: '/brand/vendors/choudoufu.svg', light: '/brand/vendors/choudoufu.svg' }, named: true, link: true, href: `${C}/` },
+		rows: [
+			{ q: 'Two applies to one root, on different resources, run side by side',
+				tg: ['good', 'both apply; neither waits for a lock', `${C}/how-it-works/locking/`],
+				hcp: ['bad', 'second queues', `${H}/workspaces/run/states`],
+				sl: ['bad', 'second waits', `${S}/concepts/run`] },
+			{ q: 'Drift read for one resource alone',
+				tg: ['good', 'that resource and what it reads, no root-wide sweep', `${PL}/how-it-works/drift/#against-choudoufu`],
+				hcp: ['bad', 'whole workspace', `${H}/workspaces/health`],
+				sl: ['bad', 'whole stack', `${S}/concepts/stack/drift-detection`] },
+			{ q: 'Ownership recorded on the resource itself',
+				tg: ['good', 'tofu-estate and tofu-address tags on the resource itself', `${C}/how-it-works/identity/`],
+				hcp: ['bad', '', `${H}/workspaces/state`],
+				sl: ['bad', '', `${S}/vendors/terraform/state-management`] },
 		],
 	},
 	{
