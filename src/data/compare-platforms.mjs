@@ -31,7 +31,7 @@ const need = (data, v) => {
 		if (c.plan !== null) max = Math.max(max, c.plan);
 		else if (c.tier !== 'unpublished') none++;
 	}
-	return none ? `${data.PLANS[v][max]} lacks ${none}` : data.PLANS[v][max];
+	return none ? `${data.PLANS[v][max]}, still missing ${none} of ${data.GATED.length} features` : data.PLANS[v][max];
 };
 
 const INTENTIUS = { id: 'in', name: 'Intentius', named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold', href: '/tools/' };

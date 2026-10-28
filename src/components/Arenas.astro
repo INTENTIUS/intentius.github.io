@@ -118,7 +118,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				<span class="ar-q">The plan you'd need</span>
 				{VENDORS.map((v) => {
 					const n = need(v.id, all);
-					return <span class={`ar-cell${v.id === OURS ? ' ar-ours' : ''}`} data-v={v.id} data-need={v.id}><b>{n.plan}</b><small class="ar-lacks">{n.none ? `and still lacks ${n.none}` : ''}</small></span>;
+					return <span class={`ar-cell${v.id === OURS ? ' ar-ours' : ''}`} data-v={v.id} data-need={v.id}><b>{n.plan}</b><small class="ar-lacks">{n.none ? `and still missing ${n.none} of the features you ticked` : ''}</small></span>;
 				})}
 			</div>
 		</div>
@@ -189,7 +189,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				});
 				var cell = gate.querySelector('[data-need="' + v.id + '"]');
 				cell.querySelector('b').textContent = max < 0 ? '-' : PLANS[v.id][max];
-				cell.querySelector('.ar-lacks').textContent = none ? 'and still lacks ' + none : '';
+				cell.querySelector('.ar-lacks').textContent = none ? 'and still missing ' + none + ' of the features you ticked' : '';
 			});
 			boxes.forEach(function (b) { b.closest('.ar-gate').classList.toggle('ar-off', !b.checked); });
 		};
