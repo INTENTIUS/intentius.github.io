@@ -57,6 +57,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 	{HEAD && <p class="ar-legend">
 		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
+		<span><b class="ar-mark good">✓</b> does it</span>
+		<span><b class="ar-mark warn">◐</b> partly</span>
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
 	</p>}
@@ -77,7 +79,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				{a.rows.map((r) => (
 					<div class="ar-row">
 						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} title={`${lead(a, v)}: the best answer in this row`} />)}
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>
@@ -141,7 +143,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				{a.rows.map((r) => (
 					<div class="ar-row">
 						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} title={`${lead(a, v)}: the best answer in this row`} />)}
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>

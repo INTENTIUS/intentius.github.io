@@ -4,8 +4,12 @@
 // column that speaks for several products is { parts: [[name, mark, words,
 // source], ...] }, each part under its product's name. A row with no cell
 // for a vendor was not compared there, and draws a faint dash.
-const { cell, v, title } = Astro.props;
-const GLYPH = { good: '', warn: '', bad: '✗' };
+//
+// Our own cells say what our tools do; their best answers are lit and a
+// miss gets the red cross. Another vendor's cell is a verdict: a tick, a
+// half mark or the red cross, then at most a plan tier or a few words.
+const { cell, v, title, ours = false } = Astro.props;
+const GLYPH = ours ? { good: '', warn: '', bad: '✗' } : { good: '✓', warn: '◐', bad: '✗' };
 const WORD = { good: 'meets', warn: 'partly', bad: 'misses' };
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 const srcs = (s) => (s ? (Array.isArray(s) ? s : [s]) : []);
