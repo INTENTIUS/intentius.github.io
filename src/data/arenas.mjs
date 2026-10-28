@@ -189,7 +189,7 @@ export const ARENAS = [
 		id: 'data', title: 'Where your things live',
 		rows: [
 			{ q: 'State',
-				tg: ['good', 'your backend, where it already is', `${T}/reference/state-backends/`],
+				tg: ['good', 'stays in your own backend', `${T}/reference/state-backends/`],
 				hcp: ['warn', 'hosted by HCP, US or a separate EU org', `${H}/workspaces/state`],
 				sl: ['warn', "Spacelift's S3, or your backend", `${S}/vendors/terraform/state-management`] },
 			{ q: 'Plans and run logs',

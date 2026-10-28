@@ -152,7 +152,7 @@ export const ARENAS = [
 		id: 'data', title: 'Where your things live',
 		rows: [
 			{ q: 'State',
-				pw: ['good', 'your backend, where it already is: Pulumi Cloud or your bucket', `${PW}/reference/backends/`],
+				pw: ['good', 'stays in your backend: Pulumi Cloud or your own bucket', `${PW}/reference/backends/`],
 				pc: ['warn', 'hosted by Pulumi Cloud', `${P}/iac/concepts/state-and-backends/`],
 				sl: ['good', 'your Pulumi backend; Spacelift logs in to it', `${S}/vendors/pulumi`] },
 			{ q: 'Previews and run logs',

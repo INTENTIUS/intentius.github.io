@@ -73,7 +73,7 @@ export const LEAD = {
 					pc: cell(pu, 'basics', 'Where runs execute', 'pc'),
 					sl: cell(tf, 'basics', 'Where runs execute', 'sl') },
 				{ q: 'State',
-					in: ['good', 'your backend, where it already is', [`${T}/reference/state-backends/`, `${PW}/reference/backends/`]],
+					in: ['good', 'stays in your own backend', [`${T}/reference/state-backends/`, `${PW}/reference/backends/`]],
 					hcp: cell(tf, 'data', 'State', 'hcp'),
 					pc: cell(pu, 'data', 'State', 'pc'),
 					sl: { parts: [named('Terraform', cell(tf, 'data', 'State', 'sl')), named('Pulumi', cell(pu, 'data', 'State', 'sl'))] } },
