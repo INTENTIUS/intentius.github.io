@@ -16,9 +16,9 @@ const need = (v) => {
 };
 const rows = [
 	{ q: 'The plan you need for all of it', cells: Object.fromEntries(VENDORS.map((v) => [v.id, ['', need(v.id)]])) },
-	{ q: 'How you pay', cells: row('basics', 'How you pay') },
-	{ q: 'Your pipeline, if you leave', cells: row('leaving', 'Your pipeline') },
-	{ q: 'What one apply locks', cells: row('concurrency', 'What one apply locks') },
+	{ q: 'How you pay', cells: row('basics', 'No licence or usage fees') },
+	{ q: 'Your pipeline, if you leave', cells: row('leaving', 'Your pipeline leaves with you') },
+	{ q: 'What one apply locks', cells: row('concurrency', 'One apply locks less than a whole root') },
 ];
 const ours = VENDORS[0].id;
 ---
@@ -30,7 +30,7 @@ const ours = VENDORS[0].id;
 	{rows.map((r) => (
 		<span class="t-row">
 			<span class="t-q">{r.q}</span>
-			{VENDORS.map((v) => <span class={`t-a${v.id === ours ? ' t-ours' : ''}`}><i style={`background:${v.color}`}></i>{r.cells[v.id][1]}</span>)}
+			{VENDORS.map((v) => <span class={`t-a${v.id === ours ? ' t-ours' : ''}`}><i style={`background:${v.color}`}></i>{v.id !== ours && r.cells[v.id][0] ? (r.cells[v.id][0] === 'bad' ? '✗ ' : '✓ ') : ''}{r.cells[v.id][1]}</span>)}
 		</span>
 	))}
 	<span class="t-go">See the full comparison →</span>

@@ -27,8 +27,6 @@ const HEAD = data.HEAD ?? true;
 // A row is a question, so its best answer is highlighted (ties allowed) and
 // a vendor that doesn't do the thing at all gets a cross. Everything else is
 // its words alone.
-const GLYPH = { good: '', warn: '', bad: '✗' };
-const WORD = { good: 'meets', warn: 'partly', bad: 'misses' };
 
 // For the features ticked: the highest plan a vendor needs, and how many of
 // them it has no equivalent for. A feature whose tier isn't published counts
@@ -58,7 +56,6 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	{HEAD && <p class="ar-legend">
 		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
 		<span><b class="ar-mark good">✓</b> does it</span>
-		<span><b class="ar-mark warn">◐</b> partly</span>
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
 	</p>}
@@ -106,7 +103,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 							<span class="ar-cell" data-v={v.id} style={`--vc:var(--c-${v.id})`}>
 								{c.plan !== null
 									? <b>{PLANS[v.id][c.plan]}</b>
-									: c.tier === 'unpublished' ? <b class="ar-unpub">Tier not published</b> : <b class="ar-none"><span class="ar-mark bad">✗</span> None</b>}
+									: c.tier === 'unpublished' ? <b class="ar-unpub"><span class="ar-mark good">✓</span> Tier not published</b> : <b class="ar-none"><span class="ar-mark bad">✗</span> None</b>}
 								{c.note && <small>{c.note.replace(/^(tier not published|none documented)(; )?/, '')}</small>}
 								<a class="ar-src" href={c.src}>{host(c.src)}</a>
 							</span>
@@ -205,11 +202,11 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .arenas {
 	--ink: var(--sl-color-white); --muted: var(--sl-color-gray-2); --faint: var(--sl-color-gray-3);
 	--rule: var(--in-rule); --panel: var(--in-panel); --lit: color-mix(in srgb, var(--in-accent) 12%, transparent);
-	--good: #57d6a0; --warn: #e2b558; --bad: #f27676;
+	--good: #57d6a0; --bad: #f27676;
 	--cols: minmax(8rem, 1.1fr) repeat(var(--n, 3), minmax(0, 1fr));
 	font-size: 0.95rem; line-height: 1.45; margin-top: 1rem;
 }
-:root[data-theme='light'] .arenas { --good: #11805a; --warn: #8f6200; --bad: #c23434; }
+:root[data-theme='light'] .arenas { --good: #11805a; --bad: #c23434; }
 .arenas a { text-decoration: none; color: var(--in-accent); }
 
 .ar-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.82rem; color: var(--muted); margin: 0 0 1.4rem; }
@@ -217,7 +214,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-mark { font-weight: 700; }
 .ar-best-key { display: inline-block; width: 0.9rem; height: 0.9rem; vertical-align: -0.1rem; border-left: 3px solid var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); border-radius: 2px; }
 .ar-cell.ar-best { box-shadow: inset 3px 0 0 var(--good); background: color-mix(in srgb, var(--good) 8%, transparent); }
-.ar-mark.good { color: var(--good); } .ar-mark.warn { color: var(--warn); } .ar-mark.bad { color: var(--bad); }
+.ar-mark.good { color: var(--good); } .ar-mark.bad { color: var(--bad); }
 
 .ar-key { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--muted); }
 .ar-key span { display: inline-flex; align-items: center; gap: 0.4rem; }

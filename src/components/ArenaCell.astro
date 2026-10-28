@@ -6,11 +6,12 @@
 // for a vendor was not compared there, and draws a faint dash.
 //
 // Our own cells say what our tools do; their best answers are lit and a
-// miss gets the red cross. Another vendor's cell is a verdict: a tick, a
-// half mark or the red cross, then at most a plan tier or a few words.
+// miss gets the red cross. Another vendor's cell is a verdict: a tick with
+// the plan tier or limit it needs, or the red cross with a few words where
+// the row would mislead without them.
 const { cell, v, title, ours = false } = Astro.props;
-const GLYPH = ours ? { good: '', warn: '', bad: '✗' } : { good: '✓', warn: '◐', bad: '✗' };
-const WORD = { good: 'meets', warn: 'partly', bad: 'misses' };
+const GLYPH = ours ? { good: '', warn: '', bad: '✗' } : { good: '✓', bad: '✗' };
+const WORD = { good: 'meets', bad: 'misses' };
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 const srcs = (s) => (s ? (Array.isArray(s) ? s : [s]) : []);
 // Several sources on one host are told apart by their first path segment.
