@@ -48,26 +48,10 @@ const all = GATED.filter(shown).map((f) => f.id);
 // Arena headings sit one level down when the page puts its own heading over
 // a comparison (LEVEL 3).
 const H = data.LEVEL === 3 ? 'h3' : 'h2';
-// The "not compared" key shows only where some row leaves a vendor out.
-const hasNA = ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => !r[v.id])));
-
-// The best-answer key shows only where some cell is marked best.
-const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id] && (r[v.id].parts ? r[v.id].parts.every((p) => p[1] === 'good') : r[v.id][0] === 'good'))));
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
 <section class="arenas not-content" data-arenas={PREFIX || "main"} aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`), ...(data.GRADIENT ? [`--ar-grad:${VENDORS.slice(0, 3).map((v) => `var(--c-${v.id})`).join(', ')}`] : [])].join(';')}>
-
-	{HEAD && <p class="ar-key">{VENDORS.map((v) => <span><i style={`background:var(--c-${v.id})`}></i><b>{v.name}</b>{v.what && <em>{v.what}</em>}</span>)}</p>}
-	{HEAD && TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
-
-	{HEAD && <p class="ar-legend">
-		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
-		<span><b class="ar-mark good">✓</b> does it</span>
-		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
-		{hasNA && <span><b class="ar-na-key">–</b> not compared on this engine</span>}
-		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
-	</p>}
 
 	{ARENAS.filter((a) => a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
@@ -156,7 +140,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 		</div>
 	))}
 
-	{TRADEMARKS && <p class="ar-tm">{TRADEMARKS}</p>}
+	{(TRADEMARKS || (HEAD && READ_ON)) && <p class="ar-tm">{HEAD && READ_ON && `Sources read ${READ_ON}. `}{TRADEMARKS}</p>}
 </section>
 
 <script is:inline define:vars={{ PLANS, GATED, VENDORS, KEY: PREFIX || "main" }}>
