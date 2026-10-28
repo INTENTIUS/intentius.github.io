@@ -2,7 +2,7 @@
 // The home page's parts. `part="top"` (the default) is the pixel eye, the
 // wordmark, the mark between two gold hairlines and one line on what this is.
 // `part="picker"` is the situations picker (Picker.astro). `part="tools"` is
-// the four open-source tools as tiles, under the "Open source" heading in
+// the open-source tools as tiles, under the "Open source" heading in
 // index.mdx.
 // One import keeps index.mdx's prose free of import lines.
 import Picker from './Picker.astro';
@@ -12,9 +12,11 @@ interface Props {
 }
 const { part = 'top' } = Astro.props;
 
-// One row of cards under the header, each straight into a page of the site.
+// Cards under the header, each straight into a page of the site: the three
+// comparisons on the first row, the two situations under them.
 const cards = [
 	{ title: 'terragucci, HCP Terraform and Spacelift', body: 'Everything included, against Enterprise plans.', href: '/compare/terraform-platforms/' },
+	{ title: 'plywood, Pulumi Cloud, Spacelift and env zero', body: 'Pulumi from your own CI, against Enterprise plans.', href: '/compare/pulumi-platforms/' },
 	{ title: 'choudoufu and the state file', body: 'The owner on the resource, no state lock.', href: '/compare/choudoufu-and-terraform-state/' },
 	{ title: 'Move off another runner', body: 'Atlantis, Terraform Cloud or Spacelift, one repo at a time.', href: '/for/moving/' },
 	{ title: 'Carve up a large estate', body: 'Hundreds of roots, or one state file shared by too many teams.', href: '/for/estate/' },
@@ -24,6 +26,8 @@ const tools = [
 	{ name: 'behold', href: 'https://intentius.io/behold/', body: 'The whole estate as one picture, coloured by what has drifted.' },
 	{ name: 'chant', href: 'https://intentius.io/chant/', body: 'Infrastructure as typed code, checked before anything runs.' },
 	{ name: 'choudoufu', href: 'https://intentius.io/choudoufu/', body: 'OpenTofu with the owner on every resource, and no state lock.' },
+	{ name: 'plunge', href: 'https://intentius.io/plunge/', body: 'Pulumi with resource level concurrency and no stack lock' },
+	{ name: 'plywood', href: 'https://intentius.io/plywood/', body: 'CI Automation for Pulumi' },
 	{ name: 'terragucci', href: 'https://intentius.io/terragucci/', body: 'One workflow for every Terraform repo, run in your own CI.' },
 ];
 ---
@@ -114,10 +118,11 @@ const tools = [
 		margin: 0.5rem auto 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 0.75rem;
 	}
-	.in-cards li { margin: 0; min-width: 0; }
+	.in-cards li { margin: 0; min-width: 0; grid-column: span 2; }
+	.in-cards li:nth-child(n + 4) { grid-column: span 3; }
 	.in-cards a {
 		display: grid;
 		grid-template-rows: auto 1fr auto;
@@ -137,7 +142,7 @@ const tools = [
 	.in-cards b { font-family: var(--in-display); font-size: var(--sl-text-base); color: var(--sl-color-white); }
 	.in-cards .go { color: var(--in-accent); font-weight: 600; }
 	.in-cards a:hover, .in-cards a:focus-visible { border-color: var(--in-accent); transform: translateY(-2px); }
-	@media (max-width: 64rem) { .in-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 64rem) { .in-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .in-cards li, .in-cards li:nth-child(n + 4) { grid-column: auto; } }
 	@media (max-width: 40rem) { .in-cards { grid-template-columns: minmax(0, 1fr); } }
 	@media (prefers-reduced-motion: reduce) { .in-cards a { transition: none; } }
 	.in-tools {
@@ -146,7 +151,7 @@ const tools = [
 		margin: 1rem auto 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 0.75rem;
 	}
 	.in-tools li {

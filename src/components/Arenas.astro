@@ -5,7 +5,9 @@
 // for a "what's included" arena, READ_ON, TRADEMARKS and TRY. The first
 // vendor is ours. In each arena, hovering or focusing a vendor grows its logo, shrinks the others and
 // lights its column; the logos themselves are never tinted or recoloured, as
-// HashiCorp's and Spacelift's logo rules ask. Each cell links its source.
+// HashiCorp's and Spacelift's logo rules ask. GATED_BLURB words the gating
+// arena's lead, and GRADIENT draws each heading's rule in the first three
+// vendors' colours. Each cell links its source.
 // The gating arena takes the features you tick and names the plan each
 // vendor needs for all of them. Without script every arena still reads, with
 // every feature ticked.
@@ -14,6 +16,7 @@ import VendorLogo from './VendorLogo.astro';
 
 const { data = terraformPlatforms } = Astro.props;
 const { VENDORS, PLANS = {}, GATED = [], ARENAS, READ_ON, TRADEMARKS, LABEL, FEATURED = [], TRY } = data;
+const GATED_BLURB = data.GATED_BLURB ?? "Tick what you need. These are terragucci's features; what it lacks is under The basics.";
 const OURS = VENDORS[0].id;
 
 // A row is a question, so its best answer is highlighted (ties allowed) and
@@ -42,7 +45,7 @@ const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDOR
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
-<section class="arenas not-content" aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`)].join(';')}>
+<section class="arenas not-content" aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`), ...(data.GRADIENT ? [`--ar-grad:${VENDORS.slice(0, 3).map((v) => `var(--c-${v.id})`).join(', ')}`] : [])].join(';')}>
 
 	<p class="ar-key">{VENDORS.map((v) => <span><i style={`background:var(--c-${v.id})`}></i><b>{v.name}</b>{v.what && <em>{v.what}</em>}</span>)}</p>
 	{TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
@@ -85,7 +88,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	))}
 
 	{GATED.length > 0 && <div class="ar-arena" id="ar-gating" data-arena>
-		<header><h2>What's included</h2><p>Tick what you need. These are terragucci's features; what it lacks is under The basics.</p></header>
+		<header><h2>What's included</h2><p>{GATED_BLURB}</p></header>
 		<div class="ar-grid">
 			<div class="ar-row ar-head">
 				<span></span>
@@ -238,7 +241,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 /* ---- an arena ---- */
 .ar-arena { margin: 0 0 2.4rem; scroll-margin-top: 5rem; }
-.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent))) 1 !important; }
+.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--ar-grad, var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent)))) 1 !important; }
 .ar-arena header p { margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
 .ar-grid { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
 .ar-row { display: grid; grid-template-columns: var(--cols); align-items: stretch; border-top: 1px solid var(--rule); }

@@ -329,6 +329,10 @@ export const ARENAS = [
 				tg: ['good', 'export one folder to any static host', `${B}/`],
 				hcp: ['bad', 'only for people signed in to HCP', `${H}/workspaces/explorer`],
 				sl: ['warn', 'a link, for people in your account', `${S}/concepts/resources`] },
+			{ q: 'Terraform, Pulumi and chant on three clouds, in one graph',
+				tg: ['good', 'choudoufu, plunge and chant members drawn together, edges from shared outputs, one change-set digest over their plans', `${B}/using/three-cloud/`],
+				hcp: ['warn', 'Infragraph: one resource graph from connected data sources, Standard plan and up', 'https://developer.hashicorp.com/hcp/docs/infragraph'],
+				sl: ['warn', 'a list of resources from every stack, whatever the tool', `${S}/concepts/resources`] },
 		],
 	},
 ];
