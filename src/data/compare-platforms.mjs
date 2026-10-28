@@ -1,6 +1,6 @@
 // The combined comparison on /compare/terraform-platforms/: Intentius against
-// HCP Terraform and Pulumi Cloud, with Spacelift and env zero as the column
-// for tools that run both engines. It is assembled from the two engines' own
+// HCP Terraform and Pulumi Cloud, with Spacelift as the column for a tool
+// that runs both engines. It is assembled from the two engines' own
 // data and adds no claim of its own:
 //
 // - LEAD, the shared story, repeats cells from arenas.mjs (Terraform) and
@@ -37,8 +37,8 @@ const need = (data, v) => {
 const INTENTIUS = { id: 'in', name: 'Intentius', named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold', href: '/tools/' };
 const HCP = tf.VENDORS.find((v) => v.id === 'hcp');
 const PC = pu.VENDORS.find((v) => v.id === 'pc');
-const CROSS = { id: 'x', name: 'Spacelift and env zero', color: '#4f7cff', what: 'hosted, both engines', href: 'https://docs.spacelift.io/vendors/pulumi' };
-const VENDORS = [INTENTIUS, HCP, PC, CROSS];
+const SL = { ...tf.VENDORS.find((v) => v.id === 'sl'), what: 'hosted, both engines' };
+const VENDORS = [INTENTIUS, HCP, PC, SL];
 
 export const TRADEMARKS = `${tf.TRADEMARKS} ${pu.TRADEMARKS.replace(' Spacelift and the Spacelift logo are trademarks of Spacelift, Inc.', '').replace(' Logos are used to identify each product and are shown unaltered.', '')}`;
 
@@ -58,36 +58,35 @@ export const LEAD = {
 					in: ['good', `${need(tf, 'tg')} for Terraform and for Pulumi`, [`${T}/`, `${PW}/`]],
 					hcp: ['warn', need(tf, 'hcp'), 'https://www.hashicorp.com/en/pricing?product_intent=terraform'],
 					pc: ['warn', need(pu, 'pc'), 'https://www.pulumi.com/pricing/'],
-					x: { parts: [
-						['Spacelift, Terraform', 'warn', need(tf, 'sl'), 'https://spacelift.io/pricing'],
-						['Spacelift, Pulumi', 'warn', need(pu, 'sl'), 'https://spacelift.io/pricing'],
-						['env zero, Pulumi', 'warn', need(pu, 'e0'), 'https://www.envzero.com/pricing'],
+					sl: { parts: [
+						['Terraform', 'warn', need(tf, 'sl'), 'https://spacelift.io/pricing'],
+						['Pulumi', 'warn', need(pu, 'sl'), 'https://spacelift.io/pricing'],
 					] } },
 				{ q: 'How you pay',
 					in: cell(tf, 'basics', 'How you pay', 'tg'),
 					hcp: cell(tf, 'basics', 'How you pay', 'hcp'),
 					pc: cell(pu, 'basics', 'How you pay', 'pc'),
-					x: { parts: [named('Spacelift', cell(tf, 'basics', 'How you pay', 'sl')), named('env zero', cell(pu, 'basics', 'How you pay', 'e0'))] } },
+					sl: cell(tf, 'basics', 'How you pay', 'sl') },
 				{ q: 'Where runs execute',
 					in: ['warn', 'your CI runners', [`${T}/reference/threat-model/`, `${PW}/#limits`]],
 					hcp: cell(tf, 'basics', 'Where runs execute', 'hcp'),
 					pc: cell(pu, 'basics', 'Where runs execute', 'pc'),
-					x: { parts: [named('Spacelift', cell(tf, 'basics', 'Where runs execute', 'sl')), named('env zero', cell(pu, 'basics', 'Where runs execute', 'e0'))] } },
+					sl: cell(tf, 'basics', 'Where runs execute', 'sl') },
 				{ q: 'State',
 					in: ['good', 'your backend, where it already is', [`${T}/reference/state-backends/`, `${PW}/reference/backends/`]],
 					hcp: cell(tf, 'data', 'State', 'hcp'),
 					pc: cell(pu, 'data', 'State', 'pc'),
-					x: { parts: [named('Spacelift, Terraform', cell(tf, 'data', 'State', 'sl')), named('Spacelift, Pulumi', cell(pu, 'data', 'State', 'sl')), named('env zero, Pulumi', cell(pu, 'data', 'State', 'e0'))] } },
+					sl: { parts: [named('Terraform', cell(tf, 'data', 'State', 'sl')), named('Pulumi', cell(pu, 'data', 'State', 'sl'))] } },
 				{ q: 'Terraform, Pulumi and chant on three clouds, in one graph',
 					in: ['good', 'behold: choudoufu, plunge and chant members drawn together, edges from shared outputs', `${B}/using/three-cloud/`],
 					hcp: cell(tf, 'behold', 'Terraform, Pulumi and chant on three clouds, in one graph', 'hcp'),
 					pc: cell(pu, 'behold', 'Pulumi, Terraform and chant on three clouds, in one graph', 'pc'),
-					x: { parts: [named('Spacelift', cell(tf, 'behold', 'Terraform, Pulumi and chant on three clouds, in one graph', 'sl')), named('env zero', cell(pu, 'behold', 'Pulumi, Terraform and chant on three clouds, in one graph', 'e0'))] } },
+					sl: cell(tf, 'behold', 'Terraform, Pulumi and chant on three clouds, in one graph', 'sl') },
 				{ q: 'A service every run depends on',
 					in: ['good', 'none past your CI and cloud', [`${T}/concepts/how-it-works/`, `${PW}/concepts/how-it-works/`]],
 					hcp: cell(tf, 'data', 'A service every run depends on', 'hcp'),
 					pc: cell(pu, 'data', 'A service every run depends on', 'pc'),
-					x: { parts: [named('Spacelift', cell(tf, 'data', 'A service every run depends on', 'sl')), named('env zero', cell(pu, 'data', 'A service every run depends on', 'e0'))] } },
+					sl: cell(tf, 'data', 'A service every run depends on', 'sl') },
 			],
 		},
 	],
@@ -98,8 +97,8 @@ export const TERRAFORM = { ...tf, TRY: undefined, TRADEMARKS: undefined, ARENAS:
 export const PULUMI = { ...pu, PREFIX: 'pulumi-', TRY: undefined, TRADEMARKS: undefined, ARENAS: pu.ARENAS.filter((a) => a.id !== 'behold') };
 
 // behold's arena once, over both engines: the Terraform rows keep their
-// HCP Terraform and Spacelift cells, the Pulumi rows their Pulumi Cloud,
-// Spacelift and env zero cells, and the one row both files ask is merged.
+// HCP Terraform and Spacelift cells, the Pulumi rows their Pulumi Cloud
+// and Spacelift cells, and the one row both files ask is merged.
 const tfBehold = tf.ARENAS.find((a) => a.id === 'behold');
 const puBehold = pu.ARENAS.find((a) => a.id === 'behold');
 const BOTH_TF = 'Terraform, Pulumi and chant on three clouds, in one graph';
@@ -111,7 +110,7 @@ export const BEHOLD = {
 	PREFIX: 'graph-',
 	HEAD: false,
 	GRADIENT: true,
-	LABEL: 'behold, HCP Terraform, Pulumi Cloud, Spacelift and env zero compared',
+	LABEL: 'behold, HCP Terraform, Pulumi Cloud and Spacelift compared',
 	VENDORS,
 	TRADEMARKS,
 	ARENAS: [
@@ -124,9 +123,9 @@ export const BEHOLD = {
 					in: ['good', 'four members on three engines (choudoufu, plunge and chant) on AWS, Azure and GCP; edges from shared outputs', `${B}/using/three-cloud/`],
 					hcp: bothTf.hcp,
 					pc: bothPu.pc,
-					x: { parts: [named('Spacelift', bothTf.sl), named('env zero', bothPu.e0)] } },
-				...puBehold.rows.filter((r) => r !== bothPu).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, x: { parts: [named('Spacelift', r.sl), named('env zero', r.e0)] } })),
-				...tfBehold.rows.filter((r) => r !== bothTf).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, x: { parts: [named('Spacelift', r.sl)] } })),
+					sl: bothTf.sl },
+				...puBehold.rows.filter((r) => r !== bothPu).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, sl: r.sl })),
+				...tfBehold.rows.filter((r) => r !== bothTf).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, sl: r.sl })),
 			],
 		},
 	],
