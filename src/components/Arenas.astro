@@ -41,7 +41,15 @@ const need = (v, ids) => {
 	}
 	return { plan: max < 0 ? '-' : PLANS[v][max], none };
 };
-const all = GATED.map((f) => f.id);
+// Only the features on screen count: with FEATURED set, the rest start
+// unticked and hidden, and "Show all" ticks them as it opens them.
+const shown = (f) => !FEATURED.length || FEATURED.includes(f.id);
+const all = GATED.filter(shown).map((f) => f.id);
+// Arena headings sit one level down when the page puts its own heading over
+// a comparison (LEVEL 3).
+const H = data.LEVEL === 3 ? 'h3' : 'h2';
+// The "not compared" key shows only where some row leaves a vendor out.
+const hasNA = ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => !r[v.id])));
 
 // The best-answer key shows only where some cell is marked best.
 const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id] && (r[v.id].parts ? r[v.id].parts.every((p) => p[1] === 'good') : r[v.id][0] === 'good'))));
@@ -57,12 +65,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
 		<span><b class="ar-mark good">✓</b> does it</span>
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
+		{hasNA && <span><b class="ar-na-key">–</b> not compared on this engine</span>}
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
 	</p>}
 
 	{ARENAS.filter((a) => a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
-			<header><h2>{a.title}</h2>{a.blurb && <p>{a.blurb}</p>}</header>
+			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{a.blurb}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
 					<span></span>
@@ -75,7 +84,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
+						<span class="ar-q">{r.q}{r.def && <small class="ar-def">{r.def}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
@@ -84,7 +93,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	))}
 
 	{GATED.length > 0 && <div class="ar-arena" id={`ar-${PREFIX}gating`} data-arena data-gating>
-		<header><h2>What's included</h2><p>{GATED_BLURB}</p></header>
+		<header><H class="ar-title">What's included</H><p>{GATED_BLURB}</p></header>
 		<div class="ar-grid">
 			<div class="ar-row ar-head">
 				<span></span>
@@ -96,7 +105,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 			</div>
 			{GATED.map((f) => (
 				<label class={`ar-row ar-gate${FEATURED.length && !FEATURED.includes(f.id) ? ' ar-more' : ''}`}>
-					<span class="ar-q"><input type="checkbox" value={f.id} checked /> {f.label}</span>
+					<span class="ar-q"><input type="checkbox" value={f.id} checked={shown(f)} /> {f.label}{f.def && <small class="ar-def">{f.def}</small>}</span>
 					{VENDORS.map((v) => {
 						const c = f[v.id];
 						return (
@@ -115,7 +124,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				<button type="button" class="ar-showall" data-showall>Show all {GATED.length} features</button>
 			)}
 			<div class="ar-row ar-total">
-				<span class="ar-q">The plan you'd need</span>
+				<span class="ar-q">The tier you'd need</span>
 				{VENDORS.map((v) => {
 					const n = need(v.id, all);
 					return <span class={`ar-cell${v.id === OURS ? ' ar-ours' : ''}`} data-v={v.id} data-need={v.id}><b>{n.plan}</b><small class="ar-lacks">{n.none ? `and still missing ${n.none} of the features you ticked` : ''}</small></span>;
@@ -126,7 +135,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 	{ARENAS.filter((a) => !a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
-			<header><h2>{a.title}</h2>{a.blurb && <p>{a.blurb}</p>}</header>
+			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{a.blurb}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
 					<span></span>
@@ -139,7 +148,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
+						<span class="ar-q">{r.q}{r.def && <small class="ar-def">{r.def}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
 						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
@@ -173,6 +182,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	var more = gate && gate.querySelector('[data-showall]');
 	if (more) more.addEventListener('click', function () {
 		var open = gate.classList.toggle('ar-all');
+		gate.querySelectorAll('.ar-more input[type=checkbox]').forEach(function (b) { b.checked = open; });
+		update();
 		more.textContent = open ? 'Show the main features' : 'Show all ' + gate.querySelectorAll('.ar-gate').length + ' features';
 	});
 	if (gate) {
@@ -231,7 +242,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 /* ---- an arena ---- */
 .ar-arena { margin: 0 0 2.4rem; scroll-margin-top: 5rem; }
-.arenas .ar-arena header h2 { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--ar-grad, var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent)))) 1 !important; }
+.arenas .ar-arena header .ar-title { font-size: 1.25rem; margin: 0 0 0.2rem; padding-left: 0.6rem; border-left: 4px solid !important; border-image: linear-gradient(var(--ar-grad, var(--c-tg, var(--in-accent)), var(--c-hcp, var(--in-accent)), var(--c-sl, var(--in-accent)))) 1 !important; }
 .ar-arena header p { margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
 .ar-grid { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
 .ar-row { display: grid; grid-template-columns: var(--cols); align-items: stretch; border-top: 1px solid var(--rule); }
@@ -244,6 +255,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-cell small { display: block; color: var(--muted); font-size: 0.78rem; }
 .ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ar-cell { min-width: 0; overflow-wrap: anywhere; }
+.ar-def { display: block; margin-top: 0.2rem; font-weight: 400; font-size: 0.75rem; line-height: 1.35; color: var(--muted); }
+.ar-na-key { color: var(--faint); }
 .ar-na { color: var(--faint); }
 .ar-part { display: block; }
 .ar-part + .ar-part { margin-top: 0.45rem; }
@@ -290,7 +303,13 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	[data-focus] .ar-vendor.ar-lit { transform: none; }
 }
 @media (max-width: 40rem) {
-	.arenas { --cols: minmax(5.5rem, 1fr) repeat(var(--n, 3), minmax(0, 1fr)); font-size: 0.8rem; }
+	/* At phone width each table scrolls sideways inside its own box, so the
+	   page never does, and the question column stays put while it scrolls. */
+	.arenas { --cols: minmax(6.5rem, 1fr) repeat(var(--n, 3), minmax(6.5rem, 1fr)); font-size: 0.8rem; }
+	.ar-grid { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+	.ar-grid > * { min-width: calc(6.5rem + var(--n, 3) * 6.5rem); }
+	.ar-row > .ar-q { position: sticky; left: 0; z-index: 1; background: var(--sl-color-bg); }
+	.ar-head > span:first-child { position: sticky; left: 0; z-index: 2; background: var(--panel); }
 	.ar-row > * { padding: 0.45rem 0.4rem; }
 	.ar-wordmark { font-size: 0.8rem; }
 	.ar-vendor img { height: 1.4rem; }

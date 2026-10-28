@@ -4,11 +4,13 @@
 // data and adds no claim of its own:
 //
 // - LEAD, the shared story, repeats cells from arenas.mjs (Terraform) and
-//   compare-pulumi-platforms.mjs (Pulumi) side by side, and works out "the
-//   plan you need" from their gating arenas;
+//   compare-pulumi-platforms.mjs (Pulumi) side by side, and works out the
+//   tier each vendor needs for all of terragucci's and plywood's features;
 // - TERRAFORM and PULUMI are those two files as they are, less their behold
 //   arenas;
 // - BEHOLD is both behold arenas as one, since behold reads both engines.
+//   Rows the two files both ask are merged; a row only one engine's file
+//   asks leaves the other engine's vendor uncompared (a dash).
 //
 // Each data file says where its cells come from and when they were read.
 
@@ -19,28 +21,38 @@ const T = 'https://intentius.io/terragucci';
 const PW = 'https://intentius.io/plywood';
 const B = 'https://intentius.io/behold';
 
-const cell = (data, arena, q, v) => data.ARENAS.find((a) => a.id === arena).rows.find((r) => r.q === q)[v];
+const cell = (data, arena, q, v) => {
+	const row = data.ARENAS.find((a) => a.id === arena).rows.find((r) => r.q === q);
+	if (!row) throw new Error(`compare-platforms.mjs: no row "${q}" in ${arena}`);
+	return row[v];
+};
+const row = (data, arena, q) => data.ARENAS.find((a) => a.id === arena).rows.find((r) => r.q === q);
 const named = (name, c) => [name, ...c];
+const srcs = (...cells) => cells.flatMap((c) => (Array.isArray(c[2]) ? c[2] : [c[2]]));
 
-// The plan a vendor needs for every feature in a gating arena, and how many
-// of them it has no equivalent for, as CompareTeaser.astro words it.
-const need = (data, v) => {
+// The tier a vendor needs for every feature in a gating arena, and how many
+// of them it has no equivalent for at any tier.
+const need = (data, v, whose) => {
 	let max = -1, none = 0;
 	for (const f of data.GATED) {
 		const c = f[v];
 		if (c.plan !== null) max = Math.max(max, c.plan);
 		else if (c.tier !== 'unpublished') none++;
 	}
-	return none ? `${data.PLANS[v][max]}, still missing ${none} of ${data.GATED.length} features` : data.PLANS[v][max];
+	return none ? `${data.PLANS[v][max]} still lacks ${none} of ${whose} ${data.GATED.length}` : data.PLANS[v][max];
 };
 
-const INTENTIUS = { id: 'in', name: 'Intentius', named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold', href: '/tools/' };
+const INTENTIUS = { id: 'in', name: 'Intentius', named: true, link: true, color: '#c9a96e', what: 'terragucci, choudoufu, plywood, plunge, behold, chant', href: '/tools/' };
 const HCP = tf.VENDORS.find((v) => v.id === 'hcp');
 const PC = pu.VENDORS.find((v) => v.id === 'pc');
 const SL = { ...tf.VENDORS.find((v) => v.id === 'sl'), what: 'hosted, both engines' };
 const VENDORS = [INTENTIUS, HCP, PC, SL];
 
 export const TRADEMARKS = `${tf.TRADEMARKS} ${pu.TRADEMARKS.replace(' Spacelift and the Spacelift logo are trademarks of Spacelift, Inc.', '').replace(' Logos are used to identify each product and are shown unaltered.', '')}`;
+
+const GRAPH = 'Terraform and Pulumi on three clouds, in one graph';
+const RUNS = 'Runs without calling the vendor';
+const STATE = 'State stays in your own backend';
 
 export const LEAD = {
 	PREFIX: 'lead-',
@@ -51,16 +63,15 @@ export const LEAD = {
 	VENDORS,
 	ARENAS: [
 		{
-			id: 'story', title: 'Everything included, in your own CI',
-			blurb: 'terragucci and choudoufu for Terraform, plywood and plunge for Pulumi, and behold over both. Terraform and Pulumi in detail follow.',
+			id: 'story', title: "What's free here, against each vendor's top tier",
 			rows: [
-				{ q: 'Every feature on one plan',
-					in: ['good', `${need(tf, 'tg')} for Terraform and for Pulumi`, [`${T}/`, `${PW}/`]],
-					hcp: ['bad', need(tf, 'hcp'), 'https://www.hashicorp.com/en/pricing?product_intent=terraform'],
-					pc: ['bad', need(pu, 'pc'), 'https://www.pulumi.com/pricing/'],
+				{ q: "Every terragucci and plywood feature on one tier",
+					in: ['good', `all ${tf.GATED.length} of terragucci's and all ${pu.GATED.length} of plywood's, free`, [`${T}/`, `${PW}/`]],
+					hcp: ['bad', need(tf, 'hcp', "terragucci's"), 'https://www.hashicorp.com/en/pricing?product_intent=terraform'],
+					pc: ['bad', need(pu, 'pc', "plywood's"), 'https://www.pulumi.com/pricing/'],
 					sl: { parts: [
-						['Terraform', 'bad', need(tf, 'sl'), 'https://spacelift.io/pricing'],
-						['Pulumi', 'bad', need(pu, 'sl'), 'https://spacelift.io/pricing'],
+						['Terraform', 'bad', need(tf, 'sl', "terragucci's"), 'https://spacelift.io/pricing'],
+						['Pulumi', 'bad', need(pu, 'sl', "plywood's"), 'https://spacelift.io/pricing'],
 					] } },
 				{ q: 'No licence or usage fees',
 					in: cell(tf, 'basics', 'No licence or usage fees', 'tg'),
@@ -72,60 +83,67 @@ export const LEAD = {
 					hcp: cell(tf, 'basics', 'Runs on runners you control', 'hcp'),
 					pc: cell(pu, 'basics', 'Runs on runners you control', 'pc'),
 					sl: cell(tf, 'basics', 'Runs on runners you control', 'sl') },
-				{ q: 'State stays in your own backend',
-					in: ['good', 'stays in your own backend', [`${T}/reference/state-backends/`, `${PW}/reference/backends/`]],
-					hcp: cell(tf, 'data', 'State stays in your own backend', 'hcp'),
-					pc: cell(pu, 'data', 'State stays in your own backend', 'pc'),
-					sl: { parts: [named('Terraform', cell(tf, 'data', 'State stays in your own backend', 'sl')), named('Pulumi', cell(pu, 'data', 'State stays in your own backend', 'sl'))] } },
-				{ q: 'Terraform, Pulumi and chant on three clouds, in one graph',
-					in: ['good', 'behold: choudoufu, plunge and chant members drawn together, edges from shared outputs', `${B}/using/three-cloud/`],
-					hcp: cell(tf, 'behold', 'Terraform, Pulumi and chant on three clouds, in one graph', 'hcp'),
-					pc: cell(pu, 'behold', 'Pulumi, Terraform and chant on three clouds, in one graph', 'pc'),
-					sl: cell(tf, 'behold', 'Terraform, Pulumi and chant on three clouds, in one graph', 'sl') },
-				{ q: 'No vendor service in every run',
-					in: ['good', 'none past your CI and cloud', [`${T}/concepts/how-it-works/`, `${PW}/concepts/how-it-works/`]],
-					hcp: cell(tf, 'data', 'No vendor service in every run', 'hcp'),
-					pc: cell(pu, 'data', 'No vendor service in every run', 'pc'),
-					sl: cell(tf, 'data', 'No vendor service in every run', 'sl') },
+				{ q: STATE, def: 'State: the record of what Terraform or Pulumi created.',
+					in: { parts: [named('Terraform', cell(tf, 'data', STATE, 'tg')), named('Pulumi', cell(pu, 'data', STATE, 'pw'))] },
+					hcp: cell(tf, 'data', STATE, 'hcp'),
+					pc: cell(pu, 'data', STATE, 'pc'),
+					sl: { parts: [named('Terraform', cell(tf, 'data', STATE, 'sl')), named('Pulumi', cell(pu, 'data', STATE, 'sl'))] } },
+				{ q: GRAPH,
+					in: ['good', `behold: ${cell(tf, 'behold', GRAPH, 'tg')[1]}`, `${B}/using/three-cloud/`],
+					hcp: cell(tf, 'behold', GRAPH, 'hcp'),
+					pc: cell(pu, 'behold', GRAPH, 'pc'),
+					sl: cell(tf, 'behold', GRAPH, 'sl') },
+				{ q: RUNS,
+					in: { parts: [named('Terraform', cell(tf, 'data', RUNS, 'tg')), named('Pulumi', cell(pu, 'data', RUNS, 'pw'))] },
+					hcp: cell(tf, 'data', RUNS, 'hcp'),
+					pc: cell(pu, 'data', RUNS, 'pc'),
+					sl: cell(tf, 'data', RUNS, 'sl') },
 			],
 		},
 	],
 };
 
-export const TERRAFORM = { ...tf, TRY: undefined, TRADEMARKS: undefined, ARENAS: tf.ARENAS.filter((a) => a.id !== 'behold') };
+export const TERRAFORM = { ...tf, LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: tf.ARENAS.filter((a) => a.id !== 'behold') };
 
-export const PULUMI = { ...pu, PREFIX: 'pulumi-', TRY: undefined, TRADEMARKS: undefined, ARENAS: pu.ARENAS.filter((a) => a.id !== 'behold') };
+export const PULUMI = { ...pu, PREFIX: 'pulumi-', LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: pu.ARENAS.filter((a) => a.id !== 'behold') };
 
-// behold's arena once, over both engines: the Terraform rows keep their
-// HCP Terraform and Spacelift cells, the Pulumi rows their Pulumi Cloud
-// and Spacelift cells, and the one row both files ask is merged.
-const tfBehold = tf.ARENAS.find((a) => a.id === 'behold');
-const puBehold = pu.ARENAS.find((a) => a.id === 'behold');
-const BOTH_TF = 'Terraform, Pulumi and chant on three clouds, in one graph';
-const BOTH_PU = 'Pulumi, Terraform and chant on three clouds, in one graph';
-const bothTf = tfBehold.rows.find((r) => r.q === BOTH_TF);
-const bothPu = puBehold.rows.find((r) => r.q === BOTH_PU);
+// behold's arena once, over both engines. Three questions are asked by both
+// files and are merged into one row each, judged in every column: the graph
+// across engines, drift on the graph, and unmanaged resources. Every other
+// row keeps the cells its file has, and the engine it doesn't cover shows
+// the "not compared" dash.
+const tfB = tf.ARENAS.find((a) => a.id === 'behold');
+const puB = pu.ARENAS.find((a) => a.id === 'behold');
+const tfGraph = row(tf, 'behold', GRAPH), puGraph = row(pu, 'behold', GRAPH);
+const tfDrift = row(tf, 'behold', 'Drift, shown on the graph'), puDrift = row(pu, 'behold', "Drift, shown on the graph from each engine's own read");
+const tfFind = row(tf, 'behold', 'Finding cloud resources nothing manages'), puFind = row(pu, 'behold', 'Finds cloud resources no code manages');
+const merged = new Set([tfGraph, puGraph, tfDrift, puDrift, tfFind, puFind]);
+if (merged.has(undefined)) throw new Error('compare-platforms.mjs: a merged behold row is missing');
 
 export const BEHOLD = {
 	PREFIX: 'graph-',
-	HEAD: false,
+	LEVEL: 3,
 	GRADIENT: true,
 	LABEL: 'behold, HCP Terraform, Pulumi Cloud and Spacelift compared',
+	READ_ON: `${tf.READ_ON} for Terraform, ${pu.READ_ON} for Pulumi`,
 	VENDORS,
 	TRADEMARKS,
 	ARENAS: [
 		{
 			id: 'behold', title: 'One graph, every engine',
 			blurb: 'behold is free. It reads Terraform through choudoufu and Pulumi through plunge. Kubernetes, Helm, Argo CD and Flux need chant.',
-			lead: tfBehold.lead,
+			lead: tfB.lead,
 			rows: [
-				{ q: BOTH_TF,
-					in: ['good', 'four members on three engines (choudoufu, plunge and chant) on AWS, Azure and GCP; edges from shared outputs', `${B}/using/three-cloud/`],
-					hcp: bothTf.hcp,
-					pc: bothPu.pc,
-					sl: bothTf.sl },
-				...puBehold.rows.filter((r) => r !== bothPu).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, sl: r.sl })),
-				...tfBehold.rows.filter((r) => r !== bothTf).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, sl: r.sl })),
+				{ q: GRAPH, in: tfGraph.tg, hcp: tfGraph.hcp, pc: puGraph.pc, sl: tfGraph.sl },
+				{ q: 'Drift, shown on the graph from each engine\'s own read', def: 'Drift: a change made outside your code.',
+					in: ['good', "live, from each engine's own read: plunge drift for Pulumi, choudoufu's plan for Terraform, chant's live read for chant", srcs(tfDrift.tg, puDrift.pw)],
+					hcp: tfDrift.hcp, pc: puDrift.pc, sl: tfDrift.sl },
+				{ q: 'Finds cloud resources no code manages',
+					in: ['good', 'with choudoufu, each shown as unowned; one Adopt click opens a pull request', srcs(tfFind.tg, puFind.pw)],
+					hcp: tfFind.hcp, pc: puFind.pc,
+					sl: { parts: [named('Terraform', tfFind.sl), named('Pulumi', puFind.sl)] } },
+				...puB.rows.filter((r) => !merged.has(r)).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, sl: r.sl })),
+				...tfB.rows.filter((r) => !merged.has(r)).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, sl: r.sl })),
 			],
 		},
 	],

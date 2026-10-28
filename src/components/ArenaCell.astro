@@ -15,7 +15,8 @@ const WORD = { good: 'meets', bad: 'misses' };
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 const srcs = (s) => (s ? (Array.isArray(s) ? s : [s]) : []);
 // Several sources on one host are told apart by their first path segment.
-const label = (u, many) => (many && !u.startsWith('/') ? host(u) + '/' + new URL(u).pathname.split('/')[1] : host(u));
+const seg = (u) => new URL(u).pathname.split('/').filter((x) => x && !/^[a-z]{2}$/.test(x))[0] ?? '';
+const label = (u, many) => (many && !u.startsWith('/') ? `${host(u)}/${seg(u)}`.replace(/\/$/, '') : host(u));
 const parts = !cell ? [] : cell.parts ?? [[null, ...cell]];
 const best = parts.length > 0 && parts.every((p) => p[1] === 'good');
 ---
