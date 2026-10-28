@@ -8,9 +8,11 @@
 //   tier each vendor needs for all of terragucci's and plywood's features;
 // - TERRAFORM and PULUMI are those two files as they are, less their behold
 //   arenas;
-// - BEHOLD is both behold arenas as one, since behold reads both engines.
-//   Rows the two files both ask are merged; a row only one engine's file
-//   asks leaves the other engine's vendor uncompared (a dash).
+// - CONTROL and BEHOLD are both behold arenas as one, since behold reads
+//   both engines, split in two: CONTROL holds the rows that match what the
+//   vendors' consoles show, and BEHOLD the rest. Rows the two files both ask
+//   are merged; a row only one engine's file asks leaves the other engine's
+//   vendor uncompared (a dash).
 //
 // Each data file says where its cells come from and when they were read.
 
@@ -51,6 +53,26 @@ const VENDORS = [INTENTIUS, HCP, PC, SL];
 
 export const TRADEMARKS = `${tf.TRADEMARKS} ${pu.TRADEMARKS.replace(' Spacelift and the Spacelift logo are trademarks of Spacelift, Inc.', '').replace(' Logos are used to identify each product and are shown unaltered.', '')}`;
 
+// The first two comparisons on the page (LEAD and CONTROL) link each of our
+// tools, and each engine's name, to where the page goes into it: the top of
+// "Terraform in detail" or "Pulumi in detail" (Starlight's slugs for those
+// headings), or an arena in it (Arenas.astro's `ar-${PREFIX}${id}`; the
+// Terraform arenas have no prefix, the Pulumi ones `pulumi-`). A row's own
+// `links` point a word at a closer arena for that row. TERRAFORM, PULUMI
+// and BEHOLD carry no LINKS.
+const TF_TOP = '#terraform-in-detail';
+const PU_TOP = '#pulumi-in-detail';
+const LINKS = {
+	terragucci: TF_TOP,
+	choudoufu: '#ar-choudoufu',
+	plywood: PU_TOP,
+	plunge: '#ar-pulumi-plunge',
+	Terraform: TF_TOP,
+	Pulumi: PU_TOP,
+};
+const LOCKS = { choudoufu: '#ar-concurrency', plunge: '#ar-pulumi-concurrency', Terraform: '#ar-concurrency', Pulumi: '#ar-pulumi-concurrency' };
+const TIERS = { terragucci: '#ar-gating', plywood: '#ar-pulumi-gating', Terraform: '#ar-gating', Pulumi: '#ar-pulumi-gating' };
+
 const GRAPH = 'Terraform and Pulumi on three clouds, in one graph';
 const RUNS = 'Runs without calling the vendor';
 const STATE = 'State stays in your own backend';
@@ -61,6 +83,7 @@ export const LEAD = {
 	LABEL: 'Intentius compared with HCP Terraform, Pulumi Cloud and Spacelift',
 	READ_ON: `${tf.READ_ON} for Terraform, ${pu.READ_ON} for Pulumi`,
 	TRY: tf.TRY,
+	LINKS,
 	VENDORS,
 	ARENAS: [
 		{
@@ -74,7 +97,7 @@ export const LEAD = {
 					hcp: cell(tf, 'choudoufu', 'Two applies to one root, on different resources, run side by side', 'hcp'),
 					pc: cell(pu, 'plunge', 'Two updates to one stack, on different resources, run side by side', 'pc'),
 					sl: cell(tf, 'choudoufu', 'Two applies to one root, on different resources, run side by side', 'sl') },
-				{ q: 'No stack lock', def: 'A change locks only the resources it touches, never the whole stack or root.',
+				{ q: 'No stack lock', links: LOCKS, def: 'A change locks only the resources it touches, never the whole stack or root.',
 					in: { parts: [
 						['Terraform', 'good', 'with choudoufu, each resource locks alone', 'https://intentius.io/choudoufu/'],
 						['Pulumi', 'good', 'with plunge, each resource locks alone', `${PL}/claims/`],
@@ -82,7 +105,7 @@ export const LEAD = {
 					hcp: ['bad', 'locks the whole workspace', cell(tf, 'concurrency', 'One apply locks less than a whole root', 'hcp')[2]],
 					pc: ['bad', 'locks the whole stack', cell(pu, 'concurrency', 'One update locks less than a whole stack', 'pc')[2]],
 					sl: ['bad', 'locks the whole stack', cell(tf, 'concurrency', 'One apply locks less than a whole root', 'sl')[2]] },
-				{ q: "Every terragucci and plywood feature on one tier",
+				{ q: "Every terragucci and plywood feature on one tier", links: TIERS,
 					in: ['good', `all ${tf.GATED.length} of terragucci's and all ${pu.GATED.length} of plywood's, free`, [`${T}/`, `${PW}/`]],
 					hcp: ['bad', need(tf, 'hcp', "terragucci's"), 'https://www.hashicorp.com/en/pricing?product_intent=terraform'],
 					pc: ['bad', need(pu, 'pc', "plywood's"), 'https://www.pulumi.com/pricing/'],
@@ -130,7 +153,8 @@ export const TERRAFORM = { ...tf, LEVEL: 3, TRY: undefined, TRADEMARKS: undefine
 
 export const PULUMI = { ...pu, PREFIX: 'pulumi-', LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: lead(pu.ARENAS) };
 
-// behold's arena once, over both engines. Three questions are asked by both
+// behold's arena once, over both engines, split in two: CONTROL second on
+// the page and BEHOLD after the Pulumi section. Three questions are asked by both
 // files and are merged into one row each, judged in every column: the graph
 // across engines, drift on the graph, and unmanaged resources. Every other
 // row keeps the cells its file has, and the engine it doesn't cover shows
@@ -143,18 +167,31 @@ const tfFind = row(tf, 'behold', 'Finding cloud resources nothing manages'), puF
 const merged = new Set([tfGraph, puGraph, tfDrift, puDrift, tfFind, puFind]);
 if (merged.has(undefined)) throw new Error('compare-platforms.mjs: a merged behold row is missing');
 
-export const BEHOLD = {
-	PREFIX: 'graph-',
+const RUN = 'Shows which run deployed each resource';
+const puRun = row(pu, 'behold', RUN);
+if (!puRun) throw new Error('compare-platforms.mjs: no behold row "' + RUN + '"');
+const rest = [
+	...puB.rows.filter((r) => !merged.has(r) && r !== puRun).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, sl: r.sl })),
+	...tfB.rows.filter((r) => !merged.has(r)).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, sl: r.sl })),
+];
+
+// The control plane: the behold rows that match what HCP Terraform's and
+// Pulumi Cloud's consoles show (the estate graph, drift on it, resources
+// nothing manages, and which run deployed each resource). It sits second on
+// the page, so its words link down the page like LEAD's. behold only reads,
+// so no row here runs or approves a plan; those stay in BEHOLD.
+export const CONTROL = {
+	PREFIX: 'plane-',
 	LEVEL: 3,
 	GRADIENT: true,
-	LABEL: 'behold, HCP Terraform, Pulumi Cloud and Spacelift compared',
+	LABEL: 'behold against the HCP Terraform, Pulumi Cloud and Spacelift consoles',
 	READ_ON: `${tf.READ_ON} for Terraform, ${pu.READ_ON} for Pulumi`,
+	LINKS,
 	VENDORS,
-	TRADEMARKS,
 	ARENAS: [
 		{
 			id: 'behold', title: 'One graph, every engine',
-			blurb: 'behold is free. It reads Terraform through choudoufu and Pulumi through plunge. Kubernetes, Helm, Argo CD and Flux need chant.',
+			blurb: 'behold is free, and it only reads. It reads Terraform through choudoufu and Pulumi through plunge.',
 			lead: tfB.lead,
 			rows: [
 				{ q: GRAPH, in: tfGraph.tg, hcp: tfGraph.hcp, pc: puGraph.pc, sl: tfGraph.sl },
@@ -165,9 +202,27 @@ export const BEHOLD = {
 					in: ['good', 'with choudoufu, each shown as unowned; one Adopt click opens a pull request', srcs(tfFind.tg, puFind.pw)],
 					hcp: tfFind.hcp, pc: puFind.pc,
 					sl: { parts: [named('Terraform', tfFind.sl), named('Pulumi', puFind.sl)] } },
-				...puB.rows.filter((r) => !merged.has(r)).map((r) => ({ q: r.q, in: r.pw, pc: r.pc, sl: r.sl })),
-				...tfB.rows.filter((r) => !merged.has(r)).map((r) => ({ q: r.q, in: r.tg, hcp: r.hcp, sl: r.sl })),
+				{ q: RUN, in: puRun.pw, pc: puRun.pc, sl: puRun.sl },
 			],
+		},
+	],
+};
+
+// The rest of behold, after the Pulumi section: every row not in CONTROL.
+export const BEHOLD = {
+	PREFIX: 'graph-',
+	LEVEL: 3,
+	GRADIENT: true,
+	LABEL: 'behold, HCP Terraform, Pulumi Cloud and Spacelift compared',
+	READ_ON: `${tf.READ_ON} for Terraform, ${pu.READ_ON} for Pulumi`,
+	VENDORS,
+	TRADEMARKS,
+	ARENAS: [
+		{
+			id: 'behold', title: 'Clusters, sharing and approvals',
+			blurb: 'behold is free. Kubernetes, Helm, Argo CD and Flux need chant.',
+			lead: tfB.lead,
+			rows: rest,
 		},
 	],
 };

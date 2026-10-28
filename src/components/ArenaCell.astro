@@ -9,7 +9,11 @@
 // miss gets the red cross. Another vendor's cell is a verdict: a tick with
 // the plan tier or limit it needs, or the red cross with a few words where
 // the row would mislead without them.
-const { cell, v, title, ours = false } = Astro.props;
+//
+// `links` maps a word to an anchor further down the page (see jumps.mjs);
+// those words in the cell's text and part names link there.
+import { jumps } from './jumps.mjs';
+const { cell, v, title, ours = false, links } = Astro.props;
 const GLYPH = ours ? { good: '', warn: '', bad: '✗' } : { good: '✓', bad: '✗' };
 const WORD = { good: 'meets', bad: 'misses' };
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
@@ -26,7 +30,7 @@ const best = parts.length > 0 && parts.every((p) => p[1] === 'good');
 	<span class={`ar-cell${best ? ' ar-best' : ''}`} data-v={v} style={`--vc:var(--c-${v})`} title={best ? title : undefined}>
 		{parts.map(([name, m, text, src]) => (
 			<span class={name ? 'ar-part' : undefined}>
-				<span>{name && <b class="ar-part-name">{name} </b>}{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
+				<span>{name && <b class="ar-part-name">{jumps(name, links).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))} </b>}{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{jumps(text, links).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}</span>
 				{srcs(src).map((u, _, all) => <a class="ar-src" href={u}>{label(u, all.length > 1)}</a>)}
 			</span>
 		))}

@@ -22,9 +22,17 @@ tableOfContents: false
 ---
 
 import Arenas from '../../../components/Arenas.astro';
-import { LEAD, TERRAFORM, PULUMI, BEHOLD } from '../../../data/compare-platforms.mjs';
+import { LEAD, CONTROL, TERRAFORM, PULUMI, BEHOLD } from '../../../data/compare-platforms.mjs';
 
 <Arenas data={LEAD} />
+
+Skip to [Terraform in detail](#terraform-in-detail) or [Pulumi in detail](#pulumi-in-detail) if you run one engine.
+
+## The control plane
+
+behold against the HCP Terraform, Pulumi Cloud and Spacelift consoles, across both engines.
+
+<Arenas data={CONTROL} />
 
 ## Terraform in detail
 
