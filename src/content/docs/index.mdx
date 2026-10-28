@@ -15,17 +15,6 @@ import { LEAD, TERRAFORM, PULUMI, BEHOLD } from '../../data/compare-platforms.mj
 
 ## Intentius, HCP Terraform and Pulumi Cloud
 
-The tools on the Intentius side, one line each:
-
-- terragucci plans and applies Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
-- choudoufu is a build of OpenTofu that records each resource's owner on the resource itself.
-- plywood runs Pulumi previews and updates from pull requests, as jobs in your own CI.
-- plunge is a fork of Pulumi that keeps one record per resource, so two updates to one stack need not wait for each other.
-- behold draws the whole estate as one picture coloured by drift. It only reads.
-- chant writes infrastructure as typed code and checks it before anything runs.
-
-If you run Terraform, read the first table and Terraform in detail. Pulumi teams read the first table and Pulumi in detail. The behold section at the end covers both engines. Every vendor cell links its source.
-
 <Arenas data={LEAD} />
 
 ## Terraform in detail
