@@ -1,29 +1,18 @@
 ---
-title: "choudoufu with Terraform and OpenTofu"
-description: "Your HCL as it is, with the owner recorded on each resource."
+title: "choudoufu and the Terraform state file"
+wide: true
+tableOfContents: false
+description: "Same HCL, same providers, same plan. Ownership moves onto the resource."
 ---
 
-[choudoufu](https://intentius.io/choudoufu/) is a build of OpenTofu. It runs the same HCL with the same providers and makes the same plan, and it has been measured on 26 real configurations by the [gauntlet](https://intentius.io/choudoufu/docs/progress/). Code written for Terraform runs on it the way it runs on OpenTofu.
+import Arenas from '../../../components/Arenas.astro';
+import * as data from '../../../data/compare-choudoufu-state.mjs';
 
-## The owner on the resource
+A state file does three jobs. It says which live resource an address refers to, holds values the cloud cannot, and records that an effect happened. [choudoufu](https://intentius.io/choudoufu/) takes them apart, and the state file becomes a cache you may lose.
 
-Each resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. An IAM policy can [read that tag](https://intentius.io/choudoufu/docs/claims/the-tag-is-the-boundary/), so a team's permissions follow the resources it owns. The state file stays, and if it is lost the [next plan rebuilds it](https://intentius.io/choudoufu/docs/model/cache/) from the tags.
+Everything else is stock OpenTofu, measured on 26 real configurations by the [gauntlet](https://intentius.io/choudoufu/docs/progress/).
 
-## Two applies at once
-
-choudoufu takes no state lock. Each resource is its own record, so [applies on different resources](https://intentius.io/choudoufu/docs/model/concurrency/) both land. A saved plan that another apply made stale is [refused](https://intentius.io/choudoufu/docs/claims/apply-what-was-approved/), naming the resource that moved. After a killed apply, the [next run](https://intentius.io/choudoufu/docs/claims/recovery-is-a-rerun/) finds the new resource by its tag.
-
-## Where it runs today
-
-choudoufu runs on AWS and Kubernetes, with more on the way. It does not take a `backend` block or a non-default workspace yet, and `choudoufu live-check` reports both before you start.
-
-## With terragucci and behold
-
-[terragucci](https://intentius.io/terragucci/) runs choudoufu as its binary with `binary: choudoufu`, and changes to different resources of one estate then apply at the same time. [behold](https://intentius.io/behold/using/choudoufu/) draws a choudoufu estate beside your other roots and shows each resource as bound, unowned or pending, read from its tags.
-
-## For Pulumi
-
-[plunge](https://intentius.io/plunge/) brings the same owner record to Pulumi programs, and its first release is out.
+<Arenas data={data} />
 
 ## The claims
 
@@ -33,4 +22,3 @@ Twenty scenarios you can [run yourself](https://intentius.io/choudoufu/docs/clai
 745 resources measured against real AWS. 3,705 on the emulator only.
 */}
 
-<small>Terraform is a trademark of HashiCorp, an IBM Company. OpenTofu is a trademark of The Linux Foundation. Pulumi is a trademark of Pulumi Corporation.</small>

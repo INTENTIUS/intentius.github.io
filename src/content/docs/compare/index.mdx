@@ -1,14 +1,9 @@
 ---
-title: "Works with"
-description: "Terraform, OpenTofu, HCP Terraform, Spacelift and Pulumi, each with the Intentius tools beside it."
+title: "Compare"
+description: "One page per matchup."
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import Alongside from '../../../components/Alongside.astro';
 
-Keep the tools you run today. Each card names the Intentius tool that adds to one of them and shows how [behold](https://intentius.io/behold/) draws it. behold puts all of them in one graph.
-
-<Alongside />
-
-<LinkCard title="terragucci with HCP Terraform and Spacelift" description="Plan notes and waves in your CI, with your workspaces and stacks kept." href="/compare/terraform-platforms/" />
-<LinkCard title="choudoufu with Terraform and OpenTofu" description="Your HCL as it is, with the owner recorded on each resource." href="/compare/choudoufu-and-terraform-state/" />
+<LinkCard title="terragucci, HCP Terraform and Spacelift" href="/compare/terraform-platforms/" />
+<LinkCard title="choudoufu and the Terraform state file" description="Same HCL, same providers, same plan. Ownership moves onto the resource." href="/compare/choudoufu-and-terraform-state/" />

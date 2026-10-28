@@ -7,11 +7,11 @@ Everything I build runs in your CI, under your accounts, and stays yours.
 
 ## Estate migration and carving
 
-A large estate keeps its OpenTofu code and runs it under [choudoufu](https://intentius.io/choudoufu/), which gives each resource its own record and an owner tag. Splitting a team off then becomes a tag rewrite and a permissions policy. It runs on AWS and Kubernetes with more on the way, and [plunge](https://intentius.io/plunge/) does the same for a Pulumi estate.
+A large estate gets [choudoufu](https://intentius.io/choudoufu/) as its binary. Each resource gets its own lock and an owner tag, so splitting a team off becomes a tag rewrite and a permissions policy. It runs on AWS and Kubernetes, with more on the way.
 
-## Adding terragucci to more repos
+## Moving from another runner
 
-<span id="moving-from-another-runner"></span>terragucci starts on one repo and plans there while your current runner keeps applying. Each repo switches when your team is ready, and HCP Terraform and Spacelift can [keep running beside it](/compare/terraform-platforms/).
+Repos move over from Atlantis, Terraform Cloud or Spacelift one at a time. Each one plans under terragucci before the old runner lets go of it.
 
 ## Rollout
 
