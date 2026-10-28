@@ -13,11 +13,16 @@
 // every feature ticked.
 import * as terraformPlatforms from '../data/arenas.mjs';
 import VendorLogo from './VendorLogo.astro';
+import ArenaCell from './ArenaCell.astro';
 
 const { data = terraformPlatforms } = Astro.props;
 const { VENDORS, PLANS = {}, GATED = [], ARENAS, READ_ON, TRADEMARKS, LABEL, FEATURED = [], TRY } = data;
 const GATED_BLURB = data.GATED_BLURB ?? "Tick what you need. These are terragucci's features; what it lacks is under The basics.";
 const OURS = VENDORS[0].id;
+// A page with several comparisons gives each its own PREFIX for the arena
+// ids, and HEAD false on all but the first hides the key and the legend.
+const PREFIX = data.PREFIX ?? '';
+const HEAD = data.HEAD ?? true;
 
 // A row is a question, so its best answer is highlighted (ties allowed) and
 // a vendor that doesn't do the thing at all gets a cross. Everything else is
@@ -41,23 +46,23 @@ const need = (v, ids) => {
 const all = GATED.map((f) => f.id);
 
 // The best-answer key shows only where some cell is marked best.
-const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id][0] === 'good')));
+const hasBest = GATED.length > 0 || ARENAS.some((a) => a.rows.some((r) => VENDORS.some((v) => r[v.id] && (r[v.id].parts ? r[v.id].parts.every((p) => p[1] === 'good') : r[v.id][0] === 'good'))));
 const lead = (a, v) => (v.id === OURS && a.lead ? a.lead.name : v.name);
 const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
 ---
-<section class="arenas not-content" aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`), ...(data.GRADIENT ? [`--ar-grad:${VENDORS.slice(0, 3).map((v) => `var(--c-${v.id})`).join(', ')}`] : [])].join(';')}>
+<section class="arenas not-content" data-arenas={PREFIX || "main"} aria-label={LABEL ?? `${VENDORS.map((v) => v.name).join(', ')} compared`} style={[`--n:${VENDORS.length}`, ...VENDORS.map((v) => `--c-${v.id}:${v.color ?? 'var(--muted)'}`), ...(data.GRADIENT ? [`--ar-grad:${VENDORS.slice(0, 3).map((v) => `var(--c-${v.id})`).join(', ')}`] : [])].join(';')}>
 
-	<p class="ar-key">{VENDORS.map((v) => <span><i style={`background:var(--c-${v.id})`}></i><b>{v.name}</b>{v.what && <em>{v.what}</em>}</span>)}</p>
-	{TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
+	{HEAD && <p class="ar-key">{VENDORS.map((v) => <span><i style={`background:var(--c-${v.id})`}></i><b>{v.name}</b>{v.what && <em>{v.what}</em>}</span>)}</p>}
+	{HEAD && TRY && <p class="ar-try">{TRY.map(([text, href]) => <a href={href}>{text} →</a>)}</p>}
 
-	<p class="ar-legend">
+	{HEAD && <p class="ar-legend">
 		{hasBest && <span><b class="ar-best-key"></b> the best answer in the row</span>}
 		<span><b class="ar-mark bad">✗</b> doesn't do it</span>
 		{READ_ON && <span class="ar-hint">Sources read {READ_ON}.</span>}
-	</p>
+	</p>}
 
 	{ARENAS.filter((a) => a.first).map((a) => (
-		<div class="ar-arena" id={`ar-${a.id}`} data-arena>
+		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
 			<header><h2>{a.title}</h2>{a.blurb && <p>{a.blurb}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
@@ -72,22 +77,14 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				{a.rows.map((r) => (
 					<div class="ar-row">
 						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => {
-							const [m, text, src] = r[v.id];
-							return (
-								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
-									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									{src && <a class="ar-src" href={src}>{host(src)}</a>}
-								</span>
-							);
-						})}
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>
 		</div>
 	))}
 
-	{GATED.length > 0 && <div class="ar-arena" id="ar-gating" data-arena>
+	{GATED.length > 0 && <div class="ar-arena" id={`ar-${PREFIX}gating`} data-arena data-gating>
 		<header><h2>What's included</h2><p>{GATED_BLURB}</p></header>
 		<div class="ar-grid">
 			<div class="ar-row ar-head">
@@ -129,7 +126,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	</div>}
 
 	{ARENAS.filter((a) => !a.first).map((a) => (
-		<div class="ar-arena" id={`ar-${a.id}`} data-arena>
+		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
 			<header><h2>{a.title}</h2>{a.blurb && <p>{a.blurb}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
@@ -144,15 +141,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				{a.rows.map((r) => (
 					<div class="ar-row">
 						<span class="ar-q">{r.q}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => {
-							const [m, text, src] = r[v.id];
-							return (
-								<span class={`ar-cell${m === 'good' ? ' ar-best' : ''}`} data-v={v.id} style={`--vc:var(--c-${v.id})`} title={m === 'good' ? `${lead(a, v)}: the best answer in this row` : undefined}>
-									<span>{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
-									{src && <a class="ar-src" href={src}>{host(src)}</a>}
-								</span>
-							);
-						})}
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>
@@ -162,9 +151,11 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 	{TRADEMARKS && <p class="ar-tm">{TRADEMARKS}</p>}
 </section>
 
-<script is:inline define:vars={{ PLANS, GATED, VENDORS }}>
+<script is:inline define:vars={{ PLANS, GATED, VENDORS, KEY: PREFIX || "main" }}>
+	// Each comparison on a page runs its own copy of this, inside its own section.
+	var root = document.querySelector('[data-arenas="' + KEY + '"]');
 	// Follow a vendor: hover, focus or tap its logo. A tap on the followed one lets go.
-	document.querySelectorAll('[data-arena]').forEach(function (arena) {
+	root.querySelectorAll('[data-arena]').forEach(function (arena) {
 		var set = function (v) {
 			if (v) arena.dataset.focus = v; else delete arena.dataset.focus;
 			arena.querySelectorAll('.ar-vendor, .ar-cell').forEach(function (el) { el.classList.toggle('ar-lit', !!v && el.dataset.v === v); });
@@ -179,7 +170,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 		arena.addEventListener('mouseleave', function () { if (!arena.dataset.pinned) set(''); });
 	});
 	// The gating arena: the plan each vendor needs for every ticked feature.
-	var gate = document.getElementById('ar-gating');
+	var gate = root.querySelector('[data-gating]');
 	var more = gate && gate.querySelector('[data-showall]');
 	if (more) more.addEventListener('click', function () {
 		var open = gate.classList.toggle('ar-all');
@@ -254,6 +245,10 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 .ar-cell small { display: block; color: var(--muted); font-size: 0.78rem; }
 .ar-src { display: block; font-size: 0.7rem; margin-top: 0.15rem; opacity: 0.8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ar-cell { min-width: 0; overflow-wrap: anywhere; }
+.ar-na { color: var(--faint); }
+.ar-part { display: block; }
+.ar-part + .ar-part { margin-top: 0.45rem; }
+.ar-part-name { display: block; font-weight: 600; font-size: 0.78rem; color: var(--muted); }
 
 /* The logo for each vendor: it grows when followed, the others shrink. */
 .ar-vendor {

@@ -1,15 +1,15 @@
 ---
-title: "terragucci, HCP Terraform and Spacelift"
+title: "Intentius, HCP Terraform and Pulumi Cloud"
 wide: true
 head:
   - tag: meta
     attrs:
       name: description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
+      content: "Intentius against HCP Terraform and Pulumi Cloud, with Spacelift and env zero, compared on plans, cost, data, leaving, AI, concurrency and one graph across engines. Every cell links its source."
   - tag: meta
     attrs:
       property: og:description
-      content: "terragucci, HCP Terraform and Spacelift compared on plans, cost, data, leaving, AI and concurrency. Every cell links its source."
+      content: "Intentius against HCP Terraform and Pulumi Cloud, with Spacelift and env zero, compared on plans, cost, data, leaving, AI, concurrency and one graph across engines. Every cell links its source."
   - tag: meta
     attrs:
       property: og:image
@@ -22,5 +22,20 @@ tableOfContents: false
 ---
 
 import Arenas from '../../../components/Arenas.astro';
+import { LEAD, TERRAFORM, PULUMI, BEHOLD } from '../../../data/compare-platforms.mjs';
 
-<Arenas />
+<Arenas data={LEAD} />
+
+## Terraform in detail
+
+terragucci and choudoufu against HCP Terraform and Spacelift.
+
+<Arenas data={TERRAFORM} />
+
+## Pulumi in detail
+
+plywood and plunge against Pulumi Cloud, and against Spacelift and env zero where they run Pulumi.
+
+<Arenas data={PULUMI} />
+
+<Arenas data={BEHOLD} />

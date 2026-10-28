@@ -1,0 +1,28 @@
+---
+// One cell of an arena row, for Arenas.astro. A cell is [mark, words,
+// source], where source is one address or a list of them. A cell for a
+// column that speaks for several products is { parts: [[name, mark, words,
+// source], ...] }, each part under its product's name. A row with no cell
+// for a vendor was not compared there, and draws a faint dash.
+const { cell, v, title } = Astro.props;
+const GLYPH = { good: '', warn: '', bad: '✗' };
+const WORD = { good: 'meets', warn: 'partly', bad: 'misses' };
+const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.replace(/^www\./, ''));
+const srcs = (s) => (s ? (Array.isArray(s) ? s : [s]) : []);
+// Several sources on one host are told apart by their first path segment.
+const label = (u, many) => (many && !u.startsWith('/') ? host(u) + '/' + new URL(u).pathname.split('/')[1] : host(u));
+const parts = !cell ? [] : cell.parts ?? [[null, ...cell]];
+const best = parts.length > 0 && parts.every((p) => p[1] === 'good');
+---
+{!cell ? (
+	<span class="ar-cell ar-na" data-v={v} style={`--vc:var(--c-${v})`} title="not compared on this row">–</span>
+) : (
+	<span class={`ar-cell${best ? ' ar-best' : ''}`} data-v={v} style={`--vc:var(--c-${v})`} title={best ? title : undefined}>
+		{parts.map(([name, m, text, src]) => (
+			<span class={name ? 'ar-part' : undefined}>
+				<span>{name && <b class="ar-part-name">{name} </b>}{GLYPH[m] && <><b class={`ar-mark ${m}`} aria-label={WORD[m]}>{GLYPH[m]}</b> </>}{text}</span>
+				{srcs(src).map((u, _, all) => <a class="ar-src" href={u}>{label(u, all.length > 1)}</a>)}
+			</span>
+		))}
+	</span>
+)}

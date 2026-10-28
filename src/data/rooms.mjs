@@ -59,7 +59,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Moving from another runner', href: '/work/#moving-from-another-runner' },
-			{ label: 'terragucci, HCP Terraform and Spacelift', href: '/compare/terraform-platforms/' },
+			{ label: 'Intentius, HCP Terraform and Pulumi Cloud', href: '/compare/terraform-platforms/' },
 		],
 	},
 	{

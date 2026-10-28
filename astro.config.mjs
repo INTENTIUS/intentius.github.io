@@ -85,7 +85,7 @@ export default defineConfig({
 				{
 					label: 'Compare',
 					collapsed: true,
-					items: ['compare', 'compare/terraform-platforms', 'compare/pulumi-platforms', 'compare/choudoufu-and-terraform-state'],
+					items: ['compare', 'compare/terraform-platforms', 'compare/choudoufu-and-terraform-state'],
 				},
 				{
 					label: 'About',
