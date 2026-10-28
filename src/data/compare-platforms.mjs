@@ -71,9 +71,9 @@ export const LEAD = {
 						['Terraform', 'good', 'with choudoufu, both apply at once', 'https://intentius.io/choudoufu/'],
 						['Pulumi', 'good', 'with plunge, both apply at once', `${PL}/claims/`],
 					] },
-					hcp: cell(tf, 'concurrency', 'Two applies in one root, on different resources, run side by side', 'hcp'),
+					hcp: cell(tf, 'choudoufu', 'Two applies to one root, on different resources, run side by side', 'hcp'),
 					pc: cell(pu, 'plunge', 'Two updates to one stack, on different resources, run side by side', 'pc'),
-					sl: cell(tf, 'concurrency', 'Two applies in one root, on different resources, run side by side', 'sl') },
+					sl: cell(tf, 'choudoufu', 'Two applies to one root, on different resources, run side by side', 'sl') },
 				{ q: 'No stack lock', def: 'A change locks only the resources it touches, never the whole stack or root.',
 					in: { parts: [
 						['Terraform', 'good', 'with choudoufu, each resource locks alone', 'https://intentius.io/choudoufu/'],
@@ -120,9 +120,10 @@ export const LEAD = {
 	],
 };
 
-// Each engine's section opens on concurrency, ahead of the tier picker:
-// resource-level concurrency and no stack lock lead the comparison.
-const FIRST = new Set(['concurrency', 'plunge']);
+// Each engine's section opens on concurrency and its engine arena (choudoufu
+// or plunge), ahead of the tier picker: resource-level concurrency and no
+// stack lock lead the comparison.
+const FIRST = new Set(['concurrency', 'choudoufu', 'plunge']);
 const lead = (arenas) => arenas.filter((a) => a.id !== 'behold').map((a) => (FIRST.has(a.id) ? { ...a, first: true } : a));
 
 export const TERRAFORM = { ...tf, LEVEL: 3, TRY: undefined, TRADEMARKS: undefined, ARENAS: lead(tf.ARENAS) };
