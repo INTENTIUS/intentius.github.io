@@ -17,7 +17,7 @@ import ArenaCell from './ArenaCell.astro';
 
 const { data = terraformPlatforms } = Astro.props;
 const { VENDORS, PLANS = {}, GATED = [], ARENAS, READ_ON, TRADEMARKS, LABEL, FEATURED = [], TRY } = data;
-const GATED_BLURB = data.GATED_BLURB ?? "Tick what you need. These are terragucci's features; what it lacks is under The basics.";
+const GATED_BLURB = data.GATED_BLURB ?? "Tick what you need. These are terragucci's features.";
 const OURS = VENDORS[0].id;
 // A page with several comparisons gives each its own PREFIX for the arena
 // ids, and HEAD false on all but the first hides the key and the legend.

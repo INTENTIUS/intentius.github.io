@@ -42,7 +42,7 @@ export const PLANS = {
 	sl: ['Free', 'Starter+', 'Business', 'Enterprise', 'Enterprise+'],
 };
 
-export const GATED_BLURB = "Tick what you need. These are plywood's features; what it lacks is under The basics.";
+export const GATED_BLURB = "Tick what you need. These are plywood's features.";
 
 // The gating arena, as in arenas.mjs: `plan` indexes PLANS, `plan: null` is
 // nothing equivalent, `tier: 'unpublished'` an offer no page puts on a plan.
@@ -130,22 +130,6 @@ export const ARENAS = [
 				pw: ['good', 'your CI runners', `${PW}/#limits`],
 				pc: ['good', 'Enterprise', `${P}/deployments/concepts/`],
 				sl: ['good', 'Starter+', `${S}/concepts/worker-pools`] },
-			{ q: 'Nothing for your team to operate',
-				pw: ['bad', 'CI runners, your backend, OIDC roles', `${PW}/getting-started/`],
-				pc: ['good', '', `${P}/deployments/concepts/`],
-				sl: ['good', '', `${S}/concepts/stack/drift-detection`] },
-			{ q: 'Paid vendor support',
-				pw: ['warn', 'GitHub issues; paid setup help from Intentius', 'https://intentius.io/work/'],
-				pc: ['good', '', PP],
-				sl: ['good', '', `${S}/product/support`] },
-			{ q: "A web UI for people who don't write Pulumi",
-				pw: ['bad', 'none; changes arrive as pull requests', `${PW}/#limits`],
-				pc: ['good', 'Pro', PP],
-				sl: ['good', 'Business', `${S}/concepts/blueprint`] },
-			{ q: 'Works with Bitbucket or Azure DevOps',
-				pw: ['bad', 'GitHub, GitLab and Forgejo only', `${PW}/#limits`],
-				pc: ['good', '', `${P}/deployments/concepts/review-stacks/`],
-				sl: ['good', '', `${S}/integrations/source-control`] },
 		],
 	},
 	{
