@@ -14,6 +14,7 @@
 import * as terraformPlatforms from '../data/arenas.mjs';
 import VendorLogo from './VendorLogo.astro';
 import ArenaCell from './ArenaCell.astro';
+import { jumps } from './jumps.mjs';
 
 const { data = terraformPlatforms } = Astro.props;
 const { VENDORS, PLANS = {}, GATED = [], ARENAS, READ_ON, TRADEMARKS, LABEL, FEATURED = [], TRY } = data;
@@ -23,6 +24,12 @@ const OURS = VENDORS[0].id;
 // ids, and HEAD false on all but the first hides the key and the legend.
 const PREFIX = data.PREFIX ?? '';
 const HEAD = data.HEAD ?? true;
+// LINKS maps a word to an anchor further down the page, and a row's own
+// `links` win over it for that row: those words in blurbs, questions,
+// definitions and cells link there (jumps.mjs).
+const LINKS = data.LINKS;
+const rowLinks = (r) => (LINKS || r.links ? { ...LINKS, ...r.links } : undefined);
+const J = (text, links = LINKS) => jumps(text, links);
 
 // A row is a question, so its best answer is highlighted (ties allowed) and
 // a vendor that doesn't do the thing at all gets a cross. Everything else is
@@ -55,7 +62,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 	{ARENAS.filter((a) => a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
-			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{a.blurb}</p>}</header>
+			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{J(a.blurb).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
 					<span></span>
@@ -68,8 +75,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}{r.def && <small class="ar-def">{r.def}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
+						<span class="ar-q">{J(r.q, rowLinks(r)).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}{r.def && <small class="ar-def">{J(r.def, rowLinks(r)).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} links={rowLinks(r)} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>
@@ -119,7 +126,7 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 
 	{ARENAS.filter((a) => !a.first).map((a) => (
 		<div class="ar-arena" id={`ar-${PREFIX}${a.id}`} data-arena>
-			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{a.blurb}</p>}</header>
+			<header><H class="ar-title">{a.title}</H>{a.blurb && <p>{J(a.blurb).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}</p>}</header>
 			<div class="ar-grid">
 				<div class="ar-row ar-head">
 					<span></span>
@@ -132,8 +139,8 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 				</div>
 				{a.rows.map((r) => (
 					<div class="ar-row">
-						<span class="ar-q">{r.q}{r.def && <small class="ar-def">{r.def}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
-						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} title={`${lead(a, v)}: the best answer in this row`} />)}
+						<span class="ar-q">{J(r.q, rowLinks(r)).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}{r.def && <small class="ar-def">{J(r.def, rowLinks(r)).map((s) => (s.href ? <a class="ar-jump" href={s.href}>{s.t}</a> : s.t))}</small>}{r.note && <a class="ar-note" href={r.href}>{r.note}</a>}</span>
+						{VENDORS.map((v) => <ArenaCell cell={r[v.id]} v={v.id} ours={v.id === OURS} links={rowLinks(r)} title={`${lead(a, v)}: the best answer in this row`} />)}
 					</div>
 				))}
 			</div>
@@ -203,6 +210,9 @@ const host = (u) => (u.startsWith('/') ? 'intentius.io' : new URL(u).hostname.re
 }
 :root[data-theme='light'] .arenas { --good: #11805a; --bad: #c23434; }
 .arenas a { text-decoration: none; color: var(--in-accent); }
+/* A word that jumps further down the page keeps its colour and gets a dotted underline. */
+.arenas a.ar-jump { color: inherit; text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.arenas a.ar-jump:hover, .arenas a.ar-jump:focus-visible { color: var(--in-accent); text-decoration-style: solid; }
 
 .ar-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.82rem; color: var(--muted); margin: 0 0 1.4rem; }
 .ar-hint { color: var(--faint); font-style: italic; }
