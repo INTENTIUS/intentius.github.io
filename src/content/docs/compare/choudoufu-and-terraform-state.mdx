@@ -10,15 +10,6 @@ import * as data from '../../../data/compare-choudoufu-state.mjs';
 
 A state file does three jobs. It says which live resource an address refers to, holds values the cloud cannot, and records that an effect happened. [choudoufu](https://intentius.io/choudoufu/) takes them apart, and the state file becomes a cache you may lose.
 
-Everything else is stock OpenTofu, measured on 26 real configurations by the [gauntlet](https://intentius.io/choudoufu/docs/progress/).
+Everything else is stock OpenTofu.
 
 <Arenas data={data} />
-
-## The claims
-
-Twenty scenarios you can [run yourself](https://intentius.io/choudoufu/docs/claims/), a few minutes each.
-
-{/* scale claims held until the 10,000+ run lands (choudoufu#1051)
-745 resources measured against real AWS. 3,705 on the emulator only.
-*/}
-

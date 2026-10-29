@@ -5,9 +5,9 @@
 // rests on. Vendor pages were read on READ_ON; recheck them before changing a
 // cell.
 //
-// A plywood cell claims only what plywood's published docs describe. The
-// plunge arena claims only runs on plunge's claims page, and the behold arena
-// only what behold's published docs describe.
+// A plywood cell states only what plywood's published docs describe. The
+// plunge arena states only what plunge's published docs describe, and the
+// behold arena only what behold's published docs describe.
 //
 // Logos: Pulumi's is the one public/brand/vendors already carries, and
 // Spacelift's comes from its media page as in arenas.mjs. plywood's and
@@ -240,19 +240,19 @@ export const ARENAS = [
 	},
 	{
 		id: 'plunge', title: 'The engine underneath',
-		blurb: 'plunge is free. plywood runs it with engine: plunge. Each row is a recorded run on plunge\'s claims page.',
+		blurb: 'plunge is free. plywood runs it with engine: plunge.',
 		lead: { name: 'plunge', logo: { dark: '/brand/vendors/plunge.png', light: '/brand/vendors/plunge.png' }, named: true, link: true, href: `${PL}/` },
 		rows: [
 			{ q: 'Two updates to one stack, on different resources, run side by side',
-				pw: ['good', 'both apply; neither waits for a lock', `${PL}/claims/`],
+				pw: ['good', 'both apply; neither waits for a lock', `${PL}/`],
 				pc: ['bad', 'second queues', `${P}/deployments/concepts/settings/skip-intermediate-deployments/`],
 				sl: ['bad', 'second waits', `${S}/concepts/run`] },
 			{ q: 'Drift read for one resource alone',
-				pw: ['good', 'one provider read, no stack refresh', `${PL}/claims/`],
+				pw: ['good', 'one provider read, no stack refresh', `${PL}/`],
 				pc: ['bad', 'whole stack', `${P}/deployments/concepts/drift/`],
 				sl: ['bad', 'whole stack', `${S}/concepts/stack/drift-detection`] },
 			{ q: 'Ownership recorded on the resource itself',
-				pw: ['good', 'plunge-stack and plunge-urn tags on the resource itself', `${PL}/claims/`],
+				pw: ['good', 'plunge-stack and plunge-urn tags on the resource itself', `${PL}/`],
 				pc: ['bad', '', `${P}/iac/concepts/state-and-backends/`],
 				sl: ['bad', '', `${S}/vendors/pulumi`] },
 		],

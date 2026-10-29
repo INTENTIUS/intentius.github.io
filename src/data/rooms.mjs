@@ -31,8 +31,7 @@ export const ROOMS = [
 			'Runs on AWS and Kubernetes, with more on the way. A read-only check reports anything it would refuse before you commit.',
 		],
 		check: [
-			{ label: 'The twenty claims, each one you can run', href: 'https://intentius.io/choudoufu/docs/claims/' },
-			{ label: 'The gauntlet, 26 real configurations', href: 'https://intentius.io/choudoufu/docs/progress/' },
+			{ label: 'The docs', href: 'https://intentius.io/choudoufu/' },
 			{ label: 'The source', href: 'https://github.com/INTENTIUS/choudoufu' },
 		],
 		read: [

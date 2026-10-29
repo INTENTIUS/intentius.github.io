@@ -92,7 +92,7 @@ export const LEAD = {
 				{ q: 'Resource-level concurrency', def: 'Two changes to one stack or root, on different resources, apply at the same time.',
 					in: { parts: [
 						['Terraform', 'good', 'with choudoufu, both apply at once', 'https://intentius.io/choudoufu/'],
-						['Pulumi', 'good', 'with plunge, both apply at once', `${PL}/claims/`],
+						['Pulumi', 'good', 'with plunge, both apply at once', `${PL}/`],
 					] },
 					hcp: cell(tf, 'choudoufu', 'Two applies to one root, on different resources, run side by side', 'hcp'),
 					pc: cell(pu, 'plunge', 'Two updates to one stack, on different resources, run side by side', 'pc'),
@@ -100,7 +100,7 @@ export const LEAD = {
 				{ q: 'No stack lock', links: LOCKS, def: 'A change locks only the resources it touches, never the whole stack or root.',
 					in: { parts: [
 						['Terraform', 'good', 'with choudoufu, each resource locks alone', 'https://intentius.io/choudoufu/'],
-						['Pulumi', 'good', 'with plunge, each resource locks alone', `${PL}/claims/`],
+						['Pulumi', 'good', 'with plunge, each resource locks alone', `${PL}/`],
 					] },
 					hcp: ['bad', 'locks the whole workspace', cell(tf, 'concurrency', 'One apply locks less than a whole root', 'hcp')[2]],
 					pc: ['bad', 'locks the whole stack', cell(pu, 'concurrency', 'One update locks less than a whole stack', 'pc')[2]],
