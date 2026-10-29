@@ -9,7 +9,7 @@
 // (spacelift.io/media-resources); `named` adds the name under a logo that
 // doesn't carry it. TRADEMARKS credits both, as their brand rules ask.
 
-export const READ_ON = '2026-10-24';
+export const READ_ON = '2026-10-28';
 
 export const VENDORS = [
 	{ id: 'tg', name: 'terragucci', logo: { dark: '/brand/vendors/terragucci.svg', light: '/brand/vendors/terragucci.svg' }, named: true, link: true, color: '#0fb5b8', what: 'CI pipelines, no hosted service', href: 'https://intentius.io/terragucci/' },
@@ -146,6 +146,14 @@ export const GATED = [
 		tg: { plan: 0, note: 'one pull request per wave, across repos', src: `${T}/guides/roll-out-a-module-version/` },
 		hcp: { plan: 2, src: `${H}/workspaces/change-requests` },
 		sl: { plan: 1, src: `${S}/concepts/policy/trigger-policy` } },
+	{ id: 'catalog', label: 'Request an app from a template',
+		tg: { plan: 0, note: 'from a template or add-on; a yanked version is refused', src: `${T}/guides/request-an-app/` },
+		hcp: { plan: 2, note: 'no-code modules; a version can be deprecated on Standard, revoked on Premium', src: `${H}/workspaces/no-code-provisioning/provisioning` },
+		sl: { plan: 2, note: 'Blueprints and Templates; no yank documented', src: `${S}/concepts/blueprint` } },
+	{ id: 'actions', label: "Day-2 actions behind a second person's approval",
+		tg: { plan: 0, note: 'a changed input is gated again', src: `${T}/guides/run-a-day-2-action/` },
+		hcp: { plan: 2, note: 'Terraform 1.14 actions run as a run; approver not documented', src: `${H}/actions` },
+		sl: { plan: 1, note: 'Tasks; an approval policy can require two approvals', src: `${S}/concepts/run/task` } },
 	{ id: 'import', label: 'Import from another platform',
 		tg: { plan: 0, note: 'HCP, OTF, Scalr, Spacelift, env zero, Atlantis', src: `${T}/guides/coming-from-hcp-terraform-scalr-or-otf/` },
 		hcp: { plan: null, note: 'Community Edition state only', src: `${H}/migrate` },
