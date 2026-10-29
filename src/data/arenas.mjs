@@ -208,7 +208,7 @@ export const ARENAS = [
 		id: 'ownership', title: 'Who owns what',
 		rows: [
 			{ q: 'Your cloud IAM decides who may change each resource',
-				tg: ['good', 'your cloud IAM, reading that tag', 'https://intentius.io/choudoufu/docs/claims/'],
+				tg: ['good', 'your cloud IAM, reading that tag', `${C}/how-it-works/identity/`],
 				hcp: ['bad', '', `${H}/users-teams-organizations/permissions`],
 				sl: ['bad', '', `${S}/concepts/spaces`] },
 			{ q: 'One root reads another without the vendor',

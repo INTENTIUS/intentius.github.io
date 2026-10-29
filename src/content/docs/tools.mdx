@@ -31,15 +31,15 @@ Declares an agent's sandbox, its secrets and its schedule as ordinary infrastruc
 
 ## choudoufu
 
-A build of OpenTofu where every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. The state file becomes a copy you are allowed to lose. Twenty claims about it, each one you can run yourself. It runs on AWS and Kubernetes, with more on the way.
+A build of OpenTofu where every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. The state file becomes a copy you are allowed to lose. It runs on AWS and Kubernetes, with more on the way.
 
-[Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Claims](https://intentius.io/choudoufu/docs/claims/) · [Compare](/compare/choudoufu-and-terraform-state/)
+[Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Compare](/compare/choudoufu-and-terraform-state/)
 
 ## plunge
 
 Pulumi with resource level concurrency and no stack lock. This fork of Pulumi has a drop-in CLI that runs your programs as they are. plunge keeps one record per resource in place of one state file per stack and writes two ownership tags on each cloud object, so two runs that change different resources of one stack do not wait for each other.
 
-[Docs](https://intentius.io/plunge/) · [Source](https://github.com/INTENTIUS/plunge) · [Claims](https://intentius.io/plunge/claims/) · [Compare](/compare/terraform-platforms/)
+[Docs](https://intentius.io/plunge/) · [Source](https://github.com/INTENTIUS/plunge) · [Compare](/compare/terraform-platforms/)
 
 ## plywood
 
@@ -64,3 +64,9 @@ Local stand-ins so the tools run without a cloud account. [mudflaps](https://git
 ## Also
 
 [pinhole](https://github.com/INTENTIUS/pinhole) draws the picture. [spicypath](https://spicypath.intentius.workers.dev) inspects a profile in the browser.
+
+## Questions
+
+### What has been checked, and how?
+
+Each of the four engine tools keeps an evidence page in its repository, updated with every release: [choudoufu](https://github.com/INTENTIUS/choudoufu/blob/main/EVIDENCE.md), [plunge](https://github.com/INTENTIUS/plunge/blob/main/EVIDENCE.md), [plywood](https://github.com/INTENTIUS/plywood/blob/main/EVIDENCE.md) and [terragucci](https://github.com/INTENTIUS/terragucci/blob/main/EVIDENCE.md).
