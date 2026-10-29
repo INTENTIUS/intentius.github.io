@@ -7,13 +7,13 @@ import Wardens from '../../components/Wardens.astro';
 
 ## behold
 
-The whole estate as one picture, coloured by what has drifted. It only reads. Every change leaves through an approval.
+A spec-native control plane for cloud infrastructure. It reads what chant records for terragucci and plywood, and only reads. Every change leaves through an approval.
 
 [Docs](https://intentius.io/behold/) · [Source](https://github.com/INTENTIUS/behold)
 
 ## chant
 
-Infrastructure written as typed code and checked before anything runs, then deployed to the three big clouds and Kubernetes from one project. The deploy pipeline is generated from that same code, so adding a service does not mean writing another one.
+Spec-native typed ops with per-resource locking. terragucci and plywood are built on it. The deploy pipeline is generated from that same code, so adding a service does not mean writing another one.
 
 [Docs](https://intentius.io/chant/) · [Source](https://github.com/INTENTIUS/chant)
 
@@ -31,25 +31,25 @@ Declares an agent's sandbox, its secrets and its schedule as ordinary infrastruc
 
 ## choudoufu
 
-A build of OpenTofu where every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. The state file becomes a copy you are allowed to lose. It runs on AWS and Kubernetes, with more on the way.
+OpenTofu with per-resource locking, and the engine terragucci can run with `binary: choudoufu`. Every resource records who owns it on the resource itself, as two tags on AWS or a label on Kubernetes. The state file becomes a copy you are allowed to lose. It runs on AWS and Kubernetes, with more on the way.
 
 [Docs](https://intentius.io/choudoufu/) · [Source](https://github.com/INTENTIUS/choudoufu) · [Compare](/compare/choudoufu-and-terraform-state/)
 
 ## plunge
 
-Pulumi with resource level concurrency and no stack lock. This fork of Pulumi has a drop-in CLI that runs your programs as they are. plunge keeps one record per resource in place of one state file per stack and writes two ownership tags on each cloud object, so two runs that change different resources of one stack do not wait for each other.
+Pulumi with per-resource locking, and the engine plywood can run with `engine: plunge`. This fork of Pulumi has a drop-in CLI that runs your programs as they are. plunge keeps one record per resource in place of one state file per stack and writes two ownership tags on each cloud object, so two runs that change different resources of one stack do not wait for each other.
 
 [Docs](https://intentius.io/plunge/) · [Source](https://github.com/INTENTIUS/plunge) · [Compare](/compare/terraform-platforms/)
 
 ## plywood
 
-CI Automation for Pulumi. Previews and updates run from pull requests on GitHub, GitLab or Forgejo, as jobs in your own CI. A change gets one preview note for every stack it reaches, and each approval binds the preview digest it was shown.
+Sophisticated automation for Pulumi, built on chant, that can run plunge as its engine. Previews and updates run from pull requests on GitHub, GitLab or Forgejo, as jobs in your own CI. A change gets one preview note for every stack it reaches, and each approval binds the preview digest it was shown.
 
 [Docs](https://intentius.io/plywood/) · [Source](https://github.com/INTENTIUS/plywood) · [Compare](/compare/terraform-platforms/)
 
 ## terragucci
 
-Plan, approve and apply Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
+Sophisticated automation for Terraform. Under it sits chant, and choudoufu can stand in for the terraform binary. Plan, approve and apply Terraform, OpenTofu and Terragrunt from pull requests, as jobs in your own CI.
 
 [Docs](https://intentius.io/terragucci/) · [Source](https://github.com/INTENTIUS/terragucci)
 
