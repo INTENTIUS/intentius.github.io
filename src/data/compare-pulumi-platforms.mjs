@@ -62,7 +62,9 @@ export const GATED = [
 	{ id: 'drift', label: 'Drift detection', def: 'Drift: a change made outside your code.',
 		pw: { plan: 0, note: 'one issue per stack', src: `${PW}/guides/turn-on-drift-checks/` },
 		pc: { plan: 2, src: `${P}/deployments/concepts/drift/` },
-		sl: { plan: 1, note: 'private workers only', src: `${S}/concepts/stack/drift-detection` } },
+		// Spacelift's pricing page, read 2026-10-30, lists drift detection only on
+		// Business; its docs still say Starter+. The pricing page is what a buyer sees.
+		sl: { plan: 2, note: 'private workers only', src: 'https://spacelift.io/pricing' } },
 	{ id: 'ephemeral', label: 'A stack per pull request, deleted after a set time', def: 'Stack: one deployment of a Pulumi program, such as dev or prod.',
 		pw: { plan: 0, note: 'deleted when the pull request closes or after a set time', src: `${PW}/guides/review-stacks/` },
 		pc: { plan: 2, src: `${P}/deployments/concepts/ttl/` },
