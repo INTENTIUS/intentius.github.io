@@ -1,0 +1,15 @@
+---
+// A product's one-liner from src/data/products.mjs, as bare text. `bare`
+// drops the closing full stop, for a sentence that goes on after a comma.
+import { PRODUCTS } from '../data/products.mjs';
+
+interface Props {
+	id: string;
+	bare?: boolean;
+}
+const { id, bare = false } = Astro.props;
+const product = PRODUCTS.find((p) => p.id === id);
+if (!product) throw new Error(`OneLiner: no product "${id}" in products.mjs`);
+const text = bare ? product.oneLiner.replace(/\.$/, '') : product.oneLiner;
+---
+{text}

@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/check-rooms.mjs",
     "preview": "astro preview",
+    "sync-homes": "node scripts/sync-homes.mjs",
     "lint:prose": "node scripts/lint-prose.mjs $(find src/content/docs -name '*.md' -o -name '*.mdx')"
   },
   "dependencies": {
