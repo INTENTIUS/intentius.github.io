@@ -39,7 +39,7 @@ const SP = 'https://spacelift.io/pricing';
 export const PLANS = {
 	pw: ['Included'],
 	pc: ['Free', 'Essentials', 'Pro', 'Enterprise'],
-	sl: ['Free', 'Starter+', 'Business', 'Enterprise', 'Enterprise+'],
+	sl: ['Free', 'Starter', 'Business', 'Enterprise'],
 };
 
 export const GATED_BLURB = "Tick what you need. These are plywood's features.";
@@ -54,11 +54,11 @@ export const GATED = [
 	{ id: 'approval', label: 'An approval before an update',
 		pw: { plan: 0, note: 'bound to one preview digest', src: `${PW}/concepts/waves-and-approvals/` },
 		pc: { plan: null, note: 'none built in; ESC approvals gate credentials only', src: `${P}/deployments/guides/gated-deployments/` },
-		sl: { plan: 1, src: `${S}/concepts/policy/approval-policy` } },
+		sl: { plan: 1, src: SP } },
 	{ id: 'policy', label: 'Policy as code on every preview',
 		pw: { plan: 0, note: 'Rego, and your CrossGuard packs', src: `${PW}/guides/use-policy-packs/` },
 		pc: { plan: 2, src: PP },
-		sl: { plan: 1, src: `${S}/vendors/pulumi` } },
+		sl: { plan: 1, src: SP } },
 	{ id: 'drift', label: 'Drift detection', def: 'Drift: a change made outside your code.',
 		pw: { plan: 0, note: 'one issue per stack', src: `${PW}/guides/turn-on-drift-checks/` },
 		pc: { plan: 2, src: `${P}/deployments/concepts/drift/` },
@@ -78,13 +78,17 @@ export const GATED = [
 		pc: { plan: 2, src: `${P}/administration/guides/saml/` },
 		sl: { plan: 3, src: SP } },
 	{ id: 'private', label: 'Runs on runners you control',
+		// Spacelift's pricing page, read 2026-10-30, puts private workers on Business
+		// and has no Starter+ plan; its worker-pools docs still say Starter+.
 		pw: { plan: 0, note: 'your CI', src: `${PW}/#limits` },
 		pc: { plan: 3, src: `${P}/administration/concepts/customer-managed-runners/` },
-		sl: { plan: 1, src: `${S}/concepts/worker-pools` } },
+		sl: { plan: 2, src: SP } },
 	{ id: 'selfhost', label: 'Nothing hosted by the vendor',
+		// Self-hosting is listed under Enterprise as available on request; the page
+		// no longer lists an Enterprise+ plan.
 		pw: { plan: 0, note: 'nothing to host', src: `${PW}/concepts/how-it-works/` },
 		pc: { plan: 3, src: `${P}/administration/self-hosting/` },
-		sl: { plan: 4, src: SP } },
+		sl: { plan: 3, note: 'on request', src: SP } },
 	{ id: 'ai', label: 'AI on failed updates and drift',
 		pw: { plan: 0, note: 'fixes drift by pull request; your model key', src: `${PW}/guides/agent-fix-drift/` },
 		pc: { plan: 2, note: 'an agent can start on a failed operation', src: `${P}/ai/agents/triggers/` },
@@ -108,11 +112,11 @@ export const GATED = [
 	{ id: 'notify', label: 'Slack, Teams and webhook notifications',
 		pw: { plan: 0, note: 'signed webhook, Slack or Teams', src: `${PW}/guides/notify-a-chat-channel/` },
 		pc: { plan: 1, src: `${P}/deployments/concepts/webhooks/` },
-		sl: { plan: 1, src: `${S}/integrations/webhooks` } },
+		sl: { plan: 1, src: SP } },
 	{ id: 'oidc', label: 'Short-lived cloud credentials (OIDC)',
 		pw: { plan: 0, note: 'a preview identity and an up identity, never the same', src: `${PW}/guides/scope-state-access/` },
 		pc: { plan: 0, src: PP },
-		sl: { plan: 1, src: `${S}/integrations/cloud-providers/oidc` } },
+		sl: { plan: 1, src: SP } },
 	{ id: 'review', label: 'A model reviews each pull request',
 		pw: { plan: 0, note: 'your model key; approves nothing', src: `${PW}/guides/agent-review-a-pull-request/` },
 		pc: { plan: 1, note: 'GitHub.com only', src: `${P}/ai/concepts/neo/code-reviews/` },
@@ -140,7 +144,7 @@ export const GATED = [
 	{ id: 'actions', label: "Day-2 actions behind a second person's approval",
 		pw: { plan: 0, note: 'a second person approves the one-resource preview', src: `${PW}/guides/run-a-day-2-action/` },
 		pc: { plan: null, note: 'no approval step; ESC approvals gate credentials only', src: `${P}/deployments/guides/gated-deployments/` },
-		sl: { plan: 1, note: 'Tasks; an approval policy can require two approvals', src: `${S}/concepts/run/task` } },
+		sl: { plan: 1, note: 'Tasks; an approval policy can require two approvals', src: SP } },
 	{ id: 'import', label: 'Import from another platform',
 		pw: { plan: 0, note: 'Pulumi Deployments, pulumi/actions, Spacelift, env zero', src: `${PW}/guides/from-pulumi-actions/` },
 		pc: { plan: null, src: `${P}/iac/comparisons/spacelift/` },
@@ -163,7 +167,7 @@ export const ARENAS = [
 			{ q: 'Runs on runners you control',
 				pw: ['good', 'your CI runners', `${PW}/#limits`],
 				pc: ['good', 'Enterprise', `${P}/deployments/concepts/`],
-				sl: ['good', 'Starter+', `${S}/concepts/worker-pools`] },
+				sl: ['good', 'Business', [`${S}/concepts/worker-pools`, SP]] },
 		],
 	},
 	{
@@ -184,7 +188,7 @@ export const ARENAS = [
 			{ q: 'Runs without calling the vendor',
 				pw: ['good', 'none past your CI, cloud and backend', `${PW}/concepts/how-it-works/`],
 				pc: ['bad', 'below Enterprise', [`${P}/deployments/concepts/`, `${P}/administration/self-hosting/`]],
-				sl: ['bad', 'below Enterprise+', [`${S}/concepts/worker-pools`, SP]] },
+				sl: ['bad', 'below Enterprise', [`${S}/concepts/worker-pools`, SP]] },
 		],
 	},
 	{
