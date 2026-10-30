@@ -13,7 +13,7 @@
 // Spacelift's comes from its media page as in arenas.mjs. plywood's and
 // plunge's are their own sites' pixel logos.
 
-export const READ_ON = '2026-10-27';
+export const READ_ON = '2026-10-29';
 
 export const LABEL = 'plywood, Pulumi Cloud and Spacelift compared';
 
@@ -83,6 +83,10 @@ export const GATED = [
 		pw: { plan: 0, note: 'nothing to host', src: `${PW}/concepts/how-it-works/` },
 		pc: { plan: 3, src: `${P}/administration/self-hosting/` },
 		sl: { plan: 4, src: SP } },
+	{ id: 'ai', label: 'AI on failed updates and drift',
+		pw: { plan: 0, note: 'fixes drift by pull request; your model key', src: `${PW}/guides/agent-fix-drift/` },
+		pc: { plan: 2, note: 'an agent can start on a failed operation', src: `${P}/ai/agents/triggers/` },
+		sl: { plan: 0, note: 'summaries only', src: `${S}/concepts/run/summarization` } },
 	{ id: 'waves', label: 'Updates dependent stacks in order, with an approval between waves', def: 'Wave: a group of stacks updated together, after the ones they depend on.',
 		pw: { plan: 0, note: 'order from StackReference reads; each wave behind its gate', src: `${PW}/guides/stack-references/` },
 		pc: { plan: null, note: 'no gate between stacks', src: `${P}/deployments/concepts/webhooks/` },
@@ -117,7 +121,7 @@ export const GATED = [
 		sl: { plan: 1, src: SP } },
 	{ id: 'chat', label: 'Approve from Slack or Teams',
 		pw: { plan: 0, note: 'a relay you run; plywood notify relay records it', src: `${PW}/guides/notify-a-chat-channel/` },
-		pc: { plan: null, note: 'notifications only', src: `${P}/deployments/webhooks/` },
+		pc: { plan: null, note: 'notifications only', src: `${P}/deployments/concepts/webhooks/` },
 		sl: { plan: 1, note: 'Slack only', src: `${S}/integrations/chatops/slack` } },
 	{ id: 'override', label: 'Policy overrides by named people',
 		pw: { plan: 0, note: 'only people listed in .chant/overriders; each override recorded', src: `${PW}/guides/override-a-denial/` },
@@ -131,13 +135,17 @@ export const GATED = [
 		pw: { plan: 0, note: 'on the estate page', src: `${PW}/reference/cli/` },
 		pc: { plan: null, note: 'export and compute them yourself', src: 'https://www.pulumi.com/blog/import-your-pulumi-cloud-data-with-tap-pulumi-cloud/' },
 		sl: { plan: null, tier: 'unpublished', src: `${S}/product/dashboard` } },
+	{ id: 'actions', label: "Day-2 actions behind a second person's approval",
+		pw: { plan: 0, note: 'a second person approves the one-resource preview', src: `${PW}/guides/run-a-day-2-action/` },
+		pc: { plan: null, note: 'no approval step; ESC approvals gate credentials only', src: `${P}/deployments/guides/gated-deployments/` },
+		sl: { plan: 1, note: 'Tasks; an approval policy can require two approvals', src: `${S}/concepts/run/task` } },
 	{ id: 'import', label: 'Import from another platform',
 		pw: { plan: 0, note: 'Pulumi Deployments, pulumi/actions, Spacelift, env zero', src: `${PW}/guides/from-pulumi-actions/` },
 		pc: { plan: null, src: `${P}/iac/comparisons/spacelift/` },
 		sl: { plan: null, note: 'HCP Terraform only', src: `${S}/product/migrating-to-spacelift` } },
 	{ id: 'mcp', label: 'An MCP server for your coding agent',
 		pw: { plan: 0, note: 'read-only: stacks, runs and reports', src: `${PW}/guides/agent-read-over-mcp/` },
-		pc: { plan: 1, note: 'stack tools', src: `${P}/ai/mcp-server/` },
+		pc: { plan: 1, note: 'stack tools', src: `${P}/ai/guides/set-up-mcp-server/` },
 		sl: { plan: 0, src: `${S}/concepts/intelligence` } },
 ];
 
@@ -175,6 +183,15 @@ export const ARENAS = [
 				pw: ['good', 'none past your CI, cloud and backend', `${PW}/concepts/how-it-works/`],
 				pc: ['bad', 'below Enterprise', [`${P}/deployments/concepts/`, `${P}/administration/self-hosting/`]],
 				sl: ['bad', 'below Enterprise+', [`${S}/concepts/worker-pools`, SP]] },
+		],
+	},
+	{
+		id: 'ownership', title: 'Who owns what',
+		rows: [
+			{ q: 'Your cloud IAM decides who may change each resource',
+				pw: ['warn', 'AWS IAM and Azure Policy can read the plunge-stack tag; on Google Cloud the project is the fence', [`${PL}/aws/gate/`, `${PL}/azure/gate/`, `${PL}/gcp/gate/`]],
+				pc: ['bad', 'its own roles, on stacks', `${P}/administration/concepts/rbac/`],
+				sl: ['bad', 'its own spaces', `${S}/concepts/spaces`] },
 		],
 	},
 	{
