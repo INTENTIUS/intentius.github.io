@@ -53,7 +53,9 @@ export const GATED = [
 	{ id: 'drift', label: 'Drift detection', def: 'Drift: a change made outside your code.',
 		tg: { plan: 0, note: 'fixes by pull request', src: `${T}/guides/turn-on-drift-checks/` },
 		hcp: { plan: 2, src: `${H}/workspaces/health` },
-		sl: { plan: 1, note: 'private workers only', src: `${S}/concepts/stack/drift-detection` } },
+		// Spacelift's pricing page, read 2026-10-30, lists drift detection only on
+		// Business; its docs still say Starter+. The pricing page is what a buyer sees.
+		sl: { plan: 2, note: 'private workers only', src: 'https://spacelift.io/pricing' } },
 	{ id: 'cost', label: 'Cost estimates',
 		tg: { plan: 0, note: 'your Infracost key', src: `${T}/guides/estimate-cost/` },
 		hcp: { plan: 2, src: `${H}/workspaces/cost-estimation` },
