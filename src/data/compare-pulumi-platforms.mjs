@@ -302,7 +302,7 @@ export const ARENAS = [
 				pc: ['good', '', `${P}/iac/concepts/state-and-backends/`],
 				sl: ['good', '', `${S}/concepts/run`] },
 			{ q: 'Finds cloud resources no code manages',
-				pw: ['good', 'one Adopt click opens a pull request', `${B}/using/acting/`],
+				pw: ['good', 'chant search --ambient reports those of a kind you manage', 'https://intentius.io/chant/cli/search/'],
 				pc: ['good', 'Essentials', `${P}/discovery-governance/concepts/discovery/`],
 				sl: ['bad', 'not for Pulumi', `${S}/vendors/pulumi`] },
 		],

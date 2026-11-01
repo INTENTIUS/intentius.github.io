@@ -313,7 +313,7 @@ export const ARENAS = [
 				hcp: ['good', 'Standard, US only', 'https://www.hashicorp.com/en/blog/hcp-terraform-powered-by-infragraph-limited-availability-launch'],
 				sl: ['bad', 'list only', `${S}/concepts/resources`] },
 			{ q: 'Finding cloud resources nothing manages',
-				tg: ['good', 'with choudoufu, each shown as unowned, with the command to adopt it', `${B}/using/choudoufu/`],
+				tg: ['good', 'chant search --ambient reports those of a kind you manage', 'https://intentius.io/chant/cli/search/'],
 				hcp: ['good', 'tier not published', `${H}/workspaces/import`],
 				sl: ['good', 'tier not published', `${S}/concepts/intelligence`] },
 			{ q: 'Drift, shown on the graph',

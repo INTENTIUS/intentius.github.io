@@ -178,8 +178,8 @@ const rest = [
 // The control plane: the behold rows that match what HCP Terraform's and
 // Pulumi Cloud's consoles show (the estate graph, drift on it, resources
 // nothing manages, and which run deployed each resource). It sits second on
-// the page, so its words link down the page like LEAD's. behold only reads,
-// so no row here runs or approves a plan; those stay in BEHOLD.
+// the page, so its words link down the page like LEAD's. No row here runs or
+// approves a plan; those stay in BEHOLD.
 export const CONTROL = {
 	PREFIX: 'plane-',
 	LEVEL: 3,
@@ -191,7 +191,7 @@ export const CONTROL = {
 	ARENAS: [
 		{
 			id: 'behold', title: 'One graph, every engine',
-			blurb: 'behold is free, and it only reads. It reads Terraform through choudoufu and Pulumi through plunge.',
+			blurb: 'behold is free. It reads Terraform through choudoufu and Pulumi through plunge.',
 			lead: tfB.lead,
 			rows: [
 				{ q: GRAPH, in: tfGraph.tg, hcp: tfGraph.hcp, pc: puGraph.pc, sl: tfGraph.sl },
@@ -199,7 +199,7 @@ export const CONTROL = {
 					in: ['good', "live, from each engine's own read: plunge drift for Pulumi, choudoufu's plan for Terraform, chant's live read for chant", srcs(tfDrift.tg, puDrift.pw)],
 					hcp: tfDrift.hcp, pc: puDrift.pc, sl: tfDrift.sl },
 				{ q: 'Finds cloud resources no code manages',
-					in: ['good', 'with choudoufu, each shown as unowned; one Adopt click opens a pull request', srcs(tfFind.tg, puFind.pw)],
+					in: ['good', 'chant search --ambient reports those of a kind you manage', srcs(tfFind.tg, puFind.pw)],
 					hcp: tfFind.hcp, pc: puFind.pc,
 					sl: { parts: [named('Terraform', tfFind.sl), named('Pulumi', puFind.sl)] } },
 				{ q: RUN, in: puRun.pw, pc: puRun.pc, sl: puRun.sl },
