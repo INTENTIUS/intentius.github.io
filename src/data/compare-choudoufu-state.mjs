@@ -62,7 +62,7 @@ export const ARENAS = [
 		id: 'reach', title: 'Where it runs',
 		rows: [
 			{ q: 'Platforms',
-				cdf: ['warn', 'AWS and Kubernetes, more on the way', `${C}/docs/progress/`],
+				cdf: ['warn', 'AWS, Kubernetes, GCP and Azure', `${C}/docs/progress/`],
 				tf: ['good', 'every provider', `${H}/language/backend`] },
 			{ q: 'A backend block or a non-default workspace',
 				cdf: ['warn', 'refused; choudoufu live-check reports it before you start', `${C}/docs/progress/`],
