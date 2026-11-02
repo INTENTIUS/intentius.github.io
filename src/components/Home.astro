@@ -1,0 +1,384 @@
+---
+// The home page's sections. Each part wraps prose written in index.mdx, so
+// the words stay in the one file the prose lint reads and this file only
+// lays them out.
+//   hero     the eye, the headline, one line and two buttons
+//   pillars  an optional heading and line, then "**label** line" items as cards
+//   steps    the reader's delivery steps as a row of tiles (an ordered list)
+//   tools    a list of links laid out as cards
+//   code     prose, then code blocks in a grid of `cols` columns (3 by default)
+//   behold   prose beside a screenshot of the demo
+//   contact  the closing band
+interface Props {
+	part: 'hero' | 'pillars' | 'steps' | 'tools' | 'code' | 'behold' | 'contact';
+	img?: string;
+	alt?: string;
+	href?: string;
+	cols?: number;
+}
+const { part, img, alt = '', href, cols = 3 } = Astro.props;
+---
+{part === 'hero' && (
+	<section class="h-hero in-landing">
+		<span class="in-logo h-eye" aria-hidden="true"></span>
+		<slot />
+	</section>
+)}
+{part === 'pillars' && <section class="h-band h-pillars"><slot /></section>}
+{part === 'steps' && <section class="h-band h-steps"><slot /></section>}
+{part === 'tools' && <section class="h-band h-tools"><slot /></section>}
+{part === 'code' && <section class="h-band h-code" style={`--cols: ${cols}`}><slot /></section>}
+{part === 'behold' && (
+	<section class="h-band h-behold">
+		<div class="h-behold-text"><slot /></div>
+		<a class="h-shot not-content" href={href}><img src={img} alt={alt} loading="lazy" /></a>
+	</section>
+)}
+{part === 'contact' && <section class="h-contact"><slot /></section>}
+
+<style is:global>
+	/* Shared: each band is separated by a hairline and has room to breathe. */
+	.sl-markdown-content .h-band {
+		margin-top: 0;
+		padding-block: 3.5rem 0.5rem;
+	}
+	.sl-markdown-content :is(.h-band, .h-contact, .h-behold-text) > .sl-heading-wrapper {
+		margin-top: 0;
+	}
+	.sl-markdown-content :is(.h-band, .h-contact, .h-behold-text) > .sl-heading-wrapper h2 {
+		margin-top: 0;
+		font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+	}
+	.sl-markdown-content :is(.h-band, .h-contact, .h-behold-text) > .sl-heading-wrapper + p {
+		margin-top: 0.9rem;
+		max-width: 44rem;
+		font-size: 1rem;
+	}
+
+	/* Hero */
+	.sl-markdown-content .h-hero {
+		display: grid;
+		justify-items: center;
+		text-align: center;
+		padding-block: clamp(1.5rem, 6vw, 4.5rem) 1rem;
+	}
+	.h-hero .h-eye {
+		width: 114px;
+		height: 64px;
+		margin-bottom: 0.75rem;
+	}
+	/* Starlight puts 1.5em above a heading wrapper, which at hero size is a
+	   gap under the eye. */
+	.sl-markdown-content .h-hero > .sl-heading-wrapper {
+		margin-top: 0;
+	}
+	/* The home page's headings are not link targets, so Starlight's anchor
+	   link is hidden. Left in, it sits on a line of its own under each
+	   splash heading, which intentius.css lays out as flex. */
+	.sl-markdown-content :is(.h-hero, .h-band, .h-contact) .sl-anchor-link {
+		display: none;
+	}
+	.sl-markdown-content .h-hero h1 {
+		display: block;
+		margin: 0 auto;
+		padding-inline-end: 0;
+		max-width: 18em;
+		font-family: var(--in-display);
+		font-weight: 600;
+		font-size: clamp(2.1rem, 5.6vw, 3.6rem);
+		line-height: 1.08;
+		letter-spacing: -0.035em;
+		color: var(--sl-color-white);
+		text-wrap: balance;
+	}
+	.sl-markdown-content .h-hero > .sl-heading-wrapper + p {
+		margin-top: 1.25rem;
+		max-width: 36rem;
+		font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+		line-height: 1.5;
+		color: var(--sl-color-gray-2);
+		text-wrap: balance;
+	}
+	/* The last paragraph of the hero and of the contact band holds the
+	   buttons: the first link is filled, any second one is outlined. */
+	.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem;
+		margin-top: 2rem;
+	}
+	.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		padding: 0 1.25rem;
+		border-radius: 0.5rem;
+		border: 1px solid var(--in-accent);
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		color: var(--in-accent);
+		transition: background 0.15s, color 0.15s;
+	}
+	.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child a:first-child {
+		background: var(--in-accent);
+		color: var(--sl-color-black);
+	}
+	.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child a:hover {
+		background: color-mix(in srgb, var(--in-accent) 14%, transparent);
+		color: var(--in-accent);
+	}
+	.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child a:first-child:hover {
+		background: var(--sl-color-accent-high);
+		color: var(--sl-color-black);
+	}
+
+	/* Steps: an ordered list laid out as a row of tiles joined by a line. */
+	.sl-markdown-content .h-steps ol {
+		list-style: none;
+		counter-reset: step;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.75rem;
+		margin: 2rem 0 0;
+		padding: 0;
+	}
+	.sl-markdown-content .h-steps ol > li {
+		counter-increment: step;
+		position: relative;
+		margin: 0;
+		padding: 1rem 1rem 1.1rem;
+		border: 1px solid var(--in-rule);
+		border-radius: 0.6rem;
+		background: var(--in-panel);
+	}
+	.sl-markdown-content .h-steps ol > li::before {
+		content: '0' counter(step);
+		display: block;
+		margin-bottom: 0.6rem;
+		font-family: var(--sl-font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		color: var(--in-gold);
+	}
+	/* The line from one tile to the next. */
+	.sl-markdown-content .h-steps ol > li:not(:last-child)::after {
+		content: '';
+		position: absolute;
+		top: 1.45rem;
+		right: calc(-0.75rem - 1px);
+		width: 0.75rem;
+		height: 1px;
+		background: var(--in-gold);
+	}
+	.sl-markdown-content .h-steps ol > li > p {
+		margin: 0;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: var(--sl-color-gray-3);
+	}
+	.sl-markdown-content .h-steps ol > li > p:first-of-type {
+		margin-bottom: 0.4rem;
+		font-family: var(--in-display);
+		font-size: 1.05rem;
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+	.sl-markdown-content .h-steps > p:last-child {
+		margin-top: 1.25rem;
+		font-size: 0.85rem;
+		color: var(--sl-color-gray-3);
+	}
+
+	/* Pillars: three cards, each a bold label over one line. */
+	.sl-markdown-content .h-pillars:not(:has(.sl-heading-wrapper)) {
+		padding-top: 2.5rem;
+	}
+	.sl-markdown-content .h-pillars > .sl-heading-wrapper + p + ul {
+		margin-top: 1.75rem;
+	}
+	.sl-markdown-content .h-pillars ul {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+		gap: 0.75rem;
+		margin: 0;
+		padding: 0;
+	}
+	.sl-markdown-content .h-pillars ul > li {
+		margin: 0;
+		padding: 1.4rem 1.4rem 1.5rem;
+		border: 1px solid var(--in-rule);
+		border-top: 2px solid var(--in-gold);
+		border-radius: 0.6rem;
+		background: var(--in-panel);
+		font-size: 0.95rem;
+		line-height: 1.55;
+		color: var(--sl-color-gray-2);
+	}
+	.sl-markdown-content .h-pillars ul > li::before {
+		display: none;
+	}
+	.sl-markdown-content .h-pillars ul > li > strong {
+		display: block;
+		margin-bottom: 0.45rem;
+		font-family: var(--in-display);
+		font-size: 1.3rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: var(--sl-color-white);
+	}
+
+	/* Tools: a list of links laid out as three cards. The whole card is the link. */
+	.sl-markdown-content .h-tools ul {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: 0.75rem;
+		margin: 2rem 0 0;
+		padding: 0;
+	}
+	.sl-markdown-content .h-tools ul > li {
+		position: relative;
+		margin: 0;
+		padding: 1.25rem 1.25rem 1.4rem;
+		border: 1px solid var(--in-rule);
+		border-top: 2px solid var(--in-accent);
+		border-radius: 0.6rem;
+		background: var(--in-panel);
+		font-size: 0.9rem;
+		color: var(--sl-color-gray-3);
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	.sl-markdown-content .h-tools ul > li::before {
+		display: none;
+	}
+	.sl-markdown-content .h-tools ul > li > a {
+		display: block;
+		margin-bottom: 0.2rem;
+		font-family: var(--in-display);
+		font-size: 1.3rem;
+		font-weight: 600;
+		color: var(--sl-color-white);
+		text-decoration: none;
+	}
+	.sl-markdown-content .h-tools ul > li > a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	.sl-markdown-content .h-tools ul > li:hover,
+	.sl-markdown-content .h-tools ul > li:focus-within {
+		border-color: var(--in-accent);
+		transform: translateY(-2px);
+	}
+	.sl-markdown-content .h-tools > p:last-child {
+		margin-top: 1.25rem;
+		font-size: 0.9rem;
+	}
+
+	/* Code: three blocks side by side, joined like the steps. */
+	.sl-markdown-content .h-code {
+		display: grid;
+		grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+		column-gap: 0.75rem;
+		align-items: stretch;
+	}
+	.sl-markdown-content .h-code > :not(.expressive-code) {
+		grid-column: 1 / -1;
+	}
+	.sl-markdown-content .h-code > .expressive-code {
+		margin-top: 1.75rem;
+		min-width: 0;
+		display: flex;
+	}
+	.sl-markdown-content .h-code > .expressive-code figure {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.sl-markdown-content .h-code > .expressive-code pre {
+		flex: 1;
+		font-size: 0.74rem;
+		--ec-codePadInl: 0.9rem;
+	}
+	.sl-markdown-content .h-code > .expressive-code + p {
+		margin-top: 1.5rem;
+	}
+
+	/* behold: prose beside the screenshot. */
+	.sl-markdown-content .h-behold {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+		gap: 2.5rem;
+		align-items: center;
+	}
+	.h-behold-text > * + * {
+		margin-top: 1rem;
+	}
+	.h-shot {
+		display: block;
+		border: 1px solid var(--in-rule);
+		border-radius: 0.6rem;
+		overflow: hidden;
+		box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.5);
+		transition: border-color 0.15s;
+	}
+	.h-shot:hover {
+		border-color: var(--in-accent);
+	}
+	.h-shot img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	/* Contact: a centered band on a panel. */
+	.sl-markdown-content .h-contact {
+		margin-top: 4rem;
+		padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
+		text-align: center;
+		border: 1px solid var(--in-rule);
+		border-top: 1px solid var(--in-gold);
+		border-radius: 0.75rem;
+		background: var(--in-panel);
+	}
+	.sl-markdown-content .h-contact > .sl-heading-wrapper h2 {
+		justify-content: center;
+	}
+	.sl-markdown-content .h-contact > .sl-heading-wrapper + p {
+		margin-inline: auto;
+	}
+
+	@media (max-width: 60rem) {
+		.sl-markdown-content .h-steps ol {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.sl-markdown-content .h-steps ol > li:not(:last-child)::after {
+			top: auto;
+			bottom: calc(-0.75rem - 1px);
+			left: 1.45rem;
+			right: auto;
+			width: 1px;
+			height: 0.75rem;
+		}
+		.sl-markdown-content .h-tools ul,
+		.sl-markdown-content .h-pillars ul,
+		.sl-markdown-content .h-code,
+		.sl-markdown-content .h-behold {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.sl-markdown-content .h-behold {
+			gap: 1.5rem;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.sl-markdown-content .h-tools ul > li,
+		.h-shot,
+		.sl-markdown-content :is(.h-hero, .h-contact) > p:last-child a {
+			transition: none;
+		}
+	}
+</style>
