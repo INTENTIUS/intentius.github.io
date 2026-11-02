@@ -1,50 +1,56 @@
 ---
 title: Intentius
-description: An infrastructure consultancy. I build open-source tools and help teams put them to work.
+description: "Delivery for Terraform, Pulumi and SQL teams."
 template: splash
 tableOfContents: false
 ---
 
 import Landing from '../../components/Landing.astro';
-import Arenas from '../../components/Arenas.astro';
-import { LEAD, CONTROL, TERRAFORM, PULUMI, BEHOLD } from '../../data/compare-platforms.mjs';
 
 <Landing />
 
-<Arenas data={LEAD} />
+## Delivery for Terraform, Pulumi and SQL teams.
 
-Skip to [Terraform in detail](#terraform-in-detail) or [Pulumi in detail](#pulumi-in-detail) if you run one engine.
+Approvals and audit as jobs on GitHub, GitLab or Forgejo. No platform to buy.
 
-## The control plane
+## Your delivery
 
-behold against the HCP Terraform, Pulumi Cloud and Spacelift consoles, across both engines.
+Every team delivers in its own way. Most teams do these steps.
 
-<Arenas data={CONTROL} />
+- Build and test a change
+- Plan it
+- Get an approval
+- Release it
+- Watch it in production
 
-## Terraform in detail
+chant does each step as a job in GitHub, GitLab or Forgejo. You keep the steps you have and add the ones you need.
 
-terragucci and choudoufu against HCP Terraform and Spacelift.
+## Pick your tool
 
-<Arenas data={TERRAFORM} />
+- [terragucci](https://intentius.io/terragucci/) for Terraform teams
+- [plywood](https://intentius.io/plywood/) for Pulumi teams
+- [SQL Yodeler](https://intentius.io/sql-yodeler/) for SQL teams
 
-## Pulumi in detail
+All three are built on [chant](https://intentius.io/chant/). See how they [compare](/compare/terraform-platforms/) with HCP Terraform, Pulumi Cloud and Spacelift.
 
-plywood and plunge against Pulumi Cloud, and against Spacelift where it runs Pulumi. Pulumi calls a plan a preview, and an apply an update.
+## A way out of Terraform
 
-<Arenas data={PULUMI} />
+chant writes each cloud's own format, such as CloudFormation or Kubernetes YAML. Each chant type matches one resource in that format, field for field, like the L1 classes in AWS CDK. The cloud runs the output without Terraform. There is no state file.
 
-## behold across both engines
+The output is plain CloudFormation or YAML. If you stop using chant, you keep it.
 
-<Arenas data={BEHOLD} />
+You can move one resource at a time. Nothing is deleted or created again.
 
-## Help me
+## For software teams
 
-<Landing part="picker" />
+chant writes your pipelines and releases your software.
 
-## Open source
+## See all of it
 
-The tools are free, and the docs for each are on its own site.
+[behold](https://intentius.io/behold/) shows Terraform, Pulumi and chant resources in one view. During a move, you can see both sides. Open the [demo](https://demo.intentius.io/).
 
-<Landing part="tools" />
+## Work with me
 
-[All the tools](/tools/), or [what I do with them](/work/).
+The tools are free. I help teams install them and move from Spacelift or HCP Terraform.
+
+[Tell me how your team delivers today.](/contact/)
