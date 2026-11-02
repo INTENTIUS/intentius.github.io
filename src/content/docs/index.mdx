@@ -1,56 +1,103 @@
 ---
 title: Intentius
-description: "Delivery for Terraform, Pulumi and SQL teams."
+description: "From intent to delivery. Infrastructure and software on every cloud, with jobs on GitHub, GitLab or Forgejo."
 template: splash
 tableOfContents: false
+wide: true
 ---
 
-import Landing from '../../components/Landing.astro';
+import Home from '../../components/Home.astro';
 
-<Landing />
+<Home part="hero">
 
-## Delivery for Terraform, Pulumi and SQL teams.
+# from intent to delivery
 
-Approvals and audit as jobs on GitHub, GitLab or Forgejo. No platform to buy.
+where you already are
 
-## Your delivery
+[Contact me](/contact/)
+[Open the demo](https://demo.intentius.io/)
 
-Every team delivers in its own way. Most teams do these steps.
+</Home>
 
-- Build and test a change
-- Plan it
-- Get an approval
-- Release it
-- Watch it in production
 
-chant does each step as a job in GitHub, GitLab or Forgejo. You keep the steps you have and add the ones you need.
+<Home part="pillars">
 
-## Pick your tool
+- **Change control** Every change is planned, approved and recorded before it reaches the cloud.
+- **Drift** If someone changes the cloud by hand, chant finds it and opens a pull request.
+- **Releases** Each component releases on its own, signed. chant writes the pipelines.
 
-- [terragucci](https://intentius.io/terragucci/) for Terraform teams
-- [plywood](https://intentius.io/plywood/) for Pulumi teams
-- [SQL Yodeler](https://intentius.io/sql-yodeler/) for SQL teams
+</Home>
 
-All three are built on [chant](https://intentius.io/chant/). See how they [compare](/compare/terraform-platforms/) with HCP Terraform, Pulumi Cloud and Spacelift.
+<Home part="steps">
 
-## A way out of Terraform
+## Your delivery, step by step
 
-chant writes each cloud's own format, such as CloudFormation or Kubernetes YAML. Each chant type matches one resource in that format, field for field, like the L1 classes in AWS CDK. The cloud runs the output without Terraform. There is no state file.
+Most teams do these five steps. chant writes each step as a job in GitHub, GitLab or Forgejo. You keep the steps you have and add the ones you need.
 
-The output is plain CloudFormation or YAML. If you stop using chant, you keep it.
+1. Build and test
 
-You can move one resource at a time. Nothing is deleted or created again.
+   Each change is built and tested.
 
-## For software teams
+2. Plan
 
-chant writes your pipelines and releases your software.
+   See exactly what will change before it happens.
+
+3. Approve
+
+   Someone approves that exact change. Every approval is recorded.
+
+4. Release
+
+   The change goes out. For software, chant signs and publishes the release.
+
+5. Watch
+
+   Know what is running and when it changes.
+
+</Home>
+
+<Home part="pillars">
+
+## Terraform and Pulumi are optional
+
+chant writes each cloud's own format, such as CloudFormation. The cloud runs it, and there is no state file.
+
+- **Clear ownership** Each resource carries a label that names its team. chant never deletes anything without one.
+- **No waiting** Teams change different resources at the same time. There is no shared lock.
+- **Your IAM** The cloud permissions you already have are the gate. There is no extra tool to manage.
+- **No lock-in** If you stop using chant, you keep everything it wrote.
+
+</Home>
+
+<Home part="behold" img="/home/behold.png" alt="behold showing a Terraform estate, with each resource marked as bound, unowned or not observed" href="https://demo.intentius.io/">
 
 ## See all of it
 
-[behold](https://intentius.io/behold/) shows Terraform, Pulumi and chant resources in one view. During a move, you can see both sides. Open the [demo](https://demo.intentius.io/).
+[behold](https://intentius.io/behold/) shows Terraform, Pulumi and chant resources in one view. During a move, you can see both sides.
+
+[Open the demo](https://demo.intentius.io/)
+
+</Home>
+
+<Home part="tools">
+
+## Keep your engine for now
+
+Add the delivery steps to what you run today. When you are ready, chant carve moves Terraform resources to the cloud's own format, one at a time. Nothing is deleted or created again.
+
+- [terragucci](https://intentius.io/terragucci/) for Terraform and OpenTofu teams
+- [plywood](https://intentius.io/plywood/) for Pulumi teams
+
+See how they [compare](/compare/terraform-platforms/) with HCP Terraform, Pulumi Cloud and Spacelift. For SQL teams, there is [SQL Yodeler](https://intentius.io/sql-yodeler/).
+
+</Home>
+
+<Home part="contact">
 
 ## Work with me
 
-The tools are free. I help teams install them and move from Spacelift or HCP Terraform.
+The tools are free. I'm available to help.
 
-[Tell me how your team delivers today.](/contact/)
+[Tell me how your team delivers today](/contact/)
+
+</Home>

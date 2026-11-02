@@ -59,6 +59,7 @@ for (const file of files) {
     .replace(/^---\n[\s\S]*?\n---\n/, (s) => s.replace(/^---$/gm, "   "))
     .replace(/^import .*$/gm, (m) => " ".repeat(m.length))
     .replace(/<[A-Z][\s\S]*?\/>/g, (m) => " ".repeat(m.length))
+    .replace(/<\/?[A-Z][^>]*>/g, (m) => " ".repeat(m.length))  // wrapper tags such as <Home part="steps"> and </Home>
     .replace(/^(\s*)[-*+] /gm, (m) => " ".repeat(m.length))
     // Heading markers are punctuation, not words: blank the hashes and keep
     // the heading text, so a run of short sections is not read as anaphora.
