@@ -267,7 +267,9 @@ export const ARENAS = [
 		lead: { name: 'plunge', logo: { dark: '/brand/vendors/plunge.png', light: '/brand/vendors/plunge.png' }, named: true, link: true, href: `${PL}/` },
 		rows: [
 			{ q: 'Two updates to one stack, on different resources, run side by side',
-				pw: ['good', 'both apply; neither waits for a lock', `${PL}/`],
+				// Run directly on floci on 2026-11-02 (plywood#55): a second merge's commit carries the first merge's change, so while the
+				// first still applies, plunge's per-resource record lets one of the two save the shared resource and the other is re-run.
+				pw: ['warn', 'both apply once the first has landed; at the same moment, one is refused and re-run', [`${PL}/`, 'https://github.com/INTENTIUS/plywood/issues/55']],
 				pc: ['bad', 'second queues', `${P}/deployments/concepts/settings/skip-intermediate-deployments/`],
 				sl: ['bad', 'second waits', `${S}/concepts/run`] },
 			{ q: 'Drift read for one resource alone',
