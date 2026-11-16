@@ -35,7 +35,7 @@ export const ROOMS = [
 			{ label: 'The source', href: 'https://github.com/INTENTIUS/choudoufu' },
 		],
 		read: [
-			{ label: 'Estate migration and carving', href: '/work/#estate-migration-and-carving' },
+			{ label: 'Fractional retainer', href: '/work/#fractional-devops-retainer-from-8000-a-month' },
 			{ label: 'choudoufu and the state file', href: '/compare/choudoufu-and-terraform-state/' },
 		],
 	},
@@ -57,7 +57,7 @@ export const ROOMS = [
 			{ label: 'Coming from Spacelift or env0', href: 'https://intentius.io/terragucci/guides/coming-from-spacelift-or-env-zero/' },
 		],
 		read: [
-			{ label: 'Moving from another runner', href: '/work/#moving-from-another-runner' },
+			{ label: 'Governance sprint', href: '/work/#governance-sprint-2200' },
 			{ label: 'Comparing Intentius to the rest', href: '/compare/terraform-platforms/' },
 		],
 	},
@@ -78,7 +78,7 @@ export const ROOMS = [
 			{ label: 'The source, Apache-2.0', href: 'https://github.com/INTENTIUS/terragucci' },
 		],
 		read: [
-			{ label: 'Rollout', href: '/work/#rollout' },
+			{ label: 'Governance sprint', href: '/work/#governance-sprint-2200' },
 			{ label: 'terragucci', href: 'https://intentius.io/terragucci/' },
 		],
 	},
@@ -98,7 +98,7 @@ export const ROOMS = [
 			{ label: 'The chant source', href: 'https://github.com/INTENTIUS/chant' },
 		],
 		read: [
-			{ label: 'Agents against real infrastructure', href: '/work/#agents-against-real-infrastructure' },
+			{ label: 'Fractional retainer', href: '/work/#fractional-devops-retainer-from-8000-a-month' },
 			{ label: 'Tools', href: '/tools/#agents' },
 		],
 	},
@@ -118,7 +118,7 @@ export const ROOMS = [
 			{ label: 'The chant source', href: 'https://github.com/INTENTIUS/chant' },
 		],
 		read: [
-			{ label: 'Releases as compile targets', href: '/work/#releases-as-compile-targets' },
+			{ label: 'Fractional retainer', href: '/work/#fractional-devops-retainer-from-8000-a-month' },
 			{ label: 'The intoxicating mix of synthesis and execution', href: 'https://lex00.github.io/posts/the-intoxicating-mix-of-synthesis-and-execution/' },
 		],
 	},
