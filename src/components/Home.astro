@@ -60,7 +60,7 @@ const { part, img, alt = '', href, cols = 3 } = Astro.props;
 		display: grid;
 		justify-items: center;
 		text-align: center;
-		padding-block: clamp(1.5rem, 6vw, 4.5rem) 1rem;
+		padding-block: clamp(1rem, 3vw, 2rem) 0;
 	}
 	.h-hero .h-eye {
 		width: 114px;
@@ -135,13 +135,17 @@ const { part, img, alt = '', href, cols = 3 } = Astro.props;
 	}
 
 	/* Steps: an ordered list laid out as a row of tiles joined by a line. */
+	.sl-markdown-content .h-band.h-steps {
+		padding-top: 2.25rem;
+	}
 	.sl-markdown-content .h-steps ol {
 		list-style: none;
 		counter-reset: step;
 		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-auto-flow: column;
+		grid-auto-columns: minmax(0, 1fr);
 		gap: 0.75rem;
-		margin: 2rem 0 0;
+		margin: 1.25rem 0 0;
 		padding: 0;
 	}
 	.sl-markdown-content .h-steps ol > li {
@@ -184,6 +188,19 @@ const { part, img, alt = '', href, cols = 3 } = Astro.props;
 		font-size: 1.05rem;
 		font-weight: 600;
 		color: var(--sl-color-white);
+	}
+	/* A tile's last line is its booking link, pinned to the tile's foot. */
+	.sl-markdown-content .h-steps ol > li {
+		display: flex;
+		flex-direction: column;
+	}
+	.sl-markdown-content .h-steps ol > li > p:last-of-type:not(:first-of-type) {
+		margin-top: auto;
+		padding-top: 0.9rem;
+		font-weight: 600;
+	}
+	.sl-markdown-content .h-steps ol > li > p:nth-of-type(2) {
+		margin-bottom: 0;
 	}
 	.sl-markdown-content .h-steps > p:last-child {
 		margin-top: 1.25rem;
@@ -354,6 +371,7 @@ const { part, img, alt = '', href, cols = 3 } = Astro.props;
 
 	@media (max-width: 60rem) {
 		.sl-markdown-content .h-steps ol {
+			grid-auto-flow: row;
 			grid-template-columns: minmax(0, 1fr);
 		}
 		.sl-markdown-content .h-steps ol > li:not(:last-child)::after {
