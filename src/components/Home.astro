@@ -199,7 +199,13 @@ const { part, img, alt = '', href, cols = 3 } = Astro.props;
 		padding-top: 0.9rem;
 		font-weight: 600;
 	}
-	.sl-markdown-content .h-steps ol > li > p:nth-of-type(2) {
+	/* With four paragraphs, the second is the reader's situation. */
+	.sl-markdown-content .h-steps ol > li > p:nth-of-type(2):not(:nth-last-of-type(2)) {
+		margin-bottom: 0.4rem;
+		font-style: italic;
+		color: var(--sl-color-gray-2);
+	}
+	.sl-markdown-content .h-steps ol > li > p:nth-of-type(n+2) {
 		margin-bottom: 0;
 	}
 	.sl-markdown-content .h-steps > p:last-child {
