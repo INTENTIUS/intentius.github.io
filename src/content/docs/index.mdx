@@ -1,6 +1,6 @@
 ---
 title: Intentius
-description: "From intent to delivery. Infrastructure and software on every cloud, with jobs on GitHub, GitLab or Forgejo."
+description: "Infrastructure work for teams on Terraform, Pulumi and Kubernetes. Start with a half-day read-only audit for $950, then drift checks, governance or a retainer."
 template: splash
 tableOfContents: false
 wide: true
@@ -8,96 +8,54 @@ wide: true
 
 import Home from '../../components/Home.astro';
 
-<Home part="hero">
-
-# from intent to delivery
-
-where you already are
-
-[Contact me](/contact/)
-[Open the demo](https://demo.intentius.io/)
-
-</Home>
-
-
-<Home part="pillars">
-
-- **Change control** Every change is planned, approved and recorded before it reaches the cloud.
-- **Drift** If someone changes the cloud by hand, chant finds it and opens a pull request.
-- **Releases** Each component releases on its own, signed. chant writes the pipelines.
-
-</Home>
+<Home part="hero" />
 
 <Home part="steps">
 
-## Your delivery, step by step
+## Four ways to work with us
 
-Most teams do these five steps. chant writes each step as a job in GitHub, GitLab or Forgejo. You keep the steps you have and add the ones you need.
+1. Audit, $950
 
-1. Build and test
+   Nobody has drawn the whole estate.
 
-   Each change is built and tested.
+   Half a day, read-only. Graphs, a drift report and a 30-day plan.
 
-2. Plan
+   [Book a scoping call](https://cal.com/intentius/15min)
 
-   See exactly what will change before it happens.
+2. Drift lifecycle, $1,800
 
-3. Approve
+   Someone changed it in the console again.
 
-   Someone approves that exact change. Every approval is recorded.
+   One day. Scheduled drift checks in your GitHub Actions or GitLab.
 
-4. Release
+   [Ask about drift checks](https://cal.com/intentius/15min)
 
-   The change goes out. For software, chant signs and publishes the release.
+3. Governance, $2,200
 
-5. Watch
+   You're pricing Spacelift, HCP Terraform or Pulumi Cloud.
 
-   Know what is running and when it changes.
+   One day. Plans and approvals from pull requests, in your own CI.
+
+   [Scope your governance](https://cal.com/intentius/15min)
+
+4. Retainer, from $8,000/mo
+
+   Your senior DevOps role has been open for months.
+
+   A senior infrastructure engineer from the first week, month to month.
+
+   [Talk about a retainer](https://cal.com/intentius/15min)
+
+Want to see a report first? [blacklight](https://blacklight.intentius.io) runs `chant audit` on any public repo for free. Consulting for your own clients? behold and chant are free, and [we work alongside consultants](/work/#running-audits-for-your-own-clients).
 
 </Home>
 
-<Home part="pillars">
+<Home part="behold" img="/home/behold.png" alt="behold drawing a Terraform production network: a VPC with its subnets, security groups, route table and internet gateway, each link labelled with the attribute that joins them" href="https://demo.intentius.io/">
 
-## Terraform and Pulumi are optional
+## Nothing changes while we look
 
-chant writes each cloud's own format, such as CloudFormation. The cloud runs it, and there is no state file.
-
-- **Clear ownership** Each resource carries a label that names its team. chant never deletes anything without one.
-- **No waiting** Teams change different resources at the same time. There is no shared lock.
-- **Your IAM** The cloud permissions you already have are the gate. There is no extra tool to manage.
-- **No lock-in** If you stop using chant, you keep everything it wrote.
-
-</Home>
-
-<Home part="behold" img="/home/behold.png" alt="behold showing a Terraform estate, with each resource marked as bound, unowned or not observed" href="https://demo.intentius.io/">
-
-## See all of it
-
-[behold](https://intentius.io/behold/) shows Terraform, Pulumi and chant resources in one view. During a move, you can see both sides.
+The audit uses read-only access for the session, with nothing installed. It runs on [behold](https://intentius.io/behold/) and [chant](https://intentius.io/chant/), which are open source and stay with you.
 
 [Open the demo](https://demo.intentius.io/)
-
-</Home>
-
-<Home part="tools">
-
-## Keep your engine for now
-
-Add the delivery steps to what you run today. When you are ready, chant carve moves Terraform resources to the cloud's own format, one at a time. Nothing is deleted or created again.
-
-- [terragucci](https://intentius.io/terragucci/) for Terraform and OpenTofu teams
-- [plywood](https://intentius.io/plywood/) for Pulumi teams
-
-See how they [compare](/compare/terraform-platforms/) with HCP Terraform, Pulumi Cloud and Spacelift. For SQL teams, there is [SQL Yodeler](https://intentius.io/sql-yodeler/).
-
-</Home>
-
-<Home part="contact">
-
-## Work with me
-
-The tools are free. I'm available to help.
-
-[Tell me how your team delivers today](/contact/)
 
 </Home>
