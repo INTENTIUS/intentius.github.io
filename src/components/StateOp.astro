@@ -84,6 +84,12 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 	<svg viewBox={`0 0 610 ${op === 'protects' ? 616 : 556}`} role="img" aria-label={`${title ?? op}. With a backend per boundary: ${S.top.join(', ')}. With boundaries by label: ${S.bot.join(', ')}.`}>
 		<!-- a backend per boundary -->
 		<text class="op-name" x="20" y="28">a backend per boundary</text>
+		<g class="op-logos">
+			<image class="op-on-dark" href="/brand/vendors/terraform-on-dark.svg" x="236" y="11" width="76" height="21" />
+			<image class="op-on-light" href="/brand/vendors/terraform-on-light.svg" x="236" y="11" width="72" height="20" />
+			<image class="op-on-dark" href="/brand/vendors/pulumi-on-dark.svg" x="326" y="12" width="80" height="20" />
+			<image class="op-on-light" href="/brand/vendors/pulumi-on-light.svg" x="326" y="12" width="80" height="20" />
+		</g>
 		{COLS.map((b, c) => {
 			const x = LX[c];
 			const ls = S.topLock[b.e];
@@ -143,6 +149,15 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 
 		<!-- boundaries by label -->
 		<text class="op-name" x="20" y="340">boundaries by label</text>
+		<g class="op-logos">
+			<image href="/brand/vendors/choudoufu.svg" x="196" y="322" width="22" height="22" />
+			<text class="op-logo-name" x="223" y="339">choudoufu</text>
+			<image class="op-pixel" href="/brand/vendors/plunge.png" x="300" y="322" width="22" height="22" />
+			<text class="op-logo-name" x="327" y="339">plunge</text>
+			<image class="op-on-dark" href="/brand/vendors/chant-on-dark.svg" x="384" y="325" width="30" height="17" />
+			<image class="op-on-light" href="/brand/vendors/chant-on-light.svg" x="384" y="325" width="30" height="17" />
+			<text class="op-logo-name" x="419" y="339">chant</text>
+		</g>
 		<rect class="op-one" x={RX(0) - 20} y={Y1 - 22} width={2 * GX + CW + 40} height={GY + CH + 44} rx="16" />
 		{edgePath
 			? <path class="op-group op-edge-s" d={edgePath} />
@@ -212,6 +227,10 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 	.op svg { display: block; width: 100%; height: auto; }
 	.op text { font-family: var(--sl-font, system-ui, sans-serif); }
 	.op-name { font-size: 16px; font-weight: 700; fill: var(--sl-color-white); }
+	.op-logo-name { font-size: 13px; font-weight: 600; fill: var(--sl-color-gray-2); }
+	.op-pixel { image-rendering: pixelated; }
+	:global([data-theme='light']) .op .op-on-dark { display: none; }
+	:global(:root:not([data-theme='light'])) .op .op-on-light { display: none; }
 	.op-rule { stroke: var(--sl-color-gray-5); }
 
 	.op-backend { fill: color-mix(in srgb, var(--sl-color-gray-3) 8%, transparent); stroke-width: 3; }
