@@ -19,7 +19,7 @@ You get:
 - a drift report comparing the live estate to your configuration
 - a recorded walkthrough and a 30-day plan in priority order
 
-If you would rather not grant access ahead of time, we run the tools on your machine over a screen share.
+If you would rather not grant access ahead of time, we run the tools on your machine over a screen share. [Access and data](/security/) lists the exact roles and where the results go. To see the kind of findings `chant audit` produces, run [blacklight](https://blacklight.intentius.io) on any public repo.
 
 [Book a scoping call](https://cal.com/intentius/15min)
 
@@ -47,11 +47,11 @@ The configuration lives in your repos as plain files, and it keeps working after
 
 Ongoing. A senior infrastructure engineer for your team, month to month.
 
-A senior DevOps hire costs over $200,000 a year and usually takes months to fill. A retainer starts in the first week and covers the work after the audit. That includes moving IaC and CI/CD onto chant and managing releases. Where it makes sense, we move Terraform resources to native AWS CloudFormation without recreating them.
+A senior DevOps hire costs over $200,000 a year and usually takes months to fill. A retainer starts in the first week and covers the work after the audit, in the Terraform, Pulumi and CI you run today. If your team later wants to move IaC and CI/CD onto chant, or Terraform resources to native AWS CloudFormation, we do it without recreating anything.
 
 Everything we build uses open-source tools your team keeps.
 
-[Schedule an intro call](https://cal.com/intentius/15min)
+[Book a scoping call](https://cal.com/intentius/15min)
 
 ## Running audits for your own clients?
 

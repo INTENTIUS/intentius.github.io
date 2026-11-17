@@ -92,7 +92,7 @@ export default defineConfig({
 				{
 					label: 'About',
 					collapsed: true,
-					items: ['about', 'writing', 'contact'],
+					items: ['about', 'security', 'writing', 'contact'],
 				},
 			],
 		}),

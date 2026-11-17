@@ -160,7 +160,7 @@ export const ARENAS = [
 	{
 		id: 'basics', title: 'The basics',
 		rows: [
-			{ q: 'No licence or usage fees',
+			{ q: 'No license or usage fees',
 				pw: ['good', 'nothing; Apache-2.0', `${PW}/`],
 				pc: ['bad', 'per resource-hour', PP],
 				sl: ['bad', 'per worker', SP] },
