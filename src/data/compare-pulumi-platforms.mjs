@@ -222,7 +222,7 @@ export const ARENAS = [
 		],
 	},
 	{
-		id: 'attest', title: 'What the attestation covers',
+		id: 'attest', title: 'The attestation\'s scope',
 		blurb: "A vendor's SOC 2 covers its own service, not your estate.",
 		rows: [
 			{ q: 'No third party added to your audit scope',

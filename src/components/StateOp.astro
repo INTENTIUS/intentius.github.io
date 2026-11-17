@@ -150,13 +150,19 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 		<!-- boundaries by label -->
 		<text class="op-name" x="20" y="340">boundaries by label</text>
 		<g class="op-logos">
-			<image href="/brand/vendors/choudoufu.svg" x="196" y="322" width="22" height="22" />
-			<text class="op-logo-name" x="223" y="339">choudoufu</text>
-			<image class="op-pixel" href="/brand/vendors/plunge.png" x="300" y="322" width="22" height="22" />
-			<text class="op-logo-name" x="327" y="339">plunge</text>
-			<image class="op-on-dark" href="/brand/vendors/chant-on-dark.svg" x="384" y="325" width="30" height="17" />
-			<image class="op-on-light" href="/brand/vendors/chant-on-light.svg" x="384" y="325" width="30" height="17" />
-			<text class="op-logo-name" x="419" y="339">chant</text>
+			<a href="https://intentius.io/choudoufu/" aria-label="choudoufu">
+				<image href="/brand/vendors/choudoufu.svg" x="196" y="322" width="22" height="22" />
+				<text class="op-logo-name" x="223" y="339">choudoufu</text>
+			</a>
+			<a href="https://intentius.io/plunge/" aria-label="plunge">
+				<image class="op-pixel" href="/brand/vendors/plunge.png" x="300" y="322" width="22" height="22" />
+				<text class="op-logo-name" x="327" y="339">plunge</text>
+			</a>
+			<a href="https://intentius.io/chant/" aria-label="chant">
+				<image class="op-on-dark" href="/brand/vendors/chant-on-dark.svg" x="384" y="325" width="30" height="17" />
+				<image class="op-on-light" href="/brand/vendors/chant-on-light.svg" x="384" y="325" width="30" height="17" />
+				<text class="op-logo-name" x="419" y="339">chant</text>
+			</a>
 		</g>
 		<rect class="op-one" x={RX(0) - 20} y={Y1 - 22} width={2 * GX + CW + 40} height={GY + CH + 44} rx="16" />
 		{edgePath
@@ -228,6 +234,7 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 	.op text { font-family: var(--sl-font, system-ui, sans-serif); }
 	.op-name { font-size: 16px; font-weight: 700; fill: var(--sl-color-white); }
 	.op-logo-name { font-size: 13px; font-weight: 600; fill: var(--sl-color-gray-2); }
+	.op-logos a:hover .op-logo-name, .op-logos a:focus-visible .op-logo-name { fill: var(--sl-color-white); text-decoration: underline; }
 	.op-pixel { image-rendering: pixelated; }
 	:global([data-theme='light']) .op .op-on-dark { display: none; }
 	:global(:root:not([data-theme='light'])) .op .op-on-light { display: none; }

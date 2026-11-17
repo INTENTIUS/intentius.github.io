@@ -51,7 +51,7 @@ export const ARENAS = [
 	{
 		id: 'concurrency', title: 'Two changes at once',
 		rows: [
-			{ q: 'What one apply holds',
+			{ q: 'Held by one apply',
 				cdf: ['good', 'each resource is its own record', `${C}/how-it-works/locking/`],
 				tf: ['warn', 'the whole state file', `${H}/language/state/locking`] },
 			{ q: 'Applies on different resources',

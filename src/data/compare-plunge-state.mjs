@@ -52,7 +52,7 @@ export const ARENAS = [
 	{
 		id: 'concurrency', title: 'Two changes at once',
 		rows: [
-			{ q: 'What one update holds',
+			{ q: 'Held by one update',
 				pl: ['good', 'each record is its own write', `${P}/how-it-works/concurrency/`],
 				pu: ['warn', 'the stack lock', S] },
 			{ q: 'Updates on different resources',

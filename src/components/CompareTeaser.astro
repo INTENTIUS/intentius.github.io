@@ -18,7 +18,7 @@ const rows = [
 	{ q: 'The plan you need for all of it', cells: Object.fromEntries(VENDORS.map((v) => [v.id, ['', need(v.id)]])) },
 	{ q: 'How you pay', cells: row('basics', 'No license or usage fees') },
 	{ q: 'Your pipeline, if you leave', cells: row('leaving', 'Your pipeline leaves with you') },
-	{ q: 'What one apply locks', cells: row('concurrency', 'One apply locks less than a whole root') },
+	{ q: "One apply's lock", cells: row('concurrency', 'One apply locks less than a whole root') },
 ];
 const ours = VENDORS[0].id;
 ---
