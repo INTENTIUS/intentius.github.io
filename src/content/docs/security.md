@@ -11,7 +11,7 @@ You create each grant for the audit and remove it when we finish.
 
 | Where | Grant | Notes |
 | --- | --- | --- |
-| AWS | A role our account assumes with an external ID, carrying the managed `ReadOnlyAccess` and `SecurityAudit` policies | Add a deny for data reads such as S3 objects, Secrets Manager values and SSM parameters. The audit lists resources and never needs their contents |
+| AWS | A role our account assumes with an external ID, carrying the managed `ReadOnlyAccess` and `SecurityAudit` policies | Add a deny for data reads such as S3 objects, Secrets Manager values and SSM parameters if you want one. A few resource types, such as load balancer trust stores, need one of those reads to be listed and then drop out of the inventory |
 | GCP | `roles/viewer` and `roles/iam.securityReviewer` on the projects in scope | The audit does not enable any API on your projects |
 | Azure | `Reader` on the subscriptions in scope | |
 | Kubernetes | A ServiceAccount bound to the built-in `view` ClusterRole, with a token that expires after 24 hours | `view` does not include Secrets |
