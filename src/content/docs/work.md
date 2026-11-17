@@ -21,7 +21,7 @@ You get:
 
 If you would rather not grant access ahead of time, we run the tools on your machine over a screen share.
 
-[Book a scoping call](/contact/)
+[Book a scoping call](https://cal.com/intentius/15min)
 
 ## Drift lifecycle sprint, $1,800
 
@@ -31,7 +31,7 @@ We pair with your lead engineer to add a [chant](https://intentius.io/chant/) li
 
 If the day ends with work left, you get a working lifecycle for part of the estate and written steps for the rest.
 
-[Book a scoping call](/contact/)
+[Book a scoping call](https://cal.com/intentius/15min)
 
 ## Governance sprint, $2,200
 
@@ -41,7 +41,7 @@ Terraform and OpenTofu teams get [terragucci](https://intentius.io/terragucci/),
 
 The configuration lives in your repos as plain files, and it keeps working after we leave.
 
-[Book a scoping call](/contact/)
+[Book a scoping call](https://cal.com/intentius/15min)
 
 ## Fractional DevOps retainer, from $8,000 a month
 
@@ -51,7 +51,7 @@ A senior DevOps hire costs over $200,000 a year and usually takes months to fill
 
 Everything we build uses open-source tools your team keeps.
 
-[Schedule an intro call](/contact/)
+[Schedule an intro call](https://cal.com/intentius/15min)
 
 ## Running audits for your own clients?
 
