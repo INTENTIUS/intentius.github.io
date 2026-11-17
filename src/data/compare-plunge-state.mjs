@@ -12,7 +12,7 @@ export const HEAD = false;
 
 export const LEVEL = 3;
 
-export const TRADEMARKS = 'Pulumi and the Pulumi logo are trademarks of Pulumi Corporation, and plunge has no tie to it.';
+export const TRADEMARKS = 'Pulumi and the Pulumi logo are trademarks of Pulumi Corporation, and plunge is independent of it.';
 
 export const VENDORS = [
 	{ id: 'pl', name: 'plunge', logo: { dark: '/brand/vendors/plunge.png', light: '/brand/vendors/plunge.png' }, named: true, link: true, color: '#4a9fd0', href: 'https://intentius.io/plunge/' },
@@ -36,7 +36,7 @@ export const ARENAS = [
 	},
 	{
 		id: 'failure', title: 'When something breaks',
-		blurb: 'A crash, a killed run, a delete nobody meant.',
+		blurb: 'A crash, a killed run, a surprise delete.',
 		rows: [
 			{ q: 'A create that already landed',
 				pl: ['good', 'the next create lists by marker and binds it', `${P}/how-it-works/concurrency/`],
@@ -53,13 +53,13 @@ export const ARENAS = [
 		id: 'concurrency', title: 'Two changes at once',
 		rows: [
 			{ q: 'What one update holds',
-				pl: ['good', 'no stack lock; each record is its own write', `${P}/how-it-works/concurrency/`],
+				pl: ['good', 'each record is its own write', `${P}/how-it-works/concurrency/`],
 				pu: ['warn', 'the stack lock', S] },
 			{ q: 'Updates on different resources',
 				pl: ['good', 'both land', `${P}/how-it-works/concurrency/`],
 				pu: ['warn', 'one at a time per stack', S] },
 			{ q: 'A saved plan another run made stale',
-				pl: ['good', 'refused, naming the moved record', `${P}/how-it-works/concurrency/`],
+				pl: ['good', 'caught, naming the record that moved', `${P}/how-it-works/concurrency/`],
 				pu: ['warn', 'checked against the plan\'s constraints', 'https://www.pulumi.com/docs/iac/concepts/update-plans/'] },
 		],
 	},
@@ -70,7 +70,7 @@ export const ARENAS = [
 				pl: ['warn', 'AWS, Kubernetes, GCP and Azure', `${P}/`],
 				pu: ['good', 'every provider', S] },
 			{ q: 'Stack history',
-				pl: ['warn', 'not kept; record versions stay in the bucket', `${P}/how-it-works/`],
+				pl: ['warn', 'record versions, in the bucket', `${P}/how-it-works/`],
 				pu: ['good', 'kept', S] },
 		],
 	},

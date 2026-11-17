@@ -11,16 +11,16 @@ const P = 'https://intentius.io/plunge';
 <figure class="sc not-content" aria-labelledby="sc-cap">
 	<div class="sc-grid">
 		<div class="sc-corner"></div>
-		<div class="sc-colhead sc-stock-h"><span class="sc-k">One state file</span><span><code>terraform.tfstate</code> or a Pulumi checkpoint, under one lock</span></div>
+		<div class="sc-colhead sc-stock-h"><span class="sc-k">One state file</span><span><code>terraform.tfstate</code> or a Pulumi checkpoint, one lock</span></div>
 		<a class="sc-colhead sc-cdf-h" href={`${C}/`}><img src="/brand/vendors/choudoufu.svg" alt="" /><span class="sc-k">choudoufu</span><span>for OpenTofu</span></a>
 		<a class="sc-colhead sc-pl-h" href={`${P}/`}><img src="/brand/vendors/plunge.png" alt="" class="sc-pixel" /><span class="sc-k">plunge</span><span>for Pulumi</span></a>
 
-		<div class="sc-row sc-r1"><span class="sc-dot"></span><b>Identity</b><span>which live object is which</span></div>
-		<div class="sc-row sc-r2"><span class="sc-dot"></span><b>Values</b><span>what a read can't give back</span></div>
-		<div class="sc-row sc-r3"><span class="sc-dot"></span><b>Writes</b><span>two runs at once</span></div>
+		<div class="sc-row sc-r1"><span class="sc-dot"></span><b>Identity</b><span>address to live object</span></div>
+		<div class="sc-row sc-r2"><span class="sc-dot"></span><b>Values</b><span>passwords, random names</span></div>
+		<div class="sc-row sc-r3"><span class="sc-dot"></span><b>Writes</b><span>runs side by side</span></div>
 
 		<div class="sc-stock">
-			<div class="sc-band sc-b1"><b>Identity</b><span>address to object, in the file</span></div>
+			<div class="sc-band sc-b1"><b>Identity</b><span>in the file</span></div>
 			<div class="sc-band sc-b2"><b>Values</b><span>in the file</span></div>
 			<div class="sc-band sc-b3"><b>Writes</b><span>one lock on the file</span></div>
 			<div class="sc-lock" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="4.5" y="10.5" width="15" height="10" rx="2" fill="currentColor" /><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2.2" /></svg></div>
@@ -29,34 +29,34 @@ const P = 'https://intentius.io/plunge';
 		<a class="sc-cell sc-cdf sc-c1" href={`${C}/how-it-works/identity/`}>
 			<span class="sc-tag"><i></i>tofu-estate <em>=</em> prod-networking</span>
 			<span class="sc-tag"><i></i>tofu-address <em>=</em> aws_vpc.main</span>
-			<p>A marker on the resource itself, written by the create call.</p>
+			<p>A marker on the resource, written at create.</p>
 		</a>
 		<a class="sc-cell sc-pl sc-c1" href={`${P}/how-it-works/identity/`}>
 			<span class="sc-tag"><i></i>plunge-stack <em>=</em> payments/prod</span>
 			<span class="sc-tag"><i></i>plunge-urn <em>=</em> …Bucket::receipts</span>
-			<p>The same, keyed by stack and URN. Labels carry a digest.</p>
+			<p>Keyed by stack and URN, as a digest on labels.</p>
 		</a>
 
 		<a class="sc-cell sc-cdf sc-c2" href={`${C}/how-it-works/values/`}>
 			<div class="sc-recs" aria-hidden="true"><span>db</span><span>dns</span><span>key</span></div>
-			<p>A record per resource holds only what a read leaves out, such as a generated password. The state file stays on as a cache you can delete.</p>
+			<p>A record per resource for generated values. The state file becomes a local cache.</p>
 		</a>
 		<a class="sc-cell sc-pl sc-c2" href={`${P}/how-it-works/records/`}>
 			<div class="sc-recs" aria-hidden="true"><span>db</span><span>dns</span><span>key</span></div>
-			<p>A record per resource holds its full state, secrets as ciphertext. There is no checkpoint to keep.</p>
+			<p>A record per resource with its full state, secrets encrypted.</p>
 		</a>
 
 		<a class="sc-cell sc-cdf sc-c3" href={`${C}/how-it-works/locking/`}>
 			<div class="sc-runs" aria-hidden="true"><span>A <small>db</small> <b>✓</b></span><span>B <small>dns</small> <b>✓</b></span></div>
-			<p>No lock. Each record write is conditional, so applies on different resources both land and a clash is refused by name.</p>
+			<p>A conditional write per record. Applies on different resources land together.</p>
 		</a>
 		<a class="sc-cell sc-pl sc-c3" href={`${P}/how-it-works/concurrency/`}>
 			<div class="sc-runs" aria-hidden="true"><span>A <small>db</small> <b>✓</b></span><span>B <small>dns</small> <b>✓</b></span></div>
-			<p>No stack lock. Updates on different resources both land, and a stale saved plan is refused naming the record that moved.</p>
+			<p>A conditional write per record. Updates on different resources land together.</p>
 		</a>
 
-		<div class="sc-row sc-r4"><span class="sc-dot"></span><b>Estate</b><span>what belongs together</span></div>
-		<div class="sc-stock-estate"><p>The list inside the state file. Only the tool holding it can say what is owned.</p></div>
+		<div class="sc-row sc-r4"><span class="sc-dot"></span><b>Estate</b><span>resources that belong together</span></div>
+		<div class="sc-stock-estate"><p>The resource list inside the state file.</p></div>
 		<div class="sc-estate">
 			<div class="sc-account" aria-hidden="true">
 				<span class="sc-acct-name">one AWS account</span>
@@ -64,13 +64,13 @@ const P = 'https://intentius.io/plunge';
 				<div class="sc-group sc-g-pl"><span class="sc-g-label">plunge-stack = payments/prod</span><span>bucket</span><span>queue</span><span>function</span></div>
 			</div>
 			<ul class="sc-facts">
-				<li><b>List it</b> with any tool that filters by tag or label, no state file needed.</li>
-				<li><b>Fence it</b> with an IAM condition on the label, so a role reaches one estate.</li>
+				<li><b>List it</b> with any tool that filters by tag or label.</li>
+				<li><b>Fence it</b> with an IAM condition on the label.</li>
 				<li><b>Run both</b> in one <a href="https://intentius.io/chant/">chant</a> workspace, an OpenTofu root beside a Pulumi stack.</li>
 			</ul>
 		</div>
 	</div>
-	<figcaption id="sc-cap">A stock state file holds identity, values and writes together, under one lock. choudoufu and plunge give each job its own place: the identity on the resource, the values in a record per resource, and a conditional write per record in place of the lock. With the owner on the resource, an estate is whatever carries its label.</figcaption>
+	<figcaption id="sc-cap">A stock state file holds identity, values and writes in one file under one lock. choudoufu and plunge give each its own place: identity on the resource, values in a record per resource, and a conditional write per record. An estate is whatever carries its label.</figcaption>
 </figure>
 
 <style>

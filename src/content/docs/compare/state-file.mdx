@@ -10,7 +10,7 @@ import StateCells from '../../../components/StateCells.astro';
 import * as cdf from '../../../data/compare-choudoufu-state.mjs';
 import * as pl from '../../../data/compare-plunge-state.mjs';
 
-A Terraform state file and a Pulumi checkpoint do three jobs in one file. They say which live object an address refers to, hold the values the cloud can't give back, and keep two runs from writing over each other. One lock covers all of it. [choudoufu](https://intentius.io/choudoufu/) and [plunge](https://intentius.io/plunge/) split those jobs apart and leave your configuration and programs as they are.
+A Terraform state file and a Pulumi checkpoint do three jobs in one file. They map each address to a live object, hold generated values, and order writes. One lock covers all of it. [choudoufu](https://intentius.io/choudoufu/) and [plunge](https://intentius.io/plunge/) split those jobs apart and run your configuration and programs as they are.
 
 <StateCells />
 
