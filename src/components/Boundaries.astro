@@ -69,7 +69,7 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 			</svg>
 			<p class="bd-note">Each state file sews identity, values and writes together behind one lock, in Terraform and Pulumi alike. A state boundary is whatever that lock covers.</p>
 		</div>
-
+		<div class="bd-divider" aria-hidden="true"></div>
 		<div class="bd-panel">
 			<p class="bd-h"><b>choudoufu and plunge</b><span>The resources draw the boundary</span></p>
 			<svg viewBox="0 38 520 390" role="img" aria-label="choudoufu and plunge: one record store serves a cloud with two accounts, one record per resource, each with its own small lock. Each resource carries its estate's label, and the labels draw three estates, one of them across both accounts.">
@@ -118,9 +118,8 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 		--net: #c9a96e; --logs: #b98be0; --pay: #4a9fd0;
 		margin: 2rem 0 2.5rem;
 	}
-	.bd-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-	.bd-panel { padding: 1rem 1rem 1.1rem; border-radius: 16px; border: 1px solid var(--sl-color-gray-5); background: color-mix(in srgb, var(--sl-color-gray-6) 55%, transparent); }
-	.bd-panel:last-child { border: 2px solid transparent; background: linear-gradient(var(--sl-color-black), var(--sl-color-black)) padding-box, linear-gradient(120deg, var(--net), var(--pay)) border-box; }
+	.bd-panels { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; padding: 1.25rem 1.25rem 1.1rem; border-radius: 18px; border: 2px solid transparent; background: linear-gradient(var(--sl-color-black), var(--sl-color-black)) padding-box, linear-gradient(120deg, var(--sl-color-gray-5) 45%, var(--net), var(--pay)) border-box; }
+	.bd-divider { width: 1px; background: linear-gradient(transparent, var(--sl-color-gray-5) 15%, var(--sl-color-gray-5) 85%, transparent); }
 	.bd-h { display: flex; flex-direction: column; gap: 0.1rem; margin: 0 0 0.6rem; }
 	.bd-h b { font-family: var(--in-display, inherit); font-size: 1.15rem; color: var(--sl-color-white); }
 	.bd-h span { font-size: 0.85rem; color: var(--sl-color-gray-3); }
@@ -160,5 +159,5 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 	.bd-net-f { fill: var(--net); } .bd-logs-f { fill: var(--logs); } .bd-pay-f { fill: var(--pay); }
 	.bd-label text { font-size: 10px; font-weight: 600; fill: #14110b; }
 
-	@media (max-width: 60rem) { .bd-panels { grid-template-columns: 1fr; } }
+	@media (max-width: 60rem) { .bd-panels { grid-template-columns: 1fr; } .bd-divider { width: auto; height: 1px; background: var(--sl-color-gray-5); } }
 </style>
