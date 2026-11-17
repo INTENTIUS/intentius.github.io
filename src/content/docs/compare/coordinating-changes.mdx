@@ -1,0 +1,34 @@
+---
+title: "Coordinating changes"
+lead: false
+wide: true
+tableOfContents: false
+description: "How resources are grouped and locked decides the operations a team lives with. A backend per boundary against one backend with boundaries by label, compared operation by operation."
+---
+
+import Arenas from '../../../components/Arenas.astro';
+import Op from '../../../components/StateOp.astro';
+import * as cdf from '../../../data/compare-choudoufu-state.mjs';
+import * as pl from '../../../data/compare-plunge-state.mjs';
+
+<Op op="protects" title="What the lock protects" />
+
+<Op op="apply" title="Two applies at once" />
+
+<Op op="move" title="Move a resource to another estate" />
+
+<Op op="killed" title="An apply killed part way" />
+
+<Op op="new" title="Start a new estate" />
+
+## choudoufu and the Terraform state file
+
+Same HCL, same providers, same plan. Everything else is stock OpenTofu.
+
+<Arenas data={cdf} />
+
+## plunge and the Pulumi checkpoint
+
+Your Pulumi programs, SDKs and providers run unchanged.
+
+<Arenas data={pl} />

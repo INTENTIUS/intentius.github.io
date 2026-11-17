@@ -1,0 +1,266 @@
+---
+// One infrastructure operation, drawn twice and stacked: on top with a
+// backend per boundary, underneath with one backend and boundaries by label.
+// The steps down the right carry the comparison. `op` picks the operation:
+//   apply  - two applies at once
+//   move   - move a resource to another estate
+//   killed - an apply killed part way
+//   new    - start a new estate
+//   protects - what the lock protects: the file, not the change. Both
+//              models end on the last write; a reviewed plan catches it.
+const { op = 'apply', title } = Astro.props;
+
+const CW = 76, CH = 60, GX = 90, GY = 80;
+const ICON = {
+	globe: 'M-10 0a10 10 0 1 0 20 0a10 10 0 1 0 -20 0 M-4 0a4 10 0 1 0 8 0a4 10 0 1 0 -8 0 M-10 0H10',
+	shield: 'M0 -10 L9 -6.5 V0.5 C9 6 4.5 9.5 0 11 C-4.5 9.5 -9 6 -9 0.5 V-6.5 Z',
+	network: 'M-3 -8a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M-10 7a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M4 7a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M-1.5 -5.5 L-5.5 4.5 M1.5 -5.5 L5.5 4.5 M-4 7 H4',
+	key: 'M-9 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0 M1 0 H10 M7 0 V4 M10 0 V3',
+	bucket: 'M-10 -6 L-7 9 H7 L10 -6 M-10 -6a10 3 0 1 0 20 0a10 3 0 1 0 -20 0',
+	logs: 'M-8 -9 H8 V9 H-8 Z M-4 -4 H4 M-4 0 H4 M-4 4 H1',
+	queue: 'M-10 -4 H-4 V4 H-10 Z M-3 -4 H3 V4 H-3 Z M4 -4 H10 V4 H4 Z',
+	db: 'M-8 -6 V6 M8 -6 V6 M-8 6a8 3 0 0 0 16 0 M-8 0a8 3 0 0 0 16 0 M-8 -6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0',
+};
+const pad = (x, y, s = 1) => ({
+	shackle: `M${x - 4.2 * s} ${y - 1 * s} V${y - 4.5 * s} a${4.2 * s} ${4.2 * s} 0 0 1 ${8.4 * s} 0 V${y - 1 * s}`,
+	body: { x: x - 7 * s, y: y - 1.5 * s, w: 14 * s, h: 11 * s, rx: 2.2 * s },
+	hole: { cx: x, cy: y + 3.6 * s, r: 1.5 * s },
+	sw: 2.4 * s,
+});
+const chipW = (t) => t.length * 7.4 + 30;
+
+// The estates, one per column. A new estate takes the third column.
+const third = op === 'new' ? { e: 'new', cells: ['queue', 'db'], fresh: true } : { e: 'logs', cells: ['bucket', 'logs'] };
+const COLS = [{ e: 'edge', cells: ['globe', op === 'protects' ? 'db' : 'key'] }, { e: 'net', cells: ['network', 'shield'] }, third];
+
+// Per-op state. Cell states: on (written, green), wait (dashed grey),
+// dead (a killed apply's resource), moving. Lock states: held, stuck.
+const S = {
+	apply: {
+		topLock: { edge: 'held' }, topCell: { globe: 'on', key: 'wait' },
+		botCell: { globe: 'on', key: 'on' },
+		top: ['run 1 applies', 'run 2 waits', 'run 2 applies'], bot: ['runs 1 and 2 apply'],
+	},
+	move: {
+		topLock: { edge: 'held', net: 'held' }, topCell: { shield: 'moving' },
+		botCell: { shield: 'on' },
+		top: ['lock both backends', 'move the state', 'move the code'], bot: ['edit the label'],
+	},
+	killed: {
+		topLock: { edge: 'stuck' }, topCell: { key: 'dead' },
+		botCell: { key: 'dead' },
+		top: ['find the held lock', 'clear the lock', 'run again'], bot: ['run again'],
+	},
+	protects: {
+		topLock: { edge: 'held' }, topCell: { db: 'on' },
+		botCell: { db: 'on' },
+		top: ['run 1 sets small', 'run 2 waits', 'run 2 sets large'], bot: ['runs 1 and 2 write', 'the last write stands'],
+	},
+	new: {
+		topLock: {}, topCell: {},
+		botCell: {},
+		top: ['create a backend', 'configure its lock', 'add the root'], bot: ['add the root'],
+	},
+}[op];
+
+const Y0 = 86, Y1 = 386;
+const cy = (r) => Y0 + r * GY, cyB = (r) => Y1 + r * GY;
+const LX = [90, 202, 314];
+const RX = (c) => 90 + c * GX;
+const SX = 432;
+const BOT = Y0 + GY + CH + 14;
+// The edge estate grows around the firewall after a move.
+const edgePath = op === 'move'
+	? `M${RX(0) - 8} ${Y1 - 8} H${RX(0) + CW + 8} V${cyB(1) - 8} H${RX(1) + CW + 8} V${cyB(1) + CH + 8} H${RX(0) - 8} Z`
+	: null;
+const where = (g) => {
+	for (let c = 0; c < 3; c++) { const r = COLS[c].cells.indexOf(g); if (r >= 0) return { c, r }; }
+};
+const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y - s} L${x - s} ${y + s}`;
+---
+<figure class="op not-content">
+	{title && <p class="op-title">{title}</p>}
+	<svg viewBox={`0 0 610 ${op === 'protects' ? 616 : 556}`} role="img" aria-label={`${title ?? op}. With a backend per boundary: ${S.top.join(', ')}. With boundaries by label: ${S.bot.join(', ')}.`}>
+		<!-- a backend per boundary -->
+		<text class="op-name" x="20" y="28">a backend per boundary</text>
+		{COLS.map((b, c) => {
+			const x = LX[c];
+			const ls = S.topLock[b.e];
+			const p = pad(x + CW / 2, Y0 - 16, 1.35);
+			return (
+				<g>
+					<rect class={`op-backend op-${b.e}-s${b.fresh ? ' op-fresh' : ''}`} x={x - 12} y={Y0 - 16} width={CW + 24} height={GY + CH + 30} rx="14" />
+					<circle class="op-padbg" cx={x + CW / 2} cy={Y0 - 14} r="17" />
+					<path class={`op-shackle${ls ? ` op-${ls}` : ''}`} d={p.shackle} stroke-width={p.sw} />
+					<rect class={`op-body${ls ? ` op-${ls}` : ''}`} x={p.body.x} y={p.body.y} width={p.body.w} height={p.body.h} rx={p.body.rx} />
+					<circle class="op-keyhole" cx={p.hole.cx} cy={p.hole.cy} r={p.hole.r} />
+					{b.cells.map((g, r) => {
+						const st = S.topCell[g];
+						return (
+							<g>
+								<rect class={`op-cell${st ? ` op-c-${st}` : ''}`} x={x} y={cy(r)} width={CW} height={CH} rx="9" />
+								<path class={`op-icon${st === 'on' ? ' op-icon-on' : ''}`} d={ICON[g]} transform={`translate(${x + CW / 2} ${cy(r) + CH / 2})`} />
+								{st === 'dead' && <path class="op-x" d={X(x + CW - 12, cy(r) + 12, 5)} />}
+								{op === 'protects' && g === 'db' && <text class="op-val" x={x + CW / 2} y={cy(r) + CH - 6} text-anchor="middle">large</text>}
+							</g>
+						);
+					})}
+					<g class={`op-chip op-${b.e}-f${b.fresh ? ' op-chip-fresh' : ''}`}>
+						<path d={`M${x - 2} ${BOT} l9 -10 h${chipW(b.e) - 9} v20 h${-(chipW(b.e) - 9)} z`} />
+						<circle class="op-chip-hole" cx={x + 6} cy={BOT} r="2.4" />
+						<text x={x + 14} y={BOT + 4.5}>{b.e}</text>
+					</g>
+				</g>
+			);
+		})}
+		{(op === 'apply' || op === 'protects') && (
+			<>
+				<line class="op-go op-flow" x1="50" y1={Y0 - 14} x2={LX[0] + CW / 2 - 18} y2={Y0 - 14} />
+				<line class="op-stop" x1="48" y1={Y0 + 34} x2={LX[0] - 24} y2={Y0 + 18} />
+				<g class="op-run"><circle cx="36" cy={Y0 - 14} r="14" /><text x="36" y={Y0 - 9.5} text-anchor="middle">1</text></g>
+				<g class="op-waiting"><circle cx="36" cy={Y0 + 42} r="14" /><text x="36" y={Y0 + 46.5} text-anchor="middle">2</text></g>
+			</>
+		)}
+		{op === 'move' && (
+			<>
+				<path class="op-arrow" d={`M${LX[1] + 66} ${BOT + 2} V${BOT + 28} H${LX[0] + 70} V${BOT + 12}`} />
+				<path class="op-head" d={`M${LX[0] + 70} ${BOT + 4} l-6 9 h12 z`} />
+			</>
+		)}
+		{op === 'killed' && (
+			<g class="op-dead-run"><circle cx="36" cy={cy(1) + CH / 2} r="14" /><path d={X(36, cy(1) + CH / 2, 5)} /><line x1="50" y1={cy(1) + CH / 2} x2={LX[0] - 14} y2={cy(1) + CH / 2} /></g>
+		)}
+		{S.top.map((t, i) => (
+			<g class="op-step">
+				<rect x={SX} y={108 + i * 40} width="164" height="28" rx="14" />
+				<text class="op-step-n" x={SX + 15} y={126.5 + i * 40}>{i + 1}</text>
+				<text x={SX + 29} y={126.5 + i * 40}>{t}</text>
+			</g>
+		))}
+
+		<line class="op-rule" x1="20" y1="306" x2="590" y2="306" />
+
+		<!-- boundaries by label -->
+		<text class="op-name" x="20" y="340">boundaries by label</text>
+		<rect class="op-one" x={RX(0) - 20} y={Y1 - 22} width={2 * GX + CW + 40} height={GY + CH + 44} rx="16" />
+		{edgePath
+			? <path class="op-group op-edge-s" d={edgePath} />
+			: <rect class="op-group op-edge-s" x={RX(0) - 8} y={Y1 - 8} width={CW + 16} height={GY + CH + 16} rx="12" />}
+		<rect class={`op-group op-net-s`} x={RX(1) - 8} y={Y1 - 8} width={CW + 16} height={(op === 'move' ? 0 : GY) + CH + 16} rx="12" />
+		<rect class={`op-group op-${third.e}-s${third.fresh ? ' op-fresh-g' : ''}`} x={RX(2) - 8} y={Y1 - 8} width={CW + 16} height={GY + CH + 16} rx="12" />
+		{COLS.map((b, c) => (
+			<g class={`op-chip op-${b.e}-f${b.fresh ? ' op-chip-fresh' : ''}`}>
+				<path d={`M${RX(c) + 2} ${Y1 - 8} l9 -10 h${chipW(b.e) - 9} v20 h${-(chipW(b.e) - 9)} z`} />
+				<circle class="op-chip-hole" cx={RX(c) + 10} cy={Y1 - 8} r="2.4" />
+				<text x={RX(c) + 18} y={Y1 - 3.5}>{b.e}</text>
+			</g>
+		))}
+		{COLS.map((b, c) => b.cells.map((g, r) => {
+			const st = S.botCell[g];
+			const p = pad(RX(c) + CW - 13, cyB(r) + 15, 0.95);
+			const held = st === 'on';
+			return (
+				<g>
+					<rect class={`op-cell${st ? ` op-c-${st}` : ''}`} x={RX(c)} y={cyB(r)} width={CW} height={CH} rx="9" />
+					<path class={`op-icon${held ? ' op-icon-on' : ''}`} d={ICON[g]} transform={`translate(${RX(c) + CW / 2} ${cyB(r) + 34})`} />
+					<path class={`op-shackle${held ? ' op-held' : ' op-idle'}`} d={p.shackle} stroke-width={p.sw} />
+					<rect class={`op-body${held ? ' op-held' : ' op-idle'}`} x={p.body.x} y={p.body.y} width={p.body.w} height={p.body.h} rx={p.body.rx} />
+					<circle class="op-keyhole" cx={p.hole.cx} cy={p.hole.cy} r={p.hole.r} />
+					{st === 'dead' && <path class="op-x" d={X(RX(c) + 13, cyB(r) + 13, 5)} />}
+					{op === 'protects' && g === 'db' && <text class="op-val" x={RX(c) + CW / 2} y={cyB(r) + CH - 5} text-anchor="middle">large</text>}
+				</g>
+			);
+		}))}
+		{op === 'apply' && [0, 1].map((r) => (
+			<g>
+				<line class="op-go op-flow" x1="50" y1={cyB(r) + CH / 2} x2={RX(0)} y2={cyB(r) + CH / 2} />
+				<g class="op-run"><circle cx="36" cy={cyB(r) + CH / 2} r="14" /><text x="36" y={cyB(r) + CH / 2 + 4.5} text-anchor="middle">{r + 1}</text></g>
+			</g>
+		))}
+		{op === 'protects' && [0, 1].map((r) => (
+			<g>
+				<line class="op-go op-flow" x1="50" y1={cyB(r) + CH / 2} x2={RX(0)} y2={cyB(1) + CH / 2 + (r ? 10 : -10)} />
+				<g class="op-run"><circle cx="36" cy={cyB(r) + CH / 2} r="14" /><text x="36" y={cyB(r) + CH / 2 + 4.5} text-anchor="middle">{r + 1}</text></g>
+			</g>
+		))}
+		{op === 'killed' && (
+			<g class="op-dead-run"><circle cx="36" cy={cyB(1) + CH / 2} r="14" /><path d={X(36, cyB(1) + CH / 2, 5)} /><line x1="50" y1={cyB(1) + CH / 2} x2={RX(0) - 20} y2={cyB(1) + CH / 2} /></g>
+		)}
+		{S.bot.map((t, i) => (
+			<g class="op-step op-step-one">
+				<rect x={SX} y={Y1 + 52 + i * 40} width="164" height="28" rx="14" />
+				<text class="op-step-n" x={SX + 15} y={Y1 + 70.5 + i * 40}>{i + 1}</text>
+				<text x={SX + 29} y={Y1 + 70.5 + i * 40}>{t}</text>
+			</g>
+		))}
+		{op === 'protects' && (
+			<g class="op-foot">
+				<line class="op-rule" x1="20" y1="566" x2="590" y2="566" />
+				<circle cx="34" cy="592" r="11" />
+				<path d="M28.5 592 l4 4 l7.5 -8" />
+				<text x="54" y="597">a reviewed plan catches the conflict</text>
+			</g>
+		)}
+	</svg>
+</figure>
+
+<style>
+	.op { --edge: #4a9fd0; --net: #d36ba6; --logs: #b98be0; --new: #e0e3ea; --go: #3fae8c; --stuck: #e2a23b; --dead: #e5675e; max-width: 42rem; margin: 1rem 0 2.5rem; padding: 1.25rem; border-radius: 18px; border: 1px solid var(--sl-color-gray-5); background: var(--sl-color-black); }
+	.op-title { margin: 0 0 0.5rem; font-family: var(--in-display, inherit); font-size: 1.25rem; font-weight: 700; color: var(--sl-color-white); }
+	.op svg { display: block; width: 100%; height: auto; }
+	.op text { font-family: var(--sl-font, system-ui, sans-serif); }
+	.op-name { font-size: 16px; font-weight: 700; fill: var(--sl-color-white); }
+	.op-rule { stroke: var(--sl-color-gray-5); }
+
+	.op-backend { fill: color-mix(in srgb, var(--sl-color-gray-3) 8%, transparent); stroke-width: 3; }
+	.op-fresh { stroke-dasharray: 8 5; }
+	.op-edge-s { stroke: var(--edge); } .op-net-s { stroke: var(--net); } .op-logs-s { stroke: var(--logs); } .op-new-s { stroke: var(--new); }
+	.op-edge-f { fill: var(--edge); } .op-net-f { fill: var(--net); } .op-logs-f { fill: var(--logs); } .op-new-f { fill: var(--new); }
+	.op-one { fill: none; stroke: var(--sl-color-gray-2); stroke-width: 2; }
+	.op-group { fill: none; stroke-width: 2; stroke-dasharray: 7 5; stroke-linejoin: round; }
+
+	.op-cell { fill: var(--sl-color-gray-6); stroke: var(--sl-color-gray-5); stroke-width: 1.5; }
+	.op-c-on { stroke: var(--go); stroke-width: 3; }
+	.op-c-wait, .op-c-moving { stroke: var(--sl-color-gray-2); stroke-width: 2.5; stroke-dasharray: 6 4; }
+	.op-c-dead { stroke: var(--dead); stroke-width: 2.5; }
+	.op-icon { fill: none; stroke: var(--sl-color-gray-2); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+	.op-icon-on { stroke: var(--sl-color-white); }
+	.op-x { stroke: var(--dead); stroke-width: 2.4; stroke-linecap: round; }
+
+	.op-chip text { font-size: 12px; font-weight: 700; fill: #14110b; }
+	.op-chip-hole { fill: var(--sl-color-black); }
+
+	.op-padbg { fill: var(--sl-color-black); stroke: var(--sl-color-gray-2); stroke-width: 3; }
+	.op-shackle { fill: none; stroke: var(--sl-color-gray-3); stroke-linecap: round; }
+	.op-body { fill: var(--sl-color-gray-3); }
+	.op-shackle.op-held { stroke: var(--go); } .op-body.op-held { fill: var(--go); }
+	.op-shackle.op-stuck { stroke: var(--stuck); } .op-body.op-stuck { fill: var(--stuck); }
+	.op-idle { opacity: 0.35; }
+	.op-keyhole { fill: var(--sl-color-black); }
+
+	.op-run circle { fill: color-mix(in srgb, var(--go) 20%, var(--sl-color-black)); stroke: var(--go); stroke-width: 2.5; }
+	.op-run text { font-size: 14px; font-weight: 800; fill: var(--go); }
+	.op-waiting circle { fill: var(--sl-color-black); stroke: var(--sl-color-gray-3); stroke-width: 2.5; stroke-dasharray: 4 3; }
+	.op-waiting text { font-size: 14px; font-weight: 800; fill: var(--sl-color-gray-3); }
+	.op-dead-run circle { fill: var(--sl-color-black); stroke: var(--dead); stroke-width: 2.5; }
+	.op-dead-run path, .op-dead-run line { stroke: var(--dead); stroke-width: 2.4; stroke-linecap: round; }
+	.op-dead-run line { stroke-dasharray: 3 5; }
+	.op-go { stroke: var(--go); stroke-width: 3; stroke-linecap: round; }
+	.op-stop { stroke: var(--sl-color-gray-3); stroke-width: 3; stroke-dasharray: 4 5; stroke-linecap: round; }
+	.op-arrow { fill: none; stroke: var(--sl-color-gray-2); stroke-width: 2.5; stroke-dasharray: 6 5; }
+	.op-head { fill: var(--sl-color-gray-2); }
+	.op-flow { stroke-dasharray: 8 6; animation: op-flow 0.9s linear infinite; }
+	@keyframes op-flow { to { stroke-dashoffset: -14; } }
+	@media (prefers-reduced-motion: reduce) { .op-flow { animation: none; } }
+
+	.op-val { font: 700 10.5px var(--sl-font-mono, ui-monospace, monospace); fill: var(--sl-color-white); }
+	.op-foot circle { fill: color-mix(in srgb, var(--go) 22%, var(--sl-color-black)); stroke: var(--go); stroke-width: 2; }
+	.op-foot path { fill: none; stroke: var(--go); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+	.op-foot text { font-size: 15px; font-weight: 700; fill: var(--sl-color-white); }
+	.op-step rect { fill: var(--sl-color-gray-6); stroke: var(--sl-color-gray-4); }
+	.op-step text { font-size: 12.5px; font-weight: 600; fill: var(--sl-color-gray-1); }
+	.op-step .op-step-n { font-weight: 800; fill: var(--sl-color-gray-3); }
+	.op-step-one rect { fill: color-mix(in srgb, var(--go) 18%, var(--sl-color-black)); stroke: var(--go); }
+	.op-step-one text { fill: var(--sl-color-white); }
+	.op-step-one .op-step-n { fill: var(--go); }
+</style>
