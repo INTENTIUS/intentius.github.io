@@ -5,10 +5,10 @@
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 
 const { entry } = Astro.locals.starlightRoute;
-const { description, wide } = entry.data;
+const { description, wide, lead = true } = entry.data;
 ---
 <Default />
-{description && <p class="in-sub">{description}</p>}
+{lead && description && <p class="in-sub">{description}</p>}
 {wide && <span class="in-wide" hidden />}
 
 <style>
