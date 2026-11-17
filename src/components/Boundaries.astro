@@ -1,5 +1,5 @@
 ---
-// Two models of a boundary, side by side, nothing else. Left: a state file's
+// Two models of an estate boundary, side by side, with each backend. Left: a state file's
 // lock draws the boundary around a block of resources. Right: the same
 // resources carry labels, and resources sharing a label form an estate,
 // across accounts too. No product names; the page around it names them.
@@ -15,14 +15,13 @@ const RES = [
 ];
 const ACCOUNTS = [{ x: 12, name: 'ACCOUNT A' }, { x: 262, name: 'ACCOUNT B' }];
 const FILES = [135, 385];
-const TAGS = [{ e: 'net', t: 'network', x: 70 }, { e: 'logs', t: 'logs', x: 220 }, { e: 'pay', t: 'payments', x: 350 }];
 const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-10 * s}z M${x - 3 * s} ${y - 1 * s}v${-3 * s}a${3 * s} ${3 * s} 0 0 1 ${6 * s} 0v${3 * s}`;
 ---
 <figure class="bd not-content" aria-labelledby="bd-cap">
 	<div class="bd-panels">
 		<div class="bd-panel">
-			<p class="bd-h">Lock as boundary</p>
-			<svg viewBox="0 0 520 300" role="img" aria-label="Lock as boundary: each account's resources sit inside one wall, drawn by one state file's lock.">
+			<p class="bd-h">Estate boundaries as application locks</p>
+			<svg viewBox="0 0 520 300" role="img" aria-label="Estate boundaries as application locks: each state file holds an estate behind the tool's own lock, and that lock walls off one block of resources.">
 				{FILES.map((cx) => (
 					<g>
 						<path class="bd-doc" d={`M${cx - 22} 22 H${cx + 10} L${cx + 22} 34 V80 H${cx - 22} Z`} />
@@ -30,6 +29,7 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 						<line class="bd-docline" x1={cx - 13} y1="46" x2={cx + 13} y2="46" />
 						<line class="bd-docline" x1={cx - 13} y1="56" x2={cx + 13} y2="56" />
 						<line class="bd-docline" x1={cx - 13} y1="66" x2={cx + 5} y2="66" />
+						<text class="bd-lbl" x={cx + 32} y="54">state file</text>
 						<line class="bd-tie" x1={cx} y1="80" x2={cx} y2="148" />
 					</g>
 				))}
@@ -46,6 +46,7 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 					<g>
 						<circle class="bd-lockbg" cx={cx} cy="160" r="14" />
 						<path class="bd-lock" d={lock(cx, 162, 1.05)} />
+						<text class="bd-lbl bd-lbl-sm" x={cx + 20} y="152">application lock</text>
 					</g>
 				))}
 				{RES.map((r) => (
@@ -55,19 +56,23 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 					</g>
 				))}
 			</svg>
-			<p class="bd-note">One state file, one lock. Whatever the lock covers is one boundary.</p>
+			<p class="bd-note">The tool keeps an estate in one state file behind its own lock. Whatever that lock covers is the estate.</p>
 		</div>
 		<div class="bd-divider" aria-hidden="true"></div>
 		<div class="bd-panel">
-			<p class="bd-h">Labels as boundary</p>
-			<svg viewBox="0 0 520 300" role="img" aria-label="Labels as boundary: the same resources each carry a label, and resources sharing a label form an estate, one of them across both accounts.">
-				{TAGS.map((t) => (
-					<g class={`bd-tag bd-${t.e}-f`}>
-						<path d={`M${t.x} 40 h${t.t.length * 8 + 26} a12 12 0 0 1 0 24 h${-(t.t.length * 8 + 26)} l-12 -12 z`} />
-						<circle class="bd-hole" cx={t.x + 2} cy="52" r="3" />
-						<text x={t.x + 14} y="56.5">{t.t}</text>
+			<p class="bd-h">Estate boundaries as resource labels</p>
+			<svg viewBox="0 0 520 300" role="img" aria-label="Estate boundaries as resource labels: a record store keeps one record per resource, each with its own native lock, and resources sharing a label form an estate, one of them across both accounts.">
+				<rect class="bd-store" x="4" y="10" width="512" height="80" rx="12" />
+				<text class="bd-lbl" x="18" y="32">record store</text>
+				<text class="bd-lbl bd-lbl-sm" x="502" y="32" text-anchor="end">one record per resource, each with a native lock</text>
+				{RES.map((r, i) => (
+					<g>
+						<rect class="bd-rec" x={20 + i * 61} y="44" width="52" height="32" rx="6" />
+						<circle class={`bd-${r.e}-f`} cx={33 + i * 61} cy="60" r="5" />
+						<path class="bd-lock bd-lock-sm" d={lock(56 + i * 61, 59, 0.8)} />
 					</g>
 				))}
+				<line class="bd-tie" x1="260" y1="90" x2="260" y2="110" />
 				<rect class="bd-cloud" x="4" y="100" width="512" height="196" rx="14" />
 				{ACCOUNTS.map((a) => (
 					<g>
@@ -85,8 +90,11 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 						<circle class={`bd-${r.e}-f`} cx={COLS[r.c] + PW - 12} cy={ROWS[r.r] + PH / 2} r="5" />
 					</g>
 				))}
+				<g class="bd-chip bd-net-f"><rect x="26" y="150" width="76" height="20" rx="10" /><text x="64" y="164" text-anchor="middle">network</text></g>
+				<g class="bd-chip bd-pay-f"><rect x="280" y="150" width="86" height="20" rx="10" /><text x="323" y="164" text-anchor="middle">payments</text></g>
+				<g class="bd-chip bd-logs-f"><rect x="231" y="262" width="56" height="20" rx="10" /><text x="259" y="276" text-anchor="middle">logs</text></g>
 			</svg>
-			<p class="bd-note">Each resource carries a label. Resources with the same label are one estate, in any account.</p>
+			<p class="bd-note">Each resource carries a label, and resources with the same label are one estate, in any account. Each gets its own record, guarded by the storage service's native lock.</p>
 		</div>
 	</div>
 	<figcaption id="bd-cap">The same cloud under each model.</figcaption>
@@ -125,8 +133,12 @@ const lock = (x, y, s = 1) => `M${x - 5 * s} ${y - 1 * s}h${10 * s}v${8 * s}h${-
 	.bd-logs { stroke: var(--logs); fill: color-mix(in srgb, var(--logs) 11%, transparent); }
 	.bd-pay { stroke: var(--pay); fill: color-mix(in srgb, var(--pay) 9%, transparent); }
 	.bd-net-f { fill: var(--net); } .bd-logs-f { fill: var(--logs); } .bd-pay-f { fill: var(--pay); }
-	.bd-tag text { font-size: 13px; font-weight: 700; fill: #14110b; }
-	.bd-hole { fill: var(--sl-color-black); }
+	.bd-chip text { font-size: 11px; font-weight: 700; fill: #14110b; }
+	.bd-lbl { font-size: 13px; font-weight: 600; fill: var(--sl-color-gray-1); }
+	.bd-lbl-sm { font-size: 11px; font-weight: 500; fill: var(--sl-color-gray-3); }
+	.bd-store { fill: color-mix(in srgb, var(--sl-color-gray-3) 6%, transparent); stroke: var(--sl-color-gray-5); }
+	.bd-rec { fill: var(--sl-color-gray-6); stroke: var(--sl-color-gray-4); }
+	.bd-lock-sm { fill: var(--sl-color-gray-2); stroke: var(--sl-color-gray-2); stroke-width: 1.3; }
 
 	@media (max-width: 60rem) { .bd-panels { grid-template-columns: 1fr; } .bd-divider { width: auto; height: 1px; background: var(--sl-color-gray-5); } }
 </style>
