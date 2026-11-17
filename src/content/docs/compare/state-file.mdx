@@ -2,15 +2,20 @@
 title: "choudoufu, plunge and the state file"
 wide: true
 tableOfContents: false
-description: "A state file holds identity, values and writes in one file under one lock. choudoufu for OpenTofu and plunge for Pulumi split them, and an estate becomes whatever carries its label."
+description: "Terraform and Pulumi set state boundaries with a lock. choudoufu for OpenTofu and plunge for Pulumi let the resources draw them, with a record and a conditional write per resource."
 ---
 
 import Arenas from '../../../components/Arenas.astro';
+import Boundaries from '../../../components/Boundaries.astro';
 import StateCells from '../../../components/StateCells.astro';
 import * as cdf from '../../../data/compare-choudoufu-state.mjs';
 import * as pl from '../../../data/compare-plunge-state.mjs';
 
-A Terraform state file and a Pulumi checkpoint do three jobs in one file. They map each address to a live object, hold generated values, and order writes. One lock covers all of it. [choudoufu](https://intentius.io/choudoufu/) and [plunge](https://intentius.io/plunge/) split those jobs apart and run your configuration and programs as they are.
+Terraform and Pulumi each sew identity, values and writes into one file behind one lock, and that lock sets the state boundary. [choudoufu](https://intentius.io/choudoufu/) and [plunge](https://intentius.io/plunge/) unravel both. The resources' own labels draw the estates, and the storage service's conditional writes handle two runs at once.
+
+<Boundaries />
+
+## Part by part
 
 <StateCells />
 

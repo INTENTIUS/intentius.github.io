@@ -44,7 +44,7 @@ export const ARENAS = [
 				cdf: ['good', 'the next run starts at once', `${C}/`],
 				tf: ['warn', 'on S3, GCS or azurerm, a lock to force-unlock', `${H}/cli/commands/force-unlock`] },
 			{ q: 'Losing the state file',
-				cdf: ['good', 'it was a cache; the next plan rebuilds it', `${C}/docs/model/cache/`],
+				cdf: ['good', 'the next plan reads the resources and records', `${C}/docs/model/cache/`],
 				tf: ['bad', 're-import every resource', `${H}/language/import`] },
 		],
 	},
