@@ -11,15 +11,17 @@ import Op from '../../../components/StateOp.astro';
 import * as cdf from '../../../data/compare-choudoufu-state.mjs';
 import * as pl from '../../../data/compare-plunge-state.mjs';
 
-<Op op="protects" title="What the lock protects" />
+<p style={{ maxWidth: '42rem', fontSize: '1.2rem', lineHeight: 1.45, color: 'var(--sl-color-white)' }}>Coordinating applies comes down to ownership and boundaries, and the way you implement them shapes every operation below.</p>
 
-<Op op="apply" title="Two applies at once" />
+<Op op="protects" title="What the lock protects" intro="A backend lock keeps the state file consistent. A reviewed plan is what catches two people changing the same resource, in either model." />
 
-<Op op="move" title="Move a resource to another estate" />
+<Op op="apply" title="Two applies at once" intro="A lock per backend makes runs in one estate take turns. A lock per resource lets runs on different resources go together." />
 
-<Op op="killed" title="An apply killed part way" />
+<Op op="move" title="Move a resource to another estate" intro="Handing a resource to another owner means moving its state between backends, or editing one label." />
 
-<Op op="new" title="Start a new estate" />
+<Op op="killed" title="An apply killed part way" intro="A run that dies holds its backend's lock until someone clears it. With a lock per resource, the next run starts straight away." />
+
+<Op op="new" title="Start a new estate" intro="Under a backend per boundary, a new estate brings a new backend. Under labels, it joins the backend you already run." />
 
 ## choudoufu and the Terraform state file
 

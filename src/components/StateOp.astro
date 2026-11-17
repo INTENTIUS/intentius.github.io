@@ -8,7 +8,7 @@
 //   new    - start a new estate
 //   protects - what the lock protects: the file, not the change. Both
 //              models end on the last write; a reviewed plan catches it.
-const { op = 'apply', title } = Astro.props;
+const { op = 'apply', title, intro } = Astro.props;
 
 const CW = 76, CH = 60, GX = 90, GY = 80;
 const ICON = {
@@ -80,6 +80,7 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 ---
 <figure class="op not-content">
 	{title && <p class="op-title">{title}</p>}
+	{intro && <p class="op-intro">{intro}</p>}
 	<svg viewBox={`0 0 610 ${op === 'protects' ? 616 : 556}`} role="img" aria-label={`${title ?? op}. With a backend per boundary: ${S.top.join(', ')}. With boundaries by label: ${S.bot.join(', ')}.`}>
 		<!-- a backend per boundary -->
 		<text class="op-name" x="20" y="28">a backend per boundary</text>
@@ -207,6 +208,7 @@ const X = (x, y, s = 7) => `M${x - s} ${y - s} L${x + s} ${y + s} M${x + s} ${y 
 <style>
 	.op { --edge: #4a9fd0; --net: #d36ba6; --logs: #b98be0; --new: #e0e3ea; --go: #3fae8c; --stuck: #e2a23b; --dead: #e5675e; max-width: 42rem; margin: 1rem 0 2.5rem; padding: 1.25rem; border-radius: 18px; border: 1px solid var(--sl-color-gray-5); background: var(--sl-color-black); }
 	.op-title { margin: 0 0 0.5rem; font-family: var(--in-display, inherit); font-size: 1.25rem; font-weight: 700; color: var(--sl-color-white); }
+	.op-intro { margin: 0 0 0.9rem; font-size: 0.95rem; line-height: 1.45; color: var(--sl-color-gray-2); max-width: 36rem; }
 	.op svg { display: block; width: 100%; height: auto; }
 	.op text { font-family: var(--sl-font, system-ui, sans-serif); }
 	.op-name { font-size: 16px; font-weight: 700; fill: var(--sl-color-white); }
