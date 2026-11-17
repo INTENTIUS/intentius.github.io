@@ -1,11 +1,31 @@
 ---
 // Starlight's footer, then what the Hugo site's footer said (the tools, the
 // wardens, and that help is a message away), then the pixel eye and the name
-// on every page, linking home.
+// on every page, linking home. The site map repeats the sidebar's groups, so
+// the splash landing page, which has no sidebar, still reaches every page.
 import Default from '@astrojs/starlight/components/Footer.astro';
 import Wardens from './Wardens.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const columns = sidebar.map((e) =>
+	e.type === 'group'
+		? { label: e.label, links: e.entries.filter((x) => x.type === 'link') }
+		: { label: e.label, href: e.href, links: [] },
+);
 ---
 <Default />
+<nav class="in-map not-content" aria-label="Site map">
+	{columns.map((c) => (
+		<div>
+			{c.href ? <a class="head" href={c.href}>{c.label}</a> : <p class="head">{c.label}</p>}
+			{c.links.length > 0 && (
+				<ul>
+					{c.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+				</ul>
+			)}
+		</div>
+	))}
+</nav>
 <div class="in-foot not-content">
 	<p>
 		Intentius builds <a href="https://intentius.io/behold/">behold</a>, <a href="https://intentius.io/chant/">chant</a>, <a href="https://intentius.io/choudoufu/">choudoufu</a>, <a href="https://intentius.io/plunge/">plunge</a>, <a href="https://intentius.io/plywood/">plywood</a> and <a href="https://intentius.io/terragucci/">terragucci</a>. Everything is open source at <a href="https://github.com/intentius">github.com/intentius</a>. Also from Intentius are <a href="https://blacklight.intentius.io">blacklight</a>, <a href="https://spicypath.intentius.workers.dev">spicypath</a> and the wardens <Wardens />.
@@ -15,6 +35,36 @@ import Wardens from './Wardens.astro';
 </div>
 
 <style>
+	.in-map {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+		gap: 1.5rem 1.25rem;
+		margin: 2.5rem 0 0;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--in-rule);
+		font-size: var(--sl-text-sm);
+	}
+	.in-map .head {
+		display: block;
+		margin: 0 0 0.5rem;
+		font-weight: 600;
+		color: var(--sl-color-white);
+		text-decoration: none;
+	}
+	.in-map ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.35rem;
+	}
+	.in-map li a {
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+	}
+	.in-map a:hover {
+		color: var(--in-accent);
+	}
 	.in-foot {
 		display: grid;
 		justify-items: center;
