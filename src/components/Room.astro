@@ -16,7 +16,7 @@ const r = room(Astro.props.id);
 	{r.compare && <CompareTeaser />}
 	<div class="cols">
 		<section>
-			<h2 id="what-i-do">What I do</h2>
+			<h2 id="how-we-help">How we help</h2>
 			<ul>{r.does.map((d: string) => <li>{d}</li>)}</ul>
 		</section>
 		<section>
@@ -26,7 +26,7 @@ const r = room(Astro.props.id);
 		</section>
 	</div>
 	<section>
-		<h2 id="check">What you can check now</h2>
+		<h2 id="check">Check it now</h2>
 		<p class="note">All of it is open source, so you can read or run it before writing to me.</p>
 		<ul>{r.check.map((l: { label: string; href: string }) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
 	</section>

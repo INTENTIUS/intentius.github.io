@@ -19,7 +19,7 @@ You create each grant for the audit and remove it when we finish.
 
 If you would rather grant nothing, we run the same tools on your machine over a screen share and you keep every output.
 
-## What the tools can do with it
+## The calls the tools make
 
 The audit runs [behold](https://intentius.io/behold/) and [chant](https://intentius.io/chant/). Both are open source, so your team can read the code that touches your accounts.
 

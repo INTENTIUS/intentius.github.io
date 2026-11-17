@@ -13,7 +13,7 @@ import * as pl from '../../../data/compare-plunge-state.mjs';
 
 <p style={{ maxWidth: '42rem', fontSize: '1.2rem', lineHeight: 1.45, color: 'var(--sl-color-white)' }}>Coordinating applies comes down to ownership and boundaries, and the way you implement them shapes every operation below.</p>
 
-<Op op="protects" title="What the lock protects" intro="A backend lock keeps the state file consistent. A reviewed plan is what catches two people changing the same resource, in either model." />
+<Op op="protects" title="Two changes to one resource" intro="A backend lock keeps the state file consistent. A reviewed plan catches two people changing the same resource, in either model." />
 
 <Op op="apply" title="Two applies at once" intro="A lock per backend makes runs in one estate take turns. A lock per resource lets runs on different resources go together." />
 
