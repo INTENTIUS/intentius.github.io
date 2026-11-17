@@ -11,6 +11,7 @@ export default defineConfig({
 	redirects: {
 		// The compare index only repeated the sidebar; its URL lands on the main comparison.
 		'/compare/': '/compare/terraform-platforms/',
+		'/compare/choudoufu-and-terraform-state/': '/compare/coordinating-changes/',
 		'/compare/control-planes/': '/compare/terraform-platforms/',
 		// chant, CDK and Pulumi is argued on the blog and in chant's docs.
 		'/compare/chant-cdk-and-pulumi/': 'https://intentius.io/chant/',
@@ -87,7 +88,7 @@ export default defineConfig({
 				{
 					label: 'Compare',
 					collapsed: true,
-					items: ['compare/terraform-platforms', 'compare/choudoufu-and-terraform-state'],
+					items: ['compare/terraform-platforms', 'compare/coordinating-changes'],
 				},
 				{
 					label: 'About',

@@ -9,6 +9,9 @@ export const collections = {
 			extend: z.object({
 				// A comparison page uses the full main column (PageTitle.astro).
 				wide: z.boolean().optional(),
+				// false keeps the description for search and link previews and
+				// leaves it off the page.
+				lead: z.boolean().optional(),
 			}),
 		}),
 	}),
