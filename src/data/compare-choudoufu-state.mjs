@@ -7,6 +7,10 @@ export const LABEL = 'choudoufu and the Terraform state file compared';
 
 export const READ_ON = '2026-10-25';
 
+export const PREFIX = 'cdf-';
+
+export const LEVEL = 3;
+
 export const TRADEMARKS = 'Terraform is a trademark of HashiCorp, an IBM Company. OpenTofu is a trademark of The Linux Foundation.';
 
 export const VENDORS = [

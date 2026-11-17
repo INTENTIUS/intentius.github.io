@@ -1,0 +1,27 @@
+---
+title: "choudoufu, plunge and the state file"
+wide: true
+tableOfContents: false
+description: "A state file holds identity, values and writes in one file under one lock. choudoufu for OpenTofu and plunge for Pulumi split them, and an estate becomes whatever carries its label."
+---
+
+import Arenas from '../../../components/Arenas.astro';
+import StateCells from '../../../components/StateCells.astro';
+import * as cdf from '../../../data/compare-choudoufu-state.mjs';
+import * as pl from '../../../data/compare-plunge-state.mjs';
+
+A Terraform state file and a Pulumi checkpoint do three jobs in one file. They say which live object an address refers to, hold the values the cloud can't give back, and keep two runs from writing over each other. One lock covers all of it. [choudoufu](https://intentius.io/choudoufu/) and [plunge](https://intentius.io/plunge/) split those jobs apart and leave your configuration and programs as they are.
+
+<StateCells />
+
+## choudoufu and the Terraform state file
+
+Same HCL, same providers, same plan. Everything else is stock OpenTofu.
+
+<Arenas data={cdf} />
+
+## plunge and the Pulumi checkpoint
+
+Your Pulumi programs, SDKs and providers run unchanged.
+
+<Arenas data={pl} />

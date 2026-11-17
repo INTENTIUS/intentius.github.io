@@ -36,7 +36,7 @@ export const ROOMS = [
 		],
 		read: [
 			{ label: 'Fractional retainer', href: '/work/#fractional-devops-retainer-from-8000-a-month' },
-			{ label: 'choudoufu and the state file', href: '/compare/choudoufu-and-terraform-state/' },
+			{ label: 'choudoufu, plunge and the state file', href: '/compare/state-file/' },
 		],
 	},
 	{
