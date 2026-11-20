@@ -13,7 +13,7 @@
 // Spacelift's comes from its media page as in arenas.mjs. plywood's and
 // plunge's are their own sites' pixel logos.
 
-export const READ_ON = '2026-10-29';
+export const READ_ON = '2026-11-19';
 
 export const LABEL = 'plywood, Pulumi Cloud and Spacelift compared';
 
@@ -31,6 +31,11 @@ const PW = 'https://intentius.io/plywood';
 const PL = 'https://intentius.io/plunge';
 const B = 'https://intentius.io/behold';
 const P = 'https://www.pulumi.com/docs';
+// Pulumi Delivery and Pulumi Agents pages, read 2026-11-19. Delivery is in public
+// preview; approval and decision gates, the agent step and agent triggers are Pro and Enterprise.
+const D = `${P}/delivery/concepts`;
+const DG = `${D}/stages-and-gates/`;
+const AT = `${P}/ai/agents/triggers/`;
 const PP = 'https://www.pulumi.com/pricing/';
 const S = 'https://docs.spacelift.io';
 const SP = 'https://spacelift.io/pricing';
@@ -53,11 +58,11 @@ export const GATED = [
 		sl: { plan: 0, note: 'feature preview', src: `${S}/vendors/pulumi` } },
 	{ id: 'approval', label: 'An approval before an update',
 		pw: { plan: 0, note: 'bound to one preview digest', src: `${PW}/concepts/waves-and-approvals/` },
-		pc: { plan: null, note: 'none built in; ESC approvals gate credentials only', src: `${P}/deployments/guides/gated-deployments/` },
+		pc: { plan: 2, note: 'Delivery approval gate: named users or teams, a count; public preview', src: DG },
 		sl: { plan: 1, src: SP } },
 	{ id: 'policy', label: 'Policy as code on every preview',
 		pw: { plan: 0, note: 'Rego, and your CrossGuard packs', src: `${PW}/guides/use-policy-packs/` },
-		pc: { plan: 2, src: PP },
+		pc: { plan: 2, note: 'mandatory enforcement; Essentials is advisory', src: PP },
 		sl: { plan: 1, src: SP } },
 	{ id: 'drift', label: 'Drift detection', def: 'Drift: a change made outside your code.',
 		pw: { plan: 0, note: 'one issue per stack', src: `${PW}/guides/turn-on-drift-checks/` },
@@ -91,11 +96,11 @@ export const GATED = [
 		sl: { plan: 3, note: 'on request', src: SP } },
 	{ id: 'ai', label: 'AI on failed updates and drift',
 		pw: { plan: 0, note: 'fixes drift by pull request; your model key', src: `${PW}/guides/agent-fix-drift/` },
-		pc: { plan: 2, note: 'an agent can start on a failed operation', src: `${P}/ai/agents/triggers/` },
+		pc: { plan: 2, note: 'an agent can start on a failed operation', src: AT },
 		sl: { plan: 0, note: 'summaries only', src: `${S}/concepts/run/summarization` } },
 	{ id: 'waves', label: 'Updates dependent stacks in order, with an approval between waves', def: 'Wave: a group of stacks updated together, after the ones they depend on.',
 		pw: { plan: 0, note: 'order from StackReference reads; each wave behind its gate', src: `${PW}/guides/stack-references/` },
-		pc: { plan: null, note: 'no gate between stacks', src: `${P}/deployments/concepts/webhooks/` },
+		pc: { plan: 2, note: 'Delivery stages in order, each with its own gate; public preview', src: DG },
 		sl: { plan: null, note: 'no gate between waves', src: `${S}/concepts/stack/stack-dependencies` } },
 	{ id: 'grouped', label: 'One pull request comment for every stack a change touches',
 		pw: { plan: 0, note: 'identical changes grouped, one approval for the set', src: `${PW}/concepts/why-previews-are-grouped/` },
@@ -107,7 +112,7 @@ export const GATED = [
 		sl: { plan: 1, src: `${S}/concepts/run/pull-request-comments` } },
 	{ id: 'stale', label: 'Update only the preview that was approved',
 		pw: { plan: 0, note: 'if the preview changed after approval, nothing is updated', src: `${PW}/guides/fix-a-refused-wave/` },
-		pc: { plan: null, note: 'no approval for a preview to match', src: `${P}/deployments/guides/gated-deployments/` },
+		pc: { plan: null, note: 'Delivery approvers see a preview that the docs say can be incomplete', src: DG },
 		sl: { plan: 0, src: `${S}/concepts/run` } },
 	{ id: 'notify', label: 'Slack, Teams and webhook notifications',
 		pw: { plan: 0, note: 'signed webhook, Slack or Teams', src: `${PW}/guides/notify-a-chat-channel/` },
@@ -143,7 +148,7 @@ export const GATED = [
 		sl: { plan: null, tier: 'unpublished', src: `${S}/product/dashboard` } },
 	{ id: 'actions', label: "Day-2 actions behind a second person's approval",
 		pw: { plan: 0, note: 'a second person approves the one-resource preview', src: `${PW}/guides/run-a-day-2-action/` },
-		pc: { plan: null, note: 'no approval step; ESC approvals gate credentials only', src: `${P}/deployments/guides/gated-deployments/` },
+		pc: { plan: null, note: 'Delivery approval gates apply to release stages (Pro)', src: DG },
 		sl: { plan: 1, note: 'Tasks; an approval policy can require two approvals', src: SP } },
 	{ id: 'import', label: 'Import from another platform',
 		pw: { plan: 0, note: 'Pulumi Deployments, pulumi/actions, Spacelift, env zero', src: `${PW}/guides/from-pulumi-actions/` },
@@ -162,7 +167,7 @@ export const ARENAS = [
 		rows: [
 			{ q: 'No license or usage fees',
 				pw: ['good', 'nothing; Apache-2.0', `${PW}/`],
-				pc: ['bad', 'per resource-hour', PP],
+				pc: ['bad', 'per resource-hour, and per Delivery pipeline on Essentials and Pro', PP],
 				sl: ['bad', 'per worker', SP] },
 			{ q: 'Runs on runners you control',
 				pw: ['good', 'your CI runners', `${PW}/#limits`],
@@ -236,7 +241,7 @@ export const ARENAS = [
 		rows: [
 			{ q: 'AI writes changes and fixes drift',
 				pw: ['good', 'writes the change from /plywood agent, fixes drift, reviews pull requests', [`${PW}/guides/agent-fix-drift/`, `${PW}/reference/config/`]],
-				pc: ['bad', 'changes only, Essentials', `${P}/ai/concepts/neo/pull-requests/`],
+				pc: ['good', 'on Pro and Enterprise, an agent starts on drift or a failed update and can open a pull request', [AT, `${P}/ai/concepts/neo/pull-requests/`]],
 				sl: ['bad', 'summaries only', `${S}/concepts/run/summarization`] },
 			{ q: 'AI runs in your CI with your model key',
 				pw: ['good', 'your CI, your model key, behind your approvals', `${PW}/guides/agent-fix-drift/`],
@@ -259,6 +264,66 @@ export const ARENAS = [
 				pw: ['good', "side by side, up to your CI's capacity", `${PW}/#limits`],
 				pc: ['good', 'Essentials', PP],
 				sl: ['good', 'one per worker', `${S}/concepts/worker-pools`] },
+		],
+	},
+	{
+		id: 'delivery', title: 'Release pipelines',
+		blurb: 'Pulumi Delivery is in public preview on every Pulumi Cloud plan. Its approval and decision gates, agent steps and agent triggers are Pro and Enterprise. A plywood cell states what plywood\'s published docs describe.',
+		rows: [
+			{ q: 'A gate that scores the risk of a preview',
+				pw: ['warn', 'a review note names the risk of a change; it gates nothing', `${PW}/guides/agent-review-a-pull-request/`],
+				pc: ['good', 'on Pro and Enterprise, a decision gate rates each question against a maximumRisk you set; above it the release is rejected', DG] },
+			{ q: 'Time to soak between stages',
+				pw: ['bad', 'waves follow one another when their gates pass', `${PW}/concepts/waves-and-approvals/`],
+				pc: ['bad', 'Delivery pages describe no soak; stages run when upstream stages succeed and the gate passes', [DG, `${D}/`]] },
+			{ q: 'A canary rollout',
+				pw: ['good', 'the first wave is the canary, behind its gate', `${PW}/concepts/waves-and-approvals/`],
+				pc: ['warn', 'canary rollouts are code you write in the pipeline program', 'https://www.pulumi.com/blog/introducing-pulumi-delivery/'] },
+			{ q: 'Roll back to an earlier release',
+				pw: ['good', 'plywood rollback previews the release\'s program and updates behind a gate', `${PW}/guides/roll-back-a-stack/`],
+				pc: ['good', 'a stage deploys an earlier release it ran before, and pauses; a local run\'s release cannot be rolled back', [DG, `${D}/`]] },
+			{ q: 'Roll back, then hold the stage',
+				pw: ['bad', 'the rollback is one update behind its gate; no stage to hold', `${PW}/guides/roll-back-a-stack/`],
+				pc: ['good', 'a rollback pauses the stage; resume starts the newest waiting release', DG] },
+			{ q: 'Redeploy the current release',
+				pw: ['bad', 'an update runs on a merge or a comment', `${PW}/reference/cli/`],
+				pc: ['good', 'reruns the current release with the same commits and values', DG] },
+			{ q: 'Pause a stage',
+				pw: ['bad', 'a gate holds a wave until its approval', `${PW}/concepts/waves-and-approvals/`],
+				pc: ['good', 'a paused stage holds its release and queues waiting runs; needs write access to the pipeline stack', DG] },
+			{ q: 'A stage with several upstream stages',
+				pw: ['bad', 'waves run in the listed order; a failed stack holds the stacks that depend on it', `${PW}/concepts/waves-and-approvals/`],
+				pc: ['good', 'from lists the upstream stages; the stage waits for the same release in each', DG] },
+			{ q: 'Reject a release',
+				pw: ['bad', 'an approval records a yes; a wave without one waits', `${PW}/guides/approve-a-wave/`],
+				pc: ['good', 'on Pro and Enterprise, approvers can reject the release', DG] },
+			{ q: 'Gate rules combined with all and any',
+				pw: ['warn', 'a role and a quorum per stack glob', `${PW}/guides/approvals-runbook/`],
+				pc: ['good', 'on Pro and Enterprise, all and any, nested three levels', DG] },
+			{ q: 'An urgent path past the usual gate',
+				pw: ['bad', 'the quorum applies; an override covers a policy denial', [`${PW}/guides/approvals-runbook/`, `${PW}/guides/override-a-denial/`]],
+				pc: ['good', 'force-promote moves a release past a gate with a permission check, audit-logged; the release must have succeeded upstream', [DG, 'https://www.pulumi.com/product/delivery/']] },
+			{ q: 'Values a stage publishes for other pipelines',
+				pw: ['warn', 'the control repo is told how a repository ended and runs its dependents', `${PW}/concepts/control-repo/`],
+				pc: ['good', 'Artifact resources, secret if marked; another pipeline reads them through a PipelineSource', [DG, `${D}/sources-and-triggers/`]] },
+			{ q: 'Commands before and after a preview or an update',
+				pw: ['warn', 'check hooks, such as pre-commit, run in the check stage', `${PW}/reference/stages/`],
+				pc: ['warn', 'resource hooks before and after create, update and delete, and error hooks; deployment pre-run commands', [`${P}/iac/concepts/resources/options/hooks/`, `${P}/deployments/concepts/settings/`]] },
+			{ q: 'A cost estimate on the preview',
+				pw: ['bad', 'the preview shows the change set', `${PW}/reference/stages/`],
+				pc: ['bad', 'the Delivery docs describe none', [DG, `${D}/stacks-and-jobs/`]] },
+			{ q: 'A hold when the cost passes a limit',
+				pw: ['bad', 'gates ask for approval on the change set', `${PW}/concepts/waves-and-approvals/`],
+				pc: ['bad', 'the Delivery docs describe none', [DG, `${D}/stacks-and-jobs/`]] },
+			{ q: 'An agent step in a stage',
+				pw: ['bad', 'agents open pull requests and review changes outside the waves', `${PW}/guides/agent-fix-drift/`],
+				pc: ['good', 'on Pro and Enterprise, an Agent returns a response matching a responseSchema that later steps read', `${D}/agents/`] },
+			{ q: 'Agents started by alerts',
+				pw: ['bad', 'an agent starts on drift or a /plywood agent comment', [`${PW}/guides/agent-fix-drift/`, `${PW}/reference/config/`]],
+				pc: ['good', 'on Pro and Enterprise, PagerDuty, Honeycomb, Sentry, Datadog and generic webhooks, with an Idempotency-Key and batching', AT] },
+			{ q: 'Agents started by a failed update or a schedule',
+				pw: ['warn', 'a scheduled drift run starts the drift agent; a failed update posts a triage comment', [`${PW}/guides/agent-fix-drift/`, `${PW}/guides/answer-a-refused-or-failed-update/`]],
+				pc: ['good', 'on Pro and Enterprise, a failed operation or drift, hourly to weekly or cron schedules', AT] },
 		],
 	},
 	{
@@ -289,7 +354,7 @@ export const ARENAS = [
 		rows: [
 			{ q: 'Terraform and Pulumi on three clouds, in one graph',
 				pw: ['good', 'choudoufu and plunge projects drawn together across AWS, Azure and GCP, linked by shared outputs', `${B}/using/three-cloud/`],
-				pc: ['good', 'Pro', `${P}/discovery-governance/concepts/discovery/`],
+				pc: ['good', 'Discovery on Essentials with 1 primary cloud account, Pro with 10', [`${P}/discovery-governance/concepts/discovery/`, PP]],
 				sl: ['bad', 'list only', `${S}/concepts/resources`] },
 			{ q: 'Drift, shown on the graph from each engine\'s own read',
 				pw: ['good', 'plunge drift for Pulumi, choudoufu\'s plan for Terraform, chant\'s live read for chant', `${B}/using/three-cloud/#drift-per-engine`],
@@ -297,7 +362,7 @@ export const ARENAS = [
 				sl: ['bad', 'not on a graph', `${S}/concepts/stack/drift-detection`] },
 			{ q: "One approval over every engine's plan",
 				pw: ['good', 'one approval covers the Pulumi and Terraform plans together; if any part changes, nothing applies', `${B}/using/three-cloud/#one-change-set-over-four-members`],
-				pc: ['bad', 'no approval step', `${P}/deployments/guides/gated-deployments/`],
+				pc: ['warn', 'on Pro and Enterprise, one approval per Delivery stage, over the previews of its Pulumi stacks', DG],
 				sl: ['bad', 'per stack', `${S}/concepts/stack/stack-dependencies`] },
 			{ q: 'Shows which run deployed each resource',
 				pw: ['good', "commit, run, digest, actor and approver, from chant's release ledger", `${B}/using/reading-the-graph/#what-was-deployed-from-where`],
