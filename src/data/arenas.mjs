@@ -25,6 +25,7 @@ const T = 'https://intentius.io/terragucci';
 const B = 'https://intentius.io/behold';
 const C = 'https://intentius.io/choudoufu';
 const PL = 'https://intentius.io/plunge';
+const TE = 'https://github.com/INTENTIUS/terragucci/blob/main/EVIDENCE.md';
 
 // The plans each vendor sells, cheapest first. terragucci has one.
 export const PLANS = {
@@ -57,7 +58,7 @@ export const GATED = [
 		// Business; its docs still say Starter+. The pricing page is what a buyer sees.
 		sl: { plan: 2, note: 'private workers only', src: 'https://spacelift.io/pricing' } },
 	{ id: 'cost', label: 'Cost estimates',
-		tg: { plan: 0, note: 'your Infracost key', src: `${T}/guides/estimate-cost/` },
+		tg: { plan: 0, note: 'Infracost on your key, or your own estimator', src: `${T}/guides/estimate-cost/` },
 		hcp: { plan: 2, src: `${H}/workspaces/cost-estimation` },
 		sl: { plan: 0, src: 'https://spacelift.io/pricing' } },
 	{ id: 'audit', label: 'Audit trail',
@@ -81,7 +82,7 @@ export const GATED = [
 		hcp: { plan: 4, src: 'https://www.hashicorp.com/en/pricing?product_intent=terraform' },
 		sl: { plan: 3, note: 'on request', src: 'https://spacelift.io/pricing' } },
 	{ id: 'ai', label: 'AI on failed runs and drift',
-		tg: { plan: 0, note: 'a triage comment on a failed apply; a drift agent opens a pull request; your model key', src: 'https://github.com/INTENTIUS/terragucci/blob/main/EVIDENCE.md' },
+		tg: { plan: 0, note: 'a triage comment on a failed apply; agents open pull requests on drift, alerts, failed applies, failing soaks and a schedule; your model key', src: `${T}/guides/agent-start-from-an-alert/` },
 		hcp: { plan: null, note: 'MCP server for your assistant', src: 'https://www.hashicorp.com/en/blog/terraform-mcp-server-is-now-generally-available' },
 		sl: { plan: 0, note: 'summaries only', src: `${S}/concepts/run/summarization` } },
 	{ id: 'waves', label: 'Applies dependent roots in order, with an approval between waves', def: 'Wave: a group of roots applied together, after the ones they depend on.',
@@ -105,7 +106,7 @@ export const GATED = [
 		hcp: { plan: null, src: `${H}/registry/publish-modules` },
 		sl: { plan: null, src: `${S}/vendors/terraform/module-registry` } },
 	{ id: 'costgate', label: 'Hold or deny a change on its cost',
-		tg: { plan: 0, note: 'your Infracost key; a threshold holds the wave', src: `${T}/guides/estimate-cost/` },
+		tg: { plan: 0, note: 'a wave over cost.approve_above waits for an approval, whatever its gate', src: `${T}/guides/estimate-cost/#hold-a-wave-over-an-amount` },
 		hcp: { plan: 2, note: 'Sentinel, in legacy policy checks only', src: `${H}/workspaces/cost-estimation` },
 		sl: { plan: 1, src: `${S}/vendors/terraform/infracost` } },
 	{ id: 'chat', label: 'Approve from Slack or Teams',
@@ -145,7 +146,7 @@ export const GATED = [
 		hcp: { plan: null, tier: 'unpublished', src: `${H}/workspaces/explorer` },
 		sl: { plan: 1, src: 'https://spacelift.io/pricing' } },
 	{ id: 'hooks', label: 'Your commands before and after plan and apply',
-		tg: { plan: 0, note: 'a failing hook stops the wave or holds it', src: `${T}/guides/run-steps/` },
+		tg: { plan: 0, note: 'before and after plan and apply, and per stage; a failing hook stops the wave or holds it', src: `${T}/guides/run-steps/` },
 		hcp: { plan: 0, note: 'run tasks; one on Free, for up to ten workspaces', src: `${H}/integrations/run-tasks` },
 		sl: { plan: 1, src: `${S}/concepts/configuration/runtime-configuration/runtime-yaml-reference` } },
 	{ id: 'rollout', label: 'Roll a module version out to its users',
@@ -258,7 +259,7 @@ export const ARENAS = [
 		id: 'ai', title: 'AI that does the work',
 		rows: [
 			{ q: 'AI writes changes and fixes drift',
-				tg: ['good', 'a triage comment on a failed apply; drift agents, plan review and a refused-wave summary on your model key', 'https://github.com/INTENTIUS/terragucci/blob/main/EVIDENCE.md'],
+				tg: ['good', 'a triage comment on a failed apply; agents that open pull requests on drift, alerts, failed applies, failing soaks and a schedule; plan review and a refused-wave summary; your model key', [TE, `${T}/guides/agent-start-from-an-alert/`]],
 				hcp: ['bad', 'MCP server for your assistant', 'https://www.hashicorp.com/en/blog/terraform-mcp-server-is-now-generally-available'],
 				sl: ['bad', 'summaries only', `${S}/concepts/run/summarization`] },
 			{ q: 'AI runs in your CI with your model key',

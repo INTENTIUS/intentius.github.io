@@ -29,6 +29,7 @@ export const TRADEMARKS = 'Pulumi and the Pulumi logo are trademarks of Pulumi C
 
 const PW = 'https://intentius.io/plywood';
 const PL = 'https://intentius.io/plunge';
+const PWE = 'https://github.com/INTENTIUS/plywood/blob/main/EVIDENCE.md';
 const B = 'https://intentius.io/behold';
 const P = 'https://www.pulumi.com/docs';
 // Pulumi Delivery and Pulumi Agents pages, read 2026-11-19. Delivery is in public
@@ -95,7 +96,7 @@ export const GATED = [
 		pc: { plan: 3, src: `${P}/administration/self-hosting/` },
 		sl: { plan: 3, note: 'on request', src: SP } },
 	{ id: 'ai', label: 'AI on failed updates and drift',
-		pw: { plan: 0, note: 'fixes drift by pull request; your model key', src: `${PW}/guides/agent-fix-drift/` },
+		pw: { plan: 0, note: 'an agent opens a pull request on drift, a failed update or an alert; your model key', src: `${PW}/guides/agent-from-alerts-and-schedules/` },
 		pc: { plan: 2, note: 'an agent can start on a failed operation', src: AT },
 		sl: { plan: 0, note: 'summaries only', src: `${S}/concepts/run/summarization` } },
 	{ id: 'waves', label: 'Updates dependent stacks in order, with an approval between waves', def: 'Wave: a group of stacks updated together, after the ones they depend on.',
@@ -240,7 +241,7 @@ export const ARENAS = [
 		id: 'ai', title: 'AI that does the work',
 		rows: [
 			{ q: 'AI writes changes and fixes drift',
-				pw: ['good', 'writes the change from /plywood agent, fixes drift, reviews pull requests', [`${PW}/guides/agent-fix-drift/`, `${PW}/reference/config/`]],
+				pw: ['good', 'writes the change from /plywood agent, fixes drift, answers alerts and failed updates, reviews pull requests', [`${PW}/guides/agent-fix-drift/`, `${PW}/guides/agent-from-alerts-and-schedules/`, `${PW}/reference/config/`]],
 				pc: ['good', 'on Pro and Enterprise, an agent starts on drift or a failed update and can open a pull request', [AT, `${P}/ai/concepts/neo/pull-requests/`]],
 				sl: ['bad', 'summaries only', `${S}/concepts/run/summarization`] },
 			{ q: 'AI runs in your CI with your model key',
@@ -277,7 +278,7 @@ export const ARENAS = [
 				pw: ['bad', 'waves follow one another when their gates pass', `${PW}/concepts/waves-and-approvals/`],
 				pc: ['bad', 'Delivery pages describe no soak; stages run when upstream stages succeed and the gate passes', [DG, `${D}/`]] },
 			{ q: 'A canary rollout',
-				pw: ['good', 'the first wave is the canary, behind its gate', `${PW}/concepts/waves-and-approvals/`],
+				pw: ['good', 'the first wave is the canary, behind its gate', [`${PW}/concepts/waves-and-approvals/`, PWE]],
 				pc: ['warn', 'canary rollouts are code you write in the pipeline program', 'https://www.pulumi.com/blog/introducing-pulumi-delivery/'] },
 			{ q: 'Roll back to an earlier release',
 				pw: ['good', 'plywood rollback previews the release\'s program and updates behind a gate', `${PW}/guides/roll-back-a-stack/`],
@@ -307,22 +308,22 @@ export const ARENAS = [
 				pw: ['warn', 'the control repo is told how a repository ended and runs its dependents', `${PW}/concepts/control-repo/`],
 				pc: ['good', 'Artifact resources, secret if marked; another pipeline reads them through a PipelineSource', [DG, `${D}/sources-and-triggers/`]] },
 			{ q: 'Commands before and after a preview or an update',
-				pw: ['warn', 'check hooks, such as pre-commit, run in the check stage', `${PW}/reference/stages/`],
+				pw: ['good', 'your commands before and after each preview and update; a failing one stops the wave or holds it for an approval', `${PW}/guides/run-hooks/`],
 				pc: ['warn', 'resource hooks before and after create, update and delete, and error hooks; deployment pre-run commands', [`${P}/iac/concepts/resources/options/hooks/`, `${P}/deployments/concepts/settings/`]] },
 			{ q: 'A cost estimate on the preview',
-				pw: ['bad', 'the preview shows the change set', `${PW}/reference/stages/`],
+				pw: ['good', 'a command you name prices each preview; the note shows each stack\'s monthly change and the sum', `${PW}/guides/estimate-cost-and-hold-on-it/`],
 				pc: ['bad', 'the Delivery docs describe none', [DG, `${D}/stacks-and-jobs/`]] },
 			{ q: 'A hold when the cost passes a limit',
-				pw: ['bad', 'gates ask for approval on the change set', `${PW}/concepts/waves-and-approvals/`],
+				pw: ['good', 'above cost.approve_above a wave waits for an approval of that cost, whatever its gate', `${PW}/guides/estimate-cost-and-hold-on-it/#hold-above-an-amount`],
 				pc: ['bad', 'the Delivery docs describe none', [DG, `${D}/stacks-and-jobs/`]] },
 			{ q: 'An agent step in a stage',
 				pw: ['bad', 'agents open pull requests and review changes outside the waves', `${PW}/guides/agent-fix-drift/`],
 				pc: ['good', 'on Pro and Enterprise, an Agent returns a response matching a responseSchema that later steps read', `${D}/agents/`] },
 			{ q: 'Agents started by alerts',
-				pw: ['bad', 'an agent starts on drift or a /plywood agent comment', [`${PW}/guides/agent-fix-drift/`, `${PW}/reference/config/`]],
+				pw: ['good', 'Alertmanager, PagerDuty, Datadog, Honeycomb, Sentry and signed webhooks, through chant\'s relay; the agent opens a pull request', `${PW}/guides/agent-from-alerts-and-schedules/#answer-a-production-alert`],
 				pc: ['good', 'on Pro and Enterprise, PagerDuty, Honeycomb, Sentry, Datadog and generic webhooks, with an Idempotency-Key and batching', AT] },
 			{ q: 'Agents started by a failed update or a schedule',
-				pw: ['warn', 'a scheduled drift run starts the drift agent; a failed update posts a triage comment', [`${PW}/guides/agent-fix-drift/`, `${PW}/guides/answer-a-refused-or-failed-update/`]],
+				pw: ['good', 'a failed update records a signed fact for the agent; a cron runs a task you write; each opens a pull request', [`${PW}/guides/agent-from-alerts-and-schedules/#answer-a-failed-update`, `${PW}/guides/agent-from-alerts-and-schedules/#run-a-task-on-a-schedule`]],
 				pc: ['good', 'on Pro and Enterprise, a failed operation or drift, hourly to weekly or cron schedules', AT] },
 		],
 	},
@@ -368,6 +369,9 @@ export const ARENAS = [
 				pw: ['good', "commit, run, digest, actor and approver, from chant's release ledger", `${B}/using/reading-the-graph/#what-was-deployed-from-where`],
 				pc: ['good', '', `${P}/iac/concepts/state-and-backends/`],
 				sl: ['good', '', `${S}/concepts/run`] },
+			{ q: 'Each pipeline stage\'s release, gate and soak',
+				pw: ['good', 'a Stages tab per member: the release, gate, risk, soak, pause, queue and rollback request, for Pulumi, Terraform and SQL alike', `${B}/using/stages/`],
+				pc: ['good', 'a stage page and a run page in the console for each Delivery pipeline; public preview', DG] },
 			{ q: 'Finds cloud resources no code manages',
 				pw: ['good', 'chant search --ambient reports those of a kind you manage', 'https://intentius.io/chant/cli/search/'],
 				pc: ['good', 'Essentials', `${P}/discovery-governance/concepts/discovery/`],
